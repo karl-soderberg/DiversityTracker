@@ -18,8 +18,8 @@ export const NavBottom = ({ setPage, page }: Props) => {
                 width=''
                 height='100%'
                 link='#'
-                active={page == 'chart-home' ? true : false}
-                click={() => setPage('chart-home')}
+                active={page == 'ChartPage' ? true : false}
+                click={() => setPage('ChartPage')}
             />
             <CustomAnchor 
                 className='navbottom__item'
@@ -28,8 +28,8 @@ export const NavBottom = ({ setPage, page }: Props) => {
                 width=''
                 height='100%'
                 link='#'
-                active={page == 'form-page' ? true : false}
-                click={() => setPage('form-page')}
+                active={page == 'FormPage' ? true : false}
+                click={() => setPage('FormPage')}
             />
         </nav>
     )
