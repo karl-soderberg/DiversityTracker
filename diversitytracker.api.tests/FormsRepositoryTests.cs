@@ -37,6 +37,6 @@ public class FormsRepositoryTests : IClassFixture<DatabaseFixture>
 
         // Assert
         results.Should().NotBeNull();
-        results.Count.Should().Be(4);
+        results.Count.Should().Be(5);
     }
 }
