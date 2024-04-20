@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "diversitytracker.api", "diversitytracker.api\diversitytracker.api.csproj", "{75FFA8B2-CC8B-408B-A404-EC46ABB524A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "diversitytracker.api.tests", "diversitytracker.api.tests\diversitytracker.api.tests.csproj", "{35FDB4C5-74D5-4E77-B773-3A14D44134D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{75FFA8B2-CC8B-408B-A404-EC46ABB524A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75FFA8B2-CC8B-408B-A404-EC46ABB524A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75FFA8B2-CC8B-408B-A404-EC46ABB524A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FDB4C5-74D5-4E77-B773-3A14D44134D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FDB4C5-74D5-4E77-B773-3A14D44134D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FDB4C5-74D5-4E77-B773-3A14D44134D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FDB4C5-74D5-4E77-B773-3A14D44134D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
