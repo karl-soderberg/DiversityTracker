@@ -11,25 +11,25 @@ namespace diversitytracker.api.Controllers
     public class FormsController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetQuestions()
+        public async Task<IActionResult> GetFormResults()
         {
             return Ok();
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostData()
+        public async Task<IActionResult> AddForm()
         {
             return Ok();
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutData()
+        public async Task<IActionResult> PutForm()
         {
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteData()
+        public async Task<IActionResult> DeleteForm()
         {
             return Ok();
         }
