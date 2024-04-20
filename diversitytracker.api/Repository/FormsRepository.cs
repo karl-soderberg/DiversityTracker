@@ -11,7 +11,7 @@ namespace diversitytracker.api.Repository
 {
     public class FormsRepository : IFormsRepository
     {
-         private readonly AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public FormsRepository(AppDbContext context)
         {

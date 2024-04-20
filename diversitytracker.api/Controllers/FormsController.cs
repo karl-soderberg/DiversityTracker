@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using diversitytracker.api.Models.Forms;
+using diversitytracker.api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace diversitytracker.api.Controllers
@@ -10,8 +12,15 @@ namespace diversitytracker.api.Controllers
     [Route("api/[controller]")]
     public class FormsController : ControllerBase
     {
+        private readonly FormsRepository _formsRepository;
+
+        public FormsController(FormsRepository formsRepository)
+        {
+            _formsRepository = formsRepository;
+        }
+
         [HttpGet]
-        public async Task<IActionResult> GetFormResults()
+        public async Task<ActionResult<List<BaseFormResponseDto>>> GetFormResults()
         {
             return Ok();
         }
@@ -21,19 +30,6 @@ namespace diversitytracker.api.Controllers
         {
             return Ok();
         }
-
-        [HttpPut]
-        public async Task<IActionResult> PutForm()
-        {
-            return Ok();
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> DeleteForm()
-        {
-            return Ok();
-        }
-
 
     }
 }
