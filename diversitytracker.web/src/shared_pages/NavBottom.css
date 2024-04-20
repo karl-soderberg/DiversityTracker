@@ -1,9 +1,10 @@
 @import url('../colors.css');
 
 .navbottom-container{
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    width: 100vw;
     height: 10vh;
     z-index: 1500;
 

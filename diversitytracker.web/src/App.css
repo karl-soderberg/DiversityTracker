@@ -1,11 +1,9 @@
 @import url('./colors.css');
 
-
-
 .page-container{
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
 }
 
 :root{

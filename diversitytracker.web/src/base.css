@@ -16,7 +16,7 @@ html{
   align-items: center;
   margin: 0;
 
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #root {
