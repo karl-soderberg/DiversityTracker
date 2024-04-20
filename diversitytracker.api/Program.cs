@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using diversitytracker.api.Configurations;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Data;
