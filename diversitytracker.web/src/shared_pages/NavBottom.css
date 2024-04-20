@@ -1,0 +1,80 @@
+@import url('../colors.css');
+
+.navbottom-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+    z-index: 1500;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: var(--light-base);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+    .navbottom__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .navbottom__icon{
+        width: 1.8rem;
+        opacity: .9;
+        
+        transition: all .25s ease-in-out;
+    }
+        .navbottom__icon--colorfill{
+            fill: #b1b1b1;
+            transition: all .25s ease-in-out;
+        }
+        .navbottom__icon--colorstroke{
+            stroke: #b1b1b1;;
+            transition: all .25s ease-in-out;
+        }
+    .navbottom__item__title{
+        margin-top: .1rem;
+        font-size: .5rem;
+
+        color: #252934;
+        transition: all .25s ease-in-out;
+    }
+
+
+
+    
+
+/* active state */
+.navbottom__item.active .navbottom__icon{
+    transform: scale(1.2);
+    transition: all .25s ease-in-out;
+}
+
+.navbottom__item.active .navbottom__item__title{
+    transform: scale(1.05);
+    transform: translateY(1px);
+
+    transition: all .25s ease-in-out;
+}
+
+.navbottom__item.active .navbottom__icon--colorfill{
+    fill: var(--menu-violet);
+}
+.navbottom__item.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-violet);
+}
+.navbottom__item.active .navbottom__item__title{
+    color: var(--menu-violet);
+}
+
+.navbottom__item:nth-of-type(2).active .navbottom__icon--colorfill{
+    fill: var(--menu-green)
+}
+.navbottom__item:nth-of-type(2).active .navbottom__icon--colorstroke{
+    stroke: var(--menu-green);
+}
+.navbottom__item:nth-of-type(2).active .navbottom__item__title{
+    color: var(--menu-green);
+}
