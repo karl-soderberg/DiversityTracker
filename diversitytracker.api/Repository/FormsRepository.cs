@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using diversitytracker.api.Contracts;
+using diversitytracker.api.Data;
 using diversitytracker.api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace diversitytracker.api.Repository
 {
     public class FormsRepository : IFormsRepository
     {
-        public Task<BaseForm> AddFormAsync(BaseForm baseForm)
+         private readonly AppDbContext _context;
+
+        public FormsRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<BaseForm> AddFormAsync(BaseForm baseForm)
+        {
+             throw new NotImplementedException();
         }
 
-        public Task<List<BaseForm>> GetFormsAsync()
+        public async Task<List<BaseForm>> GetFormsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.BaseFormsData.ToListAsync();
         }
     }
 }
