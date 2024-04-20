@@ -8,10 +8,10 @@ namespace diversitytracker.api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DataController : ControllerBase
+    public class FormsController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetData()
+        public async Task<IActionResult> GetQuestions()
         {
             return Ok();
         }
