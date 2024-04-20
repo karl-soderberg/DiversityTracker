@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using diversitytracker.api.Contracts;
 using diversitytracker.api.Models;
 using diversitytracker.api.Models.Forms;
 using diversitytracker.api.Repository;
@@ -15,9 +16,9 @@ namespace diversitytracker.api.Controllers
     public class FormsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly FormsRepository _formsRepository;
+        private readonly IFormsRepository _formsRepository;
 
-        public FormsController(IMapper mapper, FormsRepository formsRepository)
+        public FormsController(IMapper mapper, IFormsRepository formsRepository)
         {
             _mapper = mapper;
             _formsRepository = formsRepository;
