@@ -1,3 +1,4 @@
+using diversitytracker.api.Configurations;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Data;
 using diversitytracker.api.Repository;
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("dockerDb"));
 });
 builder.Services.AddScoped<IFormsRepository, FormsRepository>();
+builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
 var app = builder.Build();
 
