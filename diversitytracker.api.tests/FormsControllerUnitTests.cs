@@ -10,13 +10,13 @@ using Moq;
 
 namespace diversitytracker.api.tests
 {
-    public class FormsControllerTests
+    public class FormsControllerUnitTests
     {
         private readonly Mock<IMapper> _mockMapper;
         private readonly Mock<IFormsRepository> _mockFormsRepository;
         private readonly FormsController _controller;
 
-        public FormsControllerTests()
+        public FormsControllerUnitTests()
         {
             _mockMapper = new Mock<IMapper>();
             _mockFormsRepository = new Mock<IFormsRepository>();
