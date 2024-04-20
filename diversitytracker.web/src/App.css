@@ -2,3 +2,110 @@
 
 
 
+.page-container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+:root{
+    --animation-timing: 650ms;
+    --easing: cubic-bezier(0.65,0.03,0.22,0.99);
+}
+
+.chartpage-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    background-color: rgb(0, 255, 13);
+
+    z-index: 1;
+    animation: animateLeftOut var(--animation-timing) var(--easing);
+}
+
+.formpage-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+
+    background-color: rgb(0, 8, 255);
+
+    z-index: 1;
+    animation: animateRightOut var(--animation-timing) var(--easing);
+}
+
+.chartpage-container.active{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    z-index: 2;
+
+    transform: translateX(0%);
+
+    background-color: rgb(0, 255, 13);
+    animation: animateLeft var(--animation-timing) var(--easing);
+}
+
+.formpage-container.active{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    z-index: 2;
+
+    transform: translateX(0%);
+    
+    background-color: rgb(0, 8, 255);
+    animation: animateRight var(--animation-timing) var(--easing);
+}
+
+@keyframes animateRight{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes animateRightOut{
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+@keyframes animateLeft{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes animateLeftOut{
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
