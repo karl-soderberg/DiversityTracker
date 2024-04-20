@@ -1,4 +1,6 @@
+using diversitytracker.api.Contracts;
 using diversitytracker.api.Data;
+using diversitytracker.api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("dockerDb"));
 });
+builder.Services.AddScoped<IFormsRepository, FormsRepository>();
 
 var app = builder.Build();
 
