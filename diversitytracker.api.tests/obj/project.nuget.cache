@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZwOMXeL9Dh4UNk+54djz1YQ+7G9J+gZwzsv4xw1g4j8ouUd91DdN/zqGP7BgWa2nwAgqZ3EiWcqviqmewqeSRQ==",
+  "dgSpecHash": "MD0QHoWRWa13bcvfxipg0DVbPvD5kkM/9/poySgnpcVf2U05LmQYuF5g8sibU9eVSYYDRqE5KKUCvcg8Nzx2zw==",
   "success": true,
   "projectFilePath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,7 @@
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
+    "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\8.0.4\\microsoft.entityframeworkcore.inmemory.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.4\\microsoft.entityframeworkcore.relational.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.4\\microsoft.entityframeworkcore.sqlserver.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
