@@ -49,5 +49,26 @@ namespace diversitytracker.api.tests
             actionResult.Should().NotBeNull();
             actionResult.StatusCode.Should().Be(200);
         }
+
+        [Fact]
+        public async Task AddFormReturnsCreatedAtActionResult()
+        {
+            // Arrange
+            var baseFormRequestDto = new BaseFormRequestDto { QuestionType = QuestionType.represented, value = 20, Description = "Diversity in tech roles" };
+            var newForm = new BaseForm { Id = 3, QuestionType = QuestionType.represented, value = 20, Description = "Diversity in tech roles" };
+
+            _mockMapper.Setup(m => m.Map<BaseForm>(baseFormRequestDto)).Returns(newForm);
+            _mockFormsRepository.Setup(repo => repo.AddFormAsync(newForm)).Returns(Task.FromResult(new BaseForm { Id = 3, QuestionType = QuestionType.represented, value = 20, Description = "Diversity in tech roles" }));
+
+            // Act
+            var result = await _controller.AddForm(baseFormRequestDto);
+
+            // Assert
+            var createdAtActionResult = result as CreatedAtActionResult;
+            createdAtActionResult.Should().NotBeNull();
+            createdAtActionResult.StatusCode.Should().Be(201);
+            createdAtActionResult.ActionName.Should().Be(nameof(FormsController.GetFormResults));
+            createdAtActionResult.Value.Should().BeEquivalentTo(newForm);
+        }
     }
 }
