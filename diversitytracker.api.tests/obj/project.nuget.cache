@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "z5SPCvfnHu/VCqm6HzTIs4jSENFczS0gxRZI/AFG1NOvt2jpMirO2I4fOb2mViT9BBN1V0qBfgENxRFDqx5lrw==",
+  "dgSpecHash": "ZwOMXeL9Dh4UNk+54djz1YQ+7G9J+gZwzsv4xw1g4j8ouUd91DdN/zqGP7BgWa2nwAgqZ3EiWcqviqmewqeSRQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\willi\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\willi\\.nuget\\packages\\fluentassertions\\7.0.0-alpha.3\\fluentassertions.7.0.0-alpha.3.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\8.0.4\\microsoft.aspnetcore.mvc.testing.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.aspnetcore.testhost\\8.0.4\\microsoft.aspnetcore.testhost.8.0.4.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

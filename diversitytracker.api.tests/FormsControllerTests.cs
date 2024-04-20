@@ -7,9 +7,16 @@ namespace diversitytracker.api.tests;
 
 public class FormsControllerTests
 {
-    [Fact]
-    public void Test1()
-    {
+    private readonly Mock<IMapper> _mockMapper;
+    private readonly Mock<IFormsRepository> _mockFormsRepository;
+    private readonly FormsController _controller;
 
+    public FormsControllerTests()
+    {
+        _mockMapper = new Mock<IMapper>();
+        _mockFormsRepository = new Mock<IFormsRepository>();
+        _controller = new FormsController(_mockMapper.Object, _mockFormsRepository.Object);
     }
+
+    
 }

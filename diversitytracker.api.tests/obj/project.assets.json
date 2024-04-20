@@ -84,6 +84,22 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
+      "FluentAssertions/7.0.0-alpha.3": {
+        "type": "package",
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.4.0"
+        },
+        "compile": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Testing/8.0.4": {
         "type": "package",
         "dependencies": {
@@ -1412,7 +1428,7 @@
       "Microsoft.Win32.SystemEvents/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
@@ -1829,7 +1845,7 @@
           "System.Security.Permissions": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Configuration.ConfigurationManager.dll": {
             "related": ".xml"
           }
         },
@@ -1944,7 +1960,7 @@
           "Microsoft.Win32.SystemEvents": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Drawing.Common.dll": {
             "related": ".xml"
           }
         },
@@ -2909,7 +2925,7 @@
           "System.Windows.Extensions": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Security.Permissions.dll": {
             "related": ".xml"
           }
         },
@@ -3106,7 +3122,7 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Windows.Extensions.dll": {
             "related": ".xml"
           }
         },
@@ -3429,6 +3445,30 @@
         "coverlet-icon.png",
         "coverlet.collector.6.0.0.nupkg.sha512",
         "coverlet.collector.nuspec"
+      ]
+    },
+    "FluentAssertions/7.0.0-alpha.3": {
+      "sha512": "c5HCYKAW0vhxx8qJ6s8o683GqjfKD7HCJPGA9IOcnZVvqa8atkG0mYhHEpkp/hnC4IVhRPmX+wHjBXDyZVn+3g==",
+      "type": "package",
+      "path": "fluentassertions/7.0.0-alpha.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FluentAssertions.png",
+        "fluentassertions.7.0.0-alpha.3.nupkg.sha512",
+        "fluentassertions.nuspec",
+        "lib/net47/FluentAssertions.dll",
+        "lib/net47/FluentAssertions.pdb",
+        "lib/net47/FluentAssertions.xml",
+        "lib/net6.0/FluentAssertions.dll",
+        "lib/net6.0/FluentAssertions.pdb",
+        "lib/net6.0/FluentAssertions.xml",
+        "lib/netstandard2.0/FluentAssertions.dll",
+        "lib/netstandard2.0/FluentAssertions.pdb",
+        "lib/netstandard2.0/FluentAssertions.xml",
+        "lib/netstandard2.1/FluentAssertions.dll",
+        "lib/netstandard2.1/FluentAssertions.pdb",
+        "lib/netstandard2.1/FluentAssertions.xml"
       ]
     },
     "Microsoft.AspNetCore.Mvc.Testing/8.0.4": {
@@ -9789,6 +9829,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FluentAssertions >= 7.0.0-alpha.3",
       "Microsoft.AspNetCore.Mvc.Testing >= 8.0.4",
       "Microsoft.NET.Test.Sdk >= 17.6.0",
       "Moq >= 4.20.70",
@@ -9847,6 +9888,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "FluentAssertions": {
+            "target": "Package",
+            "version": "[7.0.0-alpha.3, )"
+          },
           "Microsoft.AspNetCore.Mvc.Testing": {
             "target": "Package",
             "version": "[8.0.4, )"
