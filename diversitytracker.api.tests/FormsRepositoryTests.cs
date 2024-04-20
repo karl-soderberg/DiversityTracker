@@ -29,4 +29,14 @@ public class FormsRepositoryTests : IClassFixture<DatabaseFixture>
         result.Id.Should().Be(baseCount.Count + 1);
         _fixture.DbContext.BaseFormsData.Count().Should().Be(baseCount.Count + 1);
     }
+    [Fact]
+    public async Task GetFormsAsyncRetrievesDataCorrectly()
+    {
+        // Act
+        var results = await _repository.GetFormsAsync();
+
+        // Assert
+        results.Should().NotBeNull();
+        results.Count.Should().Be(4);
+    }
 }
