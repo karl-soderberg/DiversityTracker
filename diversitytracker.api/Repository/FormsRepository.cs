@@ -19,7 +19,9 @@ namespace diversitytracker.api.Repository
         }
         public async Task<BaseForm> AddFormAsync(BaseForm baseForm)
         {
-             throw new NotImplementedException();
+            await _context.AddAsync(baseForm);
+            await _context.SaveChangesAsync();
+            return baseForm;
         }
 
         public async Task<List<BaseForm>> GetFormsAsync()
