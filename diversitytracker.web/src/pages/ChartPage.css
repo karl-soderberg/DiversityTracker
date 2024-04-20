@@ -1,0 +1,18 @@
+@import url('../colors.css');
+
+.chartpage-container{
+    padding: 1% 5%;
+}
+
+.chart-container{
+    width: 90vw;
+    height: 60vh;
+    margin-top: 1%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--light-module2);
+    border-radius: 1rem;
+}

@@ -1,0 +1,1 @@
+export const MockData = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page B', uv: 300, pv: 1800, amt: 2400}, {name: 'Page B', uv: 500, pv: 500, amt: 500}]
