@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Models;
 using diversitytracker.api.Models.Forms;
-using diversitytracker.api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace diversitytracker.api.Controllers
