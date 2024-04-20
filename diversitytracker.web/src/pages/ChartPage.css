@@ -1,1 +1,14 @@
 @import url('../colors.css');
+
+.chartpage-container{
+    padding: 1% 5%;
+}
+
+.chart-container{
+    width: 75%;
+    height: 70vh;
+    background-color: var(--light-module);
+    border-radius: 1rem;
+
+    margin-top: 1%;
+}
