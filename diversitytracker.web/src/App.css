@@ -42,6 +42,22 @@
     animation: animateRightOut var(--animation-timing) var(--easing);
 }
 
+.newformpage-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+
+    background-color: var(--light-base);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+    z-index: 1;
+    animation: animateRightOut var(--animation-timing) var(--easing);
+}
+
 .chartpage-container.active{
     position: absolute;
     top: 0;
@@ -61,6 +77,24 @@
 }
 
 .formpage-container.active{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    z-index: 2;
+
+    transform: translateX(0%);
+    
+    background-color: var(--light-base);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    
+    animation: animateRight var(--animation-timing) var(--easing);
+}
+
+.newformpage-container.active{
     position: absolute;
     top: 0;
     left: 0;
