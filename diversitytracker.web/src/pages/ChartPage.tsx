@@ -1,7 +1,7 @@
 import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
-import { MOCKData } from '../data/MockData'
 import { useState } from 'react'
+import { MOCKData } from '../data/MockData'
 
 type Props = {
     className: string
@@ -50,7 +50,7 @@ export const ChartPage = ( {className} : Props) => {
                                 <Line type="monotone" dataKey="numberofmen" stroke="#8884d8" />
                             }
                             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                            <XAxis dataKey="value" />
+                            <XAxis dataKey="date" />
                             <YAxis />
                         </LineChart>
                     }
