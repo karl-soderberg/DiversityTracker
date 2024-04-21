@@ -4,7 +4,7 @@
 
 2 weeks of planning, prototyping and execution
 
-## Problems hoping to solve
+## Challenges
 
 This project aims to enhance organizational inclusivity and maximize productivity by addressing the critical issues of 
 underrepresentation of minorities and overlooked interpersonal office dynamics at organizations. 
