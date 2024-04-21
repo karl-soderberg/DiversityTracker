@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Front-End Build & Testing
 
 on:
@@ -23,7 +20,6 @@ jobs:
     strategy:
       matrix:
         node-version: [21.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -34,10 +30,24 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Install dependencies
+    - name: Change to Root Directory
+      run: cd ${{ github.workspace }}
+
+    - name: List directories
+      run: ls -lah
+
+    - name: Install dependencies (Web)
+      working-directory: ./diversitytracker.web
+      run: npm ci
+
+    - name: Build (Web)
+      working-directory: ./diversitytracker.web
+      run: npm run build --if-present
+
+    - name: Install dependencies (Tests)
       working-directory: ./diversitytracker.web.tests
       run: npm ci
 
-    - name: Run tests
+    - name: Run tests (Tests)
       working-directory: ./diversitytracker.web.tests
       run: npm test
