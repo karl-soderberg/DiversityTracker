@@ -24,17 +24,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js for Web
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: diversitytracker.web/package-lock.json
 
-    - name: Change to Root Directory
-      run: cd ${{ github.workspace }}
-
-    - name: List directories
-      run: ls -lah
+    - name: Set up Node.js for Web Tests
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: diversitytracker.web.tests/package-lock.json
 
     - name: Install dependencies (Web)
       working-directory: ./diversitytracker.web
