@@ -1,6 +1,21 @@
 import { DataResponseObject } from "../types/types";
 
-export const MockData: DataResponseObject = {
+export const MOCKData = 
+    [
+        {value: 1, numberofmen: 2, numberofwomen: 10}, 
+        {value: 2, numberofmen: 5, numberofwomen: 17}, 
+        {value: 3, numberofmen: 7, numberofwomen: 25},
+        {value: 4, numberofmen: 12, numberofwomen: 20}, 
+        {value: 5, numberofmen: 17, numberofwomen: 18}, 
+        {value: 6, numberofmen: 25, numberofwomen: 15},
+        {value: 7, numberofmen: 10, numberofwomen: 10},
+        {value: 8, numberofmen: 5, numberofwomen: 5},
+        {value: 9, numberofmen: 2, numberofwomen: 2},
+        {value: 10, numberofmen: 1, numberofwomen: 2},
+    ]
+
+
+export const MockData2: DataResponseObject = {
     men: [
         { id: 1, value: 45 }, { id: 2, value: 29 }, { id: 3, value: 72 }, { id: 4, value: 19 }, { id: 5, value: 44 },
         { id: 6, value: 88 }, { id: 7, value: 3 }, { id: 8, value: 41 }, { id: 9, value: 31 }, { id: 10, value: 76 },
