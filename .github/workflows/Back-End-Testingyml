@@ -1,0 +1,42 @@
+name: Back-End Build & Testing
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'diversitytracker.api/**'
+      - 'diversitytracker.api.tests/**'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'diversitytracker.api/**'
+      - 'diversitytracker.api.tests/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies (API)
+      working-directory: ./diversitytracker.api
+      run: dotnet restore
+
+    - name: Build (API)
+      working-directory: ./diversitytracker.api
+      run: dotnet build --no-restore
+
+    - name: Restore dependencies (API Tests)
+      working-directory: ./diversitytracker.api.tests
+      run: dotnet restore
+
+    - name: Test (API Tests)
+      working-directory: ./diversitytracker.api.tests
+      run: dotnet test --no-restore --verbosity normal
