@@ -14,9 +14,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "../", // Set the base URL to the parent directory of the test directory
+    "baseUrl": "../",
     "paths": {
-      "src/*": ["diversitytracker.web/src/*"] // Mapping 'src' to the source directory of the main project
+      "src/*": ["diversitytracker.web/src/*"]
     }
   },
   "include": [
