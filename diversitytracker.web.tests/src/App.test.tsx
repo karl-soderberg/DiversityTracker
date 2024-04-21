@@ -43,5 +43,16 @@ describe('App Component', () => {
     expect(chartPage).toHaveClass('chartpage-container active');
   });
 
-  
+  it('changes state to FormPage when clicking the form anchor', async () => {
+    // Arrange
+    const { container } = render(<App />);
+    const formAnchor = container.querySelector('.navbottom__item:nth-child(2)');
+
+    // Act
+    fireEvent.click(formAnchor);
+
+    // Assert
+    const formPage = container.querySelector('.formpage-container');
+    expect(formPage).toHaveClass('formpage-container active');
+  });
 });
