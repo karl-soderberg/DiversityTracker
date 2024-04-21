@@ -9,6 +9,7 @@ type Props = {
 
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
+    const [scope, setScope] = useState<string>("both");
 
     return(
         <section className={className}>
@@ -32,14 +33,22 @@ export const ChartPage = ( {className} : Props) => {
                             <XAxis dataKey="value" />
                             <YAxis />
                             <CartesianGrid strokeDasharray="3 3" />
-                            <Area type="monotone" dataKey="numberofwomen" name='distribution' stroke="#D88484" fillOpacity={1} fill="url(#colorUv)" />
-                            <Area type="monotone" dataKey="numberofmen" name='distribution' stroke="#8296CA" fillOpacity={1} fill="url(#colorPv)" />
+                            {(scope === "both" || scope === "women") && 
+                                <Area type="monotone" dataKey="numberofwomen" name='distribution' stroke="#D88484" fillOpacity={1} fill="url(#colorUv)" /> 
+                            }
+                            {(scope === "both" || scope === "men") && 
+                                <Area type="monotone" dataKey="numberofmen" name='distribution' stroke="#8296CA" fillOpacity={1} fill="url(#colorPv)" />
+                            }
                         </AreaChart>
                     }
                     {chartType == 'distributionacrosstime' &&
                         <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                            <Line type="monotone" dataKey="numberofmen" stroke="#8884d8" />
-                            <Line type="monotone" dataKey="numberofwomen" stroke="#D88484" />
+                            {(scope === "both" || scope === "women") && 
+                                <Line type="monotone" dataKey="numberofwomen" stroke="#D88484" />
+                            }
+                            {(scope === "both" || scope === "men") && 
+                                <Line type="monotone" dataKey="numberofmen" stroke="#8884d8" />
+                            }
                             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                             <XAxis dataKey="value" />
                             <YAxis />
@@ -50,6 +59,11 @@ export const ChartPage = ( {className} : Props) => {
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
+            </select>
+            <select name="" id="" onChange={(e) => setScope(e.target.value)}>
+                <option value="both">both</option>
+                <option value="men">men</option>
+                <option value="women">women</option>
             </select>
         </section>
     )
