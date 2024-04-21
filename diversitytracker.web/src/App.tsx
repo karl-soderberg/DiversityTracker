@@ -18,9 +18,9 @@ function App() {
         <FormPage 
             className={"formpage-container " + (page == "FormPage" && "active")}
           />
-          <NewFormPage 
-            className={"newformpage-container " + (page == "NewFormPage" && "active")}
-          />
+        <NewFormPage 
+          className={"newformpage-container " + (page == "NewFormPage" && "active")}
+        />
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
         />

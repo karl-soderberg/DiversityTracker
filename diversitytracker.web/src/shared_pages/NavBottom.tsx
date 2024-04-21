@@ -38,8 +38,8 @@ export const NavBottom = ({ setPage, page }: Props) => {
                 width=''
                 height='100%'
                 link='#'
-                active={page == 'FormPage' ? true : false}
-                click={() => setPage('FormPage')}
+                active={page == 'NewFormPage' ? true : false}
+                click={() => setPage('NewFormPage')}
             />
         </nav>
     )
