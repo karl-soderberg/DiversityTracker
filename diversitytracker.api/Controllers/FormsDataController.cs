@@ -20,9 +20,9 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData()
+        public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
         {
-            var formsData = await _formsDataRepository.GetFormsAsync();
+            var formsData = await _formsDataRepository.GetFormsAsync(startDate, endDate);
             var formsResponseData = _mapper.Map<ICollection<FormSubmissionResponseDto>>(formsData);
             var formResponseObject = new FormSubmissionsDataResponseDto(){
                 RequestedAt = DateTime.UtcNow,

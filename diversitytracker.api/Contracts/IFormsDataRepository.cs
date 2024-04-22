@@ -8,7 +8,7 @@ namespace diversitytracker.api.Contracts
 {
     public interface IFormsDataRepository
     {
-        Task<List<FormSubmission>> GetFormsAsync();
+        Task<List<FormSubmission>> GetFormsAsync(DateTime? startDate, DateTime? endDate);
         Task<FormSubmission> AddFormAsync(FormSubmission baseForm); 
         Task<List<QuestionType>> GetQuestionTypes();
         Task<QuestionType> AddQuestionType(QuestionType questionType); 

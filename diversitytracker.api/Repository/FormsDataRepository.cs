@@ -20,9 +20,23 @@ namespace diversitytracker.api.Repository
             return baseForm;
         }
 
-        public async Task<List<FormSubmission>> GetFormsAsync()
+        public async Task<List<FormSubmission>> GetFormsAsync(DateTime? startDate, DateTime? endDate)
         {
-            return await _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person).ToListAsync();
+            IQueryable<FormSubmission> query = _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person);
+
+            if (startDate != null)
+            {
+                query = query.Where(form => form.CreatedAt >= startDate);
+            }
+
+            if (endDate != null)
+            {
+                query = query.Where(form => form.CreatedAt <= endDate);
+            }
+
+            var formSubmissions = await query.ToListAsync();
+
+            return formSubmissions;
         }
         public async Task<List<QuestionType>> GetQuestionTypes()
         {
