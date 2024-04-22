@@ -38,7 +38,7 @@ namespace diversitytracker.api.Repository
 
             return formSubmissions;
         }
-        public async Task<FormSubmission> GetFormSubmissionById(int id)
+        public async Task<FormSubmission> GetFormSubmissionById(Ulid id)
         {
             return await _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person).FirstOrDefaultAsync(form => form.Id == id);
         }
@@ -60,12 +60,12 @@ namespace diversitytracker.api.Repository
             return questionType;
         }
 
-        public async Task<QuestionType> GetQuestionTypeById(int id)
+        public async Task<QuestionType> GetQuestionTypeById(Ulid id)
         {
             return await _context.QuestionTypes.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task DeleteQuestionType(int id)
+        public async Task DeleteQuestionType(Ulid id)
         {
             var questionDeleteRequest = await GetQuestionTypeById(id);
             _context.QuestionTypes.Remove(questionDeleteRequest);

@@ -10,62 +10,64 @@ namespace diversitytracker.api.Controllers
     [Route("api/[controller]")]
     public class QuestionsController : ControllerBase
     {
-        // private readonly IMapper _mapper;
-        // private readonly IFormsDataRepository _formsDataRepository;
+        private readonly IMapper _mapper;
+        private readonly IFormsDataRepository _formsDataRepository;
 
-        // public QuestionsController(IMapper mapper, IFormsDataRepository formsDataRepository)
-        // {
-        //     _mapper = mapper;
-        //     _formsDataRepository = formsDataRepository;
-        // }
+        public QuestionsController(IMapper mapper, IFormsDataRepository formsDataRepository)
+        {
+            _mapper = mapper;
+            _formsDataRepository = formsDataRepository;
+        }
 
-        // [HttpGet]
-        // public async Task<ActionResult<List<QuestionTypeResponseDto>>> GetQuestionTypes()
-        // {
-        //     var formsData = await _formsDataRepository.GetQuestionTypes();
-        //     var formsResponseData = _mapper.Map<IEnumerable<QuestionTypeResponseDto>>(formsData);
-        //     return Ok(formsResponseData);
-        // }
+        [HttpGet]
+        public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
+        {
+            var questionTypes = await _formsDataRepository.GetQuestionTypes();
+            return Ok(questionTypes);
+        }
 
-        // [HttpPost]
-        // public async Task<IActionResult> AddQuestionType(QuestionTypePostDto questionType)
-        // {
-        //     if(!ModelState.IsValid)
-        //     {
-        //         return BadRequest(ModelState);
-        //     }
+        [HttpPost]
+        public async Task<IActionResult> AddQuestionType(PostQuestionTypeDto questionTypeDto)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //     var newQuestion = _mapper.Map<QuestionType>(questionType);
-        //     await _formsDataRepository.AddQuestionType(newQuestion);
+            var newQuestion = new QuestionType(){
+                Value = questionTypeDto.Value
+            };
 
-        //     return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
-        // }
+            await _formsDataRepository.AddQuestionType(newQuestion);
 
-        // [HttpDelete("{id}")]
+            return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
+        }
 
-        // public async Task<IActionResult> DeleteQuestionType(int id)
-        // {
-        //     var questionDeleteRequest = await QuestionExists(id);
+        [HttpDelete("{id}")]
 
-        //     if (!questionDeleteRequest)
-        //     {
-        //         return NotFound();
-        //     }
+        public async Task<IActionResult> DeleteQuestionType(Ulid id)
+        {
+            var questionDeleteRequest = await QuestionExists(id);
 
-        //     await _formsDataRepository.DeleteQuestionType(id);
+            if (!questionDeleteRequest)
+            {
+                return NotFound();
+            }
 
-        //     return NoContent();
-        // }
+            await _formsDataRepository.DeleteQuestionType(id);
 
-        // private async Task<bool> QuestionExists(int id)
-        // {
-        //     var QuestionExists = await _formsDataRepository.GetQuestionTypeById(id);
+            return NoContent();
+        }
 
-        //     if (QuestionExists == null){
-        //         return false;
-        //     }
+        private async Task<bool> QuestionExists(Ulid id)
+        {
+            var QuestionExists = await _formsDataRepository.GetQuestionTypeById(id);
+
+            if (QuestionExists == null){
+                return false;
+            }
             
-        //     return true;
-        // }
+            return true;
+        }
     }
 }

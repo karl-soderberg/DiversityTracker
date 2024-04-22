@@ -19,17 +19,16 @@ namespace diversitytracker.api.Controllers
             _formsDataRepository = formsDataRepository;
         }
 
-        // [HttpGet]
-        // public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
-        // {
-        //     var formsData = await _formsDataRepository.GetFormsAsync(startDate, endDate);
-        //     var formsResponseData = _mapper.Map<ICollection<FormSubmissionResponseDto>>(formsData);
-        //     var formResponseObject = new FormSubmissionsDataResponseDto(){
-        //         RequestedAt = DateTime.UtcNow,
-        //         FormSubmissions = formsResponseData
-        //     };  
-        //     return Ok(formResponseObject);
-        // }
+        [HttpGet]
+        public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
+        {
+            var formSubmissions = await _formsDataRepository.GetFormsAsync(startDate, endDate);
+            var formSubmissionsResponseDto = new FormSubmissionsDataResponseDto(){
+                RequestedAt = DateTime.UtcNow,
+                FormSubmissions = formSubmissions
+            };  
+            return Ok(formSubmissionsResponseDto);
+        }
 
         // [HttpPut("{id}")]
         // public async Task<IActionResult> PutForm(int id, UpdateFormSubmissionDto updateFormSubmissionDto)
@@ -67,21 +66,37 @@ namespace diversitytracker.api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
-            // foreach (var question in formSubmissionPostDto.Questions)
-            // {
-            //     var questionFound = _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId);
-            //     if(questionFound == null)
-            //     {
-            //         return NotFound("Could Not Find Question Id: " + question.QuestionTypeId);
-            //     }
-            // }
 
-            var newFormSubmission = _mapper.Map<FormSubmission>(postFormSubmissionDto);
+            var newFormSubmission = new FormSubmission()
+            {
+                CreatedAt = postFormSubmissionDto.CreatedAt,
+                Person = new Person(){
+                    Name = postFormSubmissionDto.Person.Name,
+                    Gender = postFormSubmissionDto.Person.Gender,
+                    TimeAtCompany = postFormSubmissionDto.Person.TimeAtCompany,
+                },
+                Questions = new List<Question>()
+            };
+            
+            foreach(var question in postFormSubmissionDto.Questions)
+            {
+                var newQuestionType = new QuestionType()
+                {
+                    Value = question.QuestionType.Value,
+                };
+                var newQuestion = new Question(){
+                    QuestionType = newQuestionType,
+                    Value = question.Value,
+                    Answer = question.Answer,
+                    FormSubmissionId = newFormSubmission.Id,
+                    FormSubmission = newFormSubmission,
+                };
+                newFormSubmission.Questions.Add(newQuestion);
+            }
+
             await _formsDataRepository.AddFormAsync(newFormSubmission);
 
-            // return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
-            return Ok();
+            return CreatedAtAction(nameof(GetFormData), new {id = newFormSubmission.Id}, newFormSubmission);
         }
 
     }
