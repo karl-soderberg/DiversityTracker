@@ -1,5 +1,5 @@
 import './MockData'
-import { MOCKmay, MOCKjune } from './MockData'
+import { MOCKmay, MOCKjune, MOCKjuly } from './MockData'
 
 
 //FILTERING FOR PIECHART
@@ -18,3 +18,14 @@ export const pieData = [
 //FILTERING FOR SCATTER
 export const scatterMaleData = MOCKjune.filter(entery => entery.gender === 'male')
 export const scatterFemaleData = MOCKjune.filter(entery => entery.gender === 'female')
+
+//FILTERING FOR BARCHART
+const groupedData: { [key: string]: { gender: string; agreeLevel: number; count: number } } = {};
+MOCKjuly.forEach(item => {
+  const key = `${item.gender}-${item.agreeLevel}`;
+  if (!groupedData[key]) {
+    groupedData[key] = { gender: item.gender, agreeLevel: item.agreeLevel, count: 1 };
+  } else {
+    groupedData[key].count++;
+  }
+});

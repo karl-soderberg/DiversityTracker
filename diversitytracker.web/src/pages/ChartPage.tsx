@@ -14,8 +14,6 @@ type Props = {
 }
 
 
-
-
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
@@ -109,7 +107,7 @@ export const ChartPage = ( {className} : Props) => {
                             )}
                             {scope === 'men' && <Scatter name="Male" data={scatterMaleData} fill="var(--chart-male)" />}
                             {scope === 'women' && <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-female)" />}
-                            
+
                             <Legend align="right" />
                             </ScatterChart>
                         }
