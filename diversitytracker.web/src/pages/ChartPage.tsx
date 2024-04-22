@@ -1,4 +1,4 @@
-import { Area, AreaChart, CartesianGrid, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, data01, } from '../data/MockData'
@@ -19,6 +19,8 @@ type Props = {
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
+
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
     return(
         <section className={className}>
@@ -73,11 +75,15 @@ export const ChartPage = ( {className} : Props) => {
                             cx="50%"
                             cy="50%"
                             outerRadius={80}
-                            fill="#8884d8"
-                            label={({ name, value }) => `${name} (${value}%)`}
-                        />
+                            label={({ name, value }) => `${name} (${value.toFixed(2)}%)`}
+                        >
+                            {pieData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
                         <Tooltip />
-                        </PieChart>
+                    </PieChart>
+                
                     }
 
                 </ResponsiveContainer>

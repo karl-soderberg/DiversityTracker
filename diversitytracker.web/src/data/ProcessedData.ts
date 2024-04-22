@@ -8,6 +8,8 @@ const totalCount = maleCount + femaleCount;
 const malePercentage = (maleCount/totalCount) * 100;
 const femalePercentage = (femaleCount/totalCount) * 100;
 
+
+
 export const pieData = [
     { name: 'Male', value: malePercentage },
     { name: 'Female', value: femalePercentage },
