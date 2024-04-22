@@ -103,6 +103,7 @@ export const ChartPage = ( {className} : Props) => {
                             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             <Scatter name="Male" data={scatterMaleData} fill="var(--chart-female)" />
                             <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-male)" />
+                            <Legend align="right" />
                             </ScatterChart>
                         }
 
