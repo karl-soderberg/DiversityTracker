@@ -2,7 +2,7 @@ namespace diversitytracker.api.Enums
 {
     public enum Gender
     {
-        Man,
-        Woman
+        Man = 0,
+        Woman = 1,
     }
 }
