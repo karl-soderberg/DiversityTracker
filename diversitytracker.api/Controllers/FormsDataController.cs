@@ -35,6 +35,15 @@ namespace diversitytracker.api.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
+            foreach (var question in formSubmissionPostDto.Questions)
+            {
+                var questionFound = _questionRepository.GetQuestionTypeById(question.QuestionTypeId);
+                if(questionFound == null)
+                {
+                    return NotFound("Could Not Find Question Id: " + question.QuestionTypeId);
+                }
+            }
 
             var newForm = _mapper.Map<FormSubmission>(formSubmissionPostDto);
             await _formsRepository.AddFormAsync(newForm);
