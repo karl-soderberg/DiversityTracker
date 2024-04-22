@@ -64,22 +64,6 @@ export const ChartPage = ( {className} : Props) => {
                         </LineChart>
                     }
 
-                    {/* {chartType == 'piechart' &&
-                        //console.log(MOCKmay)
-                        <PieChart data={MOCKmay} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                        <Pie
-                          dataKey="gender"
-                          isAnimationActive={false}
-                          cx="50%"
-                          cy="50%"
-                          outerRadius={80}
-                          fill="#8884d8"
-                          label
-                        />
-                        <Tooltip />
-                      </PieChart>
-                    } */}
-
                     {chartType == 'piechart' &&
                         <PieChart width={400} height={400}>
                         <Pie
@@ -90,7 +74,7 @@ export const ChartPage = ( {className} : Props) => {
                             cy="50%"
                             outerRadius={80}
                             fill="#8884d8"
-                            label={({ name, value }) => `${name} (${value.toFixed(2)}%)`}
+                            label={({ name, value }) => `${name} (${value}%)`}
                         />
                         <Tooltip />
                         </PieChart>
