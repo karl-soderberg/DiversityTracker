@@ -1,7 +1,8 @@
 import { Area, AreaChart, CartesianGrid, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
-import { MOCKData, MOCKmay, data01, data02  } from '../data/MockData'
+import { MOCKData, data01, } from '../data/MockData'
+import { pieData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -80,12 +81,11 @@ export const ChartPage = ( {className} : Props) => {
                     } */}
 
                     {chartType == 'piechart' &&
-                        //console.log(MOCKmay)
                         <PieChart width={400} height={400}>
                         <Pie
                             dataKey="value"
                             isAnimationActive={false}
-                            data={data01}
+                            data={pieData}
                             cx="50%"
                             cy="50%"
                             outerRadius={80}
