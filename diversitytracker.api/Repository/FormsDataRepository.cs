@@ -38,6 +38,10 @@ namespace diversitytracker.api.Repository
 
             return formSubmissions;
         }
+        public async Task<FormSubmission> GetFormSubmissionById(int id)
+        {
+            return await _context.FormSubmissionsData.FirstOrDefaultAsync(form => form.Id == id);
+        }
         public async Task<List<QuestionType>> GetQuestionTypes()
         {
             return await _context.QuestionTypes.ToListAsync();
