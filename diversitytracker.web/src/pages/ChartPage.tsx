@@ -1,11 +1,19 @@
-import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
-import { MOCKData } from '../data/MockData'
+import { MOCKData, MOCKmay, data01, data02  } from '../data/MockData'
+
+// const FilteredMockData = [
+//     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
+//     MOCKmay.filter(entry => entry.gender === 'female').map(entry => entry.rating),
+// ];
 
 type Props = {
     className: string
 }
+
+
+
 
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
@@ -54,11 +62,46 @@ export const ChartPage = ( {className} : Props) => {
                             <YAxis />
                         </LineChart>
                     }
+
+                    {/* {chartType == 'piechart' &&
+                        //console.log(MOCKmay)
+                        <PieChart data={MOCKmay} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                        <Pie
+                          dataKey="gender"
+                          isAnimationActive={false}
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={80}
+                          fill="#8884d8"
+                          label
+                        />
+                        <Tooltip />
+                      </PieChart>
+                    } */}
+
+                    {chartType == 'piechart' &&
+                        //console.log(MOCKmay)
+                        <PieChart width={400} height={400}>
+                        <Pie
+                            dataKey="value"
+                            isAnimationActive={false}
+                            data={data01}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            fill="#8884d8"
+                            label
+                        />
+                        <Tooltip />
+                        </PieChart>
+                    }
+
                 </ResponsiveContainer>
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
+                <option value="piechart">piechart</option>
             </select>
             <select name="" id="" onChange={(e) => setScope(e.target.value)}>
                 <option value="both">both</option>
