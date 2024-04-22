@@ -101,8 +101,15 @@ export const ChartPage = ( {className} : Props) => {
                             <XAxis type="number" dataKey="age" name="age" label={{ value: 'Age', position: 'insideBottom', offset: -15 }} />
                             <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft' }}/>
                             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                            <Scatter name="Male" data={scatterMaleData} fill="var(--chart-female)" />
-                            <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-male)" />
+                            {scope === 'both' && (
+                                <>
+                                    <Scatter name="Male" data={scatterMaleData} fill="var(--chart-male)" />
+                                    <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-female)" />
+                                </>
+                            )}
+                            {scope === 'men' && <Scatter name="Male" data={scatterMaleData} fill="var(--chart-male)" />}
+                            {scope === 'women' && <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-female)" />}
+                            
                             <Legend align="right" />
                             </ScatterChart>
                         }
