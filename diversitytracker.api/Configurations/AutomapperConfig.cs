@@ -10,6 +10,7 @@ namespace diversitytracker.api.Configurations
         {
             CreateMap<FormSubmission, FormSubmissionResponseDto>().ReverseMap();
             CreateMap<FormSubmission, FormSubmissionPostDto>().ReverseMap();
+            CreateMap<FormSubmission, UpdateFormSubmissionDto>().ReverseMap();
             CreateMap<QuestionType, QuestionTypePostDto>().ReverseMap();
             CreateMap<QuestionType, QuestionTypeResponseDto>().ReverseMap();
         }

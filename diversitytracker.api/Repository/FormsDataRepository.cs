@@ -40,7 +40,7 @@ namespace diversitytracker.api.Repository
         }
         public async Task<FormSubmission> GetFormSubmissionById(int id)
         {
-            return await _context.FormSubmissionsData.FirstOrDefaultAsync(form => form.Id == id);
+            return await _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person).FirstOrDefaultAsync(form => form.Id == id);
         }
 
         public async Task UpdateForm(FormSubmission formSubmission)

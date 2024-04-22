@@ -1,8 +1,6 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace diversitytracker.api.Models
+namespace diversitytracker.api.Dtos
 {
-    public class Question
+    public class UpdateQuestionDto
     {
         public int Id { get; set; }
         public int QuestionTypeId { get; set; }
