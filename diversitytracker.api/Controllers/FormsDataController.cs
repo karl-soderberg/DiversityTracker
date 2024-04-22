@@ -28,14 +28,14 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddForm(BaseFormRequestDto baseFormRequestDto)
+        public async Task<IActionResult> AddForm(FormSubmissionPostDto formSubmissionPostDto)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var newForm = _mapper.Map<BaseForm>(baseFormRequestDto);
+            var newForm = _mapper.Map<FormSubmission>(formSubmissionPostDto);
             await _formsRepository.AddFormAsync(newForm);
 
             return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
