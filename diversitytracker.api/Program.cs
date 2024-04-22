@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("dockerDb"));
 });
 
-builder.Services.AddScoped<IFormsDataRepository, FormsDa>();
+builder.Services.AddScoped<IFormsDataRepository, FormsDataRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 

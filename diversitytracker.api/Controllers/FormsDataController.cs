@@ -1,5 +1,6 @@
 using AutoMapper;
 using diversitytracker.api.Contracts;
+using diversitytracker.api.Dtos;
 using diversitytracker.api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,11 +20,15 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<FormSubmissionResponseDto>>> GetFormData()
+        public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData()
         {
             var formsData = await _formsDataRepository.GetFormsAsync();
-            var formsResponseData = _mapper.Map<IEnumerable<FormSubmissionResponseDto>>(formsData);
-            return Ok(formsResponseData);
+            var formsResponseData = _mapper.Map<ICollection<FormSubmissionResponseDto>>(formsData);
+            var formResponseObject = new FormSubmissionsDataResponseDto(){
+                RequestedAt = DateTime.UtcNow,
+                FormSubmissions = formsResponseData
+            };  
+            return Ok(formResponseObject);
         }
 
         [HttpPost]
