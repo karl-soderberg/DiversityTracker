@@ -8,12 +8,12 @@ namespace diversitytracker.api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FormsController : ControllerBase
+    public class FormsDataController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IFormsRepository _formsRepository;
 
-        public FormsController(IMapper mapper, IFormsRepository formsRepository)
+        public FormsDataController(IMapper mapper, IFormsRepository formsRepository)
         {
             _mapper = mapper;
             _formsRepository = formsRepository;
