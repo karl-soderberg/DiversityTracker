@@ -83,7 +83,6 @@ export const ChartPage = ( {className} : Props) => {
                         </Pie>
                         <Tooltip />
                     </PieChart>
-                
                     }
 
                 </ResponsiveContainer>
