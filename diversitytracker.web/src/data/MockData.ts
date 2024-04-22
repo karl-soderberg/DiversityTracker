@@ -10,3 +10,16 @@ export const MOCKData = [
     { value: 9, numberofmen: 2, numberofwomen: 2, date: `june` },
     { value: 10, numberofmen: 1, numberofwomen: 2, date: `july` }
 ];
+
+export const MOCKmay = [
+    { gender: 'male', rating: 2, age: 40,  },
+    { gender: 'male', rating: 5, age: 37,  },
+    { gender: 'female', rating: 7, age: 25 },
+    { gender: 'male', rating: 12, age: 20,  },
+    { gender: 'female', rating: 17, age: 28 },
+    { gender: 'male', rating: 25, age: 35, },
+    { gender: 'male', rating: 10, age: 50, },
+    { gender: 'male', rating: 5, age: 55,  },
+    { gender: 'female', rating: 2, age: 32, },
+    { gender: 'female', rating: 1, age: 42, }
+];
