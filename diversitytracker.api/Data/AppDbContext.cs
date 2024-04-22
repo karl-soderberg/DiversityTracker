@@ -9,7 +9,6 @@ namespace diversitytracker.api.Data
         {
             
         }
-        public DbSet<BaseForm> BaseFormsData { get; set; }
         public DbSet<FormSubmission> FormSubmissionsData { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Person> People { get; set; }
