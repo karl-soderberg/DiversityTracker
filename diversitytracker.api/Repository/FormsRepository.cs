@@ -13,16 +13,16 @@ namespace diversitytracker.api.Repository
         {
             _context = context;
         }
-        public async Task<BaseForm> AddFormAsync(BaseForm baseForm)
+        public async Task<FormSubmission> AddFormAsync(FormSubmission baseForm)
         {
-            await _context.AddAsync(baseForm);
+            await _context.FormSubmissionsData.AddAsync(baseForm);
             await _context.SaveChangesAsync();
             return baseForm;
         }
 
-        public async Task<List<BaseForm>> GetFormsAsync()
+        public async Task<List<FormSubmission>> GetFormsAsync()
         {
-            return await _context.BaseFormsData.ToListAsync();
+            return await _context.FormSubmissionsData.ToListAsync();
         }
     }
 }

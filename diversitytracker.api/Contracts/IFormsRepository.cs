@@ -4,7 +4,7 @@ namespace diversitytracker.api.Contracts
 {
     public interface IFormsRepository
     {
-        Task<List<BaseForm>> GetFormsAsync();
-        Task<BaseForm> AddFormAsync(BaseForm baseForm); 
+        Task<List<FormSubmission>> GetFormsAsync();
+        Task<FormSubmission> AddFormAsync(FormSubmission baseForm); 
     }
 }
