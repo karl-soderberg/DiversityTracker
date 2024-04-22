@@ -45,7 +45,7 @@ namespace diversitytracker.api.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteQuestionType(Ulid id)
+        public async Task<IActionResult> DeleteQuestionType(string id)
         {
             var questionDeleteRequest = await QuestionExists(id);
 
@@ -59,7 +59,7 @@ namespace diversitytracker.api.Controllers
             return NoContent();
         }
 
-        private async Task<bool> QuestionExists(Ulid id)
+        private async Task<bool> QuestionExists(string id)
         {
             var QuestionExists = await _formsDataRepository.GetQuestionTypeById(id);
 

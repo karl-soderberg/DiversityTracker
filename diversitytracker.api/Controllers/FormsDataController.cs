@@ -80,17 +80,19 @@ namespace diversitytracker.api.Controllers
             
             foreach(var question in postFormSubmissionDto.Questions)
             {
-                var newQuestionType = new QuestionType()
-                {
-                    Value = question.QuestionType.Value,
-                };
                 var newQuestion = new Question(){
-                    QuestionType = newQuestionType,
+                    QuestionType = await _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId),
                     Value = question.Value,
                     Answer = question.Answer,
                     FormSubmissionId = newFormSubmission.Id,
                     FormSubmission = newFormSubmission,
                 };
+
+                if(newQuestion.QuestionType == null)
+                {
+                    return BadRequest($"QuestionType with Id: {question.QuestionTypeId} not found.");
+                }
+
                 newFormSubmission.Questions.Add(newQuestion);
             }
 

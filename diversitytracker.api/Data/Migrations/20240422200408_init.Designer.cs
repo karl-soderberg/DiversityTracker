@@ -12,8 +12,8 @@ using diversitytracker.api.Data;
 namespace diversitytracker.api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422172852_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240422200408_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,15 @@ namespace diversitytracker.api.Data.Migrations
 
             modelBuilder.Entity("diversitytracker.api.Models.FormSubmission", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -48,11 +46,8 @@ namespace diversitytracker.api.Data.Migrations
 
             modelBuilder.Entity("diversitytracker.api.Models.Person", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -71,21 +66,20 @@ namespace diversitytracker.api.Data.Migrations
 
             modelBuilder.Entity("diversitytracker.api.Models.Question", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Answer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FormSubmissionId")
-                        .HasColumnType("int");
+                    b.Property<string>("FormSubmissionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("QuestionTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("QuestionTypeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Value")
                         .HasColumnType("float");
@@ -101,11 +95,8 @@ namespace diversitytracker.api.Data.Migrations
 
             modelBuilder.Entity("diversitytracker.api.Models.QuestionType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .IsRequired()

@@ -5,7 +5,7 @@ namespace diversitytracker.api.Models
 {
     public class Person
     {
-        public Ulid Id { get; private set; }
+        public string Id { get; private set; }
         public required string Name { get; set; }
         [Range(0, 1, ErrorMessage = "Gender must be either 0 (Male) or 1 (Female).")]
         public required Gender Gender { get; set; }
@@ -14,7 +14,7 @@ namespace diversitytracker.api.Models
 
         public Person()
         {
-            Id = Ulid.NewUlid();
+            Id = "Person_" + Ulid.NewUlid().ToString();
         }
     }
 }
