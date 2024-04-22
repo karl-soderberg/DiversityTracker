@@ -41,7 +41,7 @@ namespace diversitytracker.api.Controllers
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteQuestionType(int id)
         {
