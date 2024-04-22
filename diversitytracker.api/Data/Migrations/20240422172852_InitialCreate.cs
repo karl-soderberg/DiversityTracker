@@ -6,16 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace diversitytracker.api.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Form_Questions_People : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "QuestionType",
-                table: "BaseFormsData",
-                newName: "QuestionTypeId");
-
             migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
@@ -32,7 +27,7 @@ namespace diversitytracker.api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionType",
+                name: "QuestionTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -41,7 +36,7 @@ namespace diversitytracker.api.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionType", x => x.Id);
+                    table.PrimaryKey("PK_QuestionTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,43 +60,32 @@ namespace diversitytracker.api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
+                name: "Question",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionTypeId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<double>(type: "float", nullable: false),
-                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    FormSubmissionId = table.Column<int>(type: "int", nullable: true)
+                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FormSubmissionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.PrimaryKey("PK_Question", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_FormSubmissionsData_FormSubmissionId",
+                        name: "FK_Question_FormSubmissionsData_FormSubmissionId",
                         column: x => x.FormSubmissionId,
                         principalTable: "FormSubmissionsData",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Questions_People_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "People",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Questions_QuestionType_QuestionTypeId",
+                        name: "FK_Question_QuestionTypes_QuestionTypeId",
                         column: x => x.QuestionTypeId,
-                        principalTable: "QuestionType",
+                        principalTable: "QuestionTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BaseFormsData_QuestionTypeId",
-                table: "BaseFormsData",
-                column: "QuestionTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FormSubmissionsData_PersonId",
@@ -109,56 +93,30 @@ namespace diversitytracker.api.Data.Migrations
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Questions_FormSubmissionId",
-                table: "Questions",
+                name: "IX_Question_FormSubmissionId",
+                table: "Question",
                 column: "FormSubmissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Questions_PersonId",
-                table: "Questions",
-                column: "PersonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Questions_QuestionTypeId",
-                table: "Questions",
+                name: "IX_Question_QuestionTypeId",
+                table: "Question",
                 column: "QuestionTypeId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_BaseFormsData_QuestionType_QuestionTypeId",
-                table: "BaseFormsData",
-                column: "QuestionTypeId",
-                principalTable: "QuestionType",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_BaseFormsData_QuestionType_QuestionTypeId",
-                table: "BaseFormsData");
-
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "FormSubmissionsData");
 
             migrationBuilder.DropTable(
-                name: "QuestionType");
+                name: "QuestionTypes");
 
             migrationBuilder.DropTable(
                 name: "People");
-
-            migrationBuilder.DropIndex(
-                name: "IX_BaseFormsData_QuestionTypeId",
-                table: "BaseFormsData");
-
-            migrationBuilder.RenameColumn(
-                name: "QuestionTypeId",
-                table: "BaseFormsData",
-                newName: "QuestionType");
         }
     }
 }

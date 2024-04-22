@@ -12,5 +12,26 @@ namespace diversitytracker.api.Data
         public DbSet<FormSubmission> FormSubmissionsData { get; set; }
         public DbSet<QuestionType> QuestionTypes { get; set; }
         public DbSet<Person> People { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Person to FormSubmission relationship
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.FormSubmissions)
+                .WithOne(fs => fs.Person)
+                .HasForeignKey(fs => fs.PersonId);
+
+            // FormSubmission to Question relationship
+            modelBuilder.Entity<FormSubmission>()
+                .HasMany(fs => fs.Questions)
+                .WithOne(q => q.FormSubmission)
+                .HasForeignKey(q => q.FormSubmissionId);
+
+            // Question to QuestionType relationship
+            modelBuilder.Entity<Question>()
+                .HasOne(q => q.QuestionType)
+                .WithMany()
+                .HasForeignKey(q => q.QuestionTypeId);
+        }
     }
 }

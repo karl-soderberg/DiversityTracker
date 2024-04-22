@@ -12,8 +12,8 @@ using diversitytracker.api.Data;
 namespace diversitytracker.api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422115237_fix_dbset_QuestionType")]
-    partial class fix_dbset_QuestionType
+    [Migration("20240422172852_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,7 @@ namespace diversitytracker.api.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FormSubmissionId")
@@ -118,7 +119,7 @@ namespace diversitytracker.api.Data.Migrations
             modelBuilder.Entity("diversitytracker.api.Models.FormSubmission", b =>
                 {
                     b.HasOne("diversitytracker.api.Models.Person", "Person")
-                        .WithMany()
+                        .WithMany("FormSubmissions")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -148,6 +149,11 @@ namespace diversitytracker.api.Data.Migrations
             modelBuilder.Entity("diversitytracker.api.Models.FormSubmission", b =>
                 {
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("diversitytracker.api.Models.Person", b =>
+                {
+                    b.Navigation("FormSubmissions");
                 });
 #pragma warning restore 612, 618
         }
