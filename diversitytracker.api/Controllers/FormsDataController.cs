@@ -20,7 +20,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BaseFormResponseDto>>> GetFormResults()
+        public async Task<ActionResult<List<BaseFormResponseDto>>> GetFormData()
         {
             var formsData = await _formsRepository.GetFormsAsync();
             var formsResponseData = _mapper.Map<IEnumerable<BaseFormResponseDto>>(formsData);
@@ -38,7 +38,7 @@ namespace diversitytracker.api.Controllers
             var newForm = _mapper.Map<BaseForm>(baseFormRequestDto);
             await _formsRepository.AddFormAsync(newForm);
 
-            return CreatedAtAction(nameof(GetFormResults), new {id = newForm.Id}, newForm);
+            return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
         }
 
     }
