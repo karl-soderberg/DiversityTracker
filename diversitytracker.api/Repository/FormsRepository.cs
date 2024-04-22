@@ -26,12 +26,12 @@ namespace diversitytracker.api.Repository
         }
         public async Task<List<QuestionType>> GetQuestionTypes()
         {
-            return await _context.Questions.ToListAsync();
+            return await _context.QuestionTypes.ToListAsync();
         }
 
         public async Task<QuestionType> AddQuestionType(QuestionType questionType)
         {
-            await _context.Questions.AddAsync(questionType);
+            await _context.QuestionTypes.AddAsync(questionType);
             await _context.SaveChangesAsync();
             return questionType;
         }
