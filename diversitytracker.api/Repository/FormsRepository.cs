@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace diversitytracker.api.Repository
 {
-    public class FormsRepository : IFormsRepository
+    public class FormsRepository : IFormsRepository, IQuestionRepository
     {
         private readonly AppDbContext _context;
 
@@ -20,9 +20,19 @@ namespace diversitytracker.api.Repository
             return baseForm;
         }
 
+        public Task<QuestionType> AddQuestionType(QuestionType questionType)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<FormSubmission>> GetFormsAsync()
         {
             return await _context.FormSubmissionsData.ToListAsync();
+        }
+
+        public Task<List<QuestionType>> GetQuestionTypes()
+        {
+            throw new NotImplementedException();
         }
     }
 }
