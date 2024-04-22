@@ -6,6 +6,6 @@ namespace diversitytracker.api.Models
         public required QuestionType QuestionType { get; set; }
         public required double Value { get; set; }
         public string? Answer { get; set; }
-        public required Person Person { get; set; }
+        public required FormSubmission FormSubmission { get; set; }
     }
 }
