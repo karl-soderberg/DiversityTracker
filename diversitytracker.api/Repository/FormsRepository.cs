@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace diversitytracker.api.Repository
 {
-    public class FormsDataRepository : IFormsDataRepository
+    public class FormsDataRepository : IFormsRepository
     {
         private readonly AppDbContext _context;
 

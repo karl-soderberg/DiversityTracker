@@ -11,12 +11,14 @@ namespace diversitytracker.api.Controllers
     public class FormsDataController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IFormsDataRepository _formsDataRepository;
+        private readonly IFormsRepository _formsDataRepository;
+        private readonly IQuestionsRepository _questionsRepository;
 
-        public FormsDataController(IMapper mapper, IFormsDataRepository formsDataRepository)
+        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository)
         {
             _mapper = mapper;
             _formsDataRepository = formsDataRepository;
+            _questionsRepository = questionsRepository;
         }
 
         [HttpGet]
@@ -81,7 +83,7 @@ namespace diversitytracker.api.Controllers
             foreach(var question in postFormSubmissionDto.Questions)
             {
                 var newQuestion = new Question(){
-                    QuestionType = await _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId),
+                    QuestionType = await _questionsRepository.GetQuestionTypeById(question.QuestionTypeId),
                     Value = question.Value,
                     Answer = question.Answer,
                     FormSubmissionId = newFormSubmission.Id,

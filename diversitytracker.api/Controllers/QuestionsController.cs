@@ -11,18 +11,18 @@ namespace diversitytracker.api.Controllers
     public class QuestionsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IFormsDataRepository _formsDataRepository;
+        private readonly IQuestionsRepository _questionsRepository;
 
-        public QuestionsController(IMapper mapper, IFormsDataRepository formsDataRepository)
+        public QuestionsController(IMapper mapper, IQuestionsRepository questionsRepository)
         {
             _mapper = mapper;
-            _formsDataRepository = formsDataRepository;
+            _questionsRepository = questionsRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
         {
-            var questionTypes = await _formsDataRepository.GetQuestionTypes();
+            var questionTypes = await _questionsRepository.GetQuestionTypes();
             return Ok(questionTypes);
         }
 
@@ -38,7 +38,7 @@ namespace diversitytracker.api.Controllers
                 Value = questionTypeDto.Value
             };
 
-            await _formsDataRepository.AddQuestionType(newQuestion);
+            await _questionsRepository.AddQuestionType(newQuestion);
 
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
@@ -46,7 +46,7 @@ namespace diversitytracker.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutForm(string id, PutQuestionTypeDto putQuestionTypeDto)
         {
-            var question = await _formsDataRepository.GetQuestionTypeById(id);
+            var question = await _questionsRepository.GetQuestionTypeById(id);
 
             if (question == null)
             {
@@ -57,7 +57,7 @@ namespace diversitytracker.api.Controllers
 
             try
             {
-                await _formsDataRepository.UpdateQuestionType(question);
+                await _questionsRepository.UpdateQuestionType(question);
             }
             catch (Exception ex)
             {
@@ -78,14 +78,14 @@ namespace diversitytracker.api.Controllers
                 return NotFound();
             }
 
-            await _formsDataRepository.DeleteQuestionType(id);
+            await _questionsRepository.DeleteQuestionType(id);
 
             return NoContent();
         }
 
         private async Task<bool> QuestionExists(string id)
         {
-            var QuestionExists = await _formsDataRepository.GetQuestionTypeById(id);
+            var QuestionExists = await _questionsRepository.GetQuestionTypeById(id);
 
             if (QuestionExists == null){
                 return false;
