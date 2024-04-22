@@ -43,6 +43,32 @@ namespace diversitytracker.api.Controllers
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutForm(string id, PutQuestionTypeDto putQuestionTypeDto)
+        {
+            var form = await _formsDataRepository.GetFormSubmissionById(id);
+
+            if (form == null)
+            {
+                return NotFound();
+            }
+
+            var updatedQuestionType = new QuestionType(){
+                Value = putQuestionTypeDto.Value,
+            };
+
+            try
+            {
+                await _formsDataRepository.UpdateQuestionType(updatedQuestionType);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteQuestionType(string id)
