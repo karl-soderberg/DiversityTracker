@@ -40,5 +40,12 @@ namespace diversitytracker.api.Repository
         {
             return await _context.QuestionTypes.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task DeleteQuestionType(int id)
+        {
+            var questionDeleteRequest = await GetQuestionTypeById(id);
+            _context.QuestionTypes.Remove(questionDeleteRequest);
+            await _context.SaveChangesAsync();
+        }
     }
 }
