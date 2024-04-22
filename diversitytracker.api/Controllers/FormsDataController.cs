@@ -11,11 +11,13 @@ namespace diversitytracker.api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IFormsRepository _formsRepository;
+        private readonly IQuestionRepository _questionRepository;
 
-        public FormsDataController(IMapper mapper, IFormsRepository formsRepository)
+        public FormsDataController(IMapper mapper, IFormsRepository formsRepository, IQuestionRepository questionRepository)
         {
             _mapper = mapper;
             _formsRepository = formsRepository;
+            _questionRepository = questionRepository;
         }
 
         [HttpGet]

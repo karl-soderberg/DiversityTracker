@@ -10,5 +10,6 @@ namespace diversitytracker.api.Contracts
     {
         Task<List<QuestionType>> GetQuestionTypes();
         Task<QuestionType> AddQuestionType(QuestionType questionType); 
+        Task<QuestionType> GetQuestionTypeById(int id);
     }
 }

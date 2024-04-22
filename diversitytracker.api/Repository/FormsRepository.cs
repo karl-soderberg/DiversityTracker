@@ -35,5 +35,10 @@ namespace diversitytracker.api.Repository
             await _context.SaveChangesAsync();
             return questionType;
         }
+
+        public async Task<QuestionType> GetQuestionTypeById(int id)
+        {
+            return await _context.QuestionTypes.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
