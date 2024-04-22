@@ -1,7 +1,6 @@
 using AutoMapper;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Models;
-using diversitytracker.api.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace diversitytracker.api.Controllers
