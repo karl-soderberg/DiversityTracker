@@ -31,6 +31,18 @@ namespace diversitytracker.api.Controllers
             return Ok(formResponseObject);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutForm(int id, UpdateFormSubmissionDto updateFormSubmissionDto)
+        {
+            if (id != updateFormSubmissionDto.Id)
+            {
+                return BadRequest("Invalid Form Id");
+            }
+
+
+            return NoContent();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddForm(FormSubmissionPostDto formSubmissionPostDto)
         {
