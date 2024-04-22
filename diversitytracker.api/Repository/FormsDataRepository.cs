@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace diversitytracker.api.Repository
 {
-    public class FormsRepository : IFormsRepository, IQuestionRepository
+    public class FormsDataRepository : IFormsDataRepository
     {
         private readonly AppDbContext _context;
 
-        public FormsRepository(AppDbContext context)
+        public FormsDataRepository(AppDbContext context)
         {
             _context = context;
         }

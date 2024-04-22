@@ -11,18 +11,18 @@ namespace diversitytracker.api.Controllers
     public class QuestionsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IQuestionRepository _questionRepository;
+        private readonly IFormsDataRepository _formsDataRepository;
 
-        public QuestionsController(IMapper mapper, IQuestionRepository questionRepository)
+        public QuestionsController(IMapper mapper, IFormsDataRepository formsDataRepository)
         {
             _mapper = mapper;
-            _questionRepository= questionRepository;
+            _formsDataRepository = formsDataRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<QuestionTypeResponseDto>>> GetQuestionTypes()
         {
-            var formsData = await _questionRepository.GetQuestionTypes();
+            var formsData = await _formsDataRepository.GetQuestionTypes();
             var formsResponseData = _mapper.Map<IEnumerable<QuestionTypeResponseDto>>(formsData);
             return Ok(formsResponseData);
         }
@@ -36,7 +36,7 @@ namespace diversitytracker.api.Controllers
             }
 
             var newQuestion = _mapper.Map<QuestionType>(questionType);
-            await _questionRepository.AddQuestionType(newQuestion);
+            await _formsDataRepository.AddQuestionType(newQuestion);
 
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
@@ -52,14 +52,14 @@ namespace diversitytracker.api.Controllers
                 return NotFound();
             }
 
-            await _questionRepository.DeleteQuestionType(id);
+            await _formsDataRepository.DeleteQuestionType(id);
 
             return NoContent();
         }
 
         private async Task<bool> QuestionExists(int id)
         {
-            var QuestionExists = await _questionRepository.GetQuestionTypeById(id);
+            var QuestionExists = await _formsDataRepository.GetQuestionTypeById(id);
 
             if (QuestionExists == null){
                 return false;

@@ -10,20 +10,18 @@ namespace diversitytracker.api.Controllers
     public class FormsDataController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IFormsRepository _formsRepository;
-        private readonly IQuestionRepository _questionRepository;
+        private readonly IFormsDataRepository _formsDataRepository;
 
-        public FormsDataController(IMapper mapper, IFormsRepository formsRepository, IQuestionRepository questionRepository)
+        public FormsDataController(IMapper mapper, IFormsDataRepository formsDataRepository)
         {
             _mapper = mapper;
-            _formsRepository = formsRepository;
-            _questionRepository = questionRepository;
+            _formsDataRepository = formsDataRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<FormSubmissionResponseDto>>> GetFormData()
         {
-            var formsData = await _formsRepository.GetFormsAsync();
+            var formsData = await _formsDataRepository.GetFormsAsync();
             var formsResponseData = _mapper.Map<IEnumerable<FormSubmissionResponseDto>>(formsData);
             return Ok(formsResponseData);
         }
@@ -38,7 +36,7 @@ namespace diversitytracker.api.Controllers
             
             foreach (var question in formSubmissionPostDto.Questions)
             {
-                var questionFound = _questionRepository.GetQuestionTypeById(question.QuestionTypeId);
+                var questionFound = _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId);
                 if(questionFound == null)
                 {
                     return NotFound("Could Not Find Question Id: " + question.QuestionTypeId);
@@ -46,7 +44,7 @@ namespace diversitytracker.api.Controllers
             }
 
             var newForm = _mapper.Map<FormSubmission>(formSubmissionPostDto);
-            await _formsRepository.AddFormAsync(newForm);
+            await _formsDataRepository.AddFormAsync(newForm);
 
             return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
         }
