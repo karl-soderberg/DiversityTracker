@@ -20,14 +20,16 @@ namespace diversitytracker.api.Repository
             return baseForm;
         }
 
-        public Task<QuestionType> AddQuestionType(QuestionType questionType)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<FormSubmission>> GetFormsAsync()
         {
             return await _context.FormSubmissionsData.ToListAsync();
+        }
+
+        public async Task<QuestionType> AddQuestionType(QuestionType questionType)
+        {
+            await _context.Questions.AddAsync(questionType);
+            await _context.SaveChangesAsync();
+            return questionType;
         }
 
         public Task<List<QuestionType>> GetQuestionTypes()
