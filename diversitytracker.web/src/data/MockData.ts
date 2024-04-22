@@ -25,3 +25,15 @@ export const MOCKmay = [
 ];
 
 
+export const MOCKjune = [
+    { gender: 'male', satisfactionlevel: 10, age: 40,  },
+    { gender: 'male', satisfactionlevel: 7, age: 37,  },
+    { gender: 'female', satisfactionlevel: 5, age: 25 },
+    { gender: 'male', satisfactionlevel: 8, age: 20,  },
+    { gender: 'female', satisfactionlevel: 7, age: 28 },
+    { gender: 'male', satisfactionlevel: 7, age: 35, },
+    { gender: 'male', satisfactionlevel: 10, age: 50, },
+    { gender: 'male', satisfactionlevel: 5, age: 55,  },
+    { gender: 'female', satisfactionlevel: 2, age: 32, },
+    { gender: 'female', satisfactionlevel: 4, age: 42, }
+];
