@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace diversitytracker.api.Models
 {
     public class Question

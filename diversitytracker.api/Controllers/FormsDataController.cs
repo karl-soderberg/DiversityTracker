@@ -19,68 +19,69 @@ namespace diversitytracker.api.Controllers
             _formsDataRepository = formsDataRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
-        {
-            var formsData = await _formsDataRepository.GetFormsAsync(startDate, endDate);
-            var formsResponseData = _mapper.Map<ICollection<FormSubmissionResponseDto>>(formsData);
-            var formResponseObject = new FormSubmissionsDataResponseDto(){
-                RequestedAt = DateTime.UtcNow,
-                FormSubmissions = formsResponseData
-            };  
-            return Ok(formResponseObject);
-        }
+        // [HttpGet]
+        // public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
+        // {
+        //     var formsData = await _formsDataRepository.GetFormsAsync(startDate, endDate);
+        //     var formsResponseData = _mapper.Map<ICollection<FormSubmissionResponseDto>>(formsData);
+        //     var formResponseObject = new FormSubmissionsDataResponseDto(){
+        //         RequestedAt = DateTime.UtcNow,
+        //         FormSubmissions = formsResponseData
+        //     };  
+        //     return Ok(formResponseObject);
+        // }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutForm(int id, UpdateFormSubmissionDto updateFormSubmissionDto)
-        {
-            var form = await _formsDataRepository.GetFormSubmissionById(id);
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutForm(int id, UpdateFormSubmissionDto updateFormSubmissionDto)
+        // {
+        //     var form = await _formsDataRepository.GetFormSubmissionById(id);
 
-            if(id != updateFormSubmissionDto.Id)
-            {
-                return BadRequest("Invalid formsubmission Id");
-            }
+        //     if(id != updateFormSubmissionDto.Id)
+        //     {
+        //         return BadRequest("Invalid formsubmission Id");
+        //     }
 
-            if (form == null)
-            {
-                return NotFound();
-            }
+        //     if (form == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            var newForm = _mapper.Map(updateFormSubmissionDto, form);
+        //     var newForm = _mapper.Map(updateFormSubmissionDto, form);
 
-            try
-            {
-                await _formsDataRepository.UpdateForm(newForm);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+        //     try
+        //     {
+        //         await _formsDataRepository.UpdateForm(newForm);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         throw new Exception(ex.Message);
+        //     }
 
-            return NoContent();
-        }
+        //     return NoContent();
+        // }
 
         [HttpPost]
-        public async Task<IActionResult> AddForm(FormSubmissionPostDto formSubmissionPostDto)
+        public async Task<IActionResult> AddForm(PostFormSubmissionDto postFormSubmissionDto)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             
-            foreach (var question in formSubmissionPostDto.Questions)
-            {
-                var questionFound = _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId);
-                if(questionFound == null)
-                {
-                    return NotFound("Could Not Find Question Id: " + question.QuestionTypeId);
-                }
-            }
+            // foreach (var question in formSubmissionPostDto.Questions)
+            // {
+            //     var questionFound = _formsDataRepository.GetQuestionTypeById(question.QuestionTypeId);
+            //     if(questionFound == null)
+            //     {
+            //         return NotFound("Could Not Find Question Id: " + question.QuestionTypeId);
+            //     }
+            // }
 
-            var newForm = _mapper.Map<FormSubmission>(formSubmissionPostDto);
-            await _formsDataRepository.AddFormAsync(newForm);
+            var newFormSubmission = _mapper.Map<FormSubmission>(postFormSubmissionDto);
+            await _formsDataRepository.AddFormAsync(newFormSubmission);
 
-            return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
+            // return CreatedAtAction(nameof(GetFormData), new {id = newForm.Id}, newForm);
+            return Ok();
         }
 
     }
