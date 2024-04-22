@@ -1,4 +1,4 @@
-import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, data01, } from '../data/MockData'
@@ -50,6 +50,7 @@ export const ChartPage = ( {className} : Props) => {
                             {(scope === "both" || scope === "men") && 
                                 <Area type="monotone" dataKey="numberofmen" name='distribution' stroke={COLORS[0]} fillOpacity={1} fill="url(#colorPv)" />
                             }
+                            <Legend />
                         </AreaChart>
                     }
                     {chartType == 'distributionacrosstime' &&
@@ -63,6 +64,7 @@ export const ChartPage = ( {className} : Props) => {
                             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                             <XAxis dataKey="date" />
                             <YAxis />
+                            <Legend />
                         </LineChart>
                     }
 
@@ -82,6 +84,7 @@ export const ChartPage = ( {className} : Props) => {
                             ))}
                         </Pie>
                         <Tooltip />
+                        <Legend />
                     </PieChart>
                     }
 
