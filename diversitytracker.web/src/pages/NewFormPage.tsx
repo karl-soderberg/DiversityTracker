@@ -8,8 +8,10 @@ import {
   InputNumber,
   Mentions,
   Select,
-  TreeSelect,
+  Slider,
 } from 'antd';
+
+import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 
 const { RangePicker } = DatePicker;
 
@@ -30,6 +32,17 @@ type Props = {
 
 export const NewFormPage = ({className}: Props) => {
 
+    // const { max, min } = props;
+    // const [value, setValue] = useState(0);
+
+    // const mid = Number(((max - min) / 2).toFixed(5));
+    // const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
+    // const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
+
+    const onSubmit = (value) => {
+        console.log('search:', value);
+      };
+
     return(
         <section className={className}>
             <h1>New Forms Page</h1>
@@ -37,8 +50,27 @@ export const NewFormPage = ({className}: Props) => {
 
             <section className='newformpage-container__form'>
                 <Form {...formItemLayout} variant="filled" style={{ maxWidth: 600 }}>
-                    <Form.Item label="Input" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-                    <Input />
+
+                    <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
+                    <Select
+                        showSearch
+                        placeholder="Select a your gender"
+                        optionFilterProp="children"
+                        options={[
+                        {
+                            value: 'female',
+                            label: 'Female',
+                        },
+                        {
+                            value: 'male',
+                            label: 'Male',
+                        },
+                        {
+                            value: 'other',
+                            label: 'Other',
+                        },
+                        ]}
+                    />
                     </Form.Item>
                 
                     <Form.Item
@@ -59,31 +91,16 @@ export const NewFormPage = ({className}: Props) => {
                 
                     <Form.Item
                     label="Mentions"
-                    name="Mentions"
+                    name="Slider"
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
-                    <Mentions />
+                    <div className="icon-wrapper">
+                        <FrownOutlined  />
+                            <Slider  />
+                        <SmileOutlined />
+                    </div>
                     </Form.Item>
                 
-                    <Form.Item label="Select" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
-                    <Select />
-                    </Form.Item>
-                
-                    <Form.Item
-                    label="Cascader"
-                    name="Cascader"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <Cascader />
-                    </Form.Item>
-                
-                    <Form.Item
-                    label="TreeSelect"
-                    name="TreeSelect"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <TreeSelect />
-                    </Form.Item>
                 
                     <Form.Item
                     label="DatePicker"
@@ -102,7 +119,7 @@ export const NewFormPage = ({className}: Props) => {
                     </Form.Item>
                 
                     <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onSubmit = {onSubmit}>
                         Submit
                     </Button>
                     </Form.Item>
