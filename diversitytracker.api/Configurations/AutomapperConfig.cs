@@ -8,7 +8,7 @@ namespace diversitytracker.api.Configurations
     {
         public AutomapperConfig()
         {
-            CreateMap<BaseForm, BaseFormRequestDto>().ReverseMap();
+            CreateMap<FormSubmission, FormSubmissionResponseDto>().ReverseMap();
             CreateMap<BaseForm, BaseFormResponseDto>().ReverseMap();
         }
     }

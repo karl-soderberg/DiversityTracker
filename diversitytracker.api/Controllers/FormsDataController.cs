@@ -20,10 +20,10 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BaseFormResponseDto>>> GetFormData()
+        public async Task<ActionResult<List<FormSubmissionResponseDto>>> GetFormData()
         {
             var formsData = await _formsRepository.GetFormsAsync();
-            var formsResponseData = _mapper.Map<IEnumerable<BaseFormResponseDto>>(formsData);
+            var formsResponseData = _mapper.Map<IEnumerable<FormSubmissionResponseDto>>(formsData);
             return Ok(formsResponseData);
         }
 
