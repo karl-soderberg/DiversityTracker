@@ -66,7 +66,7 @@ export const ChartPage = ( {className} : Props) => {
                         </LineChart>
                     }
 
-                    {chartType == 'piechart' &&
+                    {chartType == 'genderdistribution' &&
                         <PieChart width={400} height={400}>
                         <Pie
                             dataKey="value"
@@ -91,7 +91,7 @@ export const ChartPage = ( {className} : Props) => {
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
-                <option value="piechart">piechart</option>
+                <option value="genderdistribution">Gender Distribution</option>
             </select>
             <select name="" id="" onChange={(e) => setScope(e.target.value)}>
                 <option value="both">both</option>
