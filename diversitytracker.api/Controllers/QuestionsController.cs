@@ -53,13 +53,11 @@ namespace diversitytracker.api.Controllers
                 return NotFound();
             }
 
-            var updatedQuestionType = new QuestionType(){
-                Value = putQuestionTypeDto.Value,
-            };
+            question.Value = putQuestionTypeDto.Value;
 
             try
             {
-                await _formsDataRepository.UpdateQuestionType(updatedQuestionType);
+                await _formsDataRepository.UpdateQuestionType(question);
             }
             catch (Exception ex)
             {
