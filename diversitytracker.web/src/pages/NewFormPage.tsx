@@ -1,17 +1,15 @@
 import React from 'react';
 import {
   Button,
-  Cascader,
   DatePicker,
   Form,
   Input,
   InputNumber,
-  Mentions,
   Select,
   Slider,
 } from 'antd';
-
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
+import './NewFormPage.css'
 
 const { RangePicker } = DatePicker;
 
@@ -49,7 +47,7 @@ export const NewFormPage = ({className}: Props) => {
             <p>Submit your form</p>
 
             <section className='newformpage-container__form'>
-                <Form {...formItemLayout} variant="filled" style={{ maxWidth: 600 }}>
+                <Form {...formItemLayout} variant="filled"  onFinish={onSubmit}>
 
                     <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
                     <Select
@@ -89,6 +87,18 @@ export const NewFormPage = ({className}: Props) => {
                     <Input.TextArea />
                     </Form.Item>
                 
+                    <Form.Item
+                    label="Mentions"
+                    name="Slider"
+                    rules={[{ required: true, message: 'Please input!' }]}
+                    >
+                    <div className="icon-wrapper">
+                        <FrownOutlined  />
+                            <Slider  />
+                        <SmileOutlined />
+                    </div>
+                    </Form.Item>
+
                     <Form.Item
                     label="Mentions"
                     name="Slider"
