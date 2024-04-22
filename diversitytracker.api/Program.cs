@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 });
 
 builder.Services.AddScoped<IFormsRepository, FormsRepository>();
+builder.Services.AddScoped<IQuestionRepository, FormsRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 

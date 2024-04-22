@@ -1,4 +1,5 @@
 using AutoMapper;
+using diversitytracker.api.Dtos;
 using diversitytracker.api.Models;
 
 namespace diversitytracker.api.Configurations
@@ -9,6 +10,8 @@ namespace diversitytracker.api.Configurations
         {
             CreateMap<FormSubmission, FormSubmissionResponseDto>().ReverseMap();
             CreateMap<FormSubmission, FormSubmissionPostDto>().ReverseMap();
+            CreateMap<QuestionType, QuestionTypePostDto>().ReverseMap();
+            CreateMap<QuestionType, QuestionTypeResponseDto>().ReverseMap();
         }
     }
 }
