@@ -44,7 +44,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutForm(string id, PutQuestionTypeDto putQuestionTypeDto)
+        public async Task<IActionResult> PutForm(string id, UpdateQuestionTypeDto putQuestionTypeDto)
         {
             var question = await _questionsRepository.GetQuestionTypeById(id);
 
