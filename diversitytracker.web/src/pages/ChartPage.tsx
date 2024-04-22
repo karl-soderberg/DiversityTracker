@@ -90,7 +90,7 @@ export const ChartPage = ( {className} : Props) => {
                             cy="50%"
                             outerRadius={80}
                             fill="#8884d8"
-                            label
+                            label={({ name, value }) => `${name} (${value.toFixed(2)}%)`}
                         />
                         <Tooltip />
                         </PieChart>
