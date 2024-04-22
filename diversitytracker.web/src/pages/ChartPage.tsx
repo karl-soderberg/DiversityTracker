@@ -1,8 +1,8 @@
-import { Area, AreaChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, } from '../data/MockData'
-import { pieData } from '../data/ProcessedData'
+import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -88,12 +88,31 @@ export const ChartPage = ( {className} : Props) => {
                     </PieChart>
                     }
 
+                    {chartType == 'scatterdistribution' &&
+                        <ScatterChart
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 20,
+                            }}
+                            >
+                            <CartesianGrid />
+                            <XAxis type="number" dataKey="age" name="age" label={{ value: 'Age', position: 'insideBottom', offset: -15 }} />
+                            <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft' }}/>
+                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                            <Scatter name="Male" data={scatterMaleData} fill="var(--chart-female)" />
+                            <Scatter name="Female" data={scatterFemaleData} fill="var(--chart-male)" />
+                            </ScatterChart>
+                        }
+
                 </ResponsiveContainer>
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
                 <option value="genderdistribution">Gender Distribution</option>
+                <option value="scatterdistribution">Scatter Distribution</option>
             </select>
             <select name="" id="" onChange={(e) => setScope(e.target.value)}>
                 <option value="both">both</option>
