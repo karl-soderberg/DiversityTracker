@@ -41,5 +41,31 @@ namespace diversitytracker.api.Controllers
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
 
+        [HttpDelete]
+
+        public async Task<IActionResult> DeleteQuestionType(int id)
+        {
+            var questionDeleteRequest = await QuestionExists(id);
+
+            if (!questionDeleteRequest)
+            {
+                return NotFound();
+            }
+
+            await _questionRepository.DeleteQuestionType(id);
+
+            return NoContent();
+        }
+
+        private async Task<bool> QuestionExists(int id)
+        {
+            var QuestionExists = await _questionRepository.GetQuestionTypeById(id);
+
+            if (QuestionExists == null){
+                return false;
+            }
+            
+            return true;
+        }
     }
 }
