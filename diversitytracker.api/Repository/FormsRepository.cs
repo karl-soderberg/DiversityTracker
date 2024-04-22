@@ -22,7 +22,7 @@ namespace diversitytracker.api.Repository
 
         public async Task<List<FormSubmission>> GetFormsAsync()
         {
-            return await _context.FormSubmissionsData.ToListAsync();
+            return await _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person).ToListAsync();
         }
         public async Task<List<QuestionType>> GetQuestionTypes()
         {
