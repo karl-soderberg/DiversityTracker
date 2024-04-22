@@ -38,7 +38,13 @@ namespace diversitytracker.api.Controllers
             {
                 return BadRequest("Invalid Form Id");
             }
-            
+
+            var form = await _formsDataRepository.GetFormSubmissionById(id);
+
+            if (form == null)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
