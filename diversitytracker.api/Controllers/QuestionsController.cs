@@ -46,9 +46,9 @@ namespace diversitytracker.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutForm(string id, PutQuestionTypeDto putQuestionTypeDto)
         {
-            var form = await _formsDataRepository.GetFormSubmissionById(id);
+            var question = await _formsDataRepository.GetQuestionTypeById(id);
 
-            if (form == null)
+            if (question == null)
             {
                 return NotFound();
             }
