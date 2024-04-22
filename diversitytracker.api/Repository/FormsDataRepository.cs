@@ -42,6 +42,12 @@ namespace diversitytracker.api.Repository
         {
             return await _context.FormSubmissionsData.FirstOrDefaultAsync(form => form.Id == id);
         }
+
+        public async Task UpdateForm(FormSubmission formSubmission)
+        {
+            _context.FormSubmissionsData.Update(formSubmission);
+            await _context.SaveChangesAsync();
+        }
         public async Task<List<QuestionType>> GetQuestionTypes()
         {
             return await _context.QuestionTypes.ToListAsync();

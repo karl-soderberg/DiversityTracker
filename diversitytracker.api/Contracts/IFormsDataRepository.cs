@@ -11,6 +11,7 @@ namespace diversitytracker.api.Contracts
         Task<List<FormSubmission>> GetFormsAsync(DateTime? startDate, DateTime? endDate);
         Task<FormSubmission> GetFormSubmissionById(int id);
         Task<FormSubmission> AddFormAsync(FormSubmission baseForm); 
+        Task UpdateForm(FormSubmission formSubmission);
         Task<List<QuestionType>> GetQuestionTypes();
         Task<QuestionType> AddQuestionType(QuestionType questionType); 
         Task<QuestionType> GetQuestionTypeById(int id);
