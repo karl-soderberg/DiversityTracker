@@ -33,6 +33,11 @@
     --menu-cyan: #4AABE7;
     --menu-green: #a5ca68;
     --menu-red: #E53835;
+
+
+    --chart-female: #ad86ec;
+    --chart-male: #233d78;
+    
 }
 
 /* @import url('./colors.css'); */

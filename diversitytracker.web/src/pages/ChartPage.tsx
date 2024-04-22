@@ -1,7 +1,7 @@
 import { Area, AreaChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
-import { MOCKData, data01, } from '../data/MockData'
+import { MOCKData, } from '../data/MockData'
 import { pieData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
