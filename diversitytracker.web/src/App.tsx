@@ -4,6 +4,7 @@ import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
 import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
+import { AdminPage } from "./pages/AdminPage";
 
 function App() {
   const [page, setPage] = useState("ChartPage");
@@ -23,6 +24,9 @@ function App() {
         />
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
+        />
+        <AdminPage 
+          className={"adminpage-container " + (page == "AdminPage" && "active")}
         />
       </main>
     </>
