@@ -22,7 +22,7 @@ namespace diversitytracker.api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
         {
-            var questionTypes = await _questionsRepository.GetQuestionTypes();
+            var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
             return Ok(questionTypes);
         }
 
@@ -38,7 +38,7 @@ namespace diversitytracker.api.Controllers
                 Value = questionTypeDto.Value
             };
 
-            await _questionsRepository.AddQuestionType(newQuestion);
+            await _questionsRepository.AddQuestionTypeAsync(newQuestion);
 
             return CreatedAtAction(nameof(GetQuestionTypes), new {id = newQuestion.Id}, newQuestion);
         }
@@ -46,7 +46,7 @@ namespace diversitytracker.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutForm(string id, UpdateQuestionTypeDto putQuestionTypeDto)
         {
-            var question = await _questionsRepository.GetQuestionTypeById(id);
+            var question = await _questionsRepository.GetQuestionTypeByIdAsync(id);
 
             if (question == null)
             {
@@ -57,7 +57,7 @@ namespace diversitytracker.api.Controllers
 
             try
             {
-                await _questionsRepository.UpdateQuestionType(question);
+                await _questionsRepository.UpdateQuestionTypeAsync(question);
             }
             catch (Exception ex)
             {
@@ -78,14 +78,14 @@ namespace diversitytracker.api.Controllers
                 return NotFound();
             }
 
-            await _questionsRepository.DeleteQuestionType(id);
+            await _questionsRepository.DeleteQuestionTypeAsync(id);
 
             return NoContent();
         }
 
         private async Task<bool> QuestionExists(string id)
         {
-            var QuestionExists = await _questionsRepository.GetQuestionTypeById(id);
+            var QuestionExists = await _questionsRepository.GetQuestionTypeByIdAsync(id);
 
             if (QuestionExists == null){
                 return false;

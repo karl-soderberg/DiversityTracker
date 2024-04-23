@@ -54,7 +54,7 @@ namespace diversitytracker.api.Controllers
             foreach(var question in postFormSubmissionDto.Questions)
             {
                 var newQuestion = new Question(){
-                    QuestionType = await _questionsRepository.GetQuestionTypeById(question.QuestionTypeId),
+                    QuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId),
                     Value = question.Value,
                     Answer = question.Answer,
                     FormSubmissionId = newFormSubmission.Id,

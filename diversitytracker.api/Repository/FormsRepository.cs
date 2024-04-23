@@ -38,43 +38,14 @@ namespace diversitytracker.api.Repository
 
             return formSubmissions;
         }
-        public async Task<FormSubmission> GetFormSubmissionById(string id)
+        public async Task<FormSubmission> GetFormSubmissionByIdAsync(string id)
         {
             return await _context.FormSubmissionsData.Include(form => form.Questions).Include(form => form.Person).FirstOrDefaultAsync(form => form.Id == id);
         }
 
-        public async Task UpdateForm(FormSubmission formSubmission)
+        public async Task UpdateFormAsync(FormSubmission formSubmission)
         {
             _context.FormSubmissionsData.Update(formSubmission);
-            await _context.SaveChangesAsync();
-        }
-        public async Task<List<QuestionType>> GetQuestionTypes()
-        {
-            return await _context.QuestionTypes.ToListAsync();
-        }
-
-        public async Task<QuestionType> AddQuestionType(QuestionType questionType)
-        {
-            await _context.QuestionTypes.AddAsync(questionType);
-            await _context.SaveChangesAsync();
-            return questionType;
-        }
-
-        public async Task<QuestionType> GetQuestionTypeById(string id)
-        {
-            return await _context.QuestionTypes.FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task UpdateQuestionType(QuestionType questionType)
-        {
-            _context.QuestionTypes.Update(questionType);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteQuestionType(string id)
-        {
-            var questionDeleteRequest = await GetQuestionTypeById(id);
-            _context.QuestionTypes.Remove(questionDeleteRequest);
             await _context.SaveChangesAsync();
         }
     }

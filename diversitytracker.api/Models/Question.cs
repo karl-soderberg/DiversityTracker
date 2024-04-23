@@ -6,12 +6,10 @@ namespace diversitytracker.api.Models
     {
         public string Id { get; private set; }
         public string QuestionTypeId { get; set; }
-        [JsonIgnore]
         public required QuestionType QuestionType { get; set; }
         public required double Value { get; set; }
         public string Answer { get; set; }
         public string FormSubmissionId { get; set; }
-        [JsonIgnore]
         public FormSubmission FormSubmission  { get; set; }
 
         public Question()

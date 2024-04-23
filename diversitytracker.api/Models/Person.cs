@@ -11,7 +11,6 @@ namespace diversitytracker.api.Models
         [Range(0, 1, ErrorMessage = "Gender must be either 0 (Male) or 1 (Female).")]
         public required Gender Gender { get; set; }
         public required DateTime TimeAtCompany { get; set; }
-        [JsonIgnore]
         public ICollection<FormSubmission> FormSubmissions { get; set; }
 
         public Person()
