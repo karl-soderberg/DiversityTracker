@@ -180,3 +180,48 @@
 
         cursor: pointer;
     }
+
+
+.deleteconfirmation-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    padding-bottom: 15%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(255, 0, 0, 0.353);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    transition: all 350ms ease-in-out;
+}
+    .deleteconfirmation-container .formdata__questions__button-delete{
+        top: 50%;
+        left: 62.5%;
+        transform: translateY(-50%) translateX(-50%);
+        height: 4rem;
+        border-radius: 2rem;
+    }
+    .deleteconfirmation-container .formdata__questions__button-modify{
+        top: 50%;
+        left: 37.5%;
+        transform: translateY(-50%) translateX(-50%);
+        height: 4rem;
+        border-radius: 2rem;
+    }
+    .deleteconfirmation-container h2{
+        color: #3c3c3c;
+        cursor: default;
+    }
+    .deleteconfirmation-container span{
+        color: #c40404;
+        text-decoration: underline;
+    }

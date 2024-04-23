@@ -14,6 +14,8 @@ export const AdminPage = ( {className} : Props) => {
     const [modifyActive, setModifyActive] = useState<boolean>(false);
     const [modifyValue, setModifyValue] = useState<string>('');
     const [addQuestionValue, setAddQuestionValue] = useState<string>('');
+    const [deleteConfirmationWindow, setDeleteConfirmationWindow] = useState<boolean>(false);
+    const [deleteQuestionId, setDeleteQuestionId] = useState<string>('');
 
     const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -74,7 +76,7 @@ export const AdminPage = ( {className} : Props) => {
                             <button className={'formdata__questions__button-delete ' + ((btnsVisible == question.id && modifyActive == false) && 'active')} 
                                 name="developer" 
                                 value={question.id}
-                                onClick={() => deleteQuestion.mutate(question.id)}
+                                onClick={() => {setDeleteConfirmationWindow(true); setDeleteQuestionId(question.id)}}
                             >
                             Delete</button>
                             <button className={'formdata__questions__button-modify ' + ((btnsVisible == question.id) && 'active')}
@@ -117,6 +119,21 @@ export const AdminPage = ( {className} : Props) => {
                     />
                     <button className='formdata__questions_addform-btn'>+</button>
                 </form>
+                {deleteConfirmationWindow &&
+                    <div className='deleteconfirmation-container'>
+                        <h2>This action will <span>delete</span> the question in <span>all the forms associated with it!</span></h2>
+                        <button className={'formdata__questions__button-delete active'} 
+                            name="developer" 
+                            onClick={() => {deleteQuestion.mutate(deleteQuestionId); setDeleteConfirmationWindow(false)}}
+                        >
+                        Yes Delete</button>
+                        <button className={'formdata__questions__button-modify active'} 
+                            name="developer" 
+                            onClick={() => setDeleteConfirmationWindow(false)}
+                        >
+                        Go Back</button>
+                    </div>
+                }
             </article>
         </section>
     )
