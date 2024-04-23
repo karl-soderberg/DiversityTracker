@@ -137,3 +137,46 @@
 
                     transition: all 350ms ease-in-out;
                 }
+
+
+.formdata__questions_addform{
+    position: relative;
+    width: 50%;
+    margin: 5% 2%;
+
+    height: 2rem;
+    display: flex;
+}
+    .formdata__questions_addform-input{
+        width: 100%;
+        padding: 0% 4%;
+
+        font-size: 1.1rem;
+        font-weight: 200;
+        font-family: "Blinker", sans-serif;
+        
+        border-radius: 1rem;
+        border: none;
+    }
+    .formdata__questions_addform-input:focus {
+        outline: none;
+        border: none;
+    }
+    .formdata__questions_addform-btn{
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 10%;
+        height: 100%;
+        border-radius: 100%;
+
+        border: none;
+        border: solid .5px #1ff72a;
+        background-color: #1ff71fba;
+
+        color: #fff;
+
+        cursor: pointer;
+    }

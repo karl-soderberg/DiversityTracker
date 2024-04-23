@@ -105,9 +105,15 @@ export const AdminPage = ( {className} : Props) => {
                     ))
                 }
                 </ul>
-                <form onSubmit={(e) => addQuestionHandler(e)} action="submit">
-                    <input name='question' type="text" placeholder='New Question' className='tags-input' />
-                    <button className=''>+</button>
+                <form className='formdata__questions_addform' onSubmit={(e) => addQuestionHandler(e)} action="submit">
+                    <input 
+                        name='question' 
+                        type="text" 
+                        placeholder='New Question' 
+                        className='formdata__questions_addform-input' 
+                        onChange={(e) => setAddQuestionValue(e.target.value)}
+                    />
+                    <button className='formdata__questions_addform-btn'>+</button>
                 </form>
             </article>
         </section>
