@@ -7,7 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+.AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -15,7 +18,8 @@ builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("dockerDb"));
 });
 
-builder.Services.AddScoped<IFormsRepository, FormsRepository>();
+builder.Services.AddScoped<IFormsRepository, FormsDataRepository>();
+builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 

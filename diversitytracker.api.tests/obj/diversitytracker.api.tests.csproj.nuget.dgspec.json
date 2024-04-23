@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {}
+    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {}
   },
   "projects": {
-    "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {
+    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
+        "projectUniqueName": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
         "projectName": "diversitytracker.api.tests",
-        "projectPath": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
+        "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
         "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/obj/",
+        "outputPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
-                "projectPath": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj"
+              "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
+                "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj"
               }
             }
           }
@@ -103,14 +103,14 @@
         }
       }
     },
-    "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
+    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
+        "projectUniqueName": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
         "projectName": "diversitytracker.api",
-        "projectPath": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
+        "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
         "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api/obj/",
+        "outputPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
@@ -160,6 +160,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "Ulid": {
+              "target": "Package",
+              "version": "[1.3.3, )"
             }
           },
           "imports": [
