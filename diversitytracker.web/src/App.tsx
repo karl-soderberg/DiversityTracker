@@ -7,7 +7,7 @@ import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
 
 function App() {
-  const [page, setPage] = useState("ChartPage");
+  const [page, setPage] = useState("AdminPage");
 
   return (
     <>
