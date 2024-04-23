@@ -17,16 +17,18 @@ export const AdminPage = ( {className} : Props) => {
     return(
         <section className={className}>
             <h1>Admin Page</h1>
-            <article>
-                <h2>FormData Questions</h2>
-                <ul>
+            <article className='formdata__questions-container'>
+                <h2 className='formdata__questions-header'>FormData Questions</h2>
+                <ul className='formdata__questions-list'>
                 {isLoading && 'Loading...'}
 
                 {isError && 'Unknown Error occured...'}
 
                 {data && 
                     data.map((question) => (
-                        <li key={question.id}>{question.value}</li>
+                        <li className='formdata__questions--question' key={question.id}>{question.value}
+                        
+                        </li>
                     ))
                 }
                 </ul>
