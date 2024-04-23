@@ -2,22 +2,17 @@ import { useEffect, useState } from 'react'
 import './AdminPage.css'
 import { GetAllQuestions } from '../util/Http'
 import { Question } from '../types/types'
+import { useQuery } from 'react-query'
 
 type Props = {
     className: string
 }
 
 export const AdminPage = ( {className} : Props) => {
-    const [questions, setQuestions] = useState<Question[]>([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const fetchedQuestions = await GetAllQuestions();
-            setQuestions(fetchedQuestions);
-        };
-
-        fetchData();
-    }, []);
+    const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
+        queryKey: ['query'],
+        queryFn: () => GetAllQuestions()
+    });
 
     return(
         <section className={className}>
@@ -25,11 +20,15 @@ export const AdminPage = ( {className} : Props) => {
             <article>
                 <h2>FormData Questions</h2>
                 <ul>
-                    {questions && 
-                        questions.map((question) => (
-                            <li>{question.value}</li>
-                        ))
-                    }
+                {isLoading && 'Loading...'}
+
+                {isError && 'Unknown Error occured...'}
+
+                {data && 
+                    data.map((question) => (
+                        <li key={question.id}>{question.value}</li>
+                    ))
+                }
                 </ul>
             </article>
         </section>
