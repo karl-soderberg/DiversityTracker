@@ -11,10 +11,17 @@ type Props = {
 export const AdminPage = ( {className} : Props) => {
     const [btnsVisible, setBtnsVisible] = useState<string>('');
 
-    const submitHandler = (e: FormEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
-        // deleteDeveloper(e.currentTarget.value);
+    const deleteQuestionHandler = (id: string) => {
+        
     };
+
+    const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        const questionValue = e.target.question.value;
+        if(questionValue != ''){
+            
+        }
+    }
 
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
@@ -37,6 +44,7 @@ export const AdminPage = ( {className} : Props) => {
                             <button className={'formdata__questions__button-delete ' + (btnsVisible == question.id && 'visible')} 
                                 name="developer" 
                                 value={question.id}
+                                onClick={() => deleteQuestionHandler(question.id)}
                             >
                             Delete</button>
                             <button className={'formdata__questions__button-modify ' + (btnsVisible == question.id && 'visible')}
@@ -48,6 +56,10 @@ export const AdminPage = ( {className} : Props) => {
                     ))
                 }
                 </ul>
+                <form onSubmit={() => addQuestionHandler} action="submit">
+                    <input name='question' type="text" placeholder='New Question' className='tags-input' />
+                    <button className=''>+</button>
+                </form>
             </article>
         </section>
     )
