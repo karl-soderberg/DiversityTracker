@@ -10,13 +10,23 @@ type Props = {
 
 export const AdminPage = ( {className} : Props) => {
     const [btnsVisible, setBtnsVisible] = useState<string>('');
+    const [modifyOn, setModifyOn] = useState<string>('');
+    const [modifyActive, setModifyActive] = useState<boolean>(false);
+    const [modifyValue, setModifyValue] = useState<string>('');
 
     const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         const questionValue = e.target.question.value;
         if(questionValue != ''){
             postQuestion.mutate(questionValue);
+
         }
+    }
+
+    const modifyHandler = (id: string, value: string) => {
+        setModifyOn(id); 
+        setModifyActive(true)
+        setModifyValue(value);
     }
 
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
@@ -48,18 +58,44 @@ export const AdminPage = ( {className} : Props) => {
 
                 {data && 
                     data.map((question) => (
-                        <li onMouseEnter={() => setBtnsVisible(question.id)}  className='formdata__questions--question' key={question.id}>{question.value}
-                            <button className={'formdata__questions__button-delete ' + (btnsVisible == question.id && 'visible')} 
+                        <li onMouseEnter={() => {
+                                if(modifyActive != true){
+                                    setBtnsVisible(question.id)
+                                }
+                            }}  
+                            className='formdata__questions--question' key={question.id}>
+                            {modifyOn != question.id && question.value}
+                            <button className={'formdata__questions__button-delete ' + ((btnsVisible == question.id && modifyActive == false) && 'active')} 
                                 name="developer" 
                                 value={question.id}
                                 onClick={() => deleteQuestion.mutate(question.id)}
                             >
                             Delete</button>
-                            <button className={'formdata__questions__button-modify ' + (btnsVisible == question.id && 'visible')}
+                            <button className={'formdata__questions__button-modify ' + ((btnsVisible == question.id) && 'active')}
                                 name="developer" 
                                 value={question.id}   
+                                onClick={() => {
+                                    if(modifyActive == true){
+                                        if(modifyValue != question.value)
+                                        {
+                                            postQuestion.mutate(modifyValue);
+                                        }
+                                        setModifyActive(false);
+                                        setModifyOn('');
+                                    }
+                                    else{
+                                        modifyHandler(question.id, question.value)
+                                    }
+                                }}
                             >
-                            Modify</button>
+                            {modifyActive ? 'Apply' : 'Modify'}
+                            </button>
+                            <input 
+                                className={'formdata__questions__modify ' + (modifyOn == question.id && 'active')} 
+                                type="text" 
+                                value={modifyActive ? modifyValue : question.value}
+                                onChange={(e) => setModifyValue(e.target.value)}
+                            />
                         </li>
                     ))
                 }

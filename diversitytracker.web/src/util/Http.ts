@@ -16,7 +16,7 @@ export const GetAllQuestions = async (): Promise<Array<Question>> => {
     return questions;
 }
 
-export const DeleteQuestion = async (question: string) => {
+export const DeleteQuestion = async (question: string): void => {
     const response = await fetch(`${API_URL}/Questions/${question}`, {
         method: 'DELETE',
         headers: {
@@ -29,9 +29,6 @@ export const DeleteQuestion = async (question: string) => {
         error.message = await response.json();
         throw error;
     }
-
-    const deletedQuestion = await response.json();
-    return deletedQuestion;
 }
 
 export const PostQuestion = async (question: string) => {
