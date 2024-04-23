@@ -13,6 +13,7 @@ export const AdminPage = ( {className} : Props) => {
     const [modifyOn, setModifyOn] = useState<string>('');
     const [modifyActive, setModifyActive] = useState<boolean>(false);
     const [modifyValue, setModifyValue] = useState<string>('');
+    const [addQuestionValue, setAddQuestionValue] = useState<string>('');
 
     const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -105,13 +106,14 @@ export const AdminPage = ( {className} : Props) => {
                     ))
                 }
                 </ul>
-                <form className='formdata__questions_addform' onSubmit={(e) => addQuestionHandler(e)} action="submit">
+                <form className='formdata__questions_addform' onSubmit={(e) => {addQuestionHandler(e); setAddQuestionValue('')}} action="submit">
                     <input 
                         name='question' 
                         type="text" 
                         placeholder='New Question' 
                         className='formdata__questions_addform-input' 
                         onChange={(e) => setAddQuestionValue(e.target.value)}
+                        value={addQuestionValue}
                     />
                     <button className='formdata__questions_addform-btn'>+</button>
                 </form>
