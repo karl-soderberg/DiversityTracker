@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
-import { GetAllQuestions, PostQuestion } from '../util/Http'
+import { DeleteQuestion, GetAllQuestions, PostQuestion } from '../util/Http'
 import { Question } from '../types/types'
 import { useMutation, useQuery } from 'react-query'
 
@@ -10,10 +10,6 @@ type Props = {
 
 export const AdminPage = ( {className} : Props) => {
     const [btnsVisible, setBtnsVisible] = useState<string>('');
-
-    const deleteQuestionHandler = (id: string) => {
-        
-    };
 
     const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -28,7 +24,13 @@ export const AdminPage = ( {className} : Props) => {
         queryFn: () => GetAllQuestions()
     });
 
-    const postQuestion = useMutation((question: Question) => PostQuestion(question), {
+    const postQuestion = useMutation((question: string) => PostQuestion(question), {
+        onSuccess: () => {
+            refetch();
+        }
+    });
+
+    const deleteQuestion = useMutation((question: string) => DeleteQuestion(question), {
         onSuccess: () => {
             refetch();
         }
@@ -50,7 +52,7 @@ export const AdminPage = ( {className} : Props) => {
                             <button className={'formdata__questions__button-delete ' + (btnsVisible == question.id && 'visible')} 
                                 name="developer" 
                                 value={question.id}
-                                onClick={() => deleteQuestionHandler(question.id)}
+                                onClick={() => deleteQuestion.mutate(question.id)}
                             >
                             Delete</button>
                             <button className={'formdata__questions__button-modify ' + (btnsVisible == question.id && 'visible')}

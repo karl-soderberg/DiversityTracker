@@ -2,7 +2,7 @@ import { Question } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const GetAllQuestions = async () => {
+export const GetAllQuestions = async (): Promise<Array<Question>> => {
     const response = await fetch(`${API_URL}/Questions`);
 
     if (!response.ok) {
@@ -16,7 +16,25 @@ export const GetAllQuestions = async () => {
     return questions;
 }
 
-export const PostQuestion = async (question: Question) => {
+export const DeleteQuestion = async (question: string) => {
+    const response = await fetch(`${API_URL}/Questions/${question}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while deleting the new question');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const newQuestion = await response.json();
+    return newQuestion;
+}
+
+export const PostQuestion = async (question: string) => {
     const response = await fetch(`${API_URL}/Questions`, {
         method: 'POST',
         headers: {
