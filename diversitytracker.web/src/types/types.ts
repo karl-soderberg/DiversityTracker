@@ -14,5 +14,5 @@ export type Question = {
 }
 
 export type PostQuestionTypeDto = {
-    Value: string
+    value: string
 }

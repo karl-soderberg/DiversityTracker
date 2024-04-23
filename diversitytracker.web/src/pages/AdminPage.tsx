@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
-import { DeleteQuestion, GetAllQuestions, PostQuestion } from '../util/Http'
+import { DeleteQuestion, GetAllQuestions, PostQuestion, PutQuestion } from '../util/Http'
 import { PostQuestionTypeDto, Question } from '../types/types'
 import { useMutation, useQuery } from 'react-query'
 
@@ -19,7 +19,6 @@ export const AdminPage = ( {className} : Props) => {
         const questionValue = e.target.question.value;
         if(questionValue != ''){
             postQuestion.mutate(questionValue);
-
         }
     }
 
@@ -35,6 +34,12 @@ export const AdminPage = ( {className} : Props) => {
     });
 
     const postQuestion = useMutation((question: string) => PostQuestion(question), {
+        onSuccess: () => {
+            refetch();
+        }
+    });
+
+    const putQuestion = useMutation((question: Question) => PutQuestion(question), {
         onSuccess: () => {
             refetch();
         }
@@ -78,7 +83,7 @@ export const AdminPage = ( {className} : Props) => {
                                     if(modifyActive == true){
                                         if(modifyValue != question.value)
                                         {
-                                            postQuestion.mutate(modifyValue);
+                                            putQuestion.mutate({id: question.id, value: modifyValue});
                                         }
                                         setModifyActive(false);
                                         setModifyOn('');

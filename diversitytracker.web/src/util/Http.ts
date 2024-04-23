@@ -16,7 +16,7 @@ export const GetAllQuestions = async (): Promise<Array<Question>> => {
     return questions;
 }
 
-export const DeleteQuestion = async (question: string): void => {
+export const DeleteQuestion = async (question: string): Promise<void> => {
     const response = await fetch(`${API_URL}/Questions/${question}`, {
         method: 'DELETE',
         headers: {
@@ -31,9 +31,28 @@ export const DeleteQuestion = async (question: string): void => {
     }
 }
 
+export const PutQuestion = async (question: Question): Promise<void> => {
+    const putQuestionType: PostQuestionTypeDto = {
+        value: question.value
+    }
+    const response = await fetch(`${API_URL}/Questions/${question.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(putQuestionType),
+    });
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while deleting the new question');
+        error.message = await response.json();
+        throw error;
+    }
+}
+
 export const PostQuestion = async (question: string) => {
     const newQuestion: PostQuestionTypeDto = {
-        Value: question
+        value: question
     }
     const response = await fetch(`${API_URL}/Questions`, {
         method: 'POST',
