@@ -10,3 +10,43 @@ export const MOCKData = [
     { value: 9, numberofmen: 2, numberofwomen: 2, date: `june` },
     { value: 10, numberofmen: 1, numberofwomen: 2, date: `july` }
 ];
+
+export const MOCKmay = [
+    { gender: 'male', rating: 2, age: 40,  },
+    { gender: 'male', rating: 5, age: 37,  },
+    { gender: 'female', rating: 7, age: 25 },
+    { gender: 'male', rating: 12, age: 20,  },
+    { gender: 'female', rating: 17, age: 28 },
+    { gender: 'male', rating: 25, age: 35, },
+    { gender: 'male', rating: 10, age: 50, },
+    { gender: 'male', rating: 5, age: 55,  },
+    { gender: 'female', rating: 2, age: 32, },
+    { gender: 'female', rating: 1, age: 42, }
+];
+
+
+export const MOCKjune = [
+    { gender: 'male', satisfactionlevel: 10, age: 40,  },
+    { gender: 'male', satisfactionlevel: 7, age: 37,  },
+    { gender: 'female', satisfactionlevel: 5, age: 25 },
+    { gender: 'male', satisfactionlevel: 8, age: 20,  },
+    { gender: 'female', satisfactionlevel: 7, age: 28 },
+    { gender: 'male', satisfactionlevel: 7, age: 35, },
+    { gender: 'male', satisfactionlevel: 10, age: 50, },
+    { gender: 'male', satisfactionlevel: 5, age: 55,  },
+    { gender: 'female', satisfactionlevel: 2, age: 32, },
+    { gender: 'female', satisfactionlevel: 4, age: 42, }
+];
+
+export const MOCKjuly = [
+    { gender: 'male', agreeLevel: 1, age: 40,  },
+    { gender: 'male', agreeLevel: 5, age: 37,  },
+    { gender: 'female', agreeLevel: 4, age: 25 },
+    { gender: 'male', agreeLevel: 3, age: 20,  },
+    { gender: 'female', agreeLevel: 4, age: 28 },
+    { gender: 'male', agreeLevel: 3, age: 35, },
+    { gender: 'male', agreeLevel: 4, age: 50, },
+    { gender: 'male', agreeLevel: 1, age: 55,  },
+    { gender: 'female', agreeLevel: 2, age: 32, },
+    { gender: 'female', agreeLevel: 4, age: 42, }
+];
