@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
 import { DeleteQuestion, GetAllQuestions, PostQuestion } from '../util/Http'
-import { Question } from '../types/types'
+import { PostQuestionTypeDto, Question } from '../types/types'
 import { useMutation, useQuery } from 'react-query'
 
 type Props = {
@@ -15,7 +15,7 @@ export const AdminPage = ( {className} : Props) => {
         e.preventDefault();
         const questionValue = e.target.question.value;
         if(questionValue != ''){
-            
+            postQuestion.mutate(questionValue);
         }
     }
 
@@ -64,7 +64,7 @@ export const AdminPage = ( {className} : Props) => {
                     ))
                 }
                 </ul>
-                <form onSubmit={() => addQuestionHandler} action="submit">
+                <form onSubmit={(e) => addQuestionHandler(e)} action="submit">
                     <input name='question' type="text" placeholder='New Question' className='tags-input' />
                     <button className=''>+</button>
                 </form>

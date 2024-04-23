@@ -12,3 +12,7 @@ export type Question = {
     id: string,
     value: string,
 }
+
+export type PostQuestionTypeDto = {
+    Value: string
+}

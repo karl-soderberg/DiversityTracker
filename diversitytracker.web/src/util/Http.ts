@@ -1,4 +1,4 @@
-import { Question } from "../types/types";
+import { PostQuestionTypeDto, Question } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,17 +30,20 @@ export const DeleteQuestion = async (question: string) => {
         throw error;
     }
 
-    const newQuestion = await response.json();
-    return newQuestion;
+    const deletedQuestion = await response.json();
+    return deletedQuestion;
 }
 
 export const PostQuestion = async (question: string) => {
+    const newQuestion: PostQuestionTypeDto = {
+        Value: question
+    }
     const response = await fetch(`${API_URL}/Questions`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(question),
+        body: JSON.stringify(newQuestion),
     });
 
     if (!response.ok) {
@@ -49,6 +52,7 @@ export const PostQuestion = async (question: string) => {
         throw error;
     }
 
-    const newQuestion = await response.json();
-    return newQuestion;
+    const newQuestionResponse = await response.json();
+    console.log(newQuestionResponse);
+    return newQuestionResponse;
 }
