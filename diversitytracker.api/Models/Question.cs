@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace diversitytracker.api.Models
 {
     public class Question

@@ -32,35 +32,6 @@ namespace diversitytracker.api.Controllers
             return Ok(formSubmissionsResponseDto);
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutForm(int id, UpdateFormSubmissionDto updateFormSubmissionDto)
-        // {
-        //     var form = await _formsDataRepository.GetFormSubmissionById(id);
-
-        //     if(id != updateFormSubmissionDto.Id)
-        //     {
-        //         return BadRequest("Invalid formsubmission Id");
-        //     }
-
-        //     if (form == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     var newForm = _mapper.Map(updateFormSubmissionDto, form);
-
-        //     try
-        //     {
-        //         await _formsDataRepository.UpdateForm(newForm);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         throw new Exception(ex.Message);
-        //     }
-
-        //     return NoContent();
-        // }
-
         [HttpPost]
         public async Task<IActionResult> AddForm(PostFormSubmissionDto postFormSubmissionDto)
         {
