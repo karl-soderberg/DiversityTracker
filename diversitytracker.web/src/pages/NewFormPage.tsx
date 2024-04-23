@@ -10,6 +10,9 @@ import {
 } from 'antd';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import './NewFormPage.css'
+import { GetAllQuestions } from '../util/Http';
+import { useQuery } from 'react-query';
+import { Question } from '../types/types';
 
 const { RangePicker } = DatePicker;
 
@@ -40,6 +43,11 @@ export const NewFormPage = ({className}: Props) => {
     const onSubmit = (value) => {
         console.log('search:', value);
       };
+
+    const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
+        queryKey: ['query'],
+        queryFn: () => GetAllQuestions()
+    });
 
     return(
         <section className={className}>
@@ -72,47 +80,31 @@ export const NewFormPage = ({className}: Props) => {
                     </Form.Item>
                 
                     <Form.Item
-                    label="InputNumber"
+                    label="Age"
+                    name="InputNumber"
+                    rules={[{ required: true, message: 'Please input!' }]}
+                    >
+                    <InputNumber style={{ width: '100%' }} />
+                    </Form.Item>
+
+                    <Form.Item
+                    label="Time At Company"
                     name="InputNumber"
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
                     <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
                 
-                    <Form.Item
+                    {/* <Form.Item
                     label="TextArea"
                     name="TextArea"
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
                     <Input.TextArea />
-                    </Form.Item>
-                
-                    <Form.Item
-                    label="Mentions"
-                    name="Slider"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <div className="icon-wrapper">
-                        <FrownOutlined  />
-                            <Slider  />
-                        <SmileOutlined />
-                    </div>
-                    </Form.Item>
-
-                    <Form.Item
-                    label="Mentions"
-                    name="Slider"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <div className="icon-wrapper">
-                        <FrownOutlined  />
-                            <Slider  />
-                        <SmileOutlined />
-                    </div>
-                    </Form.Item>
+                    </Form.Item> */}
                 
                 
-                    <Form.Item
+                    {/* <Form.Item
                     label="DatePicker"
                     name="DatePicker"
                     rules={[{ required: true, message: 'Please input!' }]}
@@ -126,12 +118,33 @@ export const NewFormPage = ({className}: Props) => {
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
                     <RangePicker />
-                    </Form.Item>
+                    </Form.Item> */}
                 
+                    {isLoading && 'Loading...'}
+
+                    {isError && 'Unknown Error occured...'}
+
+
+                    {data && 
+                        data.map((question) => (
+                            <Form.Item
+                                label={question.value}
+                                key={question.id}
+                                name="Slider"
+                                rules={[{ required: true, message: 'Please input!' }]}
+                                >
+                                <div className="icon-wrapper">
+                                    <FrownOutlined  />
+                                        <Slider  />
+                                    <SmileOutlined />
+                                </div>
+                            </Form.Item>
+                        ))
+                    }
                     <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                    <Button type="primary" htmlType="submit" onSubmit = {onSubmit}>
-                        Submit
-                    </Button>
+                        <Button type="primary" htmlType="submit" onSubmit = {onSubmit}>
+                            Submit
+                        </Button>
                     </Form.Item>
                 </Form>
             </section>
