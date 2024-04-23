@@ -1,8 +1,8 @@
-import { Area, AreaChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, } from '../data/MockData'
-import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
+import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -112,6 +112,25 @@ export const ChartPage = ( {className} : Props) => {
                             </ScatterChart>
                         }
 
+                    {chartType == 'barchartdistribution' &&
+                        <BarChart
+                                data={barChartMockData}
+                                margin={{
+                                    top: 20,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5
+                                }}
+                                >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="agreeLevel" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="count" fill="#8884d8" />
+                                </BarChart>
+                            }
+
                 </ResponsiveContainer>
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
@@ -119,6 +138,7 @@ export const ChartPage = ( {className} : Props) => {
                 <option value="distributionacrosstime">Distribution across time</option>
                 <option value="genderdistribution">Gender Distribution</option>
                 <option value="scatterdistribution">Scatter Distribution</option>
+                <option value="barchartdistribution">Barchart Distribution</option>
             </select>
             <select name="" id="" onChange={(e) => setScope(e.target.value)}>
                 <option value="both">both</option>
