@@ -7,6 +7,12 @@
 .formdata__questions-container{
     width: 50vw;
 }
+@media all and (max-width: 1200px) {
+    .formdata__questions-container{
+        width: 80vw;
+        margin: 0 auto;
+    }
+}
     .formdata__questions-header{
         font-size: 1.5rem;
         font-weight: 600;
