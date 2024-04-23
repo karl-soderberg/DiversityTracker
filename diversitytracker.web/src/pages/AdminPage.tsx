@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
 import { GetAllQuestions } from '../util/Http'
 import { Question } from '../types/types'
@@ -9,6 +9,13 @@ type Props = {
 }
 
 export const AdminPage = ( {className} : Props) => {
+    const [btnsVisible, setBtnsVisible] = useState<string>('');
+
+    const submitHandler = (e: FormEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        // deleteDeveloper(e.currentTarget.value);
+    };
+
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
         queryFn: () => GetAllQuestions()
@@ -26,8 +33,17 @@ export const AdminPage = ( {className} : Props) => {
 
                 {data && 
                     data.map((question) => (
-                        <li className='formdata__questions--question' key={question.id}>{question.value}
-                        
+                        <li onMouseEnter={() => setBtnsVisible(question.id)}  className='formdata__questions--question' key={question.id}>{question.value}
+                            <button className={'formdata__questions__button-delete ' + (btnsVisible == question.id && 'visible')} 
+                                name="developer" 
+                                value={question.id}
+                            >
+                            Delete</button>
+                            <button className={'formdata__questions__button-modify ' + (btnsVisible == question.id && 'visible')}
+                                name="developer" 
+                                value={question.id}   
+                            >
+                            Modify</button>
                         </li>
                     ))
                 }
