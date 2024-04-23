@@ -38,15 +38,3 @@ export const MOCKjune = [
     { gender: 'female', satisfactionlevel: 4, age: 42, }
 ];
 
-export const MOCKjuly = [
-    { gender: 'male', agreeLevel: 1, age: 40,  },
-    { gender: 'male', agreeLevel: 5, age: 37,  },
-    { gender: 'female', agreeLevel: 4, age: 25 },
-    { gender: 'male', agreeLevel: 3, age: 20,  },
-    { gender: 'female', agreeLevel: 4, age: 28 },
-    { gender: 'male', agreeLevel: 3, age: 35, },
-    { gender: 'male', agreeLevel: 4, age: 50, },
-    { gender: 'male', agreeLevel: 1, age: 55,  },
-    { gender: 'female', agreeLevel: 2, age: 32, },
-    { gender: 'female', agreeLevel: 4, age: 42, }
-];
