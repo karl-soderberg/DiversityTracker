@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
 import { GetAllQuestions } from '../util/Http'
 import { Question } from '../types/types'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 
 type Props = {
     className: string
