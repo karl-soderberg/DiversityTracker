@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import './AdminPage.css'
-import { GetAllQuestions } from '../util/Http'
+import { GetAllQuestions, PostQuestion } from '../util/Http'
 import { Question } from '../types/types'
 import { useMutation, useQuery } from 'react-query'
 
@@ -26,6 +26,12 @@ export const AdminPage = ( {className} : Props) => {
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
         queryFn: () => GetAllQuestions()
+    });
+
+    const postQuestion = useMutation((question: Question) => PostQuestion(question), {
+        onSuccess: () => {
+            refetch();
+        }
     });
 
     return(
