@@ -1,9 +1,9 @@
-import { useState } from "react"
+//import { useState } from "react"
 import './App.css'
-import { NavBottom } from "./shared_pages/NavBottom";
-import { ChartPage } from "./pages/ChartPage";
-import { FormPage } from "./pages/FormPage";
-import { NewFormPage } from "./pages/NewFormPage";
+// import { NavBottom } from "./shared_pages/NavBottom";
+// import { ChartPage } from "./pages/ChartPage";
+// import { FormPage } from "./pages/FormPage";
+// import { NewFormPage } from "./pages/NewFormPage";
 import {
   Logout,
   StaticWebAuthLogins,
@@ -42,11 +42,36 @@ const UserDisplay = () => {
 
 
 function App() {
-  const [page, setPage] = useState("ChartPage");
+  //const [page, setPage] = useState("ChartPage");
 
   return (
     <>
-      <NavBottom 
+
+
+        <header className="App-header">
+        <StaticWebAuthLogins
+          customProviders={[{ id: "okta", name: "Okta" }]}
+          label={(name) => `Do sign in ${name}`}
+        />
+
+        <br />
+        <p>Login with custom renderer.</p>
+        <StaticWebAuthLogins
+          customProviders={[{ id: "okta", name: "Okta" }]}
+          customRenderer={({ href, className, name }) => (
+            <button className="login-button">
+              <a href={href} className={className}>
+                Custom Login Renderer - {name}
+              </a>
+            </button>
+          )}
+        />
+
+        <ClientPrincipalContextProvider>
+          <UserDisplay />
+        </ClientPrincipalContextProvider>
+      </header>
+      {/* <NavBottom 
         page={page}
         setPage={(page) => setPage(page)}
       />
@@ -60,7 +85,7 @@ function App() {
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
         />
-      </main>
+      </main> */}
     </>
   )
 }
