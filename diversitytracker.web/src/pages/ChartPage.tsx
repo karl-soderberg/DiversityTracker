@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { MOCKData, MOCKDatav1, } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { useQuery } from 'react-query'
-import { APIFormsResponse, DistributionDataType } from '../types/types'
+import { APIFormsResponse, DistributionDataType, Question } from '../types/types'
 import { GetFormsData } from '../util/Http'
 import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
 
@@ -27,6 +27,8 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
     const [formdata, setFormData] = useState<Array<DistributionDataType>>();
+    const [questionsData, setQuestionsData] = useState<Array<Question>>();
+    const [activeQuestion, setActiveQuestion] = useState<string>('');
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
@@ -35,6 +37,7 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
             const fetchedData = await GetFormsData();
             const processedData = await MapAPIFormsResponseToDistributionDataType(fetchedData);
             setFormData(processedData);
+            setQuestionsData(questionData);
         };
         fetchData();
         
@@ -42,7 +45,7 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
 
     return(
         <section className={className}>
-            <h1>Percieved Quality Of Leadership Over Time </h1>
+            <h1>Percieved Quality Of Leadership Over Time</h1>
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
                 <ResponsiveContainer width="90%" height="90%">
@@ -165,6 +168,13 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
                 <option value="men">men</option>
                 <option value="women">women</option>
             </select>
+            {questionsData && 
+                <select name="" id="" onChange={(e) => setActiveQuestion(e.target.value)}>
+                    {questionsData.map((question) => (
+                        <option value={question.id}>{question.value}</option>
+                    ))}
+                </select>
+            }
         </section>
     )
 }
