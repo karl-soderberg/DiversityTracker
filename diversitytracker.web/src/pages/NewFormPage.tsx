@@ -40,14 +40,21 @@ export const NewFormPage = ({className}: Props) => {
     // const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
     // const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
 
-    const onSubmit = (value) => {
-        console.log('search:', value);
-      };
+      
 
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
         queryFn: () => GetAllQuestions()
     });
+
+
+    const onFinish = (values: any) => {
+        console.log('Success:', values);
+      };
+
+      const onFinishFailed = (errorInfo: any) => {
+        console.log("fail!")
+      };
 
     return(
         <section className={className}>
@@ -55,7 +62,12 @@ export const NewFormPage = ({className}: Props) => {
             <p>Submit your form</p>
 
             <section className='newformpage-container__form'>
-                <Form {...formItemLayout} variant="filled"  onFinish={onSubmit}>
+                <Form 
+                    {...formItemLayout} 
+                    variant="filled"  
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                >
 
                     <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
                     <Select
@@ -81,7 +93,7 @@ export const NewFormPage = ({className}: Props) => {
                 
                     <Form.Item
                     label="Age"
-                    name="InputNumber"
+                    name="age"
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
                     <InputNumber style={{ width: '100%' }} />
@@ -89,60 +101,30 @@ export const NewFormPage = ({className}: Props) => {
 
                     <Form.Item
                     label="Time At Company"
-                    name="InputNumber"
+                    name="timeatcompany"
                     rules={[{ required: true, message: 'Please input!' }]}
                     >
                     <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-                
-                    {/* <Form.Item
-                    label="TextArea"
-                    name="TextArea"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <Input.TextArea />
-                    </Form.Item> */}
-                
-                
-                    {/* <Form.Item
-                    label="DatePicker"
-                    name="DatePicker"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <DatePicker />
-                    </Form.Item>
-                
-                    <Form.Item
-                    label="RangePicker"
-                    name="RangePicker"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <RangePicker />
-                    </Form.Item> */}
+                    
                 
                     {isLoading && 'Loading...'}
 
                     {isError && 'Unknown Error occured...'}
 
-
                     {data && 
                         data.map((question) => (
                             <Form.Item
                                 label={question.value}
-                                key={question.id}
-                                name="Slider"
-                                rules={[{ required: true, message: 'Please input!' }]}
+                                name={question.id}
+                                rules={[{ required: true, message: 'Please input your happiness level!' }]}
                                 >
-                                <div className="icon-wrapper">
-                                    <FrownOutlined  />
-                                        <Slider  />
-                                    <SmileOutlined />
-                                </div>
+                                <Slider min={0} max={100} defaultValue={50} tooltipVisible />
                             </Form.Item>
                         ))
                     }
                     <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                        <Button type="primary" htmlType="submit" onSubmit = {onSubmit}>
+                        <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
@@ -153,3 +135,30 @@ export const NewFormPage = ({className}: Props) => {
 
 }
 
+
+
+
+{/* <Form.Item
+    label="TextArea"
+    name="TextArea"
+    rules={[{ required: true, message: 'Please input!' }]}
+    >
+    <Input.TextArea />
+    </Form.Item> */}
+
+
+    {/* <Form.Item
+    label="DatePicker"
+    name="DatePicker"
+    rules={[{ required: true, message: 'Please input!' }]}
+    >
+    <DatePicker />
+    </Form.Item>
+
+    <Form.Item
+    label="RangePicker"
+    name="RangePicker"
+    rules={[{ required: true, message: 'Please input!' }]}
+    >
+    <RangePicker />
+    </Form.Item> */}
