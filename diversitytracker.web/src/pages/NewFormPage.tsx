@@ -48,7 +48,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             .filter(key => key.startsWith('QuestionType'))
             .map(key => ({
                 questionTypeId: key,
-                value: values[key],
+                value: values[key] / 10,
                 answer: 'answer'
             }));
 

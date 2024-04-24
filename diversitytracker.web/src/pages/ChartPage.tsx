@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { MOCKData, MOCKDatav1, } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { useQuery } from 'react-query'
-import { APIFormsResponse, DistributionDataType, Question } from '../types/types'
+import { APIFormsResponse, DistributionData, DistributionDataResponse, DistributionDataType, Question } from '../types/types'
 import { GetFormsData } from '../util/Http'
 import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
 
@@ -26,7 +26,8 @@ type Props = {
 export const ChartPage = ( {className, questionData, isLoading, isError, error, refetch} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
-    const [formdata, setFormData] = useState<Array<DistributionDataType>>();
+    const [formdata, setFormData] = useState<DistributionDataResponse>();
+    const [activeFormData, setActiveFormData] = useState<DistributionData>();
     const [questionsData, setQuestionsData] = useState<Array<Question>>();
     const [activeQuestion, setActiveQuestion] = useState<string>('');
 
@@ -35,9 +36,10 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
     useEffect(() => {
         const fetchData = async () => {
             const fetchedData = await GetFormsData();
-            const processedData = await MapAPIFormsResponseToDistributionDataType(fetchedData);
+            const processedData = await MapAPIFormsResponseToDistributionDataType(fetchedData, questionData);
             setFormData(processedData);
             setQuestionsData(questionData);
+            setActiveFormData(formdata["QuestionType_01HW8AHC1X02XHVJYSQV9TMBDY"]);
         };
         fetchData();
         
@@ -46,11 +48,12 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
     return(
         <section className={className}>
             <h1>Percieved Quality Of Leadership Over Time</h1>
+            
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
                 <ResponsiveContainer width="90%" height="90%">
                     {chartType == 'distributionscale' &&
-                        <AreaChart data={formdata}
+                        <AreaChart data={activeFormData.data}
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -169,7 +172,10 @@ export const ChartPage = ( {className, questionData, isLoading, isError, error, 
                 <option value="women">women</option>
             </select>
             {questionsData && 
-                <select name="" id="" onChange={(e) => setActiveQuestion(e.target.value)}>
+                <select name="" id="" onChange={(e) => {
+                        setActiveQuestion(e.target.value)
+                        setActiveFormData(formdata[e.target.value])
+                    }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
                     ))}

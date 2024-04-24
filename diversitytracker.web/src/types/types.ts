@@ -74,12 +74,23 @@ export type APIFormsResponse = {
   };
 
 
+export type FormSubmissionArray = {
+    formSubmissions: Array<FormSubmissionResponse>
+}
+
+// Distribution data format
+export type DistributionData = {
+    questionId?: string
+    data?: Array<DistributionDataType>
+}
+
 export type DistributionDataType = {
     value: number,
     numberofmen: number,
     numberofwomen: number
 }
 
-export type FormSubmissionArray = {
-    formSubmissions: Array<FormSubmissionResponse>
-}
+
+export type DistributionDataResponse = {
+    [key: string]: DistributionData;
+};

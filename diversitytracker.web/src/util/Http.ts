@@ -91,14 +91,12 @@ export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto
     }
 
     const newFormsDataResponse = await response.json();
-    console.log(newFormsDataResponse);
     return newFormsDataResponse;
 }
 
 
 
 export const GetFormsData = async () => {
-    console.log("getting formsdata!!");
     const response = await fetch(`${API_URL}/FormsData`);
 
     if (!response.ok) {
@@ -108,7 +106,6 @@ export const GetFormsData = async () => {
     }
 
     const formsResponse = await response.json();
-    console.log(formsResponse);
 
     return formsResponse;
 }
