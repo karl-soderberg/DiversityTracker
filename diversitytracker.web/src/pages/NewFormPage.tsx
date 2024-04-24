@@ -29,14 +29,14 @@ const formItemLayout = {
 
 type Props = {
     className: string,
-    data: any, 
+    questionData: any, 
     isLoading: any, 
     isError: any, 
     error: any, 
     refetch: any
 }
 
-export const NewFormPage = ({className, data, isLoading, isError, error, refetch}: Props) => {
+export const NewFormPage = ({className, questionData, isLoading, isError, error, refetch}: Props) => {
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -131,8 +131,8 @@ export const NewFormPage = ({className, data, isLoading, isError, error, refetch
 
                     {isError && 'Unknown Error occured...'}
 
-                    {data && 
-                        data.map((question) => (
+                    {questionData && 
+                        questionData.map((question) => (
                             <Form.Item
                                 label={question.value}
                                 name={question.id}

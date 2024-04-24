@@ -6,14 +6,14 @@ import { useMutation, useQuery } from 'react-query'
 
 type Props = {
     className: string,
-    data: any, 
+    questionData: any, 
     isLoading: any, 
     isError: any, 
     error: any, 
     refetch: any
 }
 
-export const AdminPage = ( {className, data, isLoading, isError, error, refetch} : Props) => {
+export const AdminPage = ( {className, questionData, isLoading, isError, error, refetch} : Props) => {
     const [btnsVisible, setBtnsVisible] = useState<string>('');
     const [modifyOn, setModifyOn] = useState<string>('');
     const [modifyActive, setModifyActive] = useState<boolean>(false);
@@ -64,8 +64,8 @@ export const AdminPage = ( {className, data, isLoading, isError, error, refetch}
 
                 {isError && 'Unknown Error occured...'}
 
-                {data && 
-                    data.map((question) => (
+                {questionData && 
+                    questionData.map((question) => (
                         <li onMouseEnter={() => {
                                 if(modifyActive != true){
                                     setBtnsVisible(question.id)

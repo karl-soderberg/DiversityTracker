@@ -14,14 +14,19 @@ import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversio
 // ];
 
 type Props = {
-    className: string
+    className: string,
+    questionData: any, 
+    isLoading: any, 
+    isError: any, 
+    error: any, 
+    refetch: any
 }
 
 
-export const ChartPage = ( {className} : Props) => {
+export const ChartPage = ( {className, questionData, isLoading, isError, error, refetch} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
-    const [data, setData] = useState<Array<DistributionDataType>>();
+    const [formdata, setFormData] = useState<Array<DistributionDataType>>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
@@ -29,7 +34,7 @@ export const ChartPage = ( {className} : Props) => {
         const fetchData = async () => {
             const fetchedData = await GetFormsData();
             const processedData = await MapAPIFormsResponseToDistributionDataType(fetchedData);
-            setData(processedData);
+            setFormData(processedData);
         };
         fetchData();
         
@@ -42,7 +47,7 @@ export const ChartPage = ( {className} : Props) => {
             <article className='chart-container'>
                 <ResponsiveContainer width="90%" height="90%">
                     {chartType == 'distributionscale' &&
-                        <AreaChart data={data}
+                        <AreaChart data={formdata}
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

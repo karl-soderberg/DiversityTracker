@@ -6,14 +6,14 @@ import './FormPage.css'
 
 type Props = {
     className: string,
-    data: any, 
+    questionData: any, 
     isLoading: any, 
     isError: any, 
     error: any, 
     refetch: any
 }
 
-export const FormPage = ( {className, data, isLoading, isError, error, refetch} : Props) => {
+export const FormPage = ( {className, questionData, isLoading, isError, error, refetch} : Props) => {
 
     return(
         <section className={className}>
@@ -24,8 +24,8 @@ export const FormPage = ( {className, data, isLoading, isError, error, refetch} 
 
                 {isError && 'Unknown Error occured...'}
 
-                {data && 
-                    data.map((question) => (
+                {questionData && 
+                    questionData.map((question) => (
                         <CustomSlider 
                             min={0}
                             max={100}

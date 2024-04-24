@@ -26,7 +26,7 @@ function App() {
       <main className="page-container">
         <FormPage 
             className={"formpage-container " + (page == "FormPage" && "active")}
-            data={data}
+            questionData={data}
             isLoading={isLoading}
             isError={isError}
             error={error}
@@ -34,7 +34,7 @@ function App() {
           />
         <NewFormPage 
           className={"newformpage-container " + (page == "NewFormPage" && "active")}
-          data={data}
+          questionData={data}
           isLoading={isLoading}
           isError={isError}
           error={error}
@@ -42,10 +42,15 @@ function App() {
         />
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
+          questionData={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          refetch={refetch}
         />
         <AdminPage 
           className={"adminpage-container " + (page == "AdminPage" && "active")}
-          data={data}
+          questionData={data}
           isLoading={isLoading}
           isError={isError}
           error={error}
