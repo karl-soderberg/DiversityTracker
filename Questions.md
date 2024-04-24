@@ -12,3 +12,4 @@
 
 # How inclusive do you find our company culture to be? (Not inclusive/Somewhat inclusive/Inclusive/Very inclusive)
 
+# Do you feel that there are equal opportunities for advancement and recognition regardless of gender? (Yes/No/Not sure)
