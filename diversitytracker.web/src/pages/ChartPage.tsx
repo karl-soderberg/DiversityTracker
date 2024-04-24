@@ -1,8 +1,8 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
-import { MOCKData, } from '../data/MockData'
-import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
+import { MOCKData, barChartMockData } from '../data/MockData'
+import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
