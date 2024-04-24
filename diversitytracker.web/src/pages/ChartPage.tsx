@@ -2,7 +2,7 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, Line
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
 import { MOCKData } from '../data/MockData'
-import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
+import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { APIFormsResponse, DistributionData, DistributionDataResponse, Question } from '../types/types'
 import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
 
@@ -146,7 +146,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                 </ScatterChart>
                             }
 
-                        {chartType == 'barchartdistribution' &&
+                        {/* {chartType == 'barchartdistribution' &&
                             <BarChart
                                     data={barChartMockData}
                                     margin={{
@@ -163,7 +163,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                     <Legend />
                                     <Bar dataKey="count" fill="#8884d8" />
                                     </BarChart>
-                                }
+                                } */}
                     </ResponsiveContainer>
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
