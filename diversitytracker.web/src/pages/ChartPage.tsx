@@ -25,36 +25,42 @@ type Props = {
 export const ChartPage = ( {className, questionData, formsData, isLoading, isError, error, refetch} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
-    const [distributionformdata, setDistributionFormData] = useState<DistributionDataResponse>();
-    const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
+    
     const [questionsData, setQuestionsData] = useState<Array<Question>>();
     const [activeQuestion, setActiveQuestion] = useState<string>('');
+    const [distributionformdata, setDistributionFormData] = useState<DistributionDataResponse>();
+
+    const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
 
     useEffect(() => {
-        const processData = async () => {
-            const processedData = await MapAPIFormsResponseToDistributionDataType(formsData, questionData);
-            setDistributionFormData(processedData);    
-            setActiveDistributionFormData(distributionformdata[activeQuestion]);
-            setQuestionsData(questionData);
-            setActiveQuestion(questionData[0])
-        };
-        if (formsData && questionData) {
-            processData();
+        if(distributionformdata){
+            setActiveDistributionFormData(distributionformdata[activeQuestion])
         }
-    }, [questionData, formsData]);
+    }, [distributionformdata])
+
+    useEffect(() => {
+        if(activeQuestion && formsData && questionData && distributionformdata == undefined){
+            setDistributionFormData(MapAPIFormsResponseToDistributionDataType(formsData, questionData));
+        }
+    }, [activeQuestion]);
+
+    useEffect(() => {
+        if(questionData){
+            setQuestionsData(questionData);
+            setActiveQuestion(questionData[0].id)
+        }
+    }, [questionData]);
 
     return(
         <section className={className}>
             <h1>Percieved Quality Of Leadership Over Time</h1>
-            
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
-                {activeDistributionFormData && 
                     <ResponsiveContainer width="90%" height="90%">
-                        {chartType == 'distributionscale' &&
+                        {(chartType == 'distributionscale' && activeDistributionFormData) &&
                             <AreaChart data={activeDistributionFormData.data}
                                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                 <defs>
@@ -159,7 +165,6 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                     </BarChart>
                                 }
                     </ResponsiveContainer>
-                }
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
@@ -175,14 +180,15 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
             </select>
             {questionsData && 
                 <select name="" id="" onChange={(e) => {
-                        setActiveQuestion(e.target.value)
-                        setActiveDistributionFormData(distributionformdata[e.target.value])
+                        setActiveQuestion(e.target.value);
+                        setActiveDistributionFormData(distributionformdata[e.target.value]);
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
                     ))}
                 </select>
             }
+            <p>{activeQuestion}</p>
         </section>
     )
 }
