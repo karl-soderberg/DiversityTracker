@@ -5,14 +5,15 @@ import { GetAllQuestions } from '../util/Http'
 import './FormPage.css'
 
 type Props = {
-    className: string
+    className: string,
+    data: any, 
+    isLoading: any, 
+    isError: any, 
+    error: any, 
+    refetch: any
 }
 
-export const FormPage = ( {className} : Props) => {
-    const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
-        queryKey: ['query'],
-        queryFn: () => GetAllQuestions()
-    });
+export const FormPage = ( {className, data, isLoading, isError, error, refetch} : Props) => {
 
     return(
         <section className={className}>

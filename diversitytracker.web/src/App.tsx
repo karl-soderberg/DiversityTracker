@@ -5,9 +5,17 @@ import { ChartPage } from "./pages/ChartPage";
 import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
+import { useQuery } from "react-query";
+import { Question } from "./types/types";
+import { GetAllQuestions } from "./util/Http";
 
 function App() {
   const [page, setPage] = useState("ChartPage");
+
+  const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
+    queryKey: ['query'],
+    queryFn: () => GetAllQuestions()
+  });
 
   return (
     <>
@@ -18,15 +26,30 @@ function App() {
       <main className="page-container">
         <FormPage 
             className={"formpage-container " + (page == "FormPage" && "active")}
+            data={data}
+            isLoading={isLoading}
+            isError={isError}
+            error={error}
+            refetch={refetch}
           />
         <NewFormPage 
           className={"newformpage-container " + (page == "NewFormPage" && "active")}
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          refetch={refetch}
         />
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
         />
         <AdminPage 
           className={"adminpage-container " + (page == "AdminPage" && "active")}
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          refetch={refetch}
         />
       </main>
     </>

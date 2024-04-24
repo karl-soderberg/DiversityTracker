@@ -5,10 +5,15 @@ import { PostQuestionTypeDto, Question } from '../types/types'
 import { useMutation, useQuery } from 'react-query'
 
 type Props = {
-    className: string
+    className: string,
+    data: any, 
+    isLoading: any, 
+    isError: any, 
+    error: any, 
+    refetch: any
 }
 
-export const AdminPage = ( {className} : Props) => {
+export const AdminPage = ( {className, data, isLoading, isError, error, refetch} : Props) => {
     const [btnsVisible, setBtnsVisible] = useState<string>('');
     const [modifyOn, setModifyOn] = useState<string>('');
     const [modifyActive, setModifyActive] = useState<boolean>(false);
@@ -30,11 +35,6 @@ export const AdminPage = ( {className} : Props) => {
         setModifyActive(true)
         setModifyValue(value);
     }
-
-    const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
-        queryKey: ['query'],
-        queryFn: () => GetAllQuestions()
-    });
 
     const postQuestion = useMutation((question: string) => PostQuestion(question), {
         onSuccess: () => {

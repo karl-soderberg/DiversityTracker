@@ -28,10 +28,15 @@ const formItemLayout = {
 };
 
 type Props = {
-    className: string
+    className: string,
+    data: any, 
+    isLoading: any, 
+    isError: any, 
+    error: any, 
+    refetch: any
 }
 
-export const NewFormPage = ({className}: Props) => {
+export const NewFormPage = ({className, data, isLoading, isError, error, refetch}: Props) => {
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -68,11 +73,6 @@ export const NewFormPage = ({className}: Props) => {
         onSuccess: () => {
             refetch();
         }
-    });
-
-    const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
-        queryKey: ['query'],
-        queryFn: () => GetAllQuestions()
     });
 
     return(
