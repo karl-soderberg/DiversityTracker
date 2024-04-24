@@ -40,3 +40,35 @@ export type PostFormSubmissionDto = {
     person: PostPersonDto;
     questions: FormSubmitQuestionTypeDto[];
 }
+
+
+export type PersonResponse = {
+    id: string;
+    name: string;
+    gender: number;
+    timeAtCompany: string;
+    formSubmissions: (null | FormSubmissionResponse)[];
+};
+  
+export type QuestionResponse = {
+    id: string;
+    questionTypeId: string;
+    questionType: any;
+    value: number;
+    answer: string;
+    formSubmissionId: string;
+    formSubmission: any;
+};
+  
+export type FormSubmissionResponse = {
+    id: string;
+    createdAt: string;
+    personId: string;
+    person: PersonResponse;
+    questions: Array<QuestionResponse>;
+};
+  
+export type APIFormsResponse = {
+    requestedAt: string;
+    formSubmissions: Array<FormSubmissionResponse>;
+  };
