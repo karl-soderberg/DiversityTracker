@@ -1,4 +1,4 @@
-import { PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
+import { APIFormsResponse, PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -96,3 +96,17 @@ export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto
 }
 
 
+
+export const GetFormsData = async (): Promise<APIFormsResponse> => {
+    const response = await fetch(`${API_URL}/FormsData`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while fetching Forms');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const formsResponse = await response.json();
+
+    return formsResponse;
+}
