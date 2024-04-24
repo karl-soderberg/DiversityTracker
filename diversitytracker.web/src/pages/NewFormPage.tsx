@@ -12,7 +12,7 @@ import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import './NewFormPage.css'
 import { GetAllQuestions, PostFormsData } from '../util/Http';
 import { useMutation, useQuery } from 'react-query';
-import { PostFormSubmissionDto, Question } from '../types/types';
+import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } from '../types/types';
 
 const { RangePicker } = DatePicker;
 
@@ -33,7 +33,38 @@ type Props = {
 
 export const NewFormPage = ({className}: Props) => {
 
-    const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(question), {
+    const onSubmitHandler = (values: any) => {
+        const gender = parseInt(values.Select) as Gender;
+        const age = values.age;
+        const timeAtCompany = values.timeatcompany;
+
+        const questions: FormSubmitQuestionTypeDto[] = 
+        Object.keys(values)
+            .filter(key => key.startsWith('QuestionType'))
+            .map(key => ({
+                questionTypeId: key,
+                value: values[key],
+                answer: 'answer'
+            }));
+
+        const formSubmissionDto: PostFormSubmissionDto = {
+            createdAt: new Date(),
+            person: {
+                name: `User${age}`,
+                gender: gender,
+                timeAtCompany: new Date(Date.now() - timeAtCompany * 365 * 24 * 60 * 60 * 1000),
+            },
+            questions: questions
+        };
+
+        postFormsData.mutate(formSubmissionDto);
+    };
+
+    const onFailSubmitHandler = (errorInfo: any) => {
+        
+    };
+
+    const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(postFormSubmissionDto), {
         onSuccess: () => {
             refetch();
         }
@@ -44,14 +75,6 @@ export const NewFormPage = ({className}: Props) => {
         queryFn: () => GetAllQuestions()
     });
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log("fail!")
-    };
-
     return(
         <section className={className}>
             <h1>New Forms Page</h1>
@@ -61,8 +84,8 @@ export const NewFormPage = ({className}: Props) => {
                 <Form 
                     {...formItemLayout} 
                     variant="filled"  
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
+                    onFinish={onSubmitHandler}
+                    onFinishFailed={onFailSubmitHandler}
                 >
 
                     <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>

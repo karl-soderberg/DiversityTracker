@@ -32,7 +32,7 @@ export type PostPersonDto = {
 export type FormSubmitQuestionTypeDto = {
     questionTypeId?: string;
     value: number;
-    answer?: string;
+    answer: string;
 }
 
 export type PostFormSubmissionDto = {

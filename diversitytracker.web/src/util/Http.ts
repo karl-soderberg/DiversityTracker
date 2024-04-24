@@ -75,6 +75,7 @@ export const PostQuestion = async (question: string) => {
 
 
 export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto) => {
+    console.log(postFormSubmissionDto);
     const response = await fetch(`${API_URL}/FormsData`, {
         method: 'POST',
         headers: {
