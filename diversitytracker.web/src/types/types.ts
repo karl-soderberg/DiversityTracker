@@ -72,3 +72,14 @@ export type APIFormsResponse = {
     requestedAt: string;
     formSubmissions: Array<FormSubmissionResponse>;
   };
+
+
+export type DistributionDataType = {
+    value: number,
+    numberofmen: number,
+    numberofwomen: number
+}
+
+export type FormSubmissionArray = {
+    formSubmissions: Array<FormSubmissionResponse>
+}

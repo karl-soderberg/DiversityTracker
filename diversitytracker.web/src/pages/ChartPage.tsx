@@ -1,11 +1,12 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
-import { MOCKData, } from '../data/MockData'
+import { MOCKData, MOCKDatav1, } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { useQuery } from 'react-query'
-import { APIFormsResponse } from '../types/types'
+import { APIFormsResponse, DistributionDataType } from '../types/types'
 import { GetFormsData } from '../util/Http'
+import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -20,16 +21,18 @@ type Props = {
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
-    const [data, setData] = useState<APIFormsResponse>();
+    const [data, setData] = useState<Array<DistributionDataType>>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
     useEffect(() => {
         const fetchData = async () => {
             const fetchedData = await GetFormsData();
-            setData(fetchedData);
+            const processedData = await MapAPIFormsResponseToDistributionDataType(fetchedData);
+            setData(processedData);
         };
         fetchData();
+        
     }, []);
 
     return(
@@ -39,7 +42,7 @@ export const ChartPage = ( {className} : Props) => {
             <article className='chart-container'>
                 <ResponsiveContainer width="90%" height="90%">
                     {chartType == 'distributionscale' &&
-                        <AreaChart data={MOCKData}
+                        <AreaChart data={data}
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
