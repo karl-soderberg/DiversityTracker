@@ -38,3 +38,35 @@ export const MOCKjune = [
     { gender: 'female', satisfactionlevel: 4, age: 42, }
 ];
 
+export const barChartMockData = [
+        {
+          name: 'Disagree',
+          female: 400,
+          male: 240,
+          amt: 2400,
+        },
+        {
+          name: 'Somewhat disagree',
+          female: 300,
+          male: 139,
+          amt: 221,
+        },
+        {
+          name: 'Indifferent',
+          female: 200,
+          male: 980,
+          amt: 229,
+        },
+        {
+          name: 'Somewhat agree',
+          female: 278,
+          male: 390,
+          amt: 200,
+        },
+        {
+          name: 'Strongly agree',
+          female: 189,
+          male: 480,
+          amt: 218,
+        },
+      ];

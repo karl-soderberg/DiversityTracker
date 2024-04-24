@@ -112,6 +112,9 @@ export const ChartPage = ( {className} : Props) => {
                             </ScatterChart>
                         }
 
+
+                    
+
                     {chartType == 'barchartdistribution' &&
                         <BarChart
                                 data={barChartMockData}
