@@ -6,15 +6,20 @@ import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
 import { useQuery } from "react-query";
-import { Question } from "./types/types";
-import { GetAllQuestions } from "./util/Http";
+import { APIFormsResponse, Question } from "./types/types";
+import { GetAllQuestions, GetFormsData } from "./util/Http";
 
 function App() {
   const [page, setPage] = useState("ChartPage");
 
   const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
-    queryKey: ['query'],
+    queryKey: ['getQuestions'],
     queryFn: () => GetAllQuestions()
+  });
+
+  const { data: formsData, isLoading: isLoadingForms, isError: isErrorForms, error: errorForms } = useQuery<APIFormsResponse>({
+    queryKey: ['getFormData'],
+    queryFn: () => GetFormsData()
   });
 
   return (
@@ -25,13 +30,13 @@ function App() {
       />
       <main className="page-container">
         <FormPage 
-            className={"formpage-container " + (page == "FormPage" && "active")}
-            questionData={data}
-            isLoading={isLoading}
-            isError={isError}
-            error={error}
-            refetch={refetch}
-          />
+          className={"formpage-container " + (page == "FormPage" && "active")}
+          questionData={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          refetch={refetch}
+        />
         <NewFormPage 
           className={"newformpage-container " + (page == "NewFormPage" && "active")}
           questionData={data}
@@ -47,6 +52,7 @@ function App() {
           isError={isError}
           error={error}
           refetch={refetch}
+          formsData={formsData}
         />
         <AdminPage 
           className={"adminpage-container " + (page == "AdminPage" && "active")}
