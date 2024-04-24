@@ -60,7 +60,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
                     <ResponsiveContainer width="90%" height="90%">
-                        {(chartType == 'distributionscale' && activeDistributionFormData) &&
+                        {(chartType == 'distributionscale' && activeDistributionFormData && distributionformdata) &&
                             <AreaChart data={activeDistributionFormData.data}
                                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                 <defs>
@@ -181,7 +181,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
             {questionsData && 
                 <select name="" id="" onChange={(e) => {
                         setActiveQuestion(e.target.value);
-                        setActiveDistributionFormData(distributionformdata[e.target.value]);
+                        setActiveDistributionFormData(distributionformdata[activeQuestion])
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
