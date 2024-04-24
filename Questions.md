@@ -5,3 +5,6 @@
 # How would you rate the opportunities for career advancement and professional growth in our company? (Poor/Fair/Good/Excellent)
 
 # Are you comfortable expressing your opinions and concerns openly without fear of reprisal? (Yes/No)
+
+# How supported do you feel by your immediate supervisor or manager? (Not supported at all/Somewhat supported/Supported/Strongly supported)
+
