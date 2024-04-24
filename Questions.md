@@ -15,3 +15,5 @@
 # Do you feel that there are equal opportunities for advancement and recognition regardless of gender? (Yes/No/Not sure)
 
 # How satisfied are you with the work-life balance provided by our company? (Very dissatisfied/Dissatisfied/Satisfied/Very satisfied)
+
+# How likely are you to recommend our company as a great place to work to others? (Not likely at all/Unlikely/Likely/Very likely)
