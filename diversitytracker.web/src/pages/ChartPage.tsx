@@ -130,8 +130,8 @@ export const ChartPage = ( {className} : Props) => {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="female" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-                                <Bar dataKey="male" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+                                <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />
+                                <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
                             </BarChart>
                             }
 
