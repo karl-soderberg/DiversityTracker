@@ -1,4 +1,4 @@
-import { PostQuestionTypeDto, Question } from "../types/types";
+import { PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -71,4 +71,25 @@ export const PostQuestion = async (question: string) => {
     const newQuestionResponse = await response.json();
     console.log(newQuestionResponse);
     return newQuestionResponse;
+}
+
+
+export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto) => {
+    const response = await fetch(`${API_URL}/FormsData`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postFormSubmissionDto),
+    });
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while posting the new question');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const newFormsDataResponse = await response.json();
+    console.log(newFormsDataResponse);
+    return newFormsDataResponse;
 }
