@@ -13,3 +13,5 @@
 # How inclusive do you find our company culture to be? (Not inclusive/Somewhat inclusive/Inclusive/Very inclusive)
 
 # Do you feel that there are equal opportunities for advancement and recognition regardless of gender? (Yes/No/Not sure)
+
+# How satisfied are you with the work-life balance provided by our company? (Very dissatisfied/Dissatisfied/Satisfied/Very satisfied)
