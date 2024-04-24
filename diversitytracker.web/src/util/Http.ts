@@ -97,7 +97,8 @@ export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto
 
 
 
-export const GetFormsData = async (): Promise<APIFormsResponse> => {
+export const GetFormsData = async () => {
+    console.log("getting formsdata!!");
     const response = await fetch(`${API_URL}/FormsData`);
 
     if (!response.ok) {

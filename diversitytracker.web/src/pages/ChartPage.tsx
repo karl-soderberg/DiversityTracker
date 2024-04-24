@@ -1,6 +1,6 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MOCKData, } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { useQuery } from 'react-query'
@@ -20,8 +20,17 @@ type Props = {
 export const ChartPage = ( {className} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
+    const [data, setData] = useState<APIFormsResponse>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedData = await GetFormsData();
+            setData(fetchedData);
+        };
+        fetchData();
+    }, []);
 
     return(
         <section className={className}>
