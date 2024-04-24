@@ -33,28 +33,18 @@ type Props = {
 
 export const NewFormPage = ({className}: Props) => {
 
-    // const { max, min } = props;
-    // const [value, setValue] = useState(0);
-
-    // const mid = Number(((max - min) / 2).toFixed(5));
-    // const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
-    // const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
-
-      
-
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
         queryFn: () => GetAllQuestions()
     });
 
-
     const onFinish = (values: any) => {
         console.log('Success:', values);
-      };
+    };
 
-      const onFinishFailed = (errorInfo: any) => {
+    const onFinishFailed = (errorInfo: any) => {
         console.log("fail!")
-      };
+    };
 
     return(
         <section className={className}>
@@ -135,6 +125,14 @@ export const NewFormPage = ({className}: Props) => {
 
 }
 
+
+
+// const { max, min } = props;
+// const [value, setValue] = useState(0);
+
+// const mid = Number(((max - min) / 2).toFixed(5));
+// const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
+// const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
 
 
 
