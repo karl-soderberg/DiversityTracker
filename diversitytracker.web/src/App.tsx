@@ -1,9 +1,9 @@
-//import { useState } from "react"
+import { useState } from "react"
 import './App.css'
-// import { NavBottom } from "./shared_pages/NavBottom";
-// import { ChartPage } from "./pages/ChartPage";
-// import { FormPage } from "./pages/FormPage";
-// import { NewFormPage } from "./pages/NewFormPage";
+import { NavBottom } from "./shared_pages/NavBottom";
+import { ChartPage } from "./pages/ChartPage";
+import { FormPage } from "./pages/FormPage";
+import { NewFormPage } from "./pages/NewFormPage";
 import {
   Logout,
   StaticWebAuthLogins,
@@ -42,7 +42,7 @@ const UserDisplay = () => {
 
 
 function App() {
-  //const [page, setPage] = useState("ChartPage");
+  const [page, setPage] = useState("ChartPage");
 
   return (
     <>
@@ -71,7 +71,7 @@ function App() {
           <UserDisplay />
         </ClientPrincipalContextProvider>
       </header>
-      {/* <NavBottom 
+      <NavBottom 
         page={page}
         setPage={(page) => setPage(page)}
       />
@@ -85,7 +85,7 @@ function App() {
         <ChartPage 
           className={"chartpage-container " + (page == "ChartPage" && "active")}
         />
-      </main> */}
+      </main>
     </>
   )
 }
