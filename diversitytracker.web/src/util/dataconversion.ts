@@ -83,6 +83,6 @@ export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsRespon
             }
         })
     })
-    
+
     return dataResponseDict;
 }

@@ -1,11 +1,9 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
-import { MOCKData, MOCKDatav1, } from '../data/MockData'
+import { MOCKData } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
-import { useQuery } from 'react-query'
-import { APIFormsResponse, DistributionData, DistributionDataResponse, DistributionDataType, Question } from '../types/types'
-import { GetFormsData } from '../util/Http'
+import { APIFormsResponse, DistributionData, DistributionDataResponse, Question } from '../types/types'
 import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
 
 // const FilteredMockData = [
@@ -27,8 +25,8 @@ type Props = {
 export const ChartPage = ( {className, questionData, formsData, isLoading, isError, error, refetch} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
-    const [formdata, setFormData] = useState<DistributionDataResponse>();
-    const [activeFormData, setActiveFormData] = useState<DistributionData>();
+    const [distributionformdata, setDistributionFormData] = useState<DistributionDataResponse>();
+    const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
     const [questionsData, setQuestionsData] = useState<Array<Question>>();
     const [activeQuestion, setActiveQuestion] = useState<string>('');
 
@@ -37,11 +35,11 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
 
     useEffect(() => {
         const processData = async () => {
+            const processedData = await MapAPIFormsResponseToDistributionDataType(formsData, questionData);
+            setDistributionFormData(processedData);    
+            setActiveDistributionFormData(distributionformdata[activeQuestion]);
             setQuestionsData(questionData);
             setActiveQuestion(questionData[0])
-            const processedData = await MapAPIFormsResponseToDistributionDataType(formsData, questionData);
-            setFormData(processedData);
-            setActiveFormData(formdata[activeQuestion]);
         };
         if (formsData && questionData) {
             processData();
@@ -54,10 +52,10 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
             
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
-                {activeFormData && 
+                {activeDistributionFormData && 
                     <ResponsiveContainer width="90%" height="90%">
                         {chartType == 'distributionscale' &&
-                            <AreaChart data={activeFormData.data}
+                            <AreaChart data={activeDistributionFormData.data}
                                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -73,10 +71,10 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                 <YAxis />
                                 <CartesianGrid strokeDasharray="3 3" />
                                 {(scope === "both" || scope === "women") && 
-                                    <Area type="monotone" dataKey="numberofwomen" name='distribution' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
+                                    <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
                                 }
                                 {(scope === "both" || scope === "men") && 
-                                    <Area type="monotone" dataKey="numberofmen" name='distribution' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
+                                    <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
                                 }
                                 <Legend />
                             </AreaChart>
@@ -178,7 +176,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
             {questionsData && 
                 <select name="" id="" onChange={(e) => {
                         setActiveQuestion(e.target.value)
-                        setActiveFormData(formdata[e.target.value])
+                        setActiveDistributionFormData(distributionformdata[e.target.value])
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
