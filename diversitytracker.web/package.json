@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aaronpowell/react-static-web-apps-auth": "^1.7.2",
     "@sgratzl/chartjs-chart-boxplot": "^4.3.1",
     "antd": "^5.16.2",
     "chart.js": "^4.4.2",

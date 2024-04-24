@@ -1,31 +1,48 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import './App.css'
 import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
 import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
+import {
+  Logout,
+  StaticWebAuthLogins,
+  ClientPrincipalContextProvider,
+  UserPurge,
+  useClientPrincipal,
+} from "@aaronpowell/react-static-web-apps-auth";
+
+const UserDisplay = () => {
+  const { clientPrincipal, loaded } = useClientPrincipal();
+
+  if (!loaded) {
+    return <p>Checking user info...</p>;
+  }
+
+  if (clientPrincipal) {
+    return (
+      <div>
+        <p>
+          {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
+          {clientPrincipal.userId} {clientPrincipal.userRoles}
+        </p>
+        <p>
+          <Logout />
+        </p>
+        <p>
+          <UserPurge provider={clientPrincipal.identityProvider} />
+        </p>
+      </div>
+    );
+  }
+
+  return <p>User not signed in</p>;
+};
+
+
 
 function App() {
   const [page, setPage] = useState("ChartPage");
-  const [userInfo, setUserInfo] = useState();
-
-  useEffect(() => {
-    (async () => {
-      setUserInfo(await getUserInfo());
-    })();
-  }, []);
-
-  async function getUserInfo() {
-    try {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      return clientPrincipal;
-    } catch (error) {
-      console.error('No profile could be found');
-      return undefined;
-    }
-  }
 
   return (
     <>
