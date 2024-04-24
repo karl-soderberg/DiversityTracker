@@ -107,6 +107,7 @@ export const GetFormsData = async (): Promise<APIFormsResponse> => {
     }
 
     const formsResponse = await response.json();
+    console.log(formsResponse);
 
     return formsResponse;
 }

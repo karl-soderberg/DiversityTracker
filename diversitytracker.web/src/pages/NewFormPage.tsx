@@ -138,7 +138,7 @@ export const NewFormPage = ({className}: Props) => {
                                 name={question.id}
                                 rules={[{ required: true, message: 'Please input your happiness level!' }]}
                                 >
-                                <Slider min={0} max={100} defaultValue={50} tooltipVisible />
+                                <Slider min={0} max={100} defaultValue={50} />
                             </Form.Item>
                         ))
                     }

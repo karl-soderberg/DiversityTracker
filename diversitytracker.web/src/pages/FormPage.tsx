@@ -23,7 +23,6 @@ export const FormPage = ( {className} : Props) => {
 
                 {isError && 'Unknown Error occured...'}
 
-
                 {data && 
                     data.map((question) => (
                         <CustomSlider 
@@ -36,6 +35,7 @@ export const FormPage = ( {className} : Props) => {
                         />
                     ))
                 }
+
                 <button 
                     className='btn-primary--gradient-outline form-input__buttonlogin'
                     type='button'

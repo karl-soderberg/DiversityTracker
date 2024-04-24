@@ -3,6 +3,9 @@ import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, } from '../data/MockData'
 import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
+import { useQuery } from 'react-query'
+import { APIFormsResponse } from '../types/types'
+import { GetFormsData } from '../util/Http'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
