@@ -10,9 +10,9 @@ import {
 } from 'antd';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import './NewFormPage.css'
-import { GetAllQuestions } from '../util/Http';
-import { useQuery } from 'react-query';
-import { Question } from '../types/types';
+import { GetAllQuestions, PostFormsData } from '../util/Http';
+import { useMutation, useQuery } from 'react-query';
+import { PostFormSubmissionDto, Question } from '../types/types';
 
 const { RangePicker } = DatePicker;
 
@@ -32,6 +32,12 @@ type Props = {
 }
 
 export const NewFormPage = ({className}: Props) => {
+
+    const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(question), {
+        onSuccess: () => {
+            refetch();
+        }
+    });
 
     const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
         queryKey: ['query'],
@@ -66,15 +72,15 @@ export const NewFormPage = ({className}: Props) => {
                         optionFilterProp="children"
                         options={[
                         {
-                            value: 'female',
+                            value: '1',
                             label: 'Female',
                         },
                         {
-                            value: 'male',
+                            value: '0',
                             label: 'Male',
                         },
                         {
-                            value: 'other',
+                            value: '2',
                             label: 'Other',
                         },
                         ]}
