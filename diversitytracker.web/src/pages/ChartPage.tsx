@@ -1,4 +1,4 @@
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
 import { MOCKData, barChartMockData } from '../data/MockData'
@@ -126,12 +126,13 @@ export const ChartPage = ( {className} : Props) => {
                                 }}
                                 >
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="agreeLevel" />
+                                <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="count" fill="#8884d8" />
-                                </BarChart>
+                                <Bar dataKey="female" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                                <Bar dataKey="male" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+                            </BarChart>
                             }
 
                 </ResponsiveContainer>
