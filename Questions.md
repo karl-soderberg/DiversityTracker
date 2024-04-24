@@ -8,3 +8,7 @@
 
 # How supported do you feel by your immediate supervisor or manager? (Not supported at all/Somewhat supported/Supported/Strongly supported)
 
+# Have you ever experienced or witnessed any form of discrimination or harassment in the workplace? (Yes/No)
+
+
+
