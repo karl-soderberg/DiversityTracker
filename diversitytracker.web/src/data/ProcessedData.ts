@@ -1,5 +1,5 @@
 import './MockData'
-import { MOCKmay, MOCKjune, MOCKjuly } from './MockData'
+import { MOCKmay, MOCKjune } from './MockData'
 
 
 //FILTERING FOR PIECHART
@@ -20,19 +20,3 @@ export const scatterMaleData = MOCKjune.filter(entery => entery.gender === 'male
 export const scatterFemaleData = MOCKjune.filter(entery => entery.gender === 'female')
 
 //FILTERING FOR BARCHART
-const groupedData: { [key: string]: { gender: string; agreeLevel: number; count: number }[] } = {};
-MOCKjuly.forEach(item => {
-  const key = `${item.agreeLevel}`;
-  if (!groupedData[key]) {
-    groupedData[key] = [];
-  }
-  groupedData[key].push({ gender: item.gender, agreeLevel: item.agreeLevel, count: 1 });
-});
-
-export const barChartMockData = Object.values(groupedData).map(arr => {
-    const obj: { [key: string]: number } =  { agreeLevel: arr[0].agreeLevel };
-    arr.forEach(item => {
-      obj[item.gender] = item.count;
-    });
-    return obj;
-  });

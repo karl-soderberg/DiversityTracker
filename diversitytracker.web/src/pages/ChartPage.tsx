@@ -1,8 +1,8 @@
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useState } from 'react'
-import { MOCKData, } from '../data/MockData'
-import { barChartMockData, pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
+import { MOCKData, barChartMockData } from '../data/MockData'
+import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -112,6 +112,9 @@ export const ChartPage = ( {className} : Props) => {
                             </ScatterChart>
                         }
 
+
+                    
+
                     {chartType == 'barchartdistribution' &&
                         <BarChart
                                 data={barChartMockData}
@@ -123,12 +126,13 @@ export const ChartPage = ( {className} : Props) => {
                                 }}
                                 >
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="agreeLevel" />
+                                <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="count" fill="#8884d8" />
-                                </BarChart>
+                                <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />
+                                <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
+                            </BarChart>
                             }
 
                 </ResponsiveContainer>

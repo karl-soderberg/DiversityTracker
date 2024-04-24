@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = diversitytracker.api.tests
-build_property.ProjectDir = /Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/
+build_property.ProjectDir = /Users/salt-dev/Desktop/SaltInfo/finalproj/DiversityTracker/diversitytracker.api.tests/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
