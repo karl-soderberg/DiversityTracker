@@ -10,5 +10,5 @@
 
 # Have you ever experienced or witnessed any form of discrimination or harassment in the workplace? (Yes/No)
 
-
+# How inclusive do you find our company culture to be? (Not inclusive/Somewhat inclusive/Inclusive/Very inclusive)
 
