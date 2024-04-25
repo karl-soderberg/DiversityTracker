@@ -2,6 +2,7 @@ using AutoMapper;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Dtos;
 using diversitytracker.api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace diversitytracker.api.Controllers
@@ -22,6 +23,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
+        [Authorize("isAdmin")]
         public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
         {
             var formSubmissions = await _formsDataRepository.GetFormsAsync(startDate, endDate);
@@ -33,6 +35,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPost]
+        [Authorize("isAdmin")]
         public async Task<IActionResult> AddForm(PostFormSubmissionDto postFormSubmissionDto)
         {
             if(!ModelState.IsValid)
