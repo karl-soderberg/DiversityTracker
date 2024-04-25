@@ -146,6 +146,12 @@
     animation: animateRight var(--animation-timing) var(--easing);
 }
 
+
+.App-header__login {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
 /* @keyframes animateRight{
     0%{
         transform: translateX(100%);

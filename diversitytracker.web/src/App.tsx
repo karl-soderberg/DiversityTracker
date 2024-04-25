@@ -15,7 +15,7 @@ import {
   UserPurge,
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
-import { Button, Flex } from 'antd';
+import { Button } from 'antd';
 
 
 const UserDisplay = () => {
@@ -65,23 +65,20 @@ function App() {
 
 
         <header className="App-header">
-        {/* <StaticWebAuthLogins
-          customProviders={[{ id: "okta", name: "Okta" }]}
-          label={(name) => `Do sign in ${name}`}
-        />
+          <section className="App-header__login">
+            <StaticWebAuthLogins
+              twitter={false}
+              google={true}
+              customRenderer={({ href, className, name }) => (
+                <Button type="primary" className="login-button">
+                  <a href={href} className={className}>
+                    Login With {name}
+                  </a>
+                </Button>
+              )}
+            />
+          </section>
 
-        <br /> */}
-        <StaticWebAuthLogins
-          twitter={false}
-          google={true}
-          customRenderer={({ href, className, name }) => (
-            <Button type="primary" className="login-button">
-              <a href={href} className={className}>
-                Login With {name}
-              </a>
-            </Button>
-          )}
-        />
 
         <ClientPrincipalContextProvider>
           <UserDisplay />
