@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.Authority = null; 
-        options.Audience = "finalprojwebapp.azurewebsites.net";
+        options.Audience = null;
     });
 
 builder.Services.AddAuthorizationBuilder()
