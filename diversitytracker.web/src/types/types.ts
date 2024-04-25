@@ -94,3 +94,36 @@ export type DistributionDataType = {
 export type DistributionDataResponse = {
     [key: string]: DistributionData;
 };
+
+export type GenderValue = {
+    name: string,
+    value: number
+}
+
+export type GenderDistribution = {
+    [key: string]: Array<GenderValue>
+}
+
+export type ChartGenderDistribution = {
+    name: string,
+    female: number,
+    male: number
+}
+
+export type ChartDistributionDict = {
+    [key: string]: Array<ChartGenderDistribution>
+}
+
+export type scatterData = {
+    satisfactionlevel: number;
+    age: number;
+}
+
+export type scatterDataArr = {
+    scatterMaleData: Array<scatterData>,
+    scatterFemaleData: Array<scatterData>
+}
+
+export type scatterDataDict = {
+    [key: string]: scatterDataArr
+}
