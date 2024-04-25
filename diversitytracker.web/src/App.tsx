@@ -63,13 +63,12 @@ function App() {
 
 
         <header className="App-header">
-        <StaticWebAuthLogins
+        {/* <StaticWebAuthLogins
           customProviders={[{ id: "okta", name: "Okta" }]}
           label={(name) => `Do sign in ${name}`}
         />
 
-        <br />
-        <p>Login with custom renderer.</p>
+        <br /> */}
         <StaticWebAuthLogins
           customProviders={[{ id: "okta", name: "Okta" }]}
           customRenderer={({ href, className, name }) => (
