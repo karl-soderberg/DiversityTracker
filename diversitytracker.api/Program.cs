@@ -23,6 +23,12 @@ builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
+  options.Authority = "https://wonderful-forest-00d084f03.5.azurestaticapps.net/.auth/login/github";
+  options.Audience = "finalprojwebapp.azurewebsites.net";
+});
+
 builder.Services.AddAuthorizationBuilder()
   .AddPolicy("isAdmin", policy =>
     policy.RequireClaim("role", "admin"));
