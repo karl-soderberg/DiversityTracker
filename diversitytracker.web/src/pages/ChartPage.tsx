@@ -195,6 +195,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                 <select name="" id="" onChange={(e) => {
                         setActiveQuestion(e.target.value);
                         setActiveDistributionFormData(distributionformdata[activeQuestion])
+                        setActiveGenderBarData(genderBarData[activeQuestion]);
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
