@@ -15,6 +15,8 @@ import {
   UserPurge,
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
+import { Button, Flex } from 'antd';
+
 
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
@@ -73,11 +75,11 @@ function App() {
           twitter={false}
           google={true}
           customRenderer={({ href, className, name }) => (
-            <button className="login-button">
+            <Button type="primary" className="login-button">
               <a href={href} className={className}>
                 Login With {name}
               </a>
-            </button>
+            </Button>
           )}
         />
 
