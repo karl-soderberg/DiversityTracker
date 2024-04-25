@@ -67,6 +67,7 @@ function App() {
         <header className="App-header">
           <section className="App-header__login">
             <StaticWebAuthLogins
+              azureAD={false}
               twitter={false}
               google={true}
               customRenderer={({ href, className, name }) => (
