@@ -2,6 +2,7 @@ using AutoMapper;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Dtos;
 using diversitytracker.api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace diversitytracker.api.Controllers
@@ -20,6 +21,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
+        [Authorize("isAdmin")]
         public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
         {
             var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
@@ -27,6 +29,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPost]
+        [Authorize("isAdmin")]
         public async Task<IActionResult> AddQuestionType(PostQuestionTypeDto questionTypeDto)
         {
             if(!ModelState.IsValid)
@@ -44,6 +47,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("isAdmin")]
         public async Task<IActionResult> PutForm(string id, UpdateQuestionTypeDto putQuestionTypeDto)
         {
             var question = await _questionsRepository.GetQuestionTypeByIdAsync(id);
@@ -68,6 +72,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("isAdmin")]
 
         public async Task<IActionResult> DeleteQuestionType(string id)
         {

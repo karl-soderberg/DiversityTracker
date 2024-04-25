@@ -23,6 +23,10 @@ builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
+builder.Services.AddAuthorizationBuilder()
+  .AddPolicy("isAdmin", policy =>
+    policy.RequireClaim("role", "admin"));
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
