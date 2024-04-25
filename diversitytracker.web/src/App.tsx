@@ -15,6 +15,8 @@ import {
   UserPurge,
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
+import { Button } from 'antd';
+
 
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
@@ -40,7 +42,7 @@ const UserDisplay = () => {
     );
   }
 
-  return <p>User not signed in</p>;
+  return <p className="Not-signed-in">User not signed in</p>;
 };
 
 
@@ -63,23 +65,20 @@ function App() {
 
 
         <header className="App-header">
-        <StaticWebAuthLogins
-          customProviders={[{ id: "okta", name: "Okta" }]}
-          label={(name) => `Do sign in ${name}`}
-        />
+          <section className="App-header__login">
+            <StaticWebAuthLogins
+              twitter={false}
+              google={true}
+              customRenderer={({ href, className, name }) => (
+                <Button type="primary" className="login-button">
+                  <a href={href} className={className}>
+                    Login With {name}
+                  </a>
+                </Button>
+              )}
+            />
+          </section>
 
-        <br />
-        <p>Login with custom renderer.</p>
-        <StaticWebAuthLogins
-          customProviders={[{ id: "okta", name: "Okta" }]}
-          customRenderer={({ href, className, name }) => (
-            <button className="login-button">
-              <a href={href} className={className}>
-                Custom Login Renderer - {name}
-              </a>
-            </button>
-          )}
-        />
 
         <ClientPrincipalContextProvider>
           <UserDisplay />
