@@ -22,9 +22,10 @@ export const AdminPage = ( {className, questionData, isLoading, isError, error, 
     const [deleteConfirmationWindow, setDeleteConfirmationWindow] = useState<boolean>(false);
     const [deleteQuestionId, setDeleteQuestionId] = useState<string>('');
 
-    const addQuestionHandler = (e: FormEvent<HTMLButtonElement>): void => {
+    const addQuestionHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        const questionValue = e.target.question.value;
+        // const questionValue = e.target.question.value;
+        const questionValue = addQuestionValue;
         if(questionValue != ''){
             postQuestion.mutate(questionValue);
         }

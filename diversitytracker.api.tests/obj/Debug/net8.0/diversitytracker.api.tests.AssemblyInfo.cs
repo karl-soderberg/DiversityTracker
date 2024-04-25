@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("diversitytracker.api.tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4a6b76b900d19c742b55b614415a144b862e389")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81b08448fc2a45773f11a486dd96e0cb5b6383f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("diversitytracker.api.tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("diversitytracker.api.tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
