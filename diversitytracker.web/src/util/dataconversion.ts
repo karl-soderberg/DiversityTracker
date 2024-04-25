@@ -1,4 +1,4 @@
-import { APIFormsResponse, DistributionDataResponse, Question} from "../types/types";
+import { APIFormsResponse, DistributionDataResponse, GenderDistribution, Question} from "../types/types";
 
 export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsResponse, questions: Array<Question>): DistributionDataResponse  => {
 
@@ -83,6 +83,47 @@ export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsRespon
             }
         })
     })
+
+    return dataResponseDict;
+}
+
+
+export const MapAPIFormsResponseToGenderDistribution = (inData: APIFormsResponse, questions: Array<Question>): GenderDistribution  => {
+
+    const formSubmissions = inData.formSubmissions;
+    let dataResponseDict: GenderDistribution = {};
+
+    questions.forEach((question) => {
+        dataResponseDict[question.id] = [
+            {
+                name: 'Male',
+                value: 0,
+            },
+            {
+                name: 'Female',
+                value: 0,
+            }
+        ]
+    });
+
+    formSubmissions.forEach((formsubmission) => {
+        formsubmission.questions.forEach((question) => {
+            if(formsubmission.person.gender == 0){
+                dataResponseDict[question.questionTypeId][0].value++;
+            }
+            else if(formsubmission.person.gender == 1){
+                dataResponseDict[question.questionTypeId][1].value++;
+            }
+        })
+    }) 
+
+    Object.keys(dataResponseDict).forEach((questionId) => {
+        const totalResponses = dataResponseDict[questionId][0].value + dataResponseDict[questionId][1].value;
+        if (totalResponses > 0) {
+            dataResponseDict[questionId][0].value = (dataResponseDict[questionId][0].value / totalResponses) * 100;
+            dataResponseDict[questionId][1].value = (dataResponseDict[questionId][1].value / totalResponses) * 100;
+        }
+    });
 
     return dataResponseDict;
 }

@@ -94,3 +94,16 @@ export type DistributionDataType = {
 export type DistributionDataResponse = {
     [key: string]: DistributionData;
 };
+
+export type GenderValue = {
+    name: string,
+    value: number
+}
+
+export type GenderDistribution = {
+    [key: string]: Array<GenderValue>
+}
+
+
+// { name: 'Male', value: malePercentage },
+//     { name: 'Female', value: femalePercentage },

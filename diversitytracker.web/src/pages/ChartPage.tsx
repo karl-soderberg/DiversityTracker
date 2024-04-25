@@ -1,10 +1,10 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
-import { MOCKData } from '../data/MockData'
+import { MOCKData, barChartMockData, barData } from '../data/MockData'
 import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
-import { APIFormsResponse, DistributionData, DistributionDataResponse, Question } from '../types/types'
-import { MapAPIFormsResponseToDistributionDataType } from '../util/dataconversion'
+import { APIFormsResponse, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question } from '../types/types'
+import { MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution } from '../util/dataconversion'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -23,14 +23,16 @@ type Props = {
 
 
 export const ChartPage = ( {className, questionData, formsData, isLoading, isError, error, refetch} : Props) => {
-    const [chartType, setChartType] = useState<string>("distributionscale");
+    const [chartType, setChartType] = useState<string>("genderdistribution");
     const [scope, setScope] = useState<string>("both");
     
     const [questionsData, setQuestionsData] = useState<Array<Question>>();
     const [activeQuestion, setActiveQuestion] = useState<string>('');
     const [distributionformdata, setDistributionFormData] = useState<DistributionDataResponse>();
+    const [genderDistributionData, setGenderDistributionData] = useState<GenderDistribution>();
 
     const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
+    const [activeGenderDistributionData, setActiveGenderDistributionData] = useState<Array<GenderValue>>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
@@ -39,11 +41,15 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
         if(distributionformdata){
             setActiveDistributionFormData(distributionformdata[activeQuestion])
         }
+        if(genderDistributionData){
+            setActiveGenderDistributionData(genderDistributionData[activeQuestion]);
+        }
     }, [distributionformdata])
 
     useEffect(() => {
         if(activeQuestion && formsData && questionData && distributionformdata == undefined){
             setDistributionFormData(MapAPIFormsResponseToDistributionDataType(formsData, questionData));
+            setGenderDistributionData(MapAPIFormsResponseToGenderDistribution(formsData, questionData));
         }
     }, [activeQuestion]);
 
@@ -100,12 +106,12 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                             </LineChart>
                         }
 
-                        {chartType == 'genderdistribution' &&
+                        {(chartType == 'genderdistribution' && genderDistributionData && activeGenderDistributionData) &&
                             <PieChart width={400} height={400}>
                             <Pie
                                 dataKey="value"
                                 isAnimationActive={false}
-                                data={pieData}
+                                data={activeGenderDistributionData}
                                 cx="50%"
                                 cy="50%"
                                 outerRadius={80}
@@ -120,7 +126,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                         </PieChart>
                         }
 
-                        {chartType == 'scatterdistribution' &&
+                        {(chartType == 'scatterdistribution' && activeDistributionFormData && distributionformdata) &&
                             <ScatterChart
                                 margin={{
                                     top: 20,
@@ -146,7 +152,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                 </ScatterChart>
                             }
 
-                        {/* {chartType == 'barchartdistribution' &&
+                        {chartType == 'barchartdistribution' &&
                             <BarChart
                                     data={barChartMockData}
                                     margin={{
@@ -157,13 +163,14 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                     }}
                                     >
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="agreeLevel" />
+                                    <XAxis dataKey="name" />
                                     <YAxis />
                                     <Tooltip />
                                     <Legend />
-                                    <Bar dataKey="count" fill="#8884d8" />
+                                        <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />    
+                                        <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
                                     </BarChart>
-                                } */}
+                                }
                     </ResponsiveContainer>
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
