@@ -3,8 +3,8 @@ import './ChartPage.css'
 import { useEffect, useState } from 'react'
 import { MOCKData, barChartMockData, barData } from '../data/MockData'
 import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
-import { APIFormsResponse, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question } from '../types/types'
-import { MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution } from '../util/dataconversion'
+import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question } from '../types/types'
+import { MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution } from '../util/dataconversion'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -30,9 +30,11 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
     const [activeQuestion, setActiveQuestion] = useState<string>('');
     const [distributionformdata, setDistributionFormData] = useState<DistributionDataResponse>();
     const [genderDistributionData, setGenderDistributionData] = useState<GenderDistribution>();
+    const [genderBarData, setGenderBarData] = useState<ChartDistributionDict>();
 
     const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
     const [activeGenderDistributionData, setActiveGenderDistributionData] = useState<Array<GenderValue>>();
+    const [activeGenderBarData, setActiveGenderBarData] = useState<ChartGenderDistribution>();
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
@@ -44,12 +46,16 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
         if(genderDistributionData){
             setActiveGenderDistributionData(genderDistributionData[activeQuestion]);
         }
+        if(genderBarData){
+            setActiveGenderBarData(genderBarData[activeQuestion]);
+        }
     }, [distributionformdata])
 
     useEffect(() => {
         if(activeQuestion && formsData && questionData && distributionformdata == undefined){
             setDistributionFormData(MapAPIFormsResponseToDistributionDataType(formsData, questionData));
             setGenderDistributionData(MapAPIFormsResponseToGenderDistribution(formsData, questionData));
+            setGenderBarData(MapAPIFormsResponseToBarChart(formsData, questionData));
         }
     }, [activeQuestion]);
 
@@ -152,9 +158,9 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                 </ScatterChart>
                             }
 
-                        {chartType == 'barchartdistribution' &&
+                        {(chartType == 'barchartdistribution' && genderBarData && activeGenderBarData) &&
                             <BarChart
-                                    data={barChartMockData}
+                                    data={activeGenderBarData}
                                     margin={{
                                         top: 20,
                                         right: 30,

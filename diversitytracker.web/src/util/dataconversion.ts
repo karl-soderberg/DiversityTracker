@@ -1,4 +1,4 @@
-import { APIFormsResponse, DistributionDataResponse, GenderDistribution, Question} from "../types/types";
+import { APIFormsResponse, ChartDistributionDict, DistributionDataResponse, GenderDistribution, Question} from "../types/types";
 
 export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsResponse, questions: Array<Question>): DistributionDataResponse  => {
 
@@ -127,3 +127,66 @@ export const MapAPIFormsResponseToGenderDistribution = (inData: APIFormsResponse
 
     return dataResponseDict;
 }
+
+
+export const MapAPIFormsResponseToBarChart = (inData: APIFormsResponse, questions: Array<Question>): ChartDistributionDict  => {
+
+    const formSubmissions = inData.formSubmissions;
+    let dataResponseDict: ChartDistributionDict = {};
+
+    questions.forEach((question) => {
+        dataResponseDict[question.id] = [
+            {
+                name: 'Disagree',
+                female: 0,
+                male: 0
+            },
+            {
+                name: 'Somewhat disagree',
+                female: 0,
+                male: 0
+            },
+            {
+                name: 'Indifferent',
+                female: 0,
+                male: 0
+            },
+            {
+                name: 'Somewhat agree',
+                female: 0,
+                male: 0
+            },
+            {
+                name: 'Strongly agree',
+                female: 0,
+                male: 0
+            }
+        ]
+    });
+
+    formSubmissions.forEach((formsubmission) => {
+        formsubmission.questions.forEach((question) => {
+            if(formsubmission.person.gender == 0){
+                for(let value = 1; value <= 10; value++){
+                    if (Math.round(question.value) == value) {
+                        dataResponseDict[question.questionTypeId][Math.ceil(value / 2) - 1].male++;
+                    }
+                }
+            }
+            else if(formsubmission.person.gender == 1){
+                for(let value = 1; value <= 10; value++){
+                    if (Math.round(question.value) == value) {
+                        dataResponseDict[question.questionTypeId][Math.ceil(value / 2) - 1].female++;
+                    }
+                }
+            }
+        })
+    }) 
+
+    return dataResponseDict;
+}
+
+
+function remap(value: number): number {
+    return Math.ceil(value / 2);
+  }

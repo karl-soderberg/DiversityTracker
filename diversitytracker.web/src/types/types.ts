@@ -104,6 +104,15 @@ export type GenderDistribution = {
     [key: string]: Array<GenderValue>
 }
 
+export type ChartGenderDistribution = {
+    name: string,
+    female: number,
+    male: number
+}
+
+export type ChartDistributionDict = {
+    [key: string]: Array<ChartGenderDistribution>
+}
 
 // { name: 'Male', value: malePercentage },
 //     { name: 'Female', value: femalePercentage },
