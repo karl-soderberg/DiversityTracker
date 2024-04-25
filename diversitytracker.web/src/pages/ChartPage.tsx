@@ -23,7 +23,7 @@ type Props = {
 
 
 export const ChartPage = ( {className, questionData, formsData, isLoading, isError, error, refetch} : Props) => {
-    const [chartType, setChartType] = useState<string>("scatterdistribution");
+    const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
     
     const [questionsData, setQuestionsData] = useState<Array<Question>>();
@@ -149,7 +149,7 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                 >
                                 <CartesianGrid />
                                 <XAxis type="number" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
-                                <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft' }}/>
+                                <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft' }} domain={[0, 10]}/>
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                 {scope === 'both' && (
                                     <>
