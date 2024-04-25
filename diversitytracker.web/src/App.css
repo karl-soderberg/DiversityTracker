@@ -152,6 +152,13 @@
     justify-content: space-between;
     margin: 10px;
 }
+
+.Not-signed-in {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+
+}
 /* @keyframes animateRight{
     0%{
         transform: translateX(100%);

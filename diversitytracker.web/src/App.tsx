@@ -42,7 +42,7 @@ const UserDisplay = () => {
     );
   }
 
-  return <p>User not signed in</p>;
+  return <p className="Not-signed-in">User not signed in</p>;
 };
 
 
