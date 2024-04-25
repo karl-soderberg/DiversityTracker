@@ -1,4 +1,4 @@
-import { APIFormsResponse, ChartDistributionDict, DistributionDataResponse, GenderDistribution, Question} from "../types/types";
+import { APIFormsResponse, ChartDistributionDict, DistributionDataResponse, GenderDistribution, Question, scatterData, scatterDataDict} from "../types/types";
 
 export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsResponse, questions: Array<Question>): DistributionDataResponse  => {
 
@@ -187,6 +187,54 @@ export const MapAPIFormsResponseToBarChart = (inData: APIFormsResponse, question
 }
 
 
-function remap(value: number): number {
-    return Math.ceil(value / 2);
+
+
+export const MapAPIFormsResponseToScatterChart = (inData: APIFormsResponse, questions: Array<Question>): scatterDataDict  => {
+
+    const formSubmissions = inData.formSubmissions;
+    let dataResponseDict: scatterDataDict = {};
+
+    questions.forEach((question) => {
+        dataResponseDict[question.id] = {
+            scatterMaleData: [],
+            scatterFemaleData: []
+        }
+        
+    });
+
+    formSubmissions.forEach((formsubmission) => {
+        formsubmission.questions.forEach((question) => {
+            if(formsubmission.person.gender == 0){
+                for(let value = 1; value <= 10; value++){
+                    if (Math.round(question.value) == value) {
+                        let scatterDataObject: scatterData = {
+                            satisfactionlevel: question.value,
+                            age: calculateAge(parseInt(formsubmission.person.timeAtCompany))
+                        }
+                        dataResponseDict[question.questionTypeId].scatterMaleData.push(scatterDataObject);
+                    }
+                }
+            }
+            else if(formsubmission.person.gender == 1){
+                for(let value = 1; value <= 10; value++){
+                    if (Math.round(question.value) == value) {
+                        let scatterDataObject: scatterData = {
+                            satisfactionlevel: question.value,
+                            age: calculateAge(parseInt(formsubmission.person.timeAtCompany))
+                        }
+                        dataResponseDict[question.questionTypeId].scatterFemaleData.push(scatterDataObject);
+                    }
+                }
+            }
+        })
+    }) 
+
+    return dataResponseDict;
+}
+
+
+
+function calculateAge(yearOfBirth: number): number {
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth;
   }

@@ -114,5 +114,16 @@ export type ChartDistributionDict = {
     [key: string]: Array<ChartGenderDistribution>
 }
 
-// { name: 'Male', value: malePercentage },
-//     { name: 'Female', value: femalePercentage },
+export type scatterData = {
+    satisfactionlevel: number;
+    age: number;
+}
+
+export type scatterDataArr = {
+    scatterMaleData: Array<scatterData>,
+    scatterFemaleData: Array<scatterData>
+}
+
+export type scatterDataDict = {
+    [key: string]: scatterDataArr
+}
