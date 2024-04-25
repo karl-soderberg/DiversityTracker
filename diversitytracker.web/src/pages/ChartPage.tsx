@@ -173,8 +173,12 @@ export const ChartPage = ( {className, questionData, formsData, isLoading, isErr
                                     <YAxis />
                                     <Tooltip />
                                     <Legend />
-                                        <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />    
+                                    {(scope === "both" || scope === "women") && 
+                                        <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
+                                    }
+                                    {(scope === "both" || scope === "men") && 
                                         <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
+                                    }     
                                     </BarChart>
                                 }
                     </ResponsiveContainer>
