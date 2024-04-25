@@ -5,10 +5,11 @@ type SliderProps = {
   min: number,
   max: number,
   step: number,
+  text: string,
   onChange: (value: number) => void,
 }
 
-export const CustomSlider = ({min, max, step, onChange }: SliderProps) => {
+export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => {
     const [value, setValue] = useState((max + min) / 2 - 1.8);
     const [compensatorValue, setCompensatorValue] = useState(1.8);
 
@@ -24,7 +25,7 @@ export const CustomSlider = ({min, max, step, onChange }: SliderProps) => {
 
     return (
         <section className="slider-container">
-            <label className='slider__label' htmlFor="">Office Enviroment Comfort</label>
+            <label className='slider__label' htmlFor="">{text}</label>
             <div className='slider__overlay' style={{ left: `${value+compensatorValue}%`, transform: `translateX(-50%)`}}>
                 {value}
             </div>
