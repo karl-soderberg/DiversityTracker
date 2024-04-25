@@ -70,11 +70,12 @@ function App() {
 
         <br /> */}
         <StaticWebAuthLogins
-          customProviders={[{ id: "okta", name: "Okta" }]}
+          twitter={false}
+          google={true}
           customRenderer={({ href, className, name }) => (
             <button className="login-button">
               <a href={href} className={className}>
-                Custom Login Renderer - {name}
+                Login With {name}
               </a>
             </button>
           )}
