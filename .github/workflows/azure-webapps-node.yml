@@ -1,0 +1,37 @@
+name: Deploy Web App to Azure Static Web
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'diversitytracker.web/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '21'  # specify Node.js version here
+
+    - name: Install dependencies
+      run: npm install --prefix diversitytracker.web
+
+    - name: Build
+      run: npm run build --prefix diversitytracker.web
+
+    - name: Deploy to Azure Static Web App
+      uses: Azure/static-web-apps-deploy@v1
+      with:
+        azure_static_web_apps_api_token: ${{ secrets.STATIC_SECRET }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }} # Provides GitHub token for authentication
+        action: "upload"
+        ###### Repository/Build Configurations - These fields are configured during the Azure SWA setup
+        app_location: "diversitytracker.web"  # Location for the source code of your app
+        api_location: ""  # No API for static frontend
+        output_location: "dist"  # Build output directory
