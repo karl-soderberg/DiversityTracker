@@ -71,20 +71,19 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        console.log(formSubmissionDto);
 
-        // postFormsData.mutate(formSubmissionDto);
+        postFormsData.mutate(formSubmissionDto);
     };
 
     const onFailSubmitHandler = (errorInfo: any) => {
         
     };
 
-    // const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(postFormSubmissionDto), {
-    //     onSuccess: () => {
-    //         refetch();
-    //     }
-    // });
+    const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(postFormSubmissionDto), {
+        onSuccess: () => {
+            refetch();
+        }
+    });
 
     return(
         <section className={className}>
