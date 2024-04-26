@@ -2,7 +2,6 @@ import { useState } from "react"
 import './App.css'
 import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
-import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
 import { useQuery } from "react-query";
@@ -16,10 +15,7 @@ import {
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
 import { Button } from 'antd';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import 'react-router-dom';
-
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const UserDisplay = () => {
@@ -64,62 +60,63 @@ function App() {
     queryFn: () => GetFormsData()
   });
 
-  return (
-    <>
-
-
+    return (
+      <>
+        <Router>
         <header className="App-header">
-          <section className="App-header__login">
-            <StaticWebAuthLogins
-              twitter={false}
-              customRenderer={({ href, className, name }) => (
-                <Button type="primary" className="login-button">
-                  <a href={href} className={className}>
-                    Login With {name}
-                  </a>
-                </Button>
-              )}
-              />
-          </section>
-
-
-        <ClientPrincipalContextProvider>
-          <UserDisplay />
-        </ClientPrincipalContextProvider>
-      </header>
-      <NavBottom 
-        page={page}
-        setPage={(page) => setPage(page)}
-      />
+            <section className="App-header__login">
+              <StaticWebAuthLogins
+                twitter={false}
+                customRenderer={({ href, className, name }) => (
+                  <Button type="primary" className="login-button">
+                    <a href={href} className={className}>
+                      Login With {name}
+                    </a>
+                  </Button>
+                )}
+                />
+            </section>
+          <ClientPrincipalContextProvider>
+            <UserDisplay />
+          </ClientPrincipalContextProvider>
+        </header>
+      <NavBottom  page={page}
+        setPage={(page) => setPage(page)}/>
       <main className="page-container">
-        <NewFormPage 
-          className={"newformpage-container " + (page == "NewFormPage" && "active")}
-          questionData={data}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          refetch={refetch}
-        />
-        <ChartPage 
-          className={"chartpage-container " + (page == "ChartPage" && "active")}
-          questionData={data}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          refetch={refetch}
-          formsData={formsData}
-        />
-        <AdminPage 
-          className={"adminpage-container " + (page == "AdminPage" && "active")}
-          questionData={data}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          refetch={refetch}
-        />
+        <Routes>
+          <Route path="/newform" element={<NewFormPage 
+              className="newformpage-container"
+              questionData={data}
+              isLoading={isLoading}
+              isError={isError}
+              error={error}
+              refetch={refetch}
+            />} />
+          <Route path="/chart" element={<ChartPage 
+              className="chartpage-container"
+              questionData={data}
+              isLoading={isLoading}
+              isError={isError}
+              error={error}
+              refetch={refetch}
+              formsData={formsData}
+            />} />
+          <Route path="/admin" element={<AdminPage 
+              className="adminpage-container"
+              questionData={data}
+              isLoading={isLoading}
+              isError={isError}
+              error={error}
+              refetch={refetch}
+            />} />
+        </Routes>
       </main>
-    </>
-  )
+    </Router>
+      
+          
+      </>
+         
+    )
 }
 
 export default App
