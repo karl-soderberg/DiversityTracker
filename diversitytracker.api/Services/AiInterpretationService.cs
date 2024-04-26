@@ -38,7 +38,6 @@ namespace diversitytracker.api.Services
                         realData[question.QuestionTypeId] = new double[] { question.Value };
                     }
                 }
-                
             }
 
             foreach(var form in formSubmissions)
@@ -56,13 +55,14 @@ namespace diversitytracker.api.Services
                         questionAnswersData[question.QuestionTypeId] = new string[] { question.Answer };
                     }
                 }
-                
             }
 
             foreach(var form in formSubmissions)
             {
                 reflectionAnswersData.Add(form.Person.PersonalReflection);
             }
+
+            var ReflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
             
             throw new NotImplementedException();
         }
@@ -88,7 +88,7 @@ namespace diversitytracker.api.Services
             var jsonContent = JsonSerializer.Serialize(data, options);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);            
+            HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);         
             response.EnsureSuccessStatusCode();
 
             var jsonResponse = await response.Content.ReadFromJsonAsync<OpenAIApiResponse>();
@@ -106,7 +106,12 @@ namespace diversitytracker.api.Services
         }
         private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
         {
-            throw new NotImplementedException();
+            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words:\n\n");
+            foreach (var input in reflectionAnswerData)
+            {
+                promptBuilder.AppendLine($"\n{input}");
+            }
+            return promptBuilder.ToString();
         }
         private string CreatePrompt(string[] inputs)
         {
