@@ -16,6 +16,7 @@ import {
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
 import { Button } from 'antd';
+import { CustomProviderLogin, GoogleLogin } from "@aaronpowell/react-static-web-apps-auth/build/StaticWebAuthLogins";
 
 
 const UserDisplay = () => {
@@ -77,7 +78,8 @@ function App() {
                   </a>
                 </Button>
               )}
-            />
+              />
+              <GoogleLogin />
           </section>
 
 
