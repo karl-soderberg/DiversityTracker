@@ -157,31 +157,31 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
 
                             <Legend align="right" />
                         </ScatterChart>
+                        
+                // ) : chartType == 'barchartdistribution' && genderBarData && activeGenderBarData ? (
+                    // <BarChart
+                    //     data={activeGenderBarData}
+                    //     margin={{
+                    //         top: 20,
+                    //         right: 30,
+                    //         left: 20,
+                    //         bottom: 5
+                    //     }}
+                    //     >
+                    //     <CartesianGrid strokeDasharray="3 3" />
+                    //     <XAxis dataKey="name" />
+                    //     <YAxis />
+                    //     <Tooltip />
+                    //     <Legend />
+                    //     {(scope === "both" || scope === "women") && 
+                    //         <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
+                    //     }
+                    //     {(scope === "both" || scope === "men") && 
+                    //         <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
+                    //     }     
+                    // </BarChart>
                 ) : null}
             </ResponsiveContainer>
-                        {/* {(chartType == 'barchartdistribution' && genderBarData && activeGenderBarData) &&
-                            <BarChart
-                                    data={activeGenderBarData}
-                                    margin={{
-                                        top: 20,
-                                        right: 30,
-                                        left: 20,
-                                        bottom: 5
-                                    }}
-                                    >
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    {(scope === "both" || scope === "women") && 
-                                        <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
-                                    }
-                                    {(scope === "both" || scope === "men") && 
-                                        <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
-                                    }     
-                                    </BarChart>
-                                } */}
             </article>
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
