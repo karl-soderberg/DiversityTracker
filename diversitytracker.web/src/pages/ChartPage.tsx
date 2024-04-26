@@ -208,6 +208,103 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                 </select>
             }
             <p>{activeQuestion}</p>
+            <article className='datasummary-container'>
+                <h2>Data Reflection</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, dicta mollitia fugit ab maiores deleniti ullam recusandae beatae laboriosam a sit hic minima vel blanditiis quae architecto assumenda commodi deserunt, amet nam dolorum aperiam ea labore unde? Dignissimos alias quam voluptas ex vero fuga velit reiciendis qui tenetur! Explicabo facere reiciendis dicta error minima dolores sapiente doloremque quaerat nulla, odit tempore unde! Illum incidunt ab non neque perferendis iste accusantium ullam dolorum ducimus. Sunt, porro?</p>
+            </article>
+            <article className='reflectionboxsummary-container'>
+                <h2>Reflection Box Summary</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut dolores cupiditate magnam nobis quo quod nemo, libero nihil quibusdam assumenda voluptatum repellendus necessitatibus reiciendis eligendi! Ratione consequuntur fugit, molestiae iure voluptatibus aut? Blanditiis itaque doloribus, at minima expedita exercitationem obcaecati suscipit. Pariatur et, aut voluptatem voluptatibus est recusandae enim odit.</p>
+            </article>
+            <article className='reflectionboxchartsummary-container'>
+            <ResponsiveContainer width="90%" height="90%">
+                {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
+                    <AreaChart data={activeDistributionFormData.data}
+                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                        <defs>
+                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor="var(--chart-female)" stopOpacity={.2}/>
+                            </linearGradient>
+                            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="var( --chart-male)" stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
+                            </linearGradient>
+                        </defs> 
+                        <XAxis dataKey="value" />
+                        <YAxis />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        {(scope === "both" || scope === "women") && 
+                            <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
+                        }
+                        {(scope === "both" || scope === "men") && 
+                            <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
+                        }
+                        <Legend />
+                    </AreaChart>
+                ) : chartType === 'distributionacrosstime' ? (
+                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                        {(scope === "both" || scope === "women") && 
+                            <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" />
+                        }
+                        {(scope === "both" || scope === "men") && 
+                            <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" />
+                        }
+                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Legend />
+                    </LineChart>
+                ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
+                    <PieChart width={400} height={400}>
+                            <Pie
+                                dataKey="value"
+                                isAnimationActive={false}
+                                data={activeGenderDistributionData}
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={80}
+                                label={({ name, value }) => `${name} (${value.toFixed(2)}%)`}
+                            >
+                                {pieData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                        </PieChart>
+                ) : chartType === 'scatterdistribution' && activeTimeAtCompanyScatterData && timeAtCompanyScatterData ? (
+                        <ScatterChart
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 20,
+                            }}
+                            >
+                            <CartesianGrid />
+                            <XAxis type="number" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
+                            <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft' }} domain={[0, 10]}/>
+                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                            {scope === 'both' && (
+                                <>
+                                    <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />
+                                    <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />
+                                </>
+                            )}
+                            {scope === 'men' && <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />}
+                            {scope === 'women' && <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />}
+
+                            <Legend align="right" />
+                        </ScatterChart>
+                ) : null}
+            </ResponsiveContainer>
+            </article>
+            <article className='optionalreflectionsummary-container'>
+                <h2>Optional Reflection Summary</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellendus, rerum veniam placeat sapiente cum eum architecto aut, excepturi dolorem odit quidem perferendis recusandae culpa non nobis inventore tenetur distinctio praesentium obcaecati! Hic sequi dolores voluptate quis accusantium harum voluptatem, ea laborum delectus eum quos.</p>
+            </article>
+
         </section>
     )
 }
