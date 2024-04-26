@@ -16,7 +16,10 @@ import {
   useClientPrincipal,
 } from "@aaronpowell/react-static-web-apps-auth";
 import { Button } from 'antd';
-import { CustomProviderLogin, GoogleLogin } from "@aaronpowell/react-static-web-apps-auth/build/StaticWebAuthLogins";
+import { Redirect, Route, Switch } from 'react-router-dom';
+import 'react-router-dom';
+
+
 
 
 const UserDisplay = () => {
