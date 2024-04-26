@@ -96,7 +96,18 @@ namespace diversitytracker.api.Services
             string resultInterperetation = jsonResponse.Choices[0].Message.Content;
             return resultInterperetation;
         }
-
+        private Dictionary<string, string> CreateRealdataPrompt(Dictionary<string, double[]> realData)
+        {
+            throw new NotImplementedException();
+        }
+        private Dictionary<string, string> CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
+        {
+            throw new NotImplementedException();
+        }
+        private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
+        {
+            throw new NotImplementedException();
+        }
         private string CreatePrompt(string[] inputs)
         {
             StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous answers from multiple individuals. Interpret the collection of answers as a whole with a short and concise professional analysis and summary. Make it under 50 words:\n\n");
