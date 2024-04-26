@@ -1,4 +1,3 @@
-//import { useState } from "react"
 import './App.css'
 import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
@@ -48,7 +47,6 @@ const UserDisplay = () => {
 
 
 function App() {
-  //const [page, setPage] = useState("ChartPage");
 
   const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
     queryKey: ['getQuestions'],

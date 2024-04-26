@@ -4,11 +4,6 @@ import { FormIcon } from '../resources/icons/FormIcon'
 import './NavBottom.css'
 import { Link } from 'react-router-dom';
 
-// type Props = {
-//     page: string,
-//     setPage: (page: string) => void
-// }
-
 export const NavBottom = () => {
     return(
         <nav className='navbottom-container'>
