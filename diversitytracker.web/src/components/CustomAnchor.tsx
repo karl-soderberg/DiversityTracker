@@ -7,19 +7,15 @@ type Props = {
     icon: ReactElement,
     width: string,
     height: string,
-    link: string,
-    click: () => void,
-    active: boolean
 }
 
-export const CustomAnchor = ( {className, value, icon, width, height, link, click, active} : Props) => {
+export const CustomAnchor = ( {className, value, icon, width, height} : Props) => {
 
     return(
         <a 
-            className={`${className} ` + (active && 'active')}
+            className= {className}
             style={{width: width, height: height}}
-            href={link}
-            onClick={() => click()}
+
         >
             
             {icon}

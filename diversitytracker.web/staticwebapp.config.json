@@ -1,13 +1,17 @@
 {
-    "auth": {
-        "identityProviders": {
-            "google": {
-            "registration": {
-                "clientIdSettingName": "GOOGLE_CLIENT_ID",
-                "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
-            }
-            }
-        }
-        }
+    "routes": [
+        {
+          "route": "/newform*",
+          "allowedRoles": ["authenticated"]
+        },
+        {
+          "route": "/admin*",
+          "allowedRoles": ["admin"]
+        },
+        {
+            "route": "/chart*",
+            "allowedRoles": ["admin"]
+          }
+    ]
 
 }
