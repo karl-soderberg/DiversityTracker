@@ -90,14 +90,6 @@ function App() {
         setPage={(page) => setPage(page)}
       />
       <main className="page-container">
-        <FormPage 
-          className={"formpage-container " + (page == "FormPage" && "active")}
-          questionData={data}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          refetch={refetch}
-        />
         <NewFormPage 
           className={"newformpage-container " + (page == "NewFormPage" && "active")}
           questionData={data}
