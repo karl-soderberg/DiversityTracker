@@ -1,4 +1,12 @@
-/* .icon-wrapper {
+.newformpage-container{
+    padding: 2% 5%;
+}
+
+.newformpage-container__form{
+    width: 90vw;
+    margin: 0 auto;
+    padding: 5% 0%;
+    
     display: flex;
-    align-items: center;
-} */
+    flex-direction: column;
+}

@@ -13,6 +13,7 @@ import './NewFormPage.css'
 import { GetAllQuestions, PostFormsData } from '../util/Http';
 import { useMutation, useQuery } from 'react-query';
 import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } from '../types/types';
+import { CustomSlider } from '../components/CustomSlider';
 
 const { RangePicker } = DatePicker;
 
@@ -61,8 +62,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
+        console.log(formSubmissionDto);
 
-        postFormsData.mutate(formSubmissionDto);
+        // postFormsData.mutate(formSubmissionDto);
     };
 
     const onFailSubmitHandler = (errorInfo: any) => {
@@ -89,41 +91,41 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                 >
 
                     <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
-                    <Select
-                        showSearch
-                        placeholder="Select a your gender"
-                        optionFilterProp="children"
-                        options={[
-                        {
-                            value: '1',
-                            label: 'Female',
-                        },
-                        {
-                            value: '0',
-                            label: 'Male',
-                        },
-                        {
-                            value: '2',
-                            label: 'Other',
-                        },
-                        ]}
-                    />
+                        <Select
+                            showSearch
+                            placeholder="Select a your gender"
+                            optionFilterProp="children"
+                            options={[
+                            {
+                                value: '1',
+                                label: 'Female',
+                            },
+                            {
+                                value: '0',
+                                label: 'Male',
+                            },
+                            {
+                                value: '2',
+                                label: 'Other',
+                            },
+                            ]}
+                        />
                     </Form.Item>
                 
                     <Form.Item
-                    label="Age"
-                    name="age"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <InputNumber style={{ width: '100%' }} />
+                        label="Age"
+                        name="age"
+                        rules={[{ required: true, message: 'Please input age.', min: 0, max: 120}]}
+                        >
+                        <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
 
                     <Form.Item
-                    label="Time At Company"
-                    name="timeatcompany"
-                    rules={[{ required: true, message: 'Please input!' }]}
-                    >
-                    <InputNumber style={{ width: '100%' }} />
+                        label="Years At Company"
+                        name="timeatcompany"
+                        rules={[{ required: true, message: 'Please input time worked at company.', min: 0, max: 100}]}
+                        >
+                        <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
                     
                 
@@ -134,14 +136,29 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     {questionData && 
                         questionData.map((question) => (
                             <Form.Item
-                                label={question.value}
+                                // label={question.value}
                                 name={question.id}
                                 rules={[{ required: true, message: 'Please input your happiness level!' }]}
                                 >
-                                <Slider min={0} max={100} defaultValue={50} />
+                                {/* <Slider min={0} max={100} defaultValue={50} /> */}
+                                <CustomSlider 
+                                    min={0}
+                                    max={100}
+                                    step={.1}
+                                    onChange={(value) => console.log(value)}
+                                    text={question.value}
+                                    key={question.id}
+                                />
                             </Form.Item>
                         ))
                     }
+                    <Form.Item
+                        label="Personal Reflections - We will weigh this heavily in our analysis"
+                        name="TextArea"
+                        rules={[{ required: true, message: 'Please input!'}]}
+                        >
+                        <Input.TextArea />
+                    </Form.Item>
                     <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
