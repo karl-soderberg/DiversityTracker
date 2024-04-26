@@ -24,26 +24,30 @@ export const NavBottom = ({ setPage, page }: Props) => {
                     click={() => setPage('ChartPage')}
                 />
             </Link>
-            <CustomAnchor 
-                className='navbottom__item'
-                value='Newform'
-                icon={<FormIcon className='navbottom__icon' width='25px'/>}
-                width=''
-                height='100%'
-                link='#'
-                active={page == 'NewFormPage' ? true : false}
-                click={() => setPage('NewFormPage')}
-            />
-            <CustomAnchor 
-                className='navbottom__item'
-                value='charts view'
-                icon={<ChartIcon className='navbottom__icon' width='30px'/>}
-                width=''
-                height='100%'
-                link='#'
-                active={page == 'AdminPage' ? true : false}
-                click={() => setPage('AdminPage')}
-            />
+            <Link to="/newform">
+                <CustomAnchor 
+                    className='navbottom__item'
+                    value='Newform'
+                    icon={<FormIcon className='navbottom__icon' width='25px'/>}
+                    width=''
+                    height='100%'
+                    link='#'
+                    active={page == 'NewFormPage' ? true : false}
+                    click={() => setPage('NewFormPage')}
+                />
+            </Link>
+            <Link to="admin">
+                <CustomAnchor 
+                    className='navbottom__item'
+                    value='charts view'
+                    icon={<ChartIcon className='navbottom__icon' width='30px'/>}
+                    width=''
+                    height='100%'
+                    link='#'
+                    active={page == 'AdminPage' ? true : false}
+                    click={() => setPage('AdminPage')}
+                />
+            </Link>
         </nav>
     )
 }
