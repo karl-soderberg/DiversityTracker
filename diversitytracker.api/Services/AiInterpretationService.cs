@@ -21,6 +21,48 @@ namespace diversitytracker.api.Services
 
         public Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions)
         {
+            var realData = new Dictionary<string, double[]>();
+            var questionAnswersData = new Dictionary<string, string[]>();
+            List<string> reflectionAnswersData = new List<string>();
+
+            foreach(var form in formSubmissions)
+            {
+                foreach(var question in form.Questions)
+                {
+                    if (realData.ContainsKey(question.QuestionTypeId))
+                    {
+                        realData[question.QuestionTypeId] = realData[question.QuestionTypeId].Append(question.Value).ToArray();
+                    }
+                    else
+                    {
+                        realData[question.QuestionTypeId] = new double[] { question.Value };
+                    }
+                }
+                
+            }
+
+            foreach(var form in formSubmissions)
+            {
+                foreach(var question in form.Questions)
+                {
+                    if (questionAnswersData.ContainsKey(question.QuestionTypeId))
+                    {
+                         List<string> tempList = questionAnswersData[question.QuestionTypeId].ToList();
+                        tempList.Add(question.Answer);
+                        questionAnswersData[question.QuestionTypeId] = tempList.ToArray();
+                    }
+                    else
+                    {
+                        questionAnswersData[question.QuestionTypeId] = new string[] { question.Answer };
+                    }
+                }
+                
+            }
+
+            foreach(var form in formSubmissions)
+            {
+                reflectionAnswersData.Add(form.Person.PersonalReflection);
+            }
             
             throw new NotImplementedException();
         }

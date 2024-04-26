@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using diversitytracker.api.Data;
 
 #nullable disable
 
-namespace diversitytracker.api.Data.Migrations
+namespace diversitytracker.api.Data.NewMigrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240426115432_UpdateModels")]
-    partial class UpdateModels
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,8 +60,8 @@ namespace diversitytracker.api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeAtCompany")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("TimeAtCompany")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

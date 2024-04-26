@@ -2,7 +2,6 @@ import { useState } from "react"
 import './App.css'
 import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
-import { FormPage } from "./pages/FormPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
 import { useQuery } from "react-query";
