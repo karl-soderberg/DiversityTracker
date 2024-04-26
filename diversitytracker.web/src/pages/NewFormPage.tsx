@@ -45,19 +45,25 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         const timeAtCompany = values.timeatcompany;
         const reflection = values.reflection;
 
+        // const questions: FormSubmitQuestionTypeDto[] = 
+        // Object.keys(values)
+        //     .filter(key => key.startsWith('QuestionType'))
+        //     .map(key => ({
+        //         questionTypeId: key,
+        //         value: values[key] / 10,
+        //         answer: values["reflection_" + question.value] || ""
+        //     }));
         const questions: FormSubmitQuestionTypeDto[] = 
-        Object.keys(values)
-            .filter(key => key.startsWith('QuestionType'))
-            .map(key => ({
-                questionTypeId: key,
-                value: values[key] / 10,
-                answer: ""
-            }));
+            questionData.map((question) => ({
+                questionTypeId: question.id,
+                value: values[question.id] / 10,
+                answer: values["reflection_" + question.value] || ""
+        }));
 
         const formSubmissionDto: PostFormSubmissionDto = {
             createdAt: new Date(),
             person: {
-                name: `User${age}`,
+                name: `User_${age}`,
                 gender: gender,
                 age: age,
                 timeAtCompany: timeAtCompany,
@@ -118,7 +124,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     <Form.Item
                         label="Age"
                         name="age"
-                        rules={[{ required: true, message: 'Please input age.', min: 0, max: 120}]}
+                        rules={[{ required: true, message: 'Please input age.', min: 16, max: 120}]}
                         >
                         {/* <InputNumber style={{ width: '100%' }} /> */}
                         <input type="number" />
@@ -140,21 +146,30 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
                     {questionData && 
                         questionData.map((question) => (
-                            <Form.Item
-                                // label={question.value}
-                                name={question.id}
-                                rules={[{ required: true, message: 'Please input your happiness level!' }]}
-                                >
-                                {/* <Slider min={0} max={100} defaultValue={50} /> */}
-                                <CustomSlider 
-                                    min={0}
-                                    max={100}
-                                    step={.1}
-                                    onChange={(value) => {}}
-                                    text={question.value}
-                                    key={question.id}
-                                />
-                            </Form.Item>
+                            <>
+                                <Form.Item
+                                    // label={question.value}
+                                    name={question.id}
+                                    rules={[{ required: true, message: 'Please input your happiness level!' }]}
+                                    >
+                                    {/* <Slider min={0} max={100} defaultValue={50} /> */}
+                                    <CustomSlider 
+                                        min={0}
+                                        max={100}
+                                        step={.1}
+                                        onChange={(value) => {}}
+                                        text={question.value}
+                                        key={question.id}
+                                    />
+                                </Form.Item>
+                                <Form.Item
+                                    label={question.value + " reflections"}
+                                    name={"reflection_" + question.value}
+                                    rules={[{ required: false}]}
+                                    >
+                                    <Input.TextArea />
+                                </Form.Item>
+                            </>
                         ))
                     }
                     <Form.Item
