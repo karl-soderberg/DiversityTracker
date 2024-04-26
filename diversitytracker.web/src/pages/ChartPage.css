@@ -1,7 +1,8 @@
 @import url('../colors.css');
 
 .chartpage-container{
-    padding: 1% 5%;
+    padding: 1% 5% 15vh 5%; 
+    height: fit-content;
 }
 
 .chart-container{
@@ -16,3 +17,43 @@
     background-color: var(--light-module2);
     border-radius: 1rem;
 }
+
+
+    .datasummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-path);
+    }
+    .reflectionboxsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-module2);
+    }
+    .reflectionboxchartsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 40vh;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-module2);
+    }
+    .optionalreflectionsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-module2);
+    }

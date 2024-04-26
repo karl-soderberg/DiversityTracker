@@ -24,9 +24,11 @@ export enum Gender {
 }
 
 export type PostPersonDto = {
-    name: string;
-    gender: Gender;
-    timeAtCompany: Date;
+    name: string,
+    gender: Gender,
+    age: number,
+    timeAtCompany: number,
+    personalReflection: string
 }
 
 export type FormSubmitQuestionTypeDto = {
