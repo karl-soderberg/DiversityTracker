@@ -43,6 +43,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         const gender = parseInt(values.Select) as Gender;
         const age = values.age;
         const timeAtCompany = values.timeatcompany;
+        const reflection = values.reflection;
 
         const questions: FormSubmitQuestionTypeDto[] = 
         Object.keys(values)
@@ -50,7 +51,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             .map(key => ({
                 questionTypeId: key,
                 value: values[key] / 10,
-                answer: 'answer'
+                answer: ""
             }));
 
         const formSubmissionDto: PostFormSubmissionDto = {
@@ -58,7 +59,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             person: {
                 name: `User${age}`,
                 gender: gender,
-                timeAtCompany: new Date(Date.now() - timeAtCompany * 365 * 24 * 60 * 60 * 1000),
+                age: age,
+                timeAtCompany: timeAtCompany,
+                personalReflection: reflection
             },
             questions: questions
         };
@@ -71,11 +74,11 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         
     };
 
-    const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(postFormSubmissionDto), {
-        onSuccess: () => {
-            refetch();
-        }
-    });
+    // const postFormsData = useMutation((postFormSubmissionDto: PostFormSubmissionDto) => PostFormsData(postFormSubmissionDto), {
+    //     onSuccess: () => {
+    //         refetch();
+    //     }
+    // });
 
     return(
         <section className={className}>
@@ -117,7 +120,8 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="age"
                         rules={[{ required: true, message: 'Please input age.', min: 0, max: 120}]}
                         >
-                        <InputNumber style={{ width: '100%' }} />
+                        {/* <InputNumber style={{ width: '100%' }} /> */}
+                        <input type="number" />
                     </Form.Item>
 
                     <Form.Item
@@ -125,7 +129,8 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="timeatcompany"
                         rules={[{ required: true, message: 'Please input time worked at company.', min: 0, max: 100}]}
                         >
-                        <InputNumber style={{ width: '100%' }} />
+                        {/* <InputNumber style={{ width: '100%' }} /> */}
+                        <input type="number" />
                     </Form.Item>
                     
                 
@@ -145,7 +150,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                     min={0}
                                     max={100}
                                     step={.1}
-                                    onChange={(value) => console.log(value)}
+                                    onChange={(value) => {}}
                                     text={question.value}
                                     key={question.id}
                                 />
@@ -154,7 +159,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     }
                     <Form.Item
                         label="Personal Reflections - We will weigh this heavily in our analysis"
-                        name="TextArea"
+                        name="reflection"
                         rules={[{ required: true, message: 'Please input!'}]}
                         >
                         <Input.TextArea />
