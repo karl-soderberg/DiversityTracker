@@ -63,6 +63,7 @@ namespace diversitytracker.api.Services
             }
 
             var ReflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
+            var ReflectionrealDataPrompt = CreateRealdataPrompt(realData);
             
             throw new NotImplementedException();
         }
@@ -98,7 +99,23 @@ namespace diversitytracker.api.Services
         }
         private Dictionary<string, string> CreateRealdataPrompt(Dictionary<string, double[]> realData)
         {
-            throw new NotImplementedException();
+            var realDataPrompts = new Dictionary<string, string>();
+            foreach (var kvp in realData)
+            {
+                string key = kvp.Key;
+                double[] values = kvp.Value;
+
+                StringBuilder promptBuilder = new StringBuilder($"Here is a collection of answers where people ranked 0-10 of the following question: {key} \n I want you to draw conclusions objectivly about the data and answer in under 50 words:\n\n");
+                foreach (var input in values)
+                {
+                    promptBuilder.AppendLine($" \n {input} ");
+                }
+                var prompt = promptBuilder.ToString();
+                
+                realDataPrompts[key] = prompt;
+            }
+
+            return realDataPrompts;
         }
         private Dictionary<string, string> CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
         {
