@@ -1,7 +1,9 @@
 using System.Text;
 using System.Text.Json;
 using diversitytracker.api.Contracts;
+using diversitytracker.api.Models;
 using diversitytracker.api.Models.AI;
+using diversitytracker.api.Models.OpenAi;
 
 namespace diversitytracker.api.Services
 {
@@ -16,6 +18,12 @@ namespace diversitytracker.api.Services
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
         }
+
+        public Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> InterpretAnswers(string? customPrompt, string[] inputs)
         {
             string prompt = customPrompt == null ? CreatePrompt(inputs) : CreatePrompt(customPrompt, inputs);
