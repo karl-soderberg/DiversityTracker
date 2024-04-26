@@ -3,6 +3,7 @@ using diversitytracker.api.Configurations;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Data;
 using diversitytracker.api.Repository;
+using diversitytracker.api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 
 builder.Services.AddScoped<IFormsRepository, FormsDataRepository>();
 builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+builder.Services.AddHttpClient<IAiInterpretationService, AiInterpretationService>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
