@@ -8,6 +8,8 @@ namespace diversitytracker.api.Dtos
         public required string Name { get; set; }
         [Range(0, 1, ErrorMessage = "Gender must be either 0 (Male) or 1 (Female).")]
         public required Gender Gender { get; set; }
+        public int Age { get; set; }
         public required DateTime TimeAtCompany { get; set; }
+        public required string PersonalReflection { get; set; }
     }
 }

@@ -51,7 +51,9 @@ namespace diversitytracker.api.Controllers
                 Person = new Person(){
                     Name = postFormSubmissionDto.Person.Name,
                     Gender = postFormSubmissionDto.Person.Gender,
+                    Age = postFormSubmissionDto.Person.Age,
                     TimeAtCompany = postFormSubmissionDto.Person.TimeAtCompany,
+                    PersonalReflection = postFormSubmissionDto.Person.PersonalReflection,
                 },
                 Questions = new List<Question>()
             };
@@ -88,9 +90,11 @@ namespace diversitytracker.api.Controllers
                 input2,
                 input3
             };
-            var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
+            // var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
+            var formSubmissions = await _formsDataRepository.GetFormsAsync(null, null);
+            await _aiInterpretationService.InterperetFormData(formSubmissions);
 
-            return Ok(interperetedAnswers);
+            return Ok();
         }
 
     }
