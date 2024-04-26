@@ -4,12 +4,12 @@ import { FormIcon } from '../resources/icons/FormIcon'
 import './NavBottom.css'
 import { Link } from 'react-router-dom';
 
-type Props = {
-    page: string,
-    setPage: (page: string) => void
-}
+// type Props = {
+//     page: string,
+//     setPage: (page: string) => void
+// }
 
-export const NavBottom = ({ setPage, page }: Props) => {
+export const NavBottom = () => {
     return(
         <nav className='navbottom-container'>
             <Link to="/chart">
@@ -19,9 +19,7 @@ export const NavBottom = ({ setPage, page }: Props) => {
                     icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                     width=''
                     height='100%'
-                    link='#'
-                    active={page == 'ChartPage' ? true : false}
-                    click={() => setPage('ChartPage')}
+                    
                 />
             </Link>
             <Link to="/newform">
@@ -31,9 +29,6 @@ export const NavBottom = ({ setPage, page }: Props) => {
                     icon={<FormIcon className='navbottom__icon' width='25px'/>}
                     width=''
                     height='100%'
-                    link='#'
-                    active={page == 'NewFormPage' ? true : false}
-                    click={() => setPage('NewFormPage')}
                 />
             </Link>
             <Link to="admin">
@@ -43,9 +38,6 @@ export const NavBottom = ({ setPage, page }: Props) => {
                     icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                     width=''
                     height='100%'
-                    link='#'
-                    active={page == 'AdminPage' ? true : false}
-                    click={() => setPage('AdminPage')}
                 />
             </Link>
         </nav>

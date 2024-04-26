@@ -1,4 +1,4 @@
-import { useState } from "react"
+//import { useState } from "react"
 import './App.css'
 import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
@@ -48,7 +48,7 @@ const UserDisplay = () => {
 
 
 function App() {
-  const [page, setPage] = useState("ChartPage");
+  //const [page, setPage] = useState("ChartPage");
 
   const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
     queryKey: ['getQuestions'],
@@ -80,8 +80,7 @@ function App() {
             <UserDisplay />
           </ClientPrincipalContextProvider>
         </header>
-      <NavBottom  page={page}
-        setPage={(page) => setPage(page)}/>
+      <NavBottom  />
       <main className="page-container">
         <Routes>
           <Route path="/newform" element={<NewFormPage 
