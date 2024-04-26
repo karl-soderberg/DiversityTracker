@@ -10,7 +10,7 @@ export const NavBottom = () => {
             <Link to="/chart">
                 <CustomAnchor 
                     className='navbottom__item'
-                    value='charts view'
+                    value='Charts View'
                     icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                     width=''
                     height='100%'
@@ -20,7 +20,7 @@ export const NavBottom = () => {
             <Link to="/newform">
                 <CustomAnchor 
                     className='navbottom__item'
-                    value='Newform'
+                    value='Form page'
                     icon={<FormIcon className='navbottom__icon' width='25px'/>}
                     width=''
                     height='100%'
@@ -29,7 +29,7 @@ export const NavBottom = () => {
             <Link to="admin">
                 <CustomAnchor 
                     className='navbottom__item'
-                    value='charts view'
+                    value='Admin Page'
                     icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                     width=''
                     height='100%'
