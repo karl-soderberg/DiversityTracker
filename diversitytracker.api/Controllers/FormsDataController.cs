@@ -14,12 +14,14 @@ namespace diversitytracker.api.Controllers
         private readonly IMapper _mapper;
         private readonly IFormsRepository _formsDataRepository;
         private readonly IQuestionsRepository _questionsRepository;
+        private readonly IAiInterpretationService _aiInterpretationService;
 
-        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository)
+        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository, IAiInterpretationService aiInterpretationService)
         {
             _mapper = mapper;
             _formsDataRepository = formsDataRepository;
             _questionsRepository = questionsRepository;
+            _aiInterpretationService = aiInterpretationService;
         }
 
         [HttpGet]
@@ -75,6 +77,20 @@ namespace diversitytracker.api.Controllers
             await _formsDataRepository.AddFormAsync(newFormSubmission);
 
             return CreatedAtAction(nameof(GetFormData), new {id = newFormSubmission.Id}, newFormSubmission);
+        }
+
+        [HttpGet("openAITesting")]
+
+        public async Task<ActionResult<string[]>> OpenApiTesting(string? customPrompt, string input1, string input2, string input3)
+        {
+            var data = new string[]{
+                input1,
+                input2,
+                input3
+            };
+            var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
+
+            return Ok(interperetedAnswers);
         }
 
     }
