@@ -23,7 +23,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpGet]
-        [Authorize("isAdmin")]
+        // [Authorize("isAdmin")]
         public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
         {
             var formSubmissions = await _formsDataRepository.GetFormsAsync(startDate, endDate);
@@ -35,7 +35,7 @@ namespace diversitytracker.api.Controllers
         }
 
         [HttpPost]
-        [Authorize("isAdmin")]
+        // [Authorize("isAdmin")]
         public async Task<IActionResult> AddForm(PostFormSubmissionDto postFormSubmissionDto)
         {
             if(!ModelState.IsValid)

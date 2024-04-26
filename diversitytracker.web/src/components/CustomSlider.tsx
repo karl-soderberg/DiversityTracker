@@ -25,10 +25,10 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
     return (
         <section className="slider-container">
-            <label className='slider__label' htmlFor="">{text}</label>
-            <div className='slider__overlay' style={{ left: `${value+compensatorValue}%`, transform: `translateX(-50%)`}}>
+            <label className='slider__label' htmlFor="">{text + " " + Math.round(value / 10)}</label>
+            {/* <div className='slider__overlay' style={{ left: `${value+compensatorValue}%`, transform: `translateX(-50%)`}}>
                 {value}
-            </div>
+            </div> */}
             <input
                 type="range"
                 min={min}
@@ -37,6 +37,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
                 onChange={handleSliderChange}
                 className="slider"
             />
+            
         </section>
     );
 }

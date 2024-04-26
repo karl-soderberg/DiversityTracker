@@ -23,16 +23,6 @@ export const NavBottom = ({ setPage, page }: Props) => {
             />
             <CustomAnchor 
                 className='navbottom__item'
-                value='form'
-                icon={<FormIcon className='navbottom__icon' width='25px'/>}
-                width=''
-                height='100%'
-                link='#'
-                active={page == 'FormPage' ? true : false}
-                click={() => setPage('FormPage')}
-            />
-            <CustomAnchor 
-                className='navbottom__item'
                 value='Newform'
                 icon={<FormIcon className='navbottom__icon' width='25px'/>}
                 width=''
