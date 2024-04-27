@@ -26,7 +26,9 @@ namespace diversitytracker.api.Repository
 
         public async Task<AiInterpretation> AddAiInterpretationAsync(AiInterpretation aiInterpretation)
         {
-            throw new NotImplementedException();
+            await _context.AiInterpretations.AddAsync(aiInterpretation);
+            await _context.SaveChangesAsync();
+            return aiInterpretation;
         }
     }
 }
