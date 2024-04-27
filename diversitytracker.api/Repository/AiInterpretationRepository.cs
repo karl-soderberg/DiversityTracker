@@ -18,9 +18,10 @@ namespace diversitytracker.api.Repository
             return await _context.AiInterpretations.ToListAsync();
         }
 
-        public async Task UpdateAiInterpretationAsync(AiInterpretation questionType)
+        public async Task UpdateAiInterpretationAsync(AiInterpretation aiInterpretation)
         {
-            throw new NotImplementedException();
+            _context.AiInterpretations.Update(aiInterpretation);
+            await _context.SaveChangesAsync();
         }
     }
 }
