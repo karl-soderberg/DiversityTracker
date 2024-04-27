@@ -120,7 +120,7 @@ namespace diversitytracker.api.Services
             }
             else
             {
-                aiInterpretation.ReflectionsInterpretation = realDataInterpretation;
+                aiInterpretation.RealDataInterpretation = realDataInterpretation;
                 await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
                 
                 return aiInterpretation;
