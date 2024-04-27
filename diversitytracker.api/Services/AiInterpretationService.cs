@@ -52,26 +52,26 @@ namespace diversitytracker.api.Services
 
         public async Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            var realData = new Dictionary<string, double[]>();
+            // var realData = new Dictionary<string, double[]>();
             var questionAnswersData = new Dictionary<string, string[]>();
-            List<string> reflectionAnswersData = new List<string>();
+            // List<string> reflectionAnswersData = new List<string>();
 
-            foreach(var form in formSubmissions)
-            {
-                int idx = 0;
-                foreach(var question in form.Questions)
-                {
-                    if (realData.ContainsKey(questionTypes[idx].Value))
-                    {
-                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
-                    }
-                    else
-                    {
-                        realData[questionTypes[idx].Value] = new double[] { question.Value };
-                    }
-                    idx++;
-                }
-            }
+            // foreach(var form in formSubmissions)
+            // {
+            //     int idx = 0;
+            //     foreach(var question in form.Questions)
+            //     {
+            //         if (realData.ContainsKey(questionTypes[idx].Value))
+            //         {
+            //             realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
+            //         }
+            //         else
+            //         {
+            //             realData[questionTypes[idx].Value] = new double[] { question.Value };
+            //         }
+            //         idx++;
+            //     }
+            // }
 
             foreach(var form in formSubmissions)
             {
@@ -92,18 +92,18 @@ namespace diversitytracker.api.Services
                 }
             }
 
-            foreach(var form in formSubmissions)
-            {
-                reflectionAnswersData.Add(form.Person.PersonalReflection);
-            }
+            // foreach(var form in formSubmissions)
+            // {
+            //     reflectionAnswersData.Add(form.Person.PersonalReflection);
+            // }
 
             // var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
-            var realDataPrompt = CreateRealdataPrompt(realData);
+            // var realDataPrompt = CreateRealdataPrompt(realData);
             var questionAnswerPrompt = CreateQuestionAnswersDataPrompt(questionAnswersData);
             var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
 
             // var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
-            var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
+            // var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
             var questionAnswerInterpretation = await OpenAIInterperet(questionAnswerPrompt);
             var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
 
@@ -310,9 +310,51 @@ namespace diversitytracker.api.Services
             }
         }
 
-        public Task<AiInterpretation> InterperetAllRealDataAsync()
+        public async Task<AiInterpretation> InterperetAllRealDataAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            throw new NotImplementedException();
+            var realData = new Dictionary<string, double[]>();
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    if (realData.ContainsKey(questionTypes[idx].Value))
+                    {
+                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
+                    }
+                    else
+                    {
+                        realData[questionTypes[idx].Value] = new double[] { question.Value };
+                    }
+                    idx++;
+                }
+            }
+
+            var realDataPrompt = CreateRealdataPrompt(realData);
+            var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
+
+            var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+            
+            if(aiInterpretation == null)
+            {
+                var newAiInterpretation = new AiInterpretation()
+                {
+                    RealDataInterpretation = realDataInterpretation,
+                };
+                await _aiInterpretationRepository.AddAiInterpretationAsync(newAiInterpretation);
+                
+                return newAiInterpretation;
+            }
+            else
+            {
+                aiInterpretation.ReflectionsInterpretation = realDataInterpretation;
+                await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
+                
+                return aiInterpretation;
+            }
+
+
         }
 
         public Task<AiInterpretation> InterperetAllQuestionsAsync()
