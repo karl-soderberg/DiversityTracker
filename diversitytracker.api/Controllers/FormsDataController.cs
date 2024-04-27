@@ -92,7 +92,8 @@ namespace diversitytracker.api.Controllers
             };
             // var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
             var formSubmissions = await _formsDataRepository.GetFormsAsync(null, null);
-            await _aiInterpretationService.InterperetFormData(formSubmissions);
+            var questions = await _questionsRepository.GetQuestionTypesAsync();
+            await _aiInterpretationService.InterperetFormData(formSubmissions, questions);
 
             return Ok();
         }

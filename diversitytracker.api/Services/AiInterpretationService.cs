@@ -19,7 +19,7 @@ namespace diversitytracker.api.Services
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
         }
 
-        public async Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions)
+        public async Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
             var realData = new Dictionary<string, double[]>();
             var questionAnswersData = new Dictionary<string, string[]>();
@@ -27,33 +27,37 @@ namespace diversitytracker.api.Services
 
             foreach(var form in formSubmissions)
             {
+                int idx = 0;
                 foreach(var question in form.Questions)
                 {
-                    if (realData.ContainsKey(question.QuestionTypeId))
+                    if (realData.ContainsKey(questionTypes[idx].Value))
                     {
-                        realData[question.QuestionTypeId] = realData[question.QuestionTypeId].Append(question.Value).ToArray();
+                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
                     }
                     else
                     {
-                        realData[question.QuestionTypeId] = new double[] { question.Value };
+                        realData[questionTypes[idx].Value] = new double[] { question.Value };
                     }
+                    idx++;
                 }
             }
 
             foreach(var form in formSubmissions)
             {
+                int idx = 0;
                 foreach(var question in form.Questions)
                 {
-                    if (questionAnswersData.ContainsKey(question.QuestionTypeId))
+                    if (questionAnswersData.ContainsKey(questionTypes[idx].Value))
                     {
-                         List<string> tempList = questionAnswersData[question.QuestionTypeId].ToList();
+                        List<string> tempList = questionAnswersData[questionTypes[idx].Value].ToList();
                         tempList.Add(question.Answer);
-                        questionAnswersData[question.QuestionTypeId] = tempList.ToArray();
+                        questionAnswersData[questionTypes[idx].Value] = tempList.ToArray();
                     }
                     else
                     {
-                        questionAnswersData[question.QuestionTypeId] = new string[] { question.Answer };
+                        questionAnswersData[questionTypes[idx].Value] = new string[] { question.Answer };
                     }
+                    idx++;
                 }
             }
 
@@ -63,32 +67,33 @@ namespace diversitytracker.api.Services
             }
 
             var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
-            var realDataPromptDict = CreateRealdataPrompt(realData);
-            var questionanswerPromptDict = CreateQuestionAnswersDataPrompt(questionAnswersData);
+            var realDataPrompt = CreateRealdataPrompt(realData);
+            var questionAnswerPrompt = CreateQuestionAnswersDataPrompt(questionAnswersData);
 
-            var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
-            var realDataInterpretation = new Dictionary<string, string>();
-            var questionAnswersInterpretation = new Dictionary<string, string>();
 
-            foreach (var kvp in realDataPromptDict)
-            {
-                string key = kvp.Key;
-                string value = kvp.Value;
+            // var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
+            // var realDataInterpretation = new Dictionary<string, string>();
+            // var questionAnswersInterpretation = new Dictionary<string, string>();
+
+            // foreach (var kvp in realDataPromptDict)
+            // {
+            //     string key = kvp.Key;
+            //     string value = kvp.Value;
                 
-                var openAiInterpretation = await OpenAIInterperet(value);
+            //     var openAiInterpretation = await OpenAIInterperet(value);
 
-                realDataInterpretation[key] = openAiInterpretation;
-            }
+            //     realDataInterpretation[key] = openAiInterpretation;
+            // }
 
-            foreach (var kvp in questionanswerPromptDict)
-            {
-                string key = kvp.Key;
-                string value = kvp.Value;
+            // foreach (var kvp in questionanswerPromptDict)
+            // {
+            //     string key = kvp.Key;
+            //     string value = kvp.Value;
                 
-                var openAiInterpretation = await OpenAIInterperet(value);
+            //     var openAiInterpretation = await OpenAIInterperet(value);
 
-                questionAnswersInterpretation[key] = openAiInterpretation;
-            } 
+            //     questionAnswersInterpretation[key] = openAiInterpretation;
+            // } 
             
             
             throw new NotImplementedException();
@@ -151,50 +156,65 @@ namespace diversitytracker.api.Services
             string resultInterperetation = jsonResponse.Choices[0].Message.Content;
             return resultInterperetation;
         }
-        private Dictionary<string, string> CreateRealdataPrompt(Dictionary<string, double[]> realData)
+        private string CreateRealdataPrompt(Dictionary<string, double[]> realData)
         {
             var realDataPrompts = new Dictionary<string, string>();
+
+             StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. We already have a graph so you don't need to give answer on the data values themselves. Answer in under 50 words: I want you to give one 50 word answer for each question/answers. They are seperated by ->- . It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
+            
             foreach (var kvp in realData)
             {
                 string key = kvp.Key;
                 double[] values = kvp.Value;
-
-                StringBuilder promptBuilder = new StringBuilder($"Here is a collection of answers where people ranked 0-10 of the following question: {key} \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. We already have a graph so you don't need to give answer on the data values themselves. Answer in under 50 words:\n\n");
-                foreach (var input in values)
-                {
-                    promptBuilder.AppendLine($"- {input} ");
-                }
-                var prompt = promptBuilder.ToString();
                 
-                realDataPrompts[key] = prompt;
-            }
+                promptBuilder.AppendLine($"{kvp} || \n");
+                foreach (var value in values)
+                {
+                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
+                }
 
-            return realDataPrompts;
+                promptBuilder.AppendLine("->-");
+                
+                // realDataPrompts[key] = prompt;
+            }
+            var prompt = promptBuilder.ToString();
+
+            return prompt;
         }
-        private Dictionary<string, string> CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
+        private string CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
         {
             var questionAnswersDataPrompts = new Dictionary<string, string>();
+            var questionAnswerDataPrompt = new StringBuilder();
+
+            StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the emotional/personal points. We already have a graph so you don't need to give answer on the data values themselves. Answer in under 50 words: I want you to give one 50 word answer for each question/answers section. The sections are seperated by ->- . I want you to give me the under 50 word answers seperated by ||. It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
                 string key = kvp.Key;
-                string[] values = kvp.Value;
+                string[] answers = kvp.Value;
 
-                StringBuilder promptBuilder = new StringBuilder($"Here is a collection of anonymous answers from multiple individuals in an organization. It regards the following question: {key} \n I want you to draw conclusions objectivly about the answers, highlight key points people have brought up and answer in under 60 words:\n\n");
-                foreach (var input in values)
+                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                
+                foreach (var answer in answers)
                 {
-                    promptBuilder.AppendLine($"- {input} ");
+                    promptBuilder.AppendLine($"- {answer} \n");
                 }
-                var prompt = promptBuilder.ToString();
 
-                questionAnswersDataPrompts[key] = prompt;
+                promptBuilder.AppendLine("->- \n");
+
+                // var prompt = promptBuilder.ToString();
+
+                // questionAnswersDataPrompts[key] = prompt;
             }
 
-            return questionAnswersDataPrompts;
+
+            return promptBuilder.ToString();
         }
         private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
         {
-            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words:\n\n");
+            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words: It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
             foreach (var input in reflectionAnswerData)
             {
                 promptBuilder.AppendLine($"- {input}");
