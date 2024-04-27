@@ -80,23 +80,5 @@ namespace diversitytracker.api.Controllers
 
             return CreatedAtAction(nameof(GetFormData), new {id = newFormSubmission.Id}, newFormSubmission);
         }
-
-        [HttpGet("openAITesting")]
-
-        public async Task<ActionResult<string[]>> OpenApiTesting(string? customPrompt, string input1, string input2, string input3)
-        {
-            var data = new string[]{
-                input1,
-                input2,
-                input3
-            };
-            // var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
-            var formSubmissions = await _formsDataRepository.GetFormsAsync(null, null);
-            var questions = await _questionsRepository.GetQuestionTypesAsync();
-            await _aiInterpretationService.InterperetFormData(formSubmissions, questions);
-
-            return Ok();
-        }
-
     }
 }
