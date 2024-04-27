@@ -1,4 +1,5 @@
 using diversitytracker.api.Models;
+using diversitytracker.api.Models.OpenAi;
 using Microsoft.EntityFrameworkCore;
 
 namespace diversitytracker.api.Data
@@ -12,6 +13,7 @@ namespace diversitytracker.api.Data
         public DbSet<FormSubmission> FormSubmissionsData { get; set; }
         public DbSet<QuestionType> QuestionTypes { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<AiInterpretation> AiInterpretations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
