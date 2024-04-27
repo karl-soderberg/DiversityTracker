@@ -274,5 +274,30 @@ namespace diversitytracker.api.Services
             }
             return promptBuilder.ToString();
         }
+
+        public Task<AiInterpretation> InterperetAllReflectionsFormsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AiInterpretation> InterperetAllRealDataAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AiInterpretation> InterperetAllQuestionsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AiInterpretation> InterperetRealDataSeperatedAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AiInterpretation> InterperetQuestionAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
