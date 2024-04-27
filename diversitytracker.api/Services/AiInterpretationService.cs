@@ -416,13 +416,69 @@ namespace diversitytracker.api.Services
             {
                 await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
             } 
-            
+
             return aiInterpretation;
         }
 
-        public Task<AiInterpretation> InterperetRealDataSeperatedAsync()
+        public async Task<AiInterpretation> InterperetRealDataSeperatedAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            throw new NotImplementedException();
+            var realData = new Dictionary<string, double[]>();
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    if (realData.ContainsKey(questionTypes[idx].Value))
+                    {
+                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
+                    }
+                    else
+                    {
+                        realData[questionTypes[idx].Value] = new double[] { question.Value };
+                    }
+                    idx++;
+                }
+            }
+
+            var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
+            var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
+            var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+            var wasnull = false;
+            if(aiInterpretation == null)
+            {
+                aiInterpretation = new AiInterpretation();
+                wasnull = true;
+            }
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    var questionInterpretation = new AiQuestionInterpretation()
+                    {
+                        QuestionTypeId = question.QuestionTypeId,
+                        QuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId),
+                        ValueInterpretation = realDataSeperatedInterpretations[idx]
+                    };
+                    aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    idx++;
+                }
+            }
+
+            if(wasnull)
+            {
+                await _aiInterpretationRepository.AddAiInterpretationAsync(aiInterpretation);
+            }
+            else
+            {
+                await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
+            } 
+
+            return aiInterpretation;
         }
 
         public Task<AiInterpretation> InterperetQuestionAsync()
