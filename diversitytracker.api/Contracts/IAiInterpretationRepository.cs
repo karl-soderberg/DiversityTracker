@@ -4,7 +4,8 @@ namespace diversitytracker.api.Contracts
 {
     public interface IAiInterpretationRepository
     {
-        Task<List<AiInterpretation>> GetAiInterpretationAsync();
-        Task UpdateAiInterpretationAsync(AiInterpretation questionType);
+        Task<AiInterpretation> GetAiInterpretationAsync();
+        Task UpdateAiInterpretationAsync(AiInterpretation aiInterpretation);
+        Task<AiInterpretation> AddAiInterpretationAsync(AiInterpretation aiInterpretation);
     }
 }
