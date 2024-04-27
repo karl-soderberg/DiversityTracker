@@ -11,12 +11,14 @@ namespace diversitytracker.api.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
+        private readonly IQuestionsRepository _questionsRepository;
 
-        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration)
+        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository)
         {
             _apiKey = configuration["OpenAi:apiKey"];
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
+            _questionsRepository = questionsRepository;
         }
 
         public async Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
@@ -69,32 +71,37 @@ namespace diversitytracker.api.Services
             var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
             var realDataPrompt = CreateRealdataPrompt(realData);
             var questionAnswerPrompt = CreateQuestionAnswersDataPrompt(questionAnswersData);
+            var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
 
+            var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
+            var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
+            var questionAnswerInterpretation = await OpenAIInterperet(questionAnswerPrompt);
+            var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
 
-            // var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
-            // var realDataInterpretation = new Dictionary<string, string>();
-            // var questionAnswersInterpretation = new Dictionary<string, string>();
-
-            // foreach (var kvp in realDataPromptDict)
-            // {
-            //     string key = kvp.Key;
-            //     string value = kvp.Value;
-                
-            //     var openAiInterpretation = await OpenAIInterperet(value);
-
-            //     realDataInterpretation[key] = openAiInterpretation;
-            // }
-
-            // foreach (var kvp in questionanswerPromptDict)
-            // {
-            //     string key = kvp.Key;
-            //     string value = kvp.Value;
-                
-            //     var openAiInterpretation = await OpenAIInterperet(value);
-
-            //     questionAnswersInterpretation[key] = openAiInterpretation;
-            // } 
+            var questionAnswerInterpretations = questionAnswerInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
             
+            var aiInterpretation = new AiInterpretation(){
+                ReflectionsInterpretation = reflectionInterpretation,
+                RealDataInterpretation = realDataInterpretation
+            };
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    var questionInterpretation = new AiQuestionInterpretation()
+                    {
+                        QuestionTypeId = question.QuestionTypeId,
+                        QuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId),
+                        AnswerInterpretation = questionAnswerInterpretations[idx],
+                        ValueInterpretation = realDataSeperatedInterpretations[idx]
+                    };
+                    aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    idx++;
+                }
+            }
             
             throw new NotImplementedException();
         }
@@ -156,12 +163,39 @@ namespace diversitytracker.api.Services
             string resultInterperetation = jsonResponse.Choices[0].Message.Content;
             return resultInterperetation;
         }
+        private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
+        {
+            var realDataPrompts = new Dictionary<string, string>();
+
+             StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions and answers where many individuals ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional and interpersonal insights based on the data. Every section is seperated by ->- . I want you to give one answer per section and seperate the answers by two new lines. Don't give an answer on the data values themselves. Answer in under 20-50 words for each question/answers. Only give me a text no bullet points or similar. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+            
+            foreach (var kvp in realData)
+            {
+                string key = kvp.Key;
+                double[] values = kvp.Value;
+                
+                promptBuilder.AppendLine($"{kvp} || \n");
+                foreach (var value in values)
+                {
+                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
+                }
+
+                promptBuilder.AppendLine("->-");
+                
+                // realDataPrompts[key] = prompt;
+            }
+            var prompt = promptBuilder.ToString();
+
+            return prompt;
+        }
+
         private string CreateRealdataPrompt(Dictionary<string, double[]> realData)
         {
             var realDataPrompts = new Dictionary<string, string>();
 
              StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. We already have a graph so you don't need to give answer on the data values themselves. Answer in under 50 words: I want you to give one 50 word answer for each question/answers. They are seperated by ->- . It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
+                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. Do not give answer on the data values themselves. Answer in under 50 words.\n\n");
             
             foreach (var kvp in realData)
             {
@@ -188,7 +222,7 @@ namespace diversitytracker.api.Services
             var questionAnswerDataPrompt = new StringBuilder();
 
             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the emotional/personal points. We already have a graph so you don't need to give answer on the data values themselves. Answer in under 50 words: I want you to give one 50 word answer for each question/answers section. The sections are seperated by ->- . I want you to give me the under 50 word answers seperated by ||. It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
+                    $"Here is a collection of questions with answers from people working at an organization. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions that is useful for ctos. Answer in under 50 words: I want you to give one 20-50 word answer for each question/answers section. The sections are seperated by ->- . I want you to give me the under 50 word answers seperated by two new lines. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
