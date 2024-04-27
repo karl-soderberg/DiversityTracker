@@ -12,13 +12,42 @@ namespace diversitytracker.api.Services
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
         private readonly IQuestionsRepository _questionsRepository;
+        private readonly IAiInterpretationRepository _aiInterpretationRepository;
 
-        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository)
+        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository, IAiInterpretationRepository aiInterpretationRepository)
         {
             _apiKey = configuration["OpenAi:apiKey"];
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
             _questionsRepository = questionsRepository;
+            _aiInterpretationRepository = aiInterpretationRepository;
+        }
+        private async Task<string> OpenAIInterperet(string prompt)
+        {
+            var data = new 
+            { 
+                model = "gpt-3.5-turbo", 
+                messages = new[] 
+                {
+                    new 
+                    {
+                        role = "user", 
+                        content = prompt
+                    }
+                }
+            };
+
+            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var jsonContent = JsonSerializer.Serialize(data, options);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);         
+            response.EnsureSuccessStatusCode();
+
+            var jsonResponse = await response.Content.ReadFromJsonAsync<OpenAIApiResponse>();
+
+            string openAIAnswer = jsonResponse.Choices[0].Message.Content;
+            return openAIAnswer;
         }
 
         public async Task<List<AiInterpretation>> InterperetFormData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
@@ -68,12 +97,12 @@ namespace diversitytracker.api.Services
                 reflectionAnswersData.Add(form.Person.PersonalReflection);
             }
 
-            var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
+            // var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
             var realDataPrompt = CreateRealdataPrompt(realData);
             var questionAnswerPrompt = CreateQuestionAnswersDataPrompt(questionAnswersData);
             var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
 
-            var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
+            // var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
             var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
             var questionAnswerInterpretation = await OpenAIInterperet(questionAnswerPrompt);
             var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
@@ -106,62 +135,36 @@ namespace diversitytracker.api.Services
             throw new NotImplementedException();
         }
 
-        public async Task<string> OpenAIInterperet(string prompt)
-        {
-            var data = new 
-            { 
-                model = "gpt-3.5-turbo", 
-                messages = new[] 
-                {
-                    new 
-                    {
-                        role = "user", 
-                        content = prompt
-                    }
-                }
-            };
-
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var jsonContent = JsonSerializer.Serialize(data, options);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);         
-            response.EnsureSuccessStatusCode();
-
-            var jsonResponse = await response.Content.ReadFromJsonAsync<OpenAIApiResponse>();
-
-            string openAIAnswer = jsonResponse.Choices[0].Message.Content;
-            return openAIAnswer;
-        }
 
         public async Task<string> InterpretAnswers(string? customPrompt, string[] inputs)
         {
-            string prompt = customPrompt == null ? CreatePrompt(inputs) : CreatePrompt(customPrompt, inputs);
+            // string prompt = customPrompt == null ? CreatePrompt(inputs) : CreatePrompt(customPrompt, inputs);
             
-            var data = new 
-            { 
-                model = "gpt-3.5-turbo", 
-                messages = new[] 
-                {
-                    new 
-                    {
-                        role = "user", 
-                        content = prompt
-                    }
-                }
-            };
+            // var data = new 
+            // { 
+            //     model = "gpt-3.5-turbo", 
+            //     messages = new[] 
+            //     {
+            //         new 
+            //         {
+            //             role = "user", 
+            //             content = prompt
+            //         }
+            //     }
+            // };
 
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var jsonContent = JsonSerializer.Serialize(data, options);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            // var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            // var jsonContent = JsonSerializer.Serialize(data, options);
+            // var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);         
-            response.EnsureSuccessStatusCode();
+            // HttpResponseMessage response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);         
+            // response.EnsureSuccessStatusCode();
 
-            var jsonResponse = await response.Content.ReadFromJsonAsync<OpenAIApiResponse>();
+            // var jsonResponse = await response.Content.ReadFromJsonAsync<OpenAIApiResponse>();
 
-            string resultInterperetation = jsonResponse.Choices[0].Message.Content;
-            return resultInterperetation;
+            // string resultInterperetation = jsonResponse.Choices[0].Message.Content;
+            // return resultInterperetation;
+            throw new NotImplementedException();
         }
         private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
         {
@@ -275,9 +278,36 @@ namespace diversitytracker.api.Services
             return promptBuilder.ToString();
         }
 
-        public Task<AiInterpretation> InterperetAllReflectionsFormsAsync()
+        public async Task<AiInterpretation> InterperetAllReflectionsFormsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            throw new NotImplementedException();
+            List<string> reflectionAnswersData = new List<string>();
+
+            foreach(var form in formSubmissions)
+            {
+                reflectionAnswersData.Add(form.Person.PersonalReflection);
+            }
+
+            var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
+            var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
+
+            var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+            if(aiInterpretation == null)
+            {
+                var newAiInterpretation = new AiInterpretation()
+                {
+                    ReflectionsInterpretation = reflectionInterpretation,
+                };
+                await _aiInterpretationRepository.AddAiInterpretationAsync(newAiInterpretation);
+                
+                return newAiInterpretation;
+            }
+            else
+            {
+                aiInterpretation.ReflectionsInterpretation = reflectionInterpretation;
+                await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
+                
+                return aiInterpretation;
+            }
         }
 
         public Task<AiInterpretation> InterperetAllRealDataAsync()
