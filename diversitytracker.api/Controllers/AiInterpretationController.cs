@@ -98,5 +98,13 @@ namespace diversitytracker.api.Controllers
                 return StatusCode(500, ex.Message);
             }  
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> ClearAiInterpretation()
+        {
+            await _aiInterpretationRepository.DeleteAiInterpretationAsync();
+
+            return NoContent();
+        }
     }
 }
