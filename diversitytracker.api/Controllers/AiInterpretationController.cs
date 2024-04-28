@@ -65,8 +65,8 @@ namespace diversitytracker.api.Controllers
             }  
         }
 
-        [HttpGet("InterperetAllQuestions")]
-        public async Task<ActionResult<AiInterpretation>> InterperetAllQuestions()
+        [HttpGet("InterperetAllQuestionAnswers")]
+        public async Task<ActionResult<AiInterpretation>> InterperetAllQuestionAnswers()
         {
             try
             {
@@ -78,12 +78,12 @@ namespace diversitytracker.api.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, "Internal Server Error");
             }  
         }
 
-        [HttpGet("InterperetRealDataSeperated")]
-        public async Task<ActionResult<AiInterpretation>> InterperetRealData()
+        [HttpGet("InterperetAllQuestionValues")]
+        public async Task<ActionResult<AiInterpretation>> InterperetAllQuestionValues()
         {
             try
             {
@@ -94,8 +94,22 @@ namespace diversitytracker.api.Controllers
             }
             catch (Exception ex)
             {
+                 Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal Server Error");
+            }  
+        }
+
+        [HttpGet("CreateDataFromQuestionAnswersInterpretation")]
+        public async Task<ActionResult<AiInterpretation>> CreateDataFromQuestionAnswersInterpretation()
+        {
+            try
+            {
+                return Ok(); 
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, "Internal Server Error");
             }  
         }
 
