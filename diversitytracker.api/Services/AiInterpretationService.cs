@@ -286,12 +286,6 @@ namespace diversitytracker.api.Services
             return aiInterpretation;
         }
 
-        public Task<AiInterpretation> InterperetQuestionAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-
         private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
         {
              StringBuilder promptBuilder = new StringBuilder(
@@ -370,5 +364,14 @@ namespace diversitytracker.api.Services
             return promptBuilder.ToString();
         }
 
+        public Task<AiInterpretation> CreateDataFromQuestionAnswers(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AiInterpretation> InterperetQuestionAsync(QuestionType questionType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

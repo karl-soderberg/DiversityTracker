@@ -7,6 +7,7 @@ namespace diversitytracker.api.Contracts
         Task<AiInterpretation> GetAiInterpretationAsync();
         Task UpdateAiInterpretationAsync(AiInterpretation aiInterpretation);
         Task<AiInterpretation> AddAiInterpretationAsync(AiInterpretation aiInterpretation);
+    
         Task DeleteAiInterpretationAsync();
     }
 }
