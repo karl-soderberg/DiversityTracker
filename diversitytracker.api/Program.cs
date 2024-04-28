@@ -17,16 +17,18 @@ var config = new ConfigurationBuilder()
 .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
 .Build();
 
-builder.Services.AddControllers()
-.AddJsonOptions(options => {
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-});
+// builder.Services.AddControllers()
+// .AddJsonOptions(options =>
+// {
+//     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+// });
 
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options => {
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options.UseSqlServer(config.GetConnectionString("AZURE_SQL"));
 });
 
@@ -40,7 +42,7 @@ builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = null; 
+        options.Authority = null;
         options.Audience = null;
     });
 
