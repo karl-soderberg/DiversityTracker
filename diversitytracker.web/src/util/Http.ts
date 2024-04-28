@@ -91,6 +91,7 @@ export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto
     }
 
     const newFormsDataResponse = await response.json();
+    console.log(newFormsDataResponse);
     return newFormsDataResponse;
 }
 

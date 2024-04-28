@@ -71,7 +71,6 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-
         postFormsData.mutate(formSubmissionDto);
     };
 
@@ -123,7 +122,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     <Form.Item
                         label="Age"
                         name="age"
-                        rules={[{ required: true, message: 'Please input age.', min: 16, max: 120}]}
+                        rules={[{ required: true, message: 'Please input age.', min: 0}]}
                         >
                         {/* <InputNumber style={{ width: '100%' }} /> */}
                         <input type="number" />
@@ -132,7 +131,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     <Form.Item
                         label="Years At Company"
                         name="timeatcompany"
-                        rules={[{ required: true, message: 'Please input time worked at company.', min: 0, max: 100}]}
+                        rules={[{ required: true, message: 'Please input time worked at company.', min: 0}]}
                         >
                         {/* <InputNumber style={{ width: '100%' }} /> */}
                         <input type="number" />

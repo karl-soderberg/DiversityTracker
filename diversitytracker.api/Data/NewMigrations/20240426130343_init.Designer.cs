@@ -9,10 +9,10 @@ using diversitytracker.api.Data;
 
 #nullable disable
 
-namespace diversitytracker.api.Data.Migrations
+namespace diversitytracker.api.Data.NewMigrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422200408_init")]
+    [Migration("20240426130343_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -49,6 +49,9 @@ namespace diversitytracker.api.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -56,8 +59,12 @@ namespace diversitytracker.api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeAtCompany")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("PersonalReflection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeAtCompany")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

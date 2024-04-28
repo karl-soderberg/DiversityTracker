@@ -15,13 +15,14 @@ namespace diversitytracker.api.Controllers
         private readonly IFormsRepository _formsDataRepository;
         private readonly IQuestionsRepository _questionsRepository;
         private readonly IAiInterpretationService _aiInterpretationService;
-
-        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository, IAiInterpretationService aiInterpretationService)
+        private readonly IAiInterpretationRepository _aiInterpretationRepository;
+        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository, IAiInterpretationService aiInterpretationService, IAiInterpretationRepository aiInterpretationRepository)
         {
             _mapper = mapper;
             _formsDataRepository = formsDataRepository;
             _questionsRepository = questionsRepository;
             _aiInterpretationService = aiInterpretationService;
+            _aiInterpretationRepository = aiInterpretationRepository;
         }
 
         [HttpGet]
@@ -29,10 +30,14 @@ namespace diversitytracker.api.Controllers
         public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
         {
             var formSubmissions = await _formsDataRepository.GetFormsAsync(startDate, endDate);
+            var aiInterpretations = await _aiInterpretationRepository.GetAiInterpretationAsync();
+
             var formSubmissionsResponseDto = new FormSubmissionsDataResponseDto(){
                 RequestedAt = DateTime.UtcNow,
-                FormSubmissions = formSubmissions
+                FormSubmissions = formSubmissions,
+                aiInterpretation = aiInterpretations
             };  
+            
             return Ok(formSubmissionsResponseDto);
         }
 
@@ -51,7 +56,9 @@ namespace diversitytracker.api.Controllers
                 Person = new Person(){
                     Name = postFormSubmissionDto.Person.Name,
                     Gender = postFormSubmissionDto.Person.Gender,
+                    Age = postFormSubmissionDto.Person.Age,
                     TimeAtCompany = postFormSubmissionDto.Person.TimeAtCompany,
+                    PersonalReflection = postFormSubmissionDto.Person.PersonalReflection,
                 },
                 Questions = new List<Question>()
             };
@@ -78,20 +85,5 @@ namespace diversitytracker.api.Controllers
 
             return CreatedAtAction(nameof(GetFormData), new {id = newFormSubmission.Id}, newFormSubmission);
         }
-
-        [HttpGet("openAITesting")]
-
-        public async Task<ActionResult<string[]>> OpenApiTesting(string? customPrompt, string input1, string input2, string input3)
-        {
-            var data = new string[]{
-                input1,
-                input2,
-                input3
-            };
-            var interperetedAnswers = await _aiInterpretationService.InterpretAnswers(customPrompt, data);
-
-            return Ok(interperetedAnswers);
-        }
-
     }
 }

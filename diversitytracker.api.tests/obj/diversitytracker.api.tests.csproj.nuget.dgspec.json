@@ -1,33 +1,40 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {}
+    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {}
   },
   "projects": {
-    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj": {
+    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
         "projectName": "diversitytracker.api.tests",
-        "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/diversitytracker.api.tests.csproj",
-        "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api.tests/obj/",
+        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
+        "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
-                "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj"
+              "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
+                "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj"
               }
             }
           }
@@ -36,11 +43,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -104,26 +106,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj": {
+    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
         "projectName": "diversitytracker.api",
-        "projectPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/diversitytracker.api.csproj",
-        "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/SALT/Final_Project/DiversityTracker/diversitytracker.api/obj/",
+        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
+        "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -136,11 +145,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -199,7 +203,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

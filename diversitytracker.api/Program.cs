@@ -22,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 
 builder.Services.AddScoped<IFormsRepository, FormsDataRepository>();
 builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+builder.Services.AddScoped<IAiInterpretationRepository, AiInterpretationRepository>();
 builder.Services.AddHttpClient<IAiInterpretationService, AiInterpretationService>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));

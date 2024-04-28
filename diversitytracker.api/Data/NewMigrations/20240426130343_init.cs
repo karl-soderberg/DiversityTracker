@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace diversitytracker.api.Data.Migrations
+namespace diversitytracker.api.Data.NewMigrations
 {
     /// <inheritdoc />
     public partial class init : Migration
@@ -18,7 +18,9 @@ namespace diversitytracker.api.Data.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    TimeAtCompany = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    TimeAtCompany = table.Column<int>(type: "int", nullable: false),
+                    PersonalReflection = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
