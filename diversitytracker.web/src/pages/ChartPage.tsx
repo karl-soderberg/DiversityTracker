@@ -74,6 +74,18 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
 
     return(
         <section className={className}>
+            {formsData && 
+                <>
+                    <h3>Overall Data Interperetation:</h3>
+                    <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                </>
+            }
+            {formsData && 
+                <>
+                    <h3>Reflections Interperetation:</h3>
+                    <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                </>
+            }
             <h1>Percieved Quality Of Leadership Over Time</h1>
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
@@ -210,7 +222,10 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
             <p>{activeQuestion}</p>
             <article className='datasummary-container'>
                 <h2>Data Reflection</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, dicta mollitia fugit ab maiores deleniti ullam recusandae beatae laboriosam a sit hic minima vel blanditiis quae architecto assumenda commodi deserunt, amet nam dolorum aperiam ea labore unde? Dignissimos alias quam voluptas ex vero fuga velit reiciendis qui tenetur! Explicabo facere reiciendis dicta error minima dolores sapiente doloremque quaerat nulla, odit tempore unde! Illum incidunt ab non neque perferendis iste accusantium ullam dolorum ducimus. Sunt, porro?</p>
+                {formsData && 
+                    <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                }
+                
             </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Reflection Box Summary</h2>
