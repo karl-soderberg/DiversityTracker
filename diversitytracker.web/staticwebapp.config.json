@@ -1,17 +1,2 @@
-{
-    "routes": [
-        {
-          "route": "/newform*",
-          "allowedRoles": ["authenticated"]
-        },
-        {
-          "route": "/admin*",
-          "allowedRoles": ["admin"]
-        },
-        {
-            "route": "/chart*",
-            "allowedRoles": ["admin"]
-          }
-    ]
+{}
 
-}
