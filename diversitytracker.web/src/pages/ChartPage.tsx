@@ -86,7 +86,10 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                     {formsData.aiInterpretation.realDataInterpretation ? (
                         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
                     ) : (
-                        <p>No data interpretation available.</p>
+                        <>
+                            <p>No data interpretation available.</p>
+                            <button>Interperet data</button>
+                        </>
                     )}
                 </>
             )}
@@ -96,7 +99,10 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                     {formsData.aiInterpretation.reflectionsInterpretation ? (
                         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
                     ) : (
-                        <p>No reflections available.</p>
+                        <>
+                            <p>No reflections available.</p>
+                            <button>Interperet data</button>
+                        </>
                     )}
                 </>
             )}
@@ -245,12 +251,13 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                                 <p key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
                             ))
                         ) : (
-                            <p>No answers available.</p>
+                            <>
+                                <p>No answers available.</p>
+                                <button>Interperet data</button>
+                            </>
                         )}
                     </>
                 )}
-                
-                
             </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
@@ -261,13 +268,17 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                                 <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
                             ))
                         ) : (
-                            <p>No data available.</p>
+                            <>
+                                <p>No data available.</p>
+                                <button>Interperet data</button>
+                            </>
                         )}
                     </>
                 )}
             </article>
             <article className='reflectionboxchartsummary-container'>
-                <ResponsiveContainer width="100%" height="100%">
+            {aiInterpretation && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
+                 <ResponsiveContainer width="100%" height="100%">
                     {(formsData && activeAiInterpretation) &&
                         <ScatterChart
                             margin={{
@@ -286,10 +297,24 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                         </ScatterChart>
                     }
                 </ResponsiveContainer>
+                : 
+                <>
+                    <p>No data available</p>
+                    <button>Interperet data</button>
+                </>
+            }
+               
             </article>
             <article className='reflectionboxsummary-container'>
-                <h2>Rating based on real answers</h2>
-                <p>This chart shows the interpereted ratings based on real answers.</p>
+                {aiInterpretation && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
+                    <>
+                        <h2>Rating based on real answers</h2>
+                        <p>This chart shows the interpereted ratings based on real answers.</p>
+                    </>
+                :
+                    <p>No data available</p>
+                }
+                
             </article>
         </section>
     )
