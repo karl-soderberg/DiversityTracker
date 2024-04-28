@@ -15,13 +15,14 @@ namespace diversitytracker.api.Controllers
         private readonly IFormsRepository _formsDataRepository;
         private readonly IQuestionsRepository _questionsRepository;
         private readonly IAiInterpretationService _aiInterpretationService;
-
-        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository, IAiInterpretationService aiInterpretationService)
+        private readonly IAiInterpretationRepository _aiInterpretationRepository;
+        public FormsDataController(IMapper mapper, IFormsRepository formsDataRepository, IQuestionsRepository questionsRepository, IAiInterpretationService aiInterpretationService, IAiInterpretationRepository aiInterpretationRepository)
         {
             _mapper = mapper;
             _formsDataRepository = formsDataRepository;
             _questionsRepository = questionsRepository;
             _aiInterpretationService = aiInterpretationService;
+            _aiInterpretationRepository = aiInterpretationRepository;
         }
 
         [HttpGet]
@@ -29,10 +30,14 @@ namespace diversitytracker.api.Controllers
         public async Task<ActionResult<FormSubmissionsDataResponseDto>> GetFormData(DateTime? startDate, DateTime? endDate)
         {
             var formSubmissions = await _formsDataRepository.GetFormsAsync(startDate, endDate);
+            var aiInterpretations = await _aiInterpretationRepository.GetAiInterpretationAsync();
+
             var formSubmissionsResponseDto = new FormSubmissionsDataResponseDto(){
                 RequestedAt = DateTime.UtcNow,
-                FormSubmissions = formSubmissions
+                FormSubmissions = formSubmissions,
+                aiInterpretation = aiInterpretations
             };  
+            
             return Ok(formSubmissionsResponseDto);
         }
 
