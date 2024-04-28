@@ -72,13 +72,17 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
+                if(forms == null || questionTypes == null)
+                {
+                    return NotFound();
+                }
                 var interperetation = await _aiInterpretationService.InterperetAllQuestionsAsync(forms, questionTypes);
                 return Ok(interperetation);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return StatusCode(500, "Internal Server Error");
+                return StatusCode(500, ex.Message);
             }  
         }
 
@@ -95,7 +99,7 @@ namespace diversitytracker.api.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return StatusCode(500, "Internal Server Error");
+                return StatusCode(500, ex.Message);
             }  
         }
     }

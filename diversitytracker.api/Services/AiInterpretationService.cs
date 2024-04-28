@@ -160,7 +160,10 @@ namespace diversitytracker.api.Services
             var wasnull = false;
             if(aiInterpretation == null)
             {
-                aiInterpretation = new AiInterpretation();
+                aiInterpretation = new AiInterpretation
+                {
+                    QuestionInterpretations = new List<AiQuestionInterpretation>()
+                };
                 wasnull = true;
             }
 
@@ -218,25 +221,37 @@ namespace diversitytracker.api.Services
             var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+
             var wasnull = false;
             if(aiInterpretation == null)
             {
-                aiInterpretation = new AiInterpretation();
+                aiInterpretation = new AiInterpretation
+                {
+                    QuestionInterpretations = new List<AiQuestionInterpretation>()
+                };
                 wasnull = true;
             }
+            else if(aiInterpretation.QuestionInterpretations == null)
+            {
+                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>();
+            };
 
             foreach(var form in formSubmissions)
             {
                 int idx = 0;
                 foreach(var question in form.Questions)
                 {
-                    var questionInterpretation = new AiQuestionInterpretation()
+                    var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
+                    if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
                     {
-                        QuestionTypeId = question.QuestionTypeId,
-                        QuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId),
-                        ValueInterpretation = realDataSeperatedInterpretations[idx]
-                    };
-                    aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                        var questionInterpretation = new AiQuestionInterpretation()
+                        {
+                            QuestionTypeId = fetchQuestionType.Id,
+                            QuestionType = fetchQuestionType,
+                            ValueInterpretation = realDataSeperatedInterpretations[idx]
+                        };
+                        aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    }
                     idx++;
                 }
             }
@@ -261,7 +276,7 @@ namespace diversitytracker.api.Services
 
         private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
         {
-            var realDataPrompts = new Dictionary<string, string>();
+            // var realDataPrompts = new Dictionary<string, string>();
 
              StringBuilder promptBuilder = new StringBuilder(
                     $"Here is a collection of questions and answers where many individuals ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional and interpersonal insights based on the data. Every section is seperated by ->- . I want you to give one answer per section and seperate the answers by two new lines. Don't give an answer on the data values themselves. Answer in under 20-50 words for each question/answers. Only give me a text no bullet points or similar. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
@@ -271,7 +286,7 @@ namespace diversitytracker.api.Services
                 string key = kvp.Key;
                 double[] values = kvp.Value;
                 
-                promptBuilder.AppendLine($"{kvp} || \n");
+                promptBuilder.AppendLine($"{key} || \n");
                 foreach (var value in values)
                 {
                     promptBuilder.AppendLine($"- {Math.Round(value)}\n");
