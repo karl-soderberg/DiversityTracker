@@ -10,26 +10,24 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// builder.Services.AddControllers();
+// var config = new ConfigurationBuilder()
+// .AddJsonFile("appsettings.json", false, true)
+// .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
+// .Build();
 
-builder.Services.AddControllers();
-var config = new ConfigurationBuilder()
-.AddJsonFile("appsettings.json", false, true)
-.AddUserSecrets(Assembly.GetExecutingAssembly(), true)
-.Build();
-
-// builder.Services.AddControllers()
-// .AddJsonOptions(options =>
-// {
-//     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-// });
-
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(config.GetConnectionString("AZURE_SQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL"));
 });
 
 builder.Services.AddScoped<IFormsRepository, FormsDataRepository>();
@@ -61,9 +59,6 @@ if (app.Environment.IsDevelopment())
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
