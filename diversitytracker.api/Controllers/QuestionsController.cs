@@ -25,6 +25,10 @@ namespace diversitytracker.api.Controllers
         public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
         {
             var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
+            if (questionTypes == null)
+            {
+                return NotFound();
+            }
             return Ok(questionTypes);
         }
 
