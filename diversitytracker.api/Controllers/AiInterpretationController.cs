@@ -99,7 +99,7 @@ namespace diversitytracker.api.Controllers
             }  
         }
 
-        [HttpDelete]
+        [HttpDelete("ClearAiInterpretation")]
         public async Task<ActionResult> ClearAiInterpretation()
         {
             await _aiInterpretationRepository.DeleteAiInterpretationAsync();
