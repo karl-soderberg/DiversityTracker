@@ -71,10 +71,32 @@ export type FormSubmissionResponse = {
 };
   
 export type APIFormsResponse = {
-    requestedAt: string;
-    formSubmissions: Array<FormSubmissionResponse>;
-  };
+    requestedAt: string,
+    formSubmissions: Array<FormSubmissionResponse>,
+    aiInterpretation: AiInterpretationResponse
+};
 
+export type AiInterpretationResponse = {
+    id: string;
+    reflectionsInterpretation: string;
+    realDataInterpretation: string;
+    questionInterpretations: AiQuestionInterpretation[];
+}
+
+export type AiQuestionInterpretation = {
+    id: string;
+    questionTypeId: string;
+    questionType: any;
+    answerInterpretation: string;
+    valueInterpretation: string;
+    aiAnswerData: AiAnswerData;
+}
+
+export type AiAnswerData = {
+    id: string;
+    value: number[];
+    wordLength: number[];
+}
 
 export type FormSubmissionArray = {
     formSubmissions: Array<FormSubmissionResponse>
