@@ -15,7 +15,7 @@ namespace diversitytracker.api.Repository
         }
         public async Task<AiInterpretation> GetAiInterpretationAsync()
         {
-            return await _context.AiInterpretations.Include(inter => inter.QuestionInterpretations).FirstOrDefaultAsync();
+            return await _context.AiInterpretations.Include(inter => inter.QuestionInterpretations).ThenInclude(qinter => qinter.aiAnswerData).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAiInterpretationAsync(AiInterpretation aiInterpretation)

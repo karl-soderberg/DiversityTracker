@@ -104,12 +104,15 @@ namespace diversitytracker.api.Controllers
         {
             try
             {
+                var forms = await _formsRepository.GetFormsAsync(null, null);
+                var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
+                var interperetation = await _aiInterpretationService.CreateDataFromQuestionAnswers(forms, questionTypes);
                 return Ok(); 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return StatusCode(500, "Internal Server Error");
+                return StatusCode(500, ex.Message);
             }  
         }
 

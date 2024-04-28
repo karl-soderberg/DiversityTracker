@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using diversitytracker.api.Contracts;
 using diversitytracker.api.Models;
 using diversitytracker.api.Models.AI;
@@ -129,6 +130,83 @@ namespace diversitytracker.api.Services
 
         }
 
+        public async Task<AiInterpretation> InterperetRealDataSeperatedAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        {
+            var realData = new Dictionary<string, double[]>();
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    if (realData.ContainsKey(questionTypes[idx].Value))
+                    {
+                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
+                    }
+                    else
+                    {
+                        realData[questionTypes[idx].Value] = new double[] { question.Value };
+                    }
+                    idx++;
+                }
+            }
+
+            var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
+            var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
+            var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+
+            var wasnull = false;
+            if(aiInterpretation == null)
+            {
+                aiInterpretation = new AiInterpretation
+                {
+                    QuestionInterpretations = new List<AiQuestionInterpretation>()
+                };
+                wasnull = true;
+            }
+            else if(aiInterpretation.QuestionInterpretations == null)
+            {
+                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>();
+            };
+
+            foreach(var form in formSubmissions)
+            {
+                int idx = 0;
+                foreach(var question in form.Questions)
+                {
+                    var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
+                    if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
+                    {
+                        var questionInterpretation = new AiQuestionInterpretation()
+                        {
+                            QuestionTypeId = fetchQuestionType.Id,
+                            QuestionType = fetchQuestionType,
+                            ValueInterpretation = realDataSeperatedInterpretations[idx]
+                        };
+                        aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    }
+                    else
+                    {
+                        aiInterpretation.QuestionInterpretations[idx].ValueInterpretation = realDataSeperatedInterpretations[idx];
+                    }
+                    idx++;
+                }
+            }
+
+            if(wasnull)
+            {
+                await _aiInterpretationRepository.AddAiInterpretationAsync(aiInterpretation);
+            }
+            else
+            {
+                await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
+            } 
+
+            return aiInterpretation;
+        }
+
         public async Task<AiInterpretation> InterperetAllQuestionsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
             var questionAnswersData = new Dictionary<string, string[]>();
@@ -209,30 +287,64 @@ namespace diversitytracker.api.Services
             return aiInterpretation;
         }
 
-        public async Task<AiInterpretation> InterperetRealDataSeperatedAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        public async Task<AiInterpretation> CreateDataFromQuestionAnswers(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            var realData = new Dictionary<string, double[]>();
+            var questionAnswersData = new Dictionary<string, string[]>();
 
             foreach(var form in formSubmissions)
             {
                 int idx = 0;
                 foreach(var question in form.Questions)
                 {
-                    if (realData.ContainsKey(questionTypes[idx].Value))
+                    if (questionAnswersData.ContainsKey(questionTypes[idx].Value))
                     {
-                        realData[questionTypes[idx].Value] = realData[questionTypes[idx].Value].Append(question.Value).ToArray();
+                        List<string> tempList = questionAnswersData[questionTypes[idx].Value].ToList();
+                        tempList.Add(question.Answer);
+                        questionAnswersData[questionTypes[idx].Value] = tempList.ToArray();
                     }
                     else
                     {
-                        realData[questionTypes[idx].Value] = new double[] { question.Value };
+                        questionAnswersData[questionTypes[idx].Value] = new string[] { question.Answer };
                     }
                     idx++;
                 }
             }
 
-            var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
-            var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
-            var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var questionDataPrompt = CreateDataFromQuestionAnswersPrompt(questionAnswersData);
+            var questionWordLengthPrompt = CountQuestionWordLengthPrompt(questionAnswersData);
+
+            var questionDataAiInterpretation = await OpenAIInterperet(questionDataPrompt);
+            var questionWordLengthAiInterpretation = await OpenAIInterperet(questionWordLengthPrompt);
+
+            var linesAnswers = questionDataAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .ToArray();
+
+            var linesWordLength = questionWordLengthAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .ToArray();
+
+            List<double[]> questionsDataAiMatches = new List<double[]>();
+            List<double[]> questionsWordLengthAiMatches = new List<double[]>();
+
+            foreach (var line in linesAnswers)
+            {
+                var trimmedLine = line.Trim('[', ']');
+                double[] numbers = trimmedLine.Split(',')
+                                            .Select(n => double.Parse(n.Trim()))
+                                            .ToArray();
+                questionsDataAiMatches.Add(numbers);
+            }
+
+            foreach (var line in linesWordLength)
+            {
+                var trimmedLine = line.Trim('[', ']');
+                double[] numbers = trimmedLine.Split(',')
+                                            .Select(n => double.Parse(n.Trim()))
+                                            .ToArray();
+                questionsWordLengthAiMatches.Add(numbers);
+            }
+
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
 
@@ -241,14 +353,23 @@ namespace diversitytracker.api.Services
             {
                 aiInterpretation = new AiInterpretation
                 {
-                    QuestionInterpretations = new List<AiQuestionInterpretation>()
+                    QuestionInterpretations = new List<AiQuestionInterpretation>(),
                 };
                 wasnull = true;
             }
             else if(aiInterpretation.QuestionInterpretations == null)
             {
-                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>();
+                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>(){};
             };
+            
+
+            foreach (var questionInterpretation in aiInterpretation.QuestionInterpretations)
+            {
+                if (questionInterpretation.aiAnswerData == null)
+                {
+                    questionInterpretation.aiAnswerData = new AiAnswerData();
+                }
+            }
 
             foreach(var form in formSubmissions)
             {
@@ -256,19 +377,26 @@ namespace diversitytracker.api.Services
                 foreach(var question in form.Questions)
                 {
                     var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
+                    
                     if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
                     {
+                        var newAiAnswerData = new AiAnswerData(){
+                            Value = questionsDataAiMatches[idx],
+                            WordLength = questionsWordLengthAiMatches[idx]
+                        };
+
                         var questionInterpretation = new AiQuestionInterpretation()
                         {
                             QuestionTypeId = fetchQuestionType.Id,
                             QuestionType = fetchQuestionType,
-                            ValueInterpretation = realDataSeperatedInterpretations[idx]
+                            aiAnswerData = newAiAnswerData
                         };
                         aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
                     }
                     else
                     {
-                        aiInterpretation.QuestionInterpretations[idx].ValueInterpretation = realDataSeperatedInterpretations[idx];
+                        aiInterpretation.QuestionInterpretations[idx].aiAnswerData.Value = questionsDataAiMatches[idx];
+                        aiInterpretation.QuestionInterpretations[idx].aiAnswerData.WordLength = questionsWordLengthAiMatches[idx];
                     }
                     idx++;
                 }
@@ -286,14 +414,42 @@ namespace diversitytracker.api.Services
             return aiInterpretation;
         }
 
-        public Task<AiInterpretation> CreateDataFromQuestionAnswers(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        public Task<AiInterpretation> InterperetQuestionAsync(QuestionType questionType)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AiInterpretation> InterperetQuestionAsync(QuestionType questionType)
+        private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
         {
-            throw new NotImplementedException();
+            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words: It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
+            foreach (var input in reflectionAnswerData)
+            {
+                promptBuilder.AppendLine($"- {input}");
+            }
+            return promptBuilder.ToString();
+        }
+
+        private string CreateRealdataPrompt(Dictionary<string, double[]> realData)
+        {
+             StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. Do not give answer on the data values themselves. Answer in under 50 words.\n\n");
+            
+            foreach (var kvp in realData)
+            {
+                string key = kvp.Key;
+                double[] values = kvp.Value;
+                
+                promptBuilder.AppendLine($"{kvp} || \n");
+                foreach (var value in values)
+                {
+                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
+                }
+
+                promptBuilder.AppendLine("->-");
+            }
+            var prompt = promptBuilder.ToString();
+
+            return prompt;
         }
 
         private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
@@ -319,28 +475,6 @@ namespace diversitytracker.api.Services
             return prompt;
         }
 
-        private string CreateRealdataPrompt(Dictionary<string, double[]> realData)
-        {
-             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. Do not give answer on the data values themselves. Answer in under 50 words.\n\n");
-            
-            foreach (var kvp in realData)
-            {
-                string key = kvp.Key;
-                double[] values = kvp.Value;
-                
-                promptBuilder.AppendLine($"{kvp} || \n");
-                foreach (var value in values)
-                {
-                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
-                }
-
-                promptBuilder.AppendLine("->-");
-            }
-            var prompt = promptBuilder.ToString();
-
-            return prompt;
-        }
         private string CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
         {
 
@@ -364,13 +498,52 @@ namespace diversitytracker.api.Services
 
             return promptBuilder.ToString();
         }
-        private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
+
+        private string CreateDataFromQuestionAnswersPrompt(Dictionary<string, string[]> questionAnswerData)
         {
-            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words: It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
-            foreach (var input in reflectionAnswerData)
+
+            StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n . I want you to write an array of values 0-10 for each persons answer and bundle them into one array per question. 0 being poor, 10 being really good opinion. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+
+            foreach (var kvp in questionAnswerData)
             {
-                promptBuilder.AppendLine($"- {input}");
+                string key = kvp.Key;
+                string[] answers = kvp.Value;
+
+                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                
+                foreach (var answer in answers)
+                {
+                    promptBuilder.AppendLine($"- {answer} \n");
+                }
+
+                promptBuilder.AppendLine("->- \n");
             }
+
+            return promptBuilder.ToString();
+        }
+
+        private string CountQuestionWordLengthPrompt(Dictionary<string, string[]> questionAnswerData)
+        {
+
+            StringBuilder promptBuilder = new StringBuilder(
+                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n . I want you to write an array of number of words contained in each persons answer and bundle them into one array per question. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+
+            foreach (var kvp in questionAnswerData)
+            {
+                string key = kvp.Key;
+                string[] answers = kvp.Value;
+
+                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                
+                foreach (var answer in answers)
+                {
+                    promptBuilder.AppendLine($"- {answer} \n");
+                }
+
+                promptBuilder.AppendLine("->- \n");
+            }
+
             return promptBuilder.ToString();
         }
     }
