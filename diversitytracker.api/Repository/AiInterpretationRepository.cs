@@ -30,5 +30,11 @@ namespace diversitytracker.api.Repository
             await _context.SaveChangesAsync();
             return aiInterpretation;
         }
+    
+        public async Task DeleteAiInterpretationAsync()
+        {
+            var aiInterpretation = await GetAiInterpretationAsync();
+            _context.AiInterpretations.Remove(aiInterpretation);
+        }
     }
 }
