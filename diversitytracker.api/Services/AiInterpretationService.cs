@@ -157,6 +157,7 @@ namespace diversitytracker.api.Services
             var questionAnswerInterpretations = questionAnswerInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
+
             var wasnull = false;
             if(aiInterpretation == null)
             {
@@ -166,19 +167,28 @@ namespace diversitytracker.api.Services
                 };
                 wasnull = true;
             }
+            else if(aiInterpretation.QuestionInterpretations == null)
+            {
+                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>();
+            };
 
             foreach(var form in formSubmissions)
             {
                 int idx = 0;
                 foreach(var question in form.Questions)
                 {
-                    var questionInterpretation = new AiQuestionInterpretation()
+                    var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
+                    
+                    if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
                     {
-                        QuestionTypeId = question.QuestionTypeId,
-                        QuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId),
-                        AnswerInterpretation = questionAnswerInterpretations[idx],
-                    };
-                    aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                        var questionInterpretation = new AiQuestionInterpretation()
+                        {
+                            QuestionTypeId = fetchQuestionType.Id,
+                            QuestionType = fetchQuestionType,
+                            AnswerInterpretation = questionAnswerInterpretations[idx],
+                        };
+                        aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    }
                     idx++;
                 }
             }
@@ -333,7 +343,7 @@ namespace diversitytracker.api.Services
             var questionAnswerDataPrompt = new StringBuilder();
 
             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions that is useful for ctos. Answer in under 50 words: I want you to give one 20-50 word answer for each question/answers section. The sections are seperated by ->- . I want you to give me the under 50 word answers seperated by two new lines. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions. Give a 20-50 word answer for each question/answers section. The sections are seperated by ->- .It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
