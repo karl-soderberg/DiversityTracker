@@ -151,3 +151,16 @@ export type scatterDataArr = {
 export type scatterDataDict = {
     [key: string]: scatterDataArr
 }
+
+export type scatterAiData = {
+    wordlength: number;
+    value: number;
+}
+
+export type scatterAiDataArr = {
+    scatterData: Array<scatterAiData>,
+}
+
+export type scatterAiDataDict = {
+    [key: string]: scatterAiDataArr
+}
