@@ -189,6 +189,10 @@ namespace diversitytracker.api.Services
                         };
                         aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
                     }
+                    else
+                    {
+                        aiInterpretation.QuestionInterpretations[idx].AnswerInterpretation = questionAnswerInterpretations[idx];
+                    }
                     idx++;
                 }
             }
@@ -261,6 +265,10 @@ namespace diversitytracker.api.Services
                             ValueInterpretation = realDataSeperatedInterpretations[idx]
                         };
                         aiInterpretation.QuestionInterpretations.Add(questionInterpretation);
+                    }
+                    else
+                    {
+                        aiInterpretation.QuestionInterpretations[idx].ValueInterpretation = realDataSeperatedInterpretations[idx];
                     }
                     idx++;
                 }
