@@ -7,5 +7,6 @@ namespace diversitytracker.api.Models.OpenAi
         public QuestionType QuestionType { get; set; }
         public string? AnswerInterpretation { get; set; }
         public string? ValueInterpretation { get; set; }
+        public AiAnswerData? aiAnswerData{ get; set; }
     }
 }
