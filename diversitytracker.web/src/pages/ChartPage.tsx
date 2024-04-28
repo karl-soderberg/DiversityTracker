@@ -80,18 +80,26 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
 
     return(
         <section className={className}>
-            {formsData && 
+            {formsData && (
                 <>
-                    <h3>Overall Data Interperetation:</h3>
-                    <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                    <h3>Overall Data Interpretation:</h3>
+                    {formsData.aiInterpretation.realDataInterpretation ? (
+                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                    ) : (
+                        <p>No data interpretation available.</p>
+                    )}
                 </>
-            }
-            {formsData && 
+            )}
+            {formsData && (
                 <>
-                    <h3>Reflections Interperetation:</h3>
-                    <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                    <h3>Reflections Interpretation:</h3>
+                    {formsData.aiInterpretation.reflectionsInterpretation ? (
+                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                    ) : (
+                        <p>No reflections available.</p>
+                    )}
                 </>
-            }
+            )}
             <h1>Percieved Quality Of Leadership Over Time</h1>
             <p>This tracks the percieved leadership among all departments across all genders</p>
             <article className='chart-container'>
@@ -220,6 +228,7 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
                         setActiveGenderBarData(genderBarData[activeQuestion]);
                         setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
                         setActiveAiInterpretation(aiInterpretation[activeQuestion]);
+                        console.log(activeAiInterpretation);
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
@@ -229,21 +238,31 @@ export const ChartPage = ( {className, questionData, formsData} : Props) => {
             <p>{activeQuestion}</p>
             <article className='datasummary-container'>
                 <h2>Reflection Box Summary</h2>
-                {formsData && (
+                {(formsData && formsData.aiInterpretation) && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                            <p key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
-                        ))}
+                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
+                                <p key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
+                            ))
+                        ) : (
+                            <p>No answers available.</p>
+                        )}
                     </>
                 )}
+                
+                
             </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {formsData && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                            <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
-                        ))}
+                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
+                                <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
+                            ))
+                        ) : (
+                            <p>No data available.</p>
+                        )}
                     </>
                 )}
             </article>
