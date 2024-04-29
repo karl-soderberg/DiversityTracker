@@ -94,39 +94,39 @@ function App() {
       }
   });
 
-  //const isLoggedin = useClientPrincipal().clientPrincipal;
-  const isLoggedin = true;
+  const isLoggedin = useClientPrincipal().clientPrincipal;
+  //const isLoggedin = true;
 
     return (
       <>
-        <section className="Mainpage-login">
-          <StaticWebAuthLogins
-                      twitter={false}
-                      customRenderer={({ href, className, name }) => (
-                        <Button type="primary" className="login-button">
-                          <a href={href} className={className}>
-                            Login With {name}
-                          </a>
-                        </Button>
-                      )}
-                      />
-        </section>
+        {!isLoggedin && (
+          <article className="Mainpage-login">
+            <h2 className="Mainpage-login__title">DataSense</h2>
+            <section className="Mainpage-login__buttons">
+                <StaticWebAuthLogins
+                            twitter={false}
+                            customRenderer={({ href, className, name }) => (
+                              <Button type="primary" className="login-button">
+                                <a href={href} className={className}>
+                                  Login With {name}
+                                </a>
+                              </Button>
+                            )}
+                            />
+            </section>
+            
+          </article>
+        )}
       {isLoggedin && (
           <Router>
           <header className="App-header">
               <section className="App-header__login">
-                <StaticWebAuthLogins
-                  twitter={false}
-                  customRenderer={({ href, className, name }) => (
-                    <Button type="primary" className="login-button">
-                      <a href={href} className={className}>
-                        Login With {name}
-                      </a>
-                    </Button>
-                  )}
-                  />
+              <h2>DataSense</h2>
+                <Button>
+                  <Logout />
+                </Button>
               </section>
-            <ClientPrincipalContextProvider>
+              <ClientPrincipalContextProvider>
               <UserDisplay />
             </ClientPrincipalContextProvider>
           </header>

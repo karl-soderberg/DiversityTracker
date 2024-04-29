@@ -147,6 +147,27 @@
 }
 
 
+.Mainpage-login {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin: 2rem;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.Mainpage-login__title {
+    margin: 7rem;
+    font-size: 7em;
+    
+}
+
+.Mainpage-login__buttons {
+    display: flex;
+    justify-content: space-between; 
+    width: 50%;
+    margin: 15px;
+}
 .App-header__login {
     display: flex;
     justify-content: space-around;
@@ -159,6 +180,25 @@
     margin: 10px;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* @keyframes animateRight{
     0%{
         transform: translateX(100%);
