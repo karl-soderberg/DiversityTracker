@@ -83,7 +83,7 @@
 
 
 .chartpage__selectquestion{
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     width: 100vw;
@@ -95,6 +95,22 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.chartpage__selectcharttype{
+    display: flex;
+    justify-content: space-around;
+}
+    .chartpage__selectcharttype a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .chartpage__selectcharttype p{
+        font-weight: 200;
+        font-size: .6rem;
+        color: #f3f3f3;
+    }
 
 
     .chartpage-container__title{
