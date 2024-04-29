@@ -1,13 +1,2 @@
-{
-    "routes": [
-        {
-            "route": "/newform",
-            "allowedRoles": ["anonymous"]
-        },
-        {
-            "route": "/chart*",
-            "allowedRoles": ["admin"]
-          }
-    ]
-}
+{}
 
