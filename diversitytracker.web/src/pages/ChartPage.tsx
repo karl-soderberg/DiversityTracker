@@ -41,7 +41,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
 
     const [activeDistributionFormData, setActiveDistributionFormData] = useState<DistributionData>();
     const [activeGenderDistributionData, setActiveGenderDistributionData] = useState<Array<GenderValue>>();
-    const [activeGenderBarData, setActiveGenderBarData] = useState<ChartGenderDistribution>();
+    const [activeGenderBarData, setActiveGenderBarData] = useState<ChartGenderDistribution[]>();
     const [activeTimeAtCompanyScatterData, setActiveTimeAtCompanyScatterData] = useState<scatterDataArr>();
     const [activeAiInterpretation, setActiveAiInterpretation] = useState<scatterAiDataArr>();
 
