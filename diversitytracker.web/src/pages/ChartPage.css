@@ -160,8 +160,8 @@
             line-height: 1.2rem;
         }
     .reflectionboxchartsummary-container{
-        width: 40vh;
-        height: 40vh;
+        width: 75vw;
+        height: 35vh;
         margin: 10% auto;
 
         display: flex;
