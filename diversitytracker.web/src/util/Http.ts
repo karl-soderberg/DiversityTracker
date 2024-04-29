@@ -1,9 +1,10 @@
 import { APIFormsResponse, PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
 
-const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = import.meta.env.VITE_API_URL;
+const API_AZURE_URL = "https://newfinalbe.azurewebsites.net/api";
 
 export const GetAllQuestions = async (): Promise<Array<Question>> => {
-    const response = await fetch(`${API_URL}/Questions`);
+    const response = await fetch(`${API_AZURE_URL}/Questions`);
 
     if (!response.ok) {
         const error = new Error('An error occurred while fetching questions');
@@ -17,7 +18,7 @@ export const GetAllQuestions = async (): Promise<Array<Question>> => {
 }
 
 export const DeleteQuestion = async (question: string): Promise<void> => {
-    const response = await fetch(`${API_URL}/Questions/${question}`, {
+    const response = await fetch(`${API_AZURE_URL}/Questions/${question}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export const PutQuestion = async (question: Question): Promise<void> => {
     const putQuestionType: PostQuestionTypeDto = {
         value: question.value
     }
-    const response = await fetch(`${API_URL}/Questions/${question.id}`, {
+    const response = await fetch(`${API_AZURE_URL}/Questions/${question.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export const PostQuestion = async (question: string) => {
     const newQuestion: PostQuestionTypeDto = {
         value: question
     }
-    const response = await fetch(`${API_URL}/Questions`, {
+    const response = await fetch(`${API_AZURE_URL}/Questions`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ export const PostQuestion = async (question: string) => {
 
 export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto) => {
     console.log(postFormSubmissionDto);
-    const response = await fetch(`${API_URL}/FormsData`, {
+    const response = await fetch(`${API_AZURE_URL}/FormsData`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ export const PostFormsData = async (postFormSubmissionDto: PostFormSubmissionDto
 
 
 export const GetFormsData = async () => {
-    const response = await fetch(`${API_URL}/FormsData`);
+    const response = await fetch(`${API_AZURE_URL}/FormsData`);
 
     if (!response.ok) {
         const error = new Error('An error occurred while fetching Forms');
