@@ -94,8 +94,8 @@ function App() {
       }
   });
 
-  //const isLoggedin = useClientPrincipal().clientPrincipal;
-  const isLoggedin = true;
+  const isLoggedin = useClientPrincipal().clientPrincipal;
+  //const isLoggedin = true;
 
     return (
       <>
