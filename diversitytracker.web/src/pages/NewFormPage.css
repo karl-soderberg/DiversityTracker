@@ -42,3 +42,41 @@
 
     transition: all 350ms ease-in-out;
 }
+
+
+.animation1{
+    position: fixed;
+    top: 30%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+
+    width: 90vw;
+    height: 50vh;
+
+    visibility: collapse;
+    display: none;
+}
+.animation2{
+    position: fixed;
+    top: 0;
+    left: -30%;
+    z-index: 50;
+
+    width: 150vw;
+    height: 70vh;
+    
+    visibility: collapse;
+    display: none;
+}
+
+.animation1.active{
+    display: block;
+    visibility: visible;
+
+}
+.animation2.active{
+    display: block;
+    visibility: visible;
+}

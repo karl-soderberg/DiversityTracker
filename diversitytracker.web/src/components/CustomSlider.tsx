@@ -27,7 +27,6 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
 
     useEffect(() => {
-        // Initialize the animation only once when the component mounts
         if (emotionIconRef.current && !animationInstance.current) {
             animationInstance.current = lottie.loadAnimation({
                 container: emotionIconRef.current,
@@ -38,7 +37,6 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
             });
         }
 
-        // Cleanup function to destroy animation on component unmount
         return () => {
             if (animationInstance.current) {
                 animationInstance.current.destroy();
@@ -47,7 +45,6 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
     }, []);
 
     useEffect(() => {
-        // Update the animation frame whenever the value changes
         if (animationInstance.current) {
             animationInstance.current.goToAndStop(value, true);
         }
@@ -55,8 +52,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
     return (
         <section className="slider-container">
-            <label className='slider__label' htmlFor="">{text + " " + Math.round(value / 10)}</label>
-           
+            <label className='slider__label' htmlFor="">{text + " " /*+ Math.round(value / 10)*/}</label>
             <div className='slider__overlay' style={{ left: `${value+compensatorValue}%`, transform: `translateX(-50%)`}}>
                 {/* {value} */}
                 <div ref={emotionIconRef} className='slider__overlay-icon'></div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   DatePicker,
@@ -38,6 +38,12 @@ type Props = {
 }
 
 export const NewFormPage = ({className, questionData, isLoading, isError, error, refetch}: Props) => {
+    const catAnimationRef = useRef<HTMLDivElement>(null);
+    const confettiAnimationRef = useRef<HTMLDivElement>(null);
+    const catAnimationInstance = useRef<any>(null);
+    const confettiAnimationInstance = useRef<any>(null);
+    const [playAnimations, setPlayAnimations] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -45,14 +51,6 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         const timeAtCompany = values.timeatcompany;
         const reflection = values.reflection;
 
-        // const questions: FormSubmitQuestionTypeDto[] = 
-        // Object.keys(values)
-        //     .filter(key => key.startsWith('QuestionType'))
-        //     .map(key => ({
-        //         questionTypeId: key,
-        //         value: values[key] / 10,
-        //         answer: values["reflection_" + question.value] || ""
-        //     }));
         const questions: FormSubmitQuestionTypeDto[] = 
             questionData.map((question) => ({
                 questionTypeId: question.id,
@@ -71,7 +69,11 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        postFormsData.mutate(formSubmissionDto);
+        if(!isSubmitted){
+            postFormsData.mutate(formSubmissionDto);
+        }
+        setPlayAnimations(true);
+        setIsSubmitted(true);
     };
 
     const onFailSubmitHandler = (errorInfo: any) => {
@@ -84,10 +86,55 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         }
     });
 
+
+    useEffect(() => {
+        if (catAnimationRef.current && !catAnimationInstance.current) {
+            catAnimationInstance.current = lottie.loadAnimation({
+                container: catAnimationRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './src/resources/animations/cat.json'
+            });
+        }
+        return () => {
+            if (catAnimationInstance.current) {
+                catAnimationInstance.current.destroy();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
+            confettiAnimationInstance.current = lottie.loadAnimation({
+                container: confettiAnimationRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './src/resources/animations/fireworks.json'
+            });
+        }
+        return () => {
+            if (confettiAnimationInstance.current) {
+                confettiAnimationInstance.current.destroy();
+            }
+        };
+    }, []);
+
+
+    useEffect(() => {
+        if (playAnimations) {
+            catAnimationInstance.current?.play();
+            confettiAnimationInstance.current?.play();
+        }
+    }, [playAnimations]);
+
     return(
         <section className={className}>
             <h1>Salt Organization Form</h1>
             <p>The more input the better</p>
+            <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
+            <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
             <section className='newformpage-container__form-container'>
                 <Form 
