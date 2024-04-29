@@ -99,8 +99,9 @@ function App() {
 
 
   const { clientPrincipal, loaded } = useClientPrincipal();
+  const isLoggedIn = clientPrincipal.userDetails !== null;
 
-  if (!clientPrincipal) {
+  if (!isLoggedIn) {
     return (
       <article className="Mainpage-login">
         <h2 className="Mainpage-login__title">DataSense</h2>
@@ -115,10 +116,6 @@ function App() {
                           </Button>
                         )}
                         />
-              <p>
-                {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
-                {clientPrincipal.userId} {clientPrincipal.userRoles}
-              </p>
         </section> 
       </article>
     )
