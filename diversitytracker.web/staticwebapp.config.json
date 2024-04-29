@@ -1,8 +1,8 @@
 {
     "routes": [
         {
-          "route": "/admin*",
-          "allowedRoles": ["admin"]
+            "route": "/newform",
+            "allowedRoles": ["anonymous"]
         },
         {
             "route": "/chart*",
