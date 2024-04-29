@@ -17,6 +17,7 @@ import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
+
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
 
@@ -78,7 +79,7 @@ function App() {
             <UserDisplay />
           </ClientPrincipalContextProvider>
         </header>
-      <NavBottom  />
+      <NavBottom useClientPrincipal={useClientPrincipal}  />
       <main className="page-container">
         <Routes>
           <Route path="/newform" element={<NewFormPage 
