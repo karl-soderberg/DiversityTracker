@@ -94,62 +94,79 @@ function App() {
       }
   });
 
+  //const isLoggedin = useClientPrincipal().clientPrincipal;
+  const isLoggedin = true;
+
     return (
       <>
-        <Router>
-        <header className="App-header">
-            <section className="App-header__login">
-              <StaticWebAuthLogins
-                twitter={false}
-                customRenderer={({ href, className, name }) => (
-                  <Button type="primary" className="login-button">
-                    <a href={href} className={className}>
-                      Login With {name}
-                    </a>
-                  </Button>
-                )}
-                />
-            </section>
-          <ClientPrincipalContextProvider>
-            <UserDisplay />
-          </ClientPrincipalContextProvider>
-        </header>
-      <NavBottom useClientPrincipal={useClientPrincipal}  />
-      <main className="page-container">
-        <Routes>
-          <Route path="/newform" element={<NewFormPage 
-              className="newformpage-container"
-              questionData={data}
-              isLoading={isLoading}
-              isError={isError}
-              error={error}
-              refetch={refetch}
-            />} />
-          <Route path="/chart" element={<ChartPage 
-              className="chartpage-container"
-              questionData={data}
-              isLoading={isLoading}
-              isError={isError}
-              error={error}
-              refetch={refetch}
-              formsData={formsData}
-              InterperetAllRealData={InterperetAllRealData.mutate}
-              InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
-              InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
-              InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
-              CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
-            />} />
-          <Route path="/admin" element={<AdminPage 
-              className="adminpage-container"
-              questionData={data}
-              isLoading={isLoading}
-              isError={isError}
-              error={error}
-              refetch={refetch}
-            />} />
-        </Routes>
-      </main>
-    </Router>
+        <section className="Mainpage-login">
+          <StaticWebAuthLogins
+                      twitter={false}
+                      customRenderer={({ href, className, name }) => (
+                        <Button type="primary" className="login-button">
+                          <a href={href} className={className}>
+                            Login With {name}
+                          </a>
+                        </Button>
+                      )}
+                      />
+        </section>
+      {isLoggedin && (
+          <Router>
+          <header className="App-header">
+              <section className="App-header__login">
+                <StaticWebAuthLogins
+                  twitter={false}
+                  customRenderer={({ href, className, name }) => (
+                    <Button type="primary" className="login-button">
+                      <a href={href} className={className}>
+                        Login With {name}
+                      </a>
+                    </Button>
+                  )}
+                  />
+              </section>
+            <ClientPrincipalContextProvider>
+              <UserDisplay />
+            </ClientPrincipalContextProvider>
+          </header>
+        <NavBottom useClientPrincipal={useClientPrincipal}  />
+          <main className="page-container">
+            <Routes>
+              <Route path="/newform" element={<NewFormPage 
+                  className="newformpage-container"
+                  questionData={data}
+                  isLoading={isLoading}
+                  isError={isError}
+                  error={error}
+                  refetch={refetch}
+                />} />
+              <Route path="/chart" element={<ChartPage 
+                  className="chartpage-container"
+                  questionData={data}
+                  isLoading={isLoading}
+                  isError={isError}
+                  error={error}
+                  refetch={refetch}
+                  formsData={formsData}
+                  InterperetAllRealData={InterperetAllRealData.mutate}
+                  InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
+                  InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
+                  InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
+                  CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
+                />} />
+              <Route path="/admin" element={<AdminPage 
+                  className="adminpage-container"
+                  questionData={data}
+                  isLoading={isLoading}
+                  isError={isError}
+                  error={error}
+                  refetch={refetch}
+                />} />
+            </Routes>
+          </main>
+        </Router>
+        )}
       
           
       </>
