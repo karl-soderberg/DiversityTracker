@@ -5,6 +5,7 @@ import { MOCKData, barChartMockData } from '../data/MockData'
 import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question, scatterAiDataArr, scatterAiDataDict, scatterData, scatterDataArr, scatterDataDict } from '../types/types'
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'
+import { Switch } from 'antd'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -237,6 +238,12 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }     
                     </BarChart>
                 ) : null}
+                <div className='chart-container__scopebtn-container'>
+                    <p>Men</p>
+                    <Switch className='switch--men' size="small" defaultChecked />
+                    <p>Women</p>
+                    <Switch className='switch--women' size="small" defaultChecked />
+                </div> 
             </ResponsiveContainer>
             </article>
             <h1 className={className + "__title"}>Percieved Quality Of Leadership Over Time</h1>
