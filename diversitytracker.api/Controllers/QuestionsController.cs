@@ -24,12 +24,15 @@ namespace diversitytracker.api.Controllers
         // [Authorize("isAdmin")]
         public async Task<ActionResult<List<QuestionType>>> GetQuestionTypes()
         {
-            var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-            if (questionTypes == null)
-            {
-                return NotFound();
-            }
-            return Ok(questionTypes);
+            var newQuestion = new QuestionType(){
+                Value = "is this ok?"
+            };
+            // var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
+            // if (questionTypes == null)
+            // {
+            //     return NotFound();
+            // }
+            return Ok(newQuestion);
         }
 
         [HttpPost]
