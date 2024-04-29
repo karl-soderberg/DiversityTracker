@@ -3,7 +3,7 @@ import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { APIFormsResponse, Question } from "./types/types";
 import { GetAllQuestions, GetFormsData } from "./util/Http";
 import {
@@ -53,9 +53,39 @@ function App() {
     queryFn: () => GetAllQuestions()
   });
 
-  const { data: formsData, isLoading: isLoadingForms, isError: isErrorForms, error: errorForms } = useQuery<APIFormsResponse>({
+  const {isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms } = useQuery<APIFormsResponse>({
     queryKey: ['getFormData'],
     queryFn: () => GetFormsData()
+  });
+
+  const InterperetAllReflectionsForms = useMutation(() => InterperetAllReflectionsForms(), {
+      onSuccess: () => {
+          refetch();
+      }
+  });
+
+  const InterperetAllRealData = useMutation(() => InterperetAllRealData(), {
+      onSuccess: () => {
+          refetch();
+      }
+  });
+
+  const InterperetAllQuestionAnswers = useMutation(() => InterperetAllQuestionAnswers(), {
+    onSuccess: () => {
+        refetch();
+    }
+  });
+
+  const InterperetAllQuestionValues = useMutation(() => InterperetAllQuestionValues(), {
+      onSuccess: () => {
+          refetch();
+      }
+  });
+
+  const CreateDataFromQuestionAnswersInterpretation = useMutation(() => CreateDataFromQuestionAnswersInterpretation(), {
+      onSuccess: () => {
+          refetch();
+      }
   });
 
     return (
@@ -97,6 +127,11 @@ function App() {
               error={error}
               refetch={refetch}
               formsData={formsData}
+              InterperetAllReflectionsForms={InterperetAllReflectionsForms}
+              InterperetAllRealData={InterperetAllRealData}
+              InterperetAllQuestionAnswers={InterperetAllQuestionAnswers}
+              InterperetAllQuestionValues={InterperetAllQuestionValues}
+              CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation}
             />} />
           <Route path="/admin" element={<AdminPage 
               className="adminpage-container"

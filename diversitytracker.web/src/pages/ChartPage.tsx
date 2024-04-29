@@ -18,7 +18,7 @@ type Props = {
     isError: any, 
     error: any, 
     refetch: any,
-    formsData: APIFormsResponse
+    formsData: APIFormsResponse,
 }
 
 
