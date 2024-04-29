@@ -13,6 +13,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
     const [value, setValue] = useState((max + min) / 2 - 1.8);
     const [compensatorValue, setCompensatorValue] = useState(2);
     const emotionIconRef = useRef<HTMLDivElement>(null);
+    const animationInstance = useRef<any>(null);
 
     const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = Number(event.target.value);
@@ -26,34 +27,31 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
 
     useEffect(() => {
-        if (emotionIconRef.current) {
-          const animation = lottie.loadAnimation({
-            container: emotionIconRef.current,
-            renderer: 'svg',
-            loop: true,
-            autoplay: false,
-            path: './src/resources/animations/moodScaleAnimation.json'
-          });
-    
-          // Listen to changes in slider and update animation frame
-          const handleSliderChange = (event: Event) => {
-            const slider = event.target as HTMLInputElement;
-            const newValue = value;
-            animation.goToAndStop(Math.round(value), true);
-            setValue(newValue);
-            onChange(newValue);
-          };
-    
-          const sliderElement = document.querySelector('.slider');
-          sliderElement?.addEventListener('input', handleSliderChange);
-    
-          // Clean up event listener
-          return () => {
-            sliderElement?.removeEventListener('input', handleSliderChange);
-            animation.destroy(); // Optional: destroy animation on component unmount
-          };
+        // Initialize the animation only once when the component mounts
+        if (emotionIconRef.current && !animationInstance.current) {
+            animationInstance.current = lottie.loadAnimation({
+                container: emotionIconRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './src/resources/animations/moodScaleAnimation2.json'
+            });
         }
-      }, [onChange]);
+
+        // Cleanup function to destroy animation on component unmount
+        return () => {
+            if (animationInstance.current) {
+                animationInstance.current.destroy();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        // Update the animation frame whenever the value changes
+        if (animationInstance.current) {
+            animationInstance.current.goToAndStop(value, true);
+        }
+    }, [value]);
 
     return (
         <section className="slider-container">
