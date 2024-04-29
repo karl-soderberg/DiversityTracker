@@ -105,6 +105,17 @@ function App() {
           <header className="App-header">
                 <section className="App-header__login">
                 <h2>DataSense</h2>
+                <StaticWebAuthLogins
+                              twitter={false}
+                              customRenderer={({ href, className, name }) => (
+                                <Button type="primary" className="login-button">
+                                  <a href={href} className={className}>
+                                    Login With {name}
+                                  </a>
+                                </Button>
+                              )}
+                              />
+
                   <Button>
                     <Logout />
                     
