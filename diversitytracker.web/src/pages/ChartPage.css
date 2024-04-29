@@ -77,19 +77,21 @@
         background-color: var(--light-module2);
     }
     .reflectionboxchartsummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
+        width: 40vh;
+        height: 40vh;
+        margin: 10% auto;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        width: 90vw;
-        height: 65vh;
-
+        background-color: rgba(0, 0, 0, 0.545);
+        background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.815) 0%, rgba(0, 0, 0, 0.866) 100%), 
+        url('https://media.cntraveler.com/photos/6400e9ec3b1e3f0df75c5c44/16:9/w_2580,c_limit/Green%20Bowl%20Beach,%20Bali,%20Indonesia_2AGYRXP.jpg');
+        backdrop-filter: blur(50px);
+        background-size: cover;
         border-radius: 1rem;
-
-        background-color: var(--light-module2);
     }
     .optionalreflectionsummary-container{
         margin: 5% 0%;

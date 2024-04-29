@@ -47,7 +47,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
 
     const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
-
     useEffect(() => {
         if(distributionformdata){
             setActiveDistributionFormData(distributionformdata[activeQuestion])
@@ -244,7 +243,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </>
                 )}
             {/* <p>This tracks the percieved leadership among all departments across all genders</p> */}
-            <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
+            <select className={className + '__selectchhart'} name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
                 <option value="genderdistribution">Gender Distribution</option>
