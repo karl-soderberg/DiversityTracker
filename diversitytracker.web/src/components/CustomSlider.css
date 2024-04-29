@@ -55,6 +55,12 @@
   width: 60px;
   height: 60px;
 }
+.slider__overlay-icon{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 15%;
+}
 
 .slider__label{
   position: absolute;
