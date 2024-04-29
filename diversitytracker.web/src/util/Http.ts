@@ -112,7 +112,7 @@ export const GetFormsData = async () => {
 }
 
 
-export const InterperetAllReflectionsForms = async () => {
+export const aiInterperetAllReflectionsForms = async () => {
     const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllReflectionsForms`);
 
     if (!response.ok) {
@@ -126,7 +126,8 @@ export const InterperetAllReflectionsForms = async () => {
     return jsonResponse;
 }
 
-export const InterperetAllRealData = async () => {
+export const aiInterperetAllRealData = async () => {
+    console.log("starting!");
     const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllRealData`);
 
     if (!response.ok) {
@@ -140,7 +141,7 @@ export const InterperetAllRealData = async () => {
     return jsonResponse;
 }
 
-export const InterperetAllQuestionAnswers = async () => {
+export const aiInterperetAllQuestionAnswers = async () => {
     const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionAnswers`);
 
     if (!response.ok) {
@@ -154,7 +155,7 @@ export const InterperetAllQuestionAnswers = async () => {
     return jsonResponse;
 }
 
-export const InterperetAllQuestionValues = async () => {
+export const aiInterperetAllQuestionValues = async () => {
     const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionValues`);
 
     if (!response.ok) {
@@ -168,7 +169,7 @@ export const InterperetAllQuestionValues = async () => {
     return jsonResponse;
 }
 
-export const CreateDataFromQuestionAnswersInterpretation = async () => {
+export const aiCreateDataFromQuestionAnswersInterpretation = async () => {
     const response = await fetch(`${API_URL}/AiInterpretation/CreateDataFromQuestionAnswersInterpretation`);
 
     if (!response.ok) {

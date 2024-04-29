@@ -72,7 +72,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             setGenderDistributionData(MapAPIFormsResponseToGenderDistribution(formsData, questionData));
             setGenderBarData(MapAPIFormsResponseToBarChart(formsData, questionData));
             setTimeAtCompanyScatterData(MapAPIFormsResponseToScatterChart(formsData, questionData));
-            setAiInterpretation(MapAPIFormsAIResponseToScatterChart(formsData, questionData));
+            if(formsData.aiInterpretation != undefined){
+                setAiInterpretation(MapAPIFormsAIResponseToScatterChart(formsData, questionData));
+            }
         }
     }, [activeQuestion]);
 
@@ -88,12 +90,12 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {formsData && (
                 <>
                     <h3>Overall Data Interpretation:</h3>
-                    {formsData.aiInterpretation.realDataInterpretation ? (
+                    {formsData.aiInterpretation != null ? (
                         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
                     ) : (
                         <>
                             <p>No data interpretation available.</p>
-                            <button>Interperet data</button>
+                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
                         </>
                     )}
                 </>
@@ -101,12 +103,12 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {formsData && (
                 <>
                     <h3>Reflections Interpretation:</h3>
-                    {formsData.aiInterpretation.reflectionsInterpretation ? (
+                    {formsData.aiInterpretation != null ? (
                         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
                     ) : (
                         <>
                             <p>No reflections available.</p>
-                            <button>Interperet data</button>
+                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
                         </>
                     )}
                 </>
@@ -258,7 +260,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         ) : (
                             <>
                                 <p>No answers available.</p>
-                                <button>Interperet data</button>
+                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
                             </>
                         )}
                     </>
@@ -266,7 +268,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
-                {formsData && (
+                {(formsData && formsData.aiInterpretation != null) && (
                     <>
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
@@ -275,14 +277,14 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         ) : (
                             <>
                                 <p>No data available.</p>
-                                <button>Interperet data</button>
+                                <button onClick={() => InterperetAllQuestionValues()}>Interperet data</button>
                             </>
                         )}
                     </>
                 )}
             </article>
             <article className='reflectionboxchartsummary-container'>
-            {aiInterpretation && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
+            {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                  <ResponsiveContainer width="100%" height="100%">
                     {(formsData && activeAiInterpretation) &&
                         <ScatterChart
@@ -305,13 +307,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 : 
                 <>
                     <p>No data available</p>
-                    <button>Interperet data</button>
+                    <button onClick={() => CreateDataFromQuestionAnswersInterpretation()}>Interperet data</button>
                 </>
             }
                
             </article>
             <article className='reflectionboxsummary-container'>
-                {aiInterpretation && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
+                {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <>
                         <h2>Rating based on real answers</h2>
                         <p>This chart shows the interpereted ratings based on real answers.</p>
