@@ -99,30 +99,10 @@ function App() {
 
 
   const { clientPrincipal, loaded } = useClientPrincipal();
-  const isLoggedIn = clientPrincipal.userDetails !== null;
-
-  if (!isLoggedIn) {
-    return (
-      <article className="Mainpage-login">
-        <h2 className="Mainpage-login__title">DataSense</h2>
-        <section className="Mainpage-login__buttons">
-            <StaticWebAuthLogins
-                        twitter={false}
-                        customRenderer={({ href, className, name }) => (
-                          <Button type="primary" className="login-button">
-                            <a href={href} className={className}>
-                              Login With {name}
-                            </a>
-                          </Button>
-                        )}
-                        />
-        </section> 
-      </article>
-    )
-  }
 
     return (
       <>   
+      {clientPrincipal ? (
         <Router>
             <header className="App-header">
                 <section className="App-header__login">
@@ -169,7 +149,25 @@ function App() {
                   />} />
               </Routes>
             </main>
-          </Router>          
+          </Router>
+      ) : (
+        <article className="Mainpage-login">
+        <h2 className="Mainpage-login__title">DataSense</h2>
+        <section className="Mainpage-login__buttons">
+            <StaticWebAuthLogins
+                        twitter={false}
+                        customRenderer={({ href, className, name }) => (
+                          <Button type="primary" className="login-button">
+                            <a href={href} className={className}>
+                              Login With {name}
+                            </a>
+                          </Button>
+                        )}
+                        />
+        </section> 
+      </article>
+      )}
+
       </>
          
     )
