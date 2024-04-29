@@ -19,10 +19,15 @@ type Props = {
     error: any, 
     refetch: any,
     formsData: APIFormsResponse,
+    InterperetAllReflectionsForms: () => void,
+    InterperetAllRealData: () => void,
+    InterperetAllQuestionAnswers: () => void,
+    InterperetAllQuestionValues: () => void,
+    CreateDataFromQuestionAnswersInterpretation: () => void
 }
 
 
-export const ChartPage = ( {className, questionData, formsData} : Props) => {
+export const ChartPage = ( {className, questionData, formsData, InterperetAllReflectionsForms, InterperetAllRealData, InterperetAllQuestionAnswers, InterperetAllQuestionValues, CreateDataFromQuestionAnswersInterpretation} : Props) => {
     const [chartType, setChartType] = useState<string>("distributionscale");
     const [scope, setScope] = useState<string>("both");
     
