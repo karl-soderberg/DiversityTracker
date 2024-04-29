@@ -110,3 +110,74 @@ export const GetFormsData = async () => {
 
     return formsResponse;
 }
+
+
+export const InterperetAllReflectionsForms = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllReflectionsForms`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const InterperetAllRealData = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllRealData`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const InterperetAllQuestionAnswers = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionAnswers`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const InterperetAllQuestionValues = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionValues`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const CreateDataFromQuestionAnswersInterpretation = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/CreateDataFromQuestionAnswersInterpretation`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
