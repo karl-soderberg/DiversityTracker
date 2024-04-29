@@ -1,2 +1,13 @@
-{}
+{
+    "routes": [
+        {
+          "route": "/admin*",
+          "allowedRoles": ["admin"]
+        },
+        {
+            "route": "/chart*",
+            "allowedRoles": ["admin"]
+          }
+    ]
+}
 
