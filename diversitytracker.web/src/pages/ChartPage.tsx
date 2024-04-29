@@ -1,7 +1,7 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from 'recharts'
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
-import { MOCKData, barChartMockData, data01, data02 } from '../data/MockData'
+import { MOCKData, barChartMockData } from '../data/MockData'
 import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question, scatterAiDataArr, scatterAiDataDict, scatterData, scatterDataArr, scatterDataDict } from '../types/types'
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'

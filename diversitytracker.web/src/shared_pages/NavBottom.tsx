@@ -1,3 +1,4 @@
+import React from 'react';
 import { CustomAnchor } from '../components/CustomAnchor'
 import { ChartIcon } from '../resources/icons/ChartIcon'
 import { FormIcon } from '../resources/icons/FormIcon'
@@ -6,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 export const NavBottom = ({useClientPrincipal}) => {
 
-    const isAdmin = useClientPrincipal.clientPrincipal?.userRoles.includes('admin');
+    // const isAdmin = useClientPrincipal.clientPrincipal?.userRoles.includes('admin');
+    const isAdmin = true;
     return(
         <nav className='navbottom-container'>
             {isAdmin && (
