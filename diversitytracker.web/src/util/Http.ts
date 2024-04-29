@@ -1,6 +1,7 @@
 import { PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
 
-const API_URL = import.meta.env.VITE_API_URL;
+//const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://diversitytrackerapi.azurewebsites.net/api";
 
 export const GetAllQuestions = async (): Promise<Array<Question>> => {
     const response = await fetch(`${API_URL}/Questions`);
