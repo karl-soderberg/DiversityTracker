@@ -134,8 +134,8 @@ function App() {
               formsData={formsData}
               InterperetAllRealData={InterperetAllRealData.mutate}
               InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
-              InterperetAllQuestionAnswers={InterperetAllQuestionAnswers.mutate}
-              InterperetAllQuestionValues={InterperetAllQuestionValues.mutate}
+              InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
+              InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
               CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
             />} />
           <Route path="/admin" element={<AdminPage 

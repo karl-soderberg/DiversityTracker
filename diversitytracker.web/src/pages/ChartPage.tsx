@@ -85,12 +85,19 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
         }
     }, [questionData]);
 
+
+    // const isAnswerInterpretationNull = (questionTypeId: string): boolean => {
+    //     const interpretationResponse = formsData.aiInterpretation.questionInterpretations.some(inter => inter.questionTypeId === questionTypeId && inter.answerInterpretation === null);
+    //     console.log(!!interpretationResponse)
+    //     return !!interpretationResponse;
+    //   };
+
     return(
         <section className={className}>
             {formsData && (
                 <>
                     <h3>Overall Data Interpretation:</h3>
-                    {formsData.aiInterpretation != null ? (
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
                         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
                     ) : (
                         <>
@@ -103,7 +110,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {formsData && (
                 <>
                     <h3>Reflections Interpretation:</h3>
-                    {formsData.aiInterpretation != null ? (
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
                         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
                     ) : (
                         <>
@@ -237,11 +244,10 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {questionsData && 
                 <select name="" id="" onChange={(e) => {
                         setActiveQuestion(e.target.value);
-                        setActiveDistributionFormData(distributionformdata[activeQuestion])
-                        setActiveGenderBarData(genderBarData[activeQuestion]);
-                        setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
-                        setActiveAiInterpretation(aiInterpretation[activeQuestion]);
-                        console.log(activeAiInterpretation);
+                        distributionformdata &&setActiveDistributionFormData(distributionformdata[activeQuestion])
+                        genderBarData && setActiveGenderBarData(genderBarData[activeQuestion]);
+                        timeAtCompanyScatterData && setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
+                        aiInterpretation && setActiveAiInterpretation(aiInterpretation[activeQuestion]);
                     }}>
                     {questionsData.map((question) => (
                         <option value={question.id}>{question.value}</option>
@@ -282,6 +288,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
+
             </article>
             <article className='reflectionboxchartsummary-container'>
             {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
