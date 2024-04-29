@@ -37,9 +37,9 @@
 
 .slider__overlay{
   position: absolute;
-  top: -175%;
-  width: 30px;
-  height: 30px;
+  top: -375%;
+  width: 60px;
+  height: 60px;
 
   border-radius: 100%;
  
@@ -48,7 +48,12 @@
   justify-content: center;
   
   color: var(--text-base);
-  background: var(--thumb-green);
+  /* background: var(--thumb-green); */
+}
+.slider__overlay svg{
+  fill: #00c4a0;
+  width: 60px;
+  height: 60px;
 }
 
 .slider__label{
