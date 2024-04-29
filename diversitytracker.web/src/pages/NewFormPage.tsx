@@ -124,20 +124,20 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         className='newformpage__form__item'
                         label="Age"
                         name="age"
-                        rules={[{ required: true, message: 'Please input age.', min: 0}]}
+                        rules={[{ required: true, message: 'Please input age.'}]}
                         >
-                        {/* <InputNumber style={{ width: '100%' }} /> */}
-                        <input type="number" />
+                        <InputNumber style={{ width: '100%' }}/>
+                        {/* <input type="number" /> */}
                     </Form.Item>
 
                     <Form.Item
                         className='newformpage__form__item'
                         label="Years At Company"
                         name="timeatcompany"
-                        rules={[{ required: true, message: 'Please input time worked at company.', min: 0}]}
+                        rules={[{ required: true, message: 'Please input time worked at company.'}]}
                         >
-                        {/* <InputNumber style={{ width: '100%' }} /> */}
-                        <input type="number" />
+                        <InputNumber style={{ width: '100%' }}/>
+                        {/* <input type="number" /> */}
                     </Form.Item>
                     
                 
@@ -147,7 +147,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
                     {questionData && 
                         questionData.map((question) => (
-                            <>
+                            <div className='newformpage__form__itemgroup'>
                                 <Form.Item
                                     className='newformpage__form__item'
                                     // label={question.value}
@@ -166,13 +166,13 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                 </Form.Item>
                                 <Form.Item
                                     className='newformpage__form__item'
-                                    label={question.value + " reflections"}
+                                    label={question.value + ""}
                                     name={"reflection_" + question.value}
                                     rules={[{ required: false}]}
                                     >
                                     <Input.TextArea />
                                 </Form.Item>
-                            </>
+                            </div>
                         ))
                     }
                     <Form.Item
@@ -186,7 +186,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     <Form.Item 
                         className='newformpage__form__item'
                         wrapperCol={{ offset: 6, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button className='newformpage__form__submitbtn' type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>

@@ -2,8 +2,8 @@
 
 .slider-container {
   position: relative;
-  width: 171%;
-  margin: 10vh 0% 10vh 0%;
+  width: 100%;
+  margin: 5vh 0% 5vh 0%;
 }
 
 .slider {

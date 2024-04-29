@@ -21,5 +21,24 @@
 }
 
 .newformpage__form__item{
+    margin-top: 0rem;
     width: 100%;
+}
+
+.newformpage__form__itemgroup{
+    width: 100%;
+    margin: 12% 0%;
+}
+
+.newformpage__form__submitbtn{
+    width: 50%;
+
+    background-color: #00c4a0;
+    transition: all 350ms ease-in-out;
+}
+
+.newformpage__form__submitbtn:hover{
+    background-color: #00c424 !important;
+
+    transition: all 350ms ease-in-out;
 }
