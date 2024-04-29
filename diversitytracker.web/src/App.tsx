@@ -97,7 +97,7 @@ function App() {
     return (
       <>
         <Router>
-        <header className="App-header">
+        {/* <header className="App-header">
             <section className="App-header__login">
               <StaticWebAuthLogins
                 twitter={false}
@@ -113,7 +113,7 @@ function App() {
           <ClientPrincipalContextProvider>
             <UserDisplay />
           </ClientPrincipalContextProvider>
-        </header>
+        </header> */}
       <NavBottom useClientPrincipal={useClientPrincipal}  />
       <main className="page-container">
         <Routes>

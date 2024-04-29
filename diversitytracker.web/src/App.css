@@ -1,196 +1,44 @@
-@import url('./colors.css');
-
-.page-container{
-    position: relative;
-    width: 100vw;
-    height: fit-content;
-}
-
-:root{
-    --animation-timing: 650ms;
-    --easing: cubic-bezier(0.65,0.03,0.22,0.99);
-}
-
-.chartpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateLeftOut var(--animation-timing) var(--easing);
-}
-
-.formpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
+@import url('colors.css');
 
 
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
-
-.newformpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
 
 
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    .datasummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
 
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
+        border-radius: 1rem;
 
-.adminpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
-
-.chartpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    animation: animateLeft var(--animation-timing) var(--easing);
-}
-
-.formpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-    
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    
-    animation: animateRight var(--animation-timing) var(--easing);
-}
-
-.newformpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-    
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    
-    animation: animateRight var(--animation-timing) var(--easing);
-}
-
-.adminpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-    
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    
-    animation: animateRight var(--animation-timing) var(--easing);
-}
-
-
-.App-header__login {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px;
-}
-
-.Not-signed-in {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-
-}
-/* @keyframes animateRight{
-    0%{
-        transform: translateX(100%);
+        background-color: var(--light-path);
     }
-    100%{
-        transform: translateX(0%);
-    }
-}
+    .reflectionboxsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
 
-@keyframes animateRightOut{
-    0%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(100%);
-    }
-}
+        border-radius: 1rem;
 
-@keyframes animateLeft{
-    0%{
-        transform: translateX(-100%);
+        background-color: var(--light-module2);
     }
-    100%{
-        transform: translateX(0%);
-    }
-}
+    .reflectionboxchartsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
 
-@keyframes animateLeftOut{
-    0%{
-        transform: translateX(0%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 90vw;
+        height: 65vh;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-module2);
     }
-    100%{
-        transform: translateX(-100%);
+    .optionalreflectionsummary-container{
+        margin: 5% 0%;
+        padding: 2% 2% 5% 2%;
+
+        border-radius: 1rem;
+
+        background-color: var(--light-module2);
     }
-} */

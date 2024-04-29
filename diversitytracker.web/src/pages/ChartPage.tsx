@@ -94,7 +94,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
 
     return(
         <section className={className}>
-            {formsData && (
+            <div className='chartpage-container--bg'></div>
+            {/* {formsData && (
                 <>
                     <h3>Overall Data Interpretation:</h3>
                     {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
@@ -119,9 +120,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         </>
                     )}
                 </>
-            )}
-            <h1>Percieved Quality Of Leadership Over Time</h1>
-            <p>This tracks the percieved leadership among all departments across all genders</p>
+            )} */}
             <article className='chart-container'>
             <ResponsiveContainer width="90%" height="90%">
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
@@ -229,6 +228,22 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 ) : null}
             </ResponsiveContainer>
             </article>
+            <h1 className={className + "__title"}>Percieved Quality Of Leadership Over Time</h1>
+            {(formsData && formsData.aiInterpretation) && (
+                    <>
+                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
+                                <p className={className + "__reflection"} key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
+                            ))
+                        ) : (
+                            <>
+                                <p className={className + "__reflection"}>No answers available.</p>
+                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
+                            </>
+                        )}
+                    </>
+                )}
+            {/* <p>This tracks the percieved leadership among all departments across all genders</p> */}
             <select name="" id="" onChange={(e) => setChartType(e.target.value)}>
                 <option value="distributionscale">Distribution scale</option>
                 <option value="distributionacrosstime">Distribution across time</option>
@@ -255,7 +270,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </select>
             }
             <p>{activeQuestion}</p>
-            <article className='datasummary-container'>
+            {/* <article className='datasummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
@@ -271,7 +286,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
-            </article>
+            </article> */}
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
