@@ -115,6 +115,10 @@ function App() {
                           </Button>
                         )}
                         />
+              <p>
+                {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
+                {clientPrincipal.userId} {clientPrincipal.userRoles}
+              </p>
         </section> 
       </article>
     )
