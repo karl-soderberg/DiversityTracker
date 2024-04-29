@@ -15,6 +15,7 @@ import {
 } from "@aaronpowell/react-static-web-apps-auth";
 import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { NavTop } from './shared_pages/NavTop';
 
 
 
@@ -114,6 +115,7 @@ function App() {
             <UserDisplay />
           </ClientPrincipalContextProvider>
         </header> */}
+      <NavTop useClientPrincipal={useClientPrincipal} />
       <NavBottom useClientPrincipal={useClientPrincipal}  />
       <main className="page-container">
         <Routes>

@@ -1,7 +1,7 @@
 @import url('../colors.css');
 
 .chartpage-container{
-    padding: 1% 5% 15vh 5%; 
+    padding: 5% 5% 15vh 5%; 
     height: fit-content;
     cursor: default;
 }

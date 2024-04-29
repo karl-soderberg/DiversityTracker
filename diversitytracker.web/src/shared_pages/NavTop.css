@@ -1,42 +1,53 @@
 @import url('../colors.css');
 
-.navbottom-container{
+.navtop-container{
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100vw;
-    height: 10vh;
+    height: 6vh;
     z-index: 1500;
 
+    padding: 0% 4% 0% 2%; 
+
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
     background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     backdrop-filter: blur(10px);
+    background-color: transparent;
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
 }
-    .navbottom__item{
+    .navtop__item{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-    .navbottom__icon{
+    .navtop__icon{
         width: 1.8rem;
         opacity: .9;
         
         transition: all .25s ease-in-out;
     }
-        .navbottom__icon--colorfill{
+        .navtop__icon--colorfill{
             fill: #b1b1b1;
             transition: all .25s ease-in-out;
         }
-        .navbottom__icon--colorstroke{
+        .navtop__icon--colorstroke{
             stroke: #b1b1b1;;
             transition: all .25s ease-in-out;
         }
-    .navbottom__item__title{
+    .admin_icon{
+        width: 42px;
+        height: 42px;
+        border-radius: 100%;
+        background-image: url("https://talent.salt.dev/_next/image?url=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F117780994%3Fv%3D4&w=640&q=75");
+        background-size: cover;
+        opacity: .9;
+    }
+    .navtop__item__title{
         margin-top: .1rem;
         font-size: .5rem;
 
@@ -49,34 +60,34 @@
     
 
 /* active state */
-.navbottom__item.active .navbottom__icon{
+.navtop__item.active .navtop__icon{
     transform: scale(1.2);
     transition: all .25s ease-in-out;
 }
 
-.navbottom__item.active .navbottom__item__title{
+.navtop__item.active .navtop__item__title{
     transform: scale(1.05);
     transform: translateY(1px);
 
     transition: all .25s ease-in-out;
 }
 
-.navbottom__item.active .navbottom__icon--colorfill{
+.navtop__item.active .navtop__icon--colorfill{
     fill: var(--menu-violet);
 }
-.navbottom__item.active .navbottom__icon--colorstroke{
+.navtop__item.active .navtop__icon--colorstroke{
     stroke: var(--menu-violet);
 }
-.navbottom__item.active .navbottom__item__title{
+.navtop__item.active .navtop__item__title{
     color: var(--menu-violet);
 }
 
-.navbottom__item:nth-of-type(2).active .navbottom__icon--colorfill{
+.navtop__item:nth-of-type(2).active .navtop__icon--colorfill{
     fill: var(--menu-green)
 }
-.navbottom__item:nth-of-type(2).active .navbottom__icon--colorstroke{
+.navtop__item:nth-of-type(2).active .navtop__icon--colorstroke{
     stroke: var(--menu-green);
 }
-.navbottom__item:nth-of-type(2).active .navbottom__item__title{
+.navtop__item:nth-of-type(2).active .navtop__item__title{
     color: var(--menu-green);
 }
