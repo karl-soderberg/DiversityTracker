@@ -86,18 +86,19 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-            <h1>New Forms Page</h1>
-            <p>Submit your form</p>
+            <h1>Salt Organization Form</h1>
+            <p>The more input the better</p>
 
-            <section className='newformpage-container__form'>
+            <section className='newformpage-container__form-container'>
                 <Form 
                     {...formItemLayout} 
                     variant="filled"  
                     onFinish={onSubmitHandler}
                     onFinishFailed={onFailSubmitHandler}
+                    className='newformpage__form'
                 >
 
-                    <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
+                    <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
                         <Select
                             showSearch
                             placeholder="Select a your gender"
@@ -120,6 +121,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     </Form.Item>
                 
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Age"
                         name="age"
                         rules={[{ required: true, message: 'Please input age.', min: 0}]}
@@ -129,6 +131,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     </Form.Item>
 
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Years At Company"
                         name="timeatcompany"
                         rules={[{ required: true, message: 'Please input time worked at company.', min: 0}]}
@@ -146,6 +149,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         questionData.map((question) => (
                             <>
                                 <Form.Item
+                                    className='newformpage__form__item'
                                     // label={question.value}
                                     name={question.id}
                                     rules={[{ required: true, message: 'Please input your happiness level!' }]}
@@ -161,6 +165,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                     />
                                 </Form.Item>
                                 <Form.Item
+                                    className='newformpage__form__item'
                                     label={question.value + " reflections"}
                                     name={"reflection_" + question.value}
                                     rules={[{ required: false}]}
@@ -171,13 +176,16 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         ))
                     }
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Personal Reflections - We will weigh this heavily in our analysis"
                         name="reflection"
                         rules={[{ required: true, message: 'Please input!'}]}
                         >
                         <Input.TextArea />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                    <Form.Item 
+                        className='newformpage__form__item'
+                        wrapperCol={{ offset: 6, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>

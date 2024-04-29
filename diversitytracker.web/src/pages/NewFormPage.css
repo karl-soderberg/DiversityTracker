@@ -2,11 +2,24 @@
     padding: 15% 5%;
 }
 
-.newformpage-container__form{
+.newformpage-container__form-container{
     width: 90vw;
     margin: 0 auto;
     padding: 5% 0%;
     
     display: flex;
     flex-direction: column;
+}
+
+.newformpage__form{
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.newformpage__form__item{
+    width: 100%;
 }
