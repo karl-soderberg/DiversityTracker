@@ -111,3 +111,75 @@ export const GetFormsData = async () => {
 
     return formsResponse;
 }
+
+
+export const aiInterperetAllReflectionsForms = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllReflectionsForms`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const aiInterperetAllRealData = async () => {
+    console.log("starting!");
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllRealData`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const aiInterperetAllQuestionAnswers = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionAnswers`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const aiInterperetAllQuestionValues = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/InterperetAllQuestionValues`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}
+
+export const aiCreateDataFromQuestionAnswersInterpretation = async () => {
+    const response = await fetch(`${API_URL}/AiInterpretation/CreateDataFromQuestionAnswersInterpretation`);
+
+    if (!response.ok) {
+        const error = new Error('An error occurred while processing the request');
+        error.message = await response.json();
+        throw error;
+    }
+
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+}

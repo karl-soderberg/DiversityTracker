@@ -1,4 +1,4 @@
-import { APIFormsResponse, ChartDistributionDict, DistributionDataResponse, GenderDistribution, Question, scatterData, scatterDataDict} from "../types/types";
+import { APIFormsResponse, AiAnswerData, ChartDistributionDict, DistributionDataResponse, GenderDistribution, Question, scatterAiData, scatterAiDataArr, scatterAiDataDict, scatterData, scatterDataDict} from "../types/types";
 
 export const MapAPIFormsResponseToDistributionDataType = (inData: APIFormsResponse, questions: Array<Question>): DistributionDataResponse  => {
 
@@ -232,9 +232,36 @@ export const MapAPIFormsResponseToScatterChart = (inData: APIFormsResponse, ques
     return dataResponseDict;
 }
 
+export const MapAPIFormsAIResponseToScatterChart = (inData: APIFormsResponse, questions: Array<Question>): scatterAiDataDict  => {
+    const aiInterpretation = inData.aiInterpretation.questionInterpretations;
+    let dataResponseDict: scatterAiDataDict = {};
+
+    questions.forEach((question) => {
+        dataResponseDict[question.id] = {
+            scatterData: [],
+        }
+
+        aiInterpretation.forEach(interpretation => {
+            if(interpretation.questionTypeId == question.id)
+            {
+                for (let idx = 0; idx < interpretation.aiAnswerData.value.length; idx++) {
+                    dataResponseDict[question.id].scatterData.push({
+                        wordlength: interpretation.aiAnswerData.wordLength[idx],
+                        value: interpretation.aiAnswerData.value[idx]
+                    })
+                }
+            }
+        })
+    });
+
+    console.log(dataResponseDict);
+
+    return dataResponseDict;
+}
 
 
 function calculateAge(yearOfBirth: number): number {
     const currentYear = new Date().getFullYear();
     return currentYear - yearOfBirth;
   }
+

@@ -3,9 +3,9 @@ import { NavBottom } from "./shared_pages/NavBottom";
 import { ChartPage } from "./pages/ChartPage";
 import { NewFormPage } from "./pages/NewFormPage";
 import { AdminPage } from "./pages/AdminPage";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { APIFormsResponse, Question } from "./types/types";
-import { GetAllQuestions, GetFormsData } from "./util/Http";
+import { GetAllQuestions, GetFormsData, aiCreateDataFromQuestionAnswersInterpretation, aiInterperetAllQuestionAnswers, aiInterperetAllQuestionValues, aiInterperetAllRealData, aiInterperetAllReflectionsForms } from "./util/Http";
 import {
   Logout,
   StaticWebAuthLogins,
@@ -48,14 +48,49 @@ const UserDisplay = () => {
 
 function App() {
 
-  const { data, isLoading, isError, error, refetch } = useQuery<Array<Question>, Error>({
+  const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
     queryKey: ['getQuestions'],
     queryFn: () => GetAllQuestions()
   });
 
-  const { data: formsData, isLoading: isLoadingForms, isError: isErrorForms, error: errorForms } = useQuery<APIFormsResponse>({
+  const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
     queryKey: ['getFormData'],
     queryFn: () => GetFormsData()
+  });
+
+  const InterperetAllReflectionsForms = useMutation(() => aiInterperetAllReflectionsForms(), {
+      onSuccess: () => {
+          refetch();
+          questionRefetch();
+      }
+  });
+
+  const InterperetAllRealData = useMutation(() => aiInterperetAllRealData(), {
+      onSuccess: () => {
+          refetch();
+          questionRefetch();
+      }
+  });
+
+  const InterperetAllQuestionAnswers = useMutation(() => aiInterperetAllQuestionAnswers(), {
+    onSuccess: () => {
+        refetch();
+        questionRefetch();
+    }
+  });
+
+  const InterperetAllQuestionValues = useMutation(() => aiInterperetAllQuestionValues(), {
+      onSuccess: () => {
+          refetch();
+          questionRefetch();
+      }
+  });
+
+  const CreateDataFromQuestionAnswersInterpretation = useMutation(() => aiCreateDataFromQuestionAnswersInterpretation(), {
+      onSuccess: () => {
+          refetch();
+          questionRefetch();
+      }
   });
 
     return (
@@ -97,6 +132,11 @@ function App() {
               error={error}
               refetch={refetch}
               formsData={formsData}
+              InterperetAllRealData={InterperetAllRealData.mutate}
+              InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
+              InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
+              InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
+              CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
             />} />
           <Route path="/admin" element={<AdminPage 
               className="adminpage-container"
