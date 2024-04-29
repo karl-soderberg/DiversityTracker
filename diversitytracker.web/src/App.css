@@ -1,44 +1,41 @@
 @import url('colors.css');
 
+.datasummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
+    border-radius: 1rem;
 
+    background-color: var(--light-path);
+}
+.reflectionboxsummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
-    .datasummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
+    border-radius: 1rem;
 
-        border-radius: 1rem;
+    background-color: var(--light-module2);
+}
+.reflectionboxchartsummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
-        background-color: var(--light-path);
-    }
-    .reflectionboxsummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        border-radius: 1rem;
+    width: 90vw;
+    height: 65vh;
 
-        background-color: var(--light-module2);
-    }
-    .reflectionboxchartsummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
+    border-radius: 1rem;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    background-color: var(--light-module2);
+}
+.optionalreflectionsummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
-        width: 90vw;
-        height: 65vh;
+    border-radius: 1rem;
 
-        border-radius: 1rem;
-
-        background-color: var(--light-module2);
-    }
-    .optionalreflectionsummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
-
-        border-radius: 1rem;
-
-        background-color: var(--light-module2);
-    }
+    background-color: var(--light-module2);
+}

@@ -246,12 +246,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </div> 
             </ResponsiveContainer>
             </article>
-            <h1 className={className + "__title"}>Percieved Quality Of Leadership Over Time</h1>
-            {(formsData && formsData.aiInterpretation) && (
+            <header className='header-container'>
+                <h1 className={"header-container__title"}>Percieved Quality Of Leadership Over Time</h1>
+                {(formsData && formsData.aiInterpretation) && (
                     <>
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p className={className + "__reflection"} key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
+                                <p className={"header-container__reflection"} key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
                             ))
                         ) : (
                             <>
@@ -261,6 +262,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
+            </header>
             <section className='chartpage__selectcharttype'>
                 <a>
                     <svg width="40px" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 100 100" x="0px" y="0px">
@@ -342,7 +344,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </>
                 )}
             </article> */}
-            {/* <article className='reflectionboxsummary-container'>
+            <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
                     <>
@@ -359,8 +361,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </>
                 )}
 
-            </article> */}
-            {/* <article className='reflectionboxchartsummary-container'>
+            </article>
+            <article className='reflectionboxchartsummary-container'>
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <ResponsiveContainer width="100%" height="100%">
                         {(formsData && activeAiInterpretation) &&
@@ -388,8 +390,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </>
             }
                
-            </article> */}
-            {/* <article className='reflectionboxsummary-container'>
+            </article>
+            <article className='reflectionboxsummary-container'>
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <>
                         <h2>Rating based on real answers</h2>
@@ -398,8 +400,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 :
                     <p>No data available</p>
                 }
-                
-            </article> */}
+            </article>
         </section>
     )
 }
