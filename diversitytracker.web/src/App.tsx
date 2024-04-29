@@ -106,11 +106,7 @@ function App() {
   //const isLoggedin = true;
 
     return (
-      <>
-        {!loaded} && (
-          <p>Checking user info...</p>;
-        )
-   
+      <>   
         {!clientPrincipal && (
           <article className="Mainpage-login">
             <h2 className="Mainpage-login__title">DataSense</h2>
