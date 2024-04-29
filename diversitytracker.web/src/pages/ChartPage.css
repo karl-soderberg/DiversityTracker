@@ -3,11 +3,12 @@
 .chartpage-container{
     padding: 1% 5% 15vh 5%; 
     height: fit-content;
+    cursor: default;
 }
 
 .chart-container{
-    width: 40vh;
-    height: 40vh;
+    width: 85vw;
+    height: 35vh;
     margin: 10% auto;
 
     display: flex;
@@ -45,6 +46,21 @@
         height: 100%;
         backdrop-filter: blur(10px);
     }
+
+
+.chartpage__selectquestion{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 43vh;
+
+    padding: 0% 2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 
     .chartpage-container__title{
