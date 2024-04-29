@@ -98,7 +98,7 @@ function App() {
   });
 
   const { clientPrincipal, loaded } = useClientPrincipal();
-  const isUser = clientPrincipal?.userId !== null;
+  const isUser = clientPrincipal !== undefined;
 
     return (
       <>   
@@ -111,7 +111,7 @@ function App() {
                   </Button>
                 </section>
             </header>
-            {isUser && (
+            {isUser ? (
               <Router>
                 <NavBottom useClientPrincipal={useClientPrincipal}  />
                   <main className="page-container">
@@ -149,24 +149,21 @@ function App() {
                     </Routes>
                   </main>
                 </Router>
-            )}
-
-            {!isUser && (
-
-        <article className="Mainpage-login">
-        <h2 className="Mainpage-login__title">DataSense</h2>
-        <section className="Mainpage-login__buttons">
-            <StaticWebAuthLogins
-                        twitter={false}
-                        customRenderer={({ href, className, name }) => (
-                          <Button type="primary" className="login-button">
-                            <a href={href} className={className}>
-                              Login With {name}
-                            </a>
-                          </Button>
-                        )}
-                        />
-        </section> 
+            ) : (
+              <article className="Mainpage-login">
+              <h2 className="Mainpage-login__title">DataSense</h2>
+              <section className="Mainpage-login__buttons">
+                  <StaticWebAuthLogins
+                              twitter={false}
+                              customRenderer={({ href, className, name }) => (
+                                <Button type="primary" className="login-button">
+                                  <a href={href} className={className}>
+                                    Login With {name}
+                                  </a>
+                                </Button>
+                              )}
+                              />
+              </section> 
       </article>
       )}
 
