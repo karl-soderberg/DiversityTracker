@@ -18,32 +18,35 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 
-const UserDisplay = () => {
-  const { clientPrincipal, loaded } = useClientPrincipal();
+// const UserDisplay = () => {
+//   const { clientPrincipal, loaded } = useClientPrincipal();
 
-  if (!loaded) {
-    return <p>Checking user info...</p>;
-  }
+//   if (!loaded) {
+//     return <p>Checking user info...</p>;
+//   }
 
-  if (clientPrincipal) {
-    return (
-      <div>
-        <p>
-          {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
-          {clientPrincipal.userId} {clientPrincipal.userRoles}
-        </p>
-        <p>
-          <Logout />
-        </p>
-        <p>
-          <UserPurge provider={clientPrincipal.identityProvider} />
-        </p>
-      </div>
-    );
-  }
+//   if (clientPrincipal) {
+//     return (
+//       <div>
+//         <p>
+//           {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
+//           {clientPrincipal.userId} {clientPrincipal.userRoles}
+//         </p>
+//         <p>
+//           <Logout />
+//         </p>
+//         <p>
+//           <UserPurge provider={clientPrincipal.identityProvider} />
+//         </p>
+            // <ClientPrincipalContextProvider>
+            //   <UserDisplay />
+            // </ClientPrincipalContextProvider>
+//       </div>
+//     );
+//   }
 
-  return <p className="Not-signed-in">User not signed in</p>;
-};
+//   return <p className="Not-signed-in">User not signed in</p>;
+// };
 
 
 
@@ -94,12 +97,21 @@ function App() {
       }
   });
 
+
+  const { clientPrincipal, loaded } = useClientPrincipal();
+
+    
+
   //const isLoggedin = useClientPrincipal().clientPrincipal;
-  const isLoggedin = true;
+  //const isLoggedin = true;
 
     return (
       <>
-        {!isLoggedin && (
+        {!loaded} && (
+          <p>Checking user info...</p>;
+        )
+   
+        {!clientPrincipal && (
           <article className="Mainpage-login">
             <h2 className="Mainpage-login__title">DataSense</h2>
             <section className="Mainpage-login__buttons">
@@ -117,56 +129,54 @@ function App() {
             
           </article>
         )}
-      {isLoggedin && (
-          <Router>
-          <header className="App-header">
-              <section className="App-header__login">
-              <h2>DataSense</h2>
-                <Button>
-                  <Logout />
-                </Button>
-              </section>
-              <ClientPrincipalContextProvider>
-              <UserDisplay />
-            </ClientPrincipalContextProvider>
-          </header>
-        <NavBottom useClientPrincipal={useClientPrincipal}  />
-          <main className="page-container">
-            <Routes>
-              <Route path="/newform" element={<NewFormPage 
-                  className="newformpage-container"
-                  questionData={data}
-                  isLoading={isLoading}
-                  isError={isError}
-                  error={error}
-                  refetch={refetch}
-                />} />
-              <Route path="/chart" element={<ChartPage 
-                  className="chartpage-container"
-                  questionData={data}
-                  isLoading={isLoading}
-                  isError={isError}
-                  error={error}
-                  refetch={refetch}
-                  formsData={formsData}
-                  InterperetAllRealData={InterperetAllRealData.mutate}
-                  InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
-                  InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
-                  InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
-                  CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
-                />} />
-              <Route path="/admin" element={<AdminPage 
-                  className="adminpage-container"
-                  questionData={data}
-                  isLoading={isLoading}
-                  isError={isError}
-                  error={error}
-                  refetch={refetch}
-                />} />
-            </Routes>
-          </main>
-        </Router>
-        )}
+        {clientPrincipal && (
+            <Router>
+            <header className="App-header">
+                <section className="App-header__login">
+                <h2>DataSense</h2>
+                  <Button>
+                    <Logout />
+                  </Button>
+                </section>
+                
+            </header>
+          <NavBottom useClientPrincipal={useClientPrincipal}  />
+            <main className="page-container">
+              <Routes>
+                <Route path="/newform" element={<NewFormPage 
+                    className="newformpage-container"
+                    questionData={data}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error}
+                    refetch={refetch}
+                  />} />
+                <Route path="/chart" element={<ChartPage 
+                    className="chartpage-container"
+                    questionData={data}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error}
+                    refetch={refetch}
+                    formsData={formsData}
+                    InterperetAllRealData={InterperetAllRealData.mutate}
+                    InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
+                    InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
+                    InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
+                    CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
+                  />} />
+                <Route path="/admin" element={<AdminPage 
+                    className="adminpage-container"
+                    questionData={data}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error}
+                    refetch={refetch}
+                  />} />
+              </Routes>
+            </main>
+          </Router>
+          )}
       
           
       </>
