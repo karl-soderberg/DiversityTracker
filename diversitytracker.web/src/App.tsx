@@ -100,38 +100,35 @@ function App() {
 
   const { clientPrincipal, loaded } = useClientPrincipal();
 
-    
-
-  //const isLoggedin = useClientPrincipal().clientPrincipal;
-  //const isLoggedin = true;
+  if (!clientPrincipal) {
+    return (
+      <article className="Mainpage-login">
+        <h2 className="Mainpage-login__title">DataSense</h2>
+        <section className="Mainpage-login__buttons">
+            <StaticWebAuthLogins
+                        twitter={false}
+                        customRenderer={({ href, className, name }) => (
+                          <Button type="primary" className="login-button">
+                            <a href={href} className={className}>
+                              Login With {name}
+                            </a>
+                          </Button>
+                        )}
+                        />
+        </section> 
+      </article>
+    )
+  }
 
     return (
       <>   
-        {!clientPrincipal && (
-          <article className="Mainpage-login">
-            <h2 className="Mainpage-login__title">DataSense</h2>
-            <section className="Mainpage-login__buttons">
-                <StaticWebAuthLogins
-                            twitter={false}
-                            customRenderer={({ href, className, name }) => (
-                              <Button type="primary" className="login-button">
-                                <a href={href} className={className}>
-                                  Login With {name}
-                                </a>
-                              </Button>
-                            )}
-                            />
-            </section>
-            
-          </article>
-        )}
-        {clientPrincipal && (
-            <Router>
+        <Router>
             <header className="App-header">
                 <section className="App-header__login">
                 <h2>DataSense</h2>
                   <Button>
                     <Logout />
+                    
                   </Button>
                 </section>
                 
@@ -171,10 +168,7 @@ function App() {
                   />} />
               </Routes>
             </main>
-          </Router>
-          )}
-      
-          
+          </Router>          
       </>
          
     )
