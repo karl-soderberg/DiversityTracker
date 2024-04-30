@@ -124,6 +124,31 @@
         color: #f3f3f3;
     }
 
+    .chartpage__selectcharttype__anchor{
+        transition: all 250ms ease-in-out;
+    }
+/* animation */
+    .chartpage__selectcharttype__anchor.active{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor svg path{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor p{
+        margin-top: .2rem;
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor.active .selectcharttype__anchor--title{
+        color: #d09bff;
+    }
+    .chartpage__selectcharttype__anchor.active svg path{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor.active svg path{
+        stroke: #b45fff;
+    }
+   
+
 
 .header-container{
     margin: 5% 2%;
