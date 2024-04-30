@@ -16,16 +16,11 @@ import {
 import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
-
-
-
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
-
   if (!loaded) {
     return <p>Checking user info...</p>;
   }
-
   if (clientPrincipal) {
     return (
       <div>
@@ -42,66 +37,52 @@ const UserDisplay = () => {
       </div>
     );
   }
-
   return <p>User not signed in</p>;
 };
-
-
-
 function App() {
-
   const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
     queryKey: ['getQuestions'],
     queryFn: () => GetAllQuestions()
   });
-
   const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
     queryKey: ['getFormData'],
     queryFn: () => GetFormsData()
   });
-
   const InterperetAllReflectionsForms = useMutation(() => aiInterperetAllReflectionsForms(), {
       onSuccess: () => {
           refetch();
           questionRefetch();
       }
   });
-
   const InterperetAllRealData = useMutation(() => aiInterperetAllRealData(), {
       onSuccess: () => {
           refetch();
           questionRefetch();
       }
   });
-
   const InterperetAllQuestionAnswers = useMutation(() => aiInterperetAllQuestionAnswers(), {
     onSuccess: () => {
         refetch();
         questionRefetch();
     }
   });
-
   const InterperetAllQuestionValues = useMutation(() => aiInterperetAllQuestionValues(), {
       onSuccess: () => {
           refetch();
           questionRefetch();
       }
   });
-
   const CreateDataFromQuestionAnswersInterpretation = useMutation(() => aiCreateDataFromQuestionAnswersInterpretation(), {
       onSuccess: () => {
           refetch();
           questionRefetch();
       }
   });
-
     const { clientPrincipal, loaded } = useClientPrincipal();
     const isUser = clientPrincipal?.userRoles.includes('anonymous');
-
     if (!loaded) {
-      return <p>Loading...</p>; 
+      return <p>Loading...</p>;
     }
-
     return (
           <>
                 {isUser ? (
@@ -110,15 +91,16 @@ function App() {
                       <section className="App-header__login">
                       <h2>DataSense</h2>
                       <Button>
-                        <Logout />      
+                        <Logout />
                       </Button>
                       </section>
                   </header>
+                  <NavTop useClientPrincipal={useClientPrincipal} />
                     <Router>
                       <NavBottom />
                       <main className="page-container">
                           <Routes>
-                              <Route path="/newform" element={<NewFormPage 
+                              <Route path="/newform" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
                                   isLoading={isLoading}
@@ -126,7 +108,7 @@ function App() {
                                   error={error}
                                   refetch={refetch}
                                 />} />
-                              <Route path="/chart" element={<ChartPage 
+                              <Route path="/chart" element={<ChartPage
                                   className="chartpage-container"
                                   questionData={data}
                                   isLoading={isLoading}
@@ -140,7 +122,7 @@ function App() {
                                   InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
                                   CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
                                 />} />
-                              <Route path="/admin" element={<AdminPage 
+                              <Route path="/admin" element={<AdminPage
                                   className="adminpage-container"
                                   questionData={data}
                                   isLoading={isLoading}
@@ -148,7 +130,7 @@ function App() {
                                   error={error}
                                   refetch={refetch}
                                 />} />
-                          </Routes> 
+                          </Routes>
                       </main>
                     </Router>
                   </>
@@ -166,11 +148,10 @@ function App() {
                                     </Button>
                                   )}
                                   />
-                  </section> 
+                  </section>
           </article>
           )}
-          </>  
+          </>
     )
 }
-
 export default App
