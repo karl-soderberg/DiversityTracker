@@ -168,6 +168,9 @@
     width: 50%;
     margin: 15px;
 }
+.App-header {
+    height: 4rem;
+}
 .App-header__login {
     display: flex;
     justify-content: space-around;
