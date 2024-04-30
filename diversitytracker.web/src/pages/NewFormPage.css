@@ -81,3 +81,25 @@
     display: block;
     visibility: visible;
 }
+.newformpage-footer{
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .newformpage-footer img{
+        width: 150px;
+    }
+    .newformpage-footer h2{
+        font-weight: 400;
+        font-size: 32px;
+        color: #545454;
+
+        margin: 1rem 0 .2rem 0;
+    }
+    .newformpage-footer p{
+        font-weight: 200;
+        font-size: 10px;
+        color: #545454;
+    }
