@@ -294,7 +294,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         <div className={'question ' + (question.id == activeQuestion && 'active')}></div>
                     ))}
                 </div>
-                <h1 className={"header-container__title"}>Percieved Quality Of Leadership Over Time</h1>
+                {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
+                    <h1 className={"header-container__title"}>{question.value}</h1>
+                ))}
                 {(formsData && formsData.aiInterpretation) && (
                     <>
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
