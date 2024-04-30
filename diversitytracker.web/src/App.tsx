@@ -109,11 +109,11 @@ function App() {
                     <StaticWebAuthLogins
                                   twitter={false}
                                   customRenderer={({ href, className, name }) => (
-                                    <button className="login-button">
+                                    <Button className="login-button">
                                       <a href={href} className={className}>
                                         Login With {name}
                                       </a>
-                                    </button>
+                                    </Button>
                                   )}
                                   />
                     <p>{isUser}</p>
