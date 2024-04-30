@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export const NavBottom = () => {
     const { clientPrincipal } = useClientPrincipal();
-    const isAdmin = clientPrincipal?.userRoles.includes('authenticated');
+    const isAdmin = clientPrincipal?.userRoles.includes('admin');
     
     return(
         <nav className='navbottom-container'>
