@@ -6,6 +6,7 @@ import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedDa
 import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question, scatterAiDataArr, scatterAiDataDict, scatterData, scatterDataArr, scatterDataDict } from '../types/types'
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'
 import { Switch } from 'antd'
+import TextTransition, { presets } from 'react-text-transition'
 
 // const FilteredMockData = [
 //     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
@@ -295,13 +296,23 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     ))}
                 </div>
                 {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
-                    <h1 className={"header-container__title"}>{question.value}</h1>
+                    <h1 className={"header-container__title"}>
+                         <TextTransition
+                                        springConfig={presets.gentle}
+                                        style={{ margin: "0 4px" }}
+                                        inline
+                                    >
+                            {question.value}
+                        </TextTransition>
+                    </h1>
                 ))}
                 {(formsData && formsData.aiInterpretation) && (
                     <>
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p className={"header-container__reflection"} key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
+                                <p className={"header-container__reflection"} key={filteredInter.id}>
+                                    {filteredInter.answerInterpretation}     
+                                </p>
                             ))
                         ) : (
                             <>
