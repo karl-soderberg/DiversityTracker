@@ -79,7 +79,8 @@ function App() {
       }
   });
     const { clientPrincipal, loaded } = useClientPrincipal();
-    const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    //const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    const isUser = true;
     if (!loaded) {
       return <p>Loading...</p>;
     }
@@ -95,7 +96,7 @@ function App() {
                       </Button>
                       </section>
                   </header>
-                  <NavTop useClientPrincipal={useClientPrincipal} />
+                  <NavTop />
                     <Router>
                       <NavBottom />
                       <main className="page-container">
