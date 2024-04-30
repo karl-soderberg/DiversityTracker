@@ -5,9 +5,13 @@ import { FormIcon } from '../resources/icons/FormIcon'
 import './NavBottom.css'
 import { Link } from 'react-router-dom';
 
-export const NavBottom = () => {
+type Props = {
+    isAdmin: boolean
+}
+
+export const NavBottom = ({ isAdmin }: Props) => {
     const { clientPrincipal } = useClientPrincipal();
-    const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    
     
     return(
         <nav className='navbottom-container'>
