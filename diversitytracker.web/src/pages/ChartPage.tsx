@@ -240,9 +240,29 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 ) : null}
                 <div className='chart-container__scopebtn-container'>
                     <p>Men</p>
-                    <Switch className='switch--men' size="small" defaultChecked />
+                    <Switch 
+                        className='switch--men' 
+                        size="small" 
+                        defaultChecked 
+                        onClick={(checked) => {
+                            scope == 'both' && !checked && setScope('women');
+                            scope == 'women' && checked && setScope('both');
+                            scope == 'men' && !checked && setScope('');
+                            scope == '' && checked && setScope('men');
+                        }}
+                    />
                     <p>Women</p>
-                    <Switch className='switch--women' size="small" defaultChecked />
+                    <Switch 
+                        className='switch--women'
+                        size="small" 
+                        defaultChecked 
+                        onClick={(checked) => {
+                            scope == 'both' && !checked && setScope('men')
+                            scope == 'men' && checked && setScope('both');
+                            scope == 'women' && !checked && setScope('');
+                            scope == '' && checked && setScope('women');
+                        }}
+                    />
                 </div> 
             </ResponsiveContainer>
             </article>
