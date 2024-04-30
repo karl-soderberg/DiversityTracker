@@ -94,94 +94,94 @@ function App() {
       }
   });
 
-  const { clientPrincipal, loaded } = useClientPrincipal();
-  const isUser = clientPrincipal !== undefined;
+    const { clientPrincipal, loaded } = useClientPrincipal();
+    const isUser = clientPrincipal !== undefined;
+
+    if (!loaded) {
+      return <p>Loading...</p>; 
+    }
 
     return (
-      <>
-        <ClientPrincipalContextProvider>  
-          <header className="App-header">
-                <section className="App-header__login">
-                <h2>DataSense</h2>
-                <StaticWebAuthLogins
-                              twitter={false}
-                              customRenderer={({ href, className, name }) => (
-                                <button className="login-button">
-                                  <a href={href} className={className}>
-                                    Login With {name}
-                                  </a>
-                                </button>
-                              )}
-                              />
-                <p>{isUser}</p>
-                
-                  <UserDisplay />
-                
+          <>
+              <header className="App-header">
+                    <section className="App-header__login">
+                    <h2>DataSense</h2>
+                    <StaticWebAuthLogins
+                                  twitter={false}
+                                  customRenderer={({ href, className, name }) => (
+                                    <button className="login-button">
+                                      <a href={href} className={className}>
+                                        Login With {name}
+                                      </a>
+                                    </button>
+                                  )}
+                                  />
+                    <p>{isUser}</p>
+                    
+                      <UserDisplay />
+                    
 
-                <Button>
-                  <Logout />      
-                </Button>
-                </section>
-            </header>
-            {isUser ? (
-              <Router>
-                <NavBottom />
-                  <main className="page-container">
-                    <Routes>
-                      <Route path="/newform" element={<NewFormPage 
-                          className="newformpage-container"
-                          questionData={data}
-                          isLoading={isLoading}
-                          isError={isError}
-                          error={error}
-                          refetch={refetch}
-                        />} />
-                      <Route path="/chart" element={<ChartPage 
-                          className="chartpage-container"
-                          questionData={data}
-                          isLoading={isLoading}
-                          isError={isError}
-                          error={error}
-                          refetch={refetch}
-                          formsData={formsData}
-                          InterperetAllRealData={InterperetAllRealData.mutate}
-                          InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
-                          InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
-                          InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
-                          CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
-                        />} />
-                      <Route path="/admin" element={<AdminPage 
-                          className="adminpage-container"
-                          questionData={data}
-                          isLoading={isLoading}
-                          isError={isError}
-                          error={error}
-                          refetch={refetch}
-                        />} />
-                    </Routes>
-                  </main>
-                </Router>
-            ) : (
-              <article className="Mainpage-login">
-              <h2 className="Mainpage-login__title">DataSense</h2>
-              <section className="Mainpage-login__buttons">
-                  <StaticWebAuthLogins
-                              twitter={false}
-                              customRenderer={({ href, className, name }) => (
-                                <Button type="primary" className="login-button">
-                                  <a href={href} className={className}>
-                                    Login With {name}
-                                  </a>
-                                </Button>
-                              )}
-                              />
-              </section> 
-      </article>
-      )}
-
-      </ClientPrincipalContextProvider>
-      </>
-         
+                    <Button>
+                      <Logout />      
+                    </Button>
+                    </section>
+                </header>
+                {isUser ? (
+                  <Router>
+                    <NavBottom />
+                      <main className="page-container">
+                        <Routes>
+                          <Route path="/newform" element={<NewFormPage 
+                              className="newformpage-container"
+                              questionData={data}
+                              isLoading={isLoading}
+                              isError={isError}
+                              error={error}
+                              refetch={refetch}
+                            />} />
+                          <Route path="/chart" element={<ChartPage 
+                              className="chartpage-container"
+                              questionData={data}
+                              isLoading={isLoading}
+                              isError={isError}
+                              error={error}
+                              refetch={refetch}
+                              formsData={formsData}
+                              InterperetAllRealData={InterperetAllRealData.mutate}
+                              InterperetAllReflectionsForms={InterperetAllReflectionsForms.mutate}
+                              InterperetAllQuestionAnswers={() => {InterperetAllQuestionAnswers.mutate; InterperetAllQuestionValues.mutate}}
+                              InterperetAllQuestionValues={() => {InterperetAllQuestionValues.mutate; InterperetAllQuestionAnswers.mutate}}
+                              CreateDataFromQuestionAnswersInterpretation={CreateDataFromQuestionAnswersInterpretation.mutate}
+                            />} />
+                          <Route path="/admin" element={<AdminPage 
+                              className="adminpage-container"
+                              questionData={data}
+                              isLoading={isLoading}
+                              isError={isError}
+                              error={error}
+                              refetch={refetch}
+                            />} />
+                        </Routes>
+                      </main>
+                    </Router>
+                ) : (
+                  <article className="Mainpage-login">
+                  <h2 className="Mainpage-login__title">DataSense</h2>
+                  <section className="Mainpage-login__buttons">
+                      <StaticWebAuthLogins
+                                  twitter={false}
+                                  customRenderer={({ href, className, name }) => (
+                                    <Button type="primary" className="login-button">
+                                      <a href={href} className={className}>
+                                        Login With {name}
+                                      </a>
+                                    </Button>
+                                  )}
+                                  />
+                  </section> 
+          </article>
+          )}
+          </>  
     )
 }
 
