@@ -1,14 +1,20 @@
-import React from 'react';
+import { useClientPrincipal } from '@aaronpowell/react-static-web-apps-auth';
 import { CustomAnchor } from '../components/CustomAnchor'
 import { ChartIcon } from '../resources/icons/ChartIcon'
 import { FormIcon } from '../resources/icons/FormIcon'
 import './NavBottom.css'
 import { Link } from 'react-router-dom';
 
-export const NavBottom = ({useClientPrincipal}) => {
-
-    const isAdmin = useClientPrincipal.clientPrincipal?.userRoles.includes('admin');
+export const NavBottom = () => {
+    const { clientPrincipal } = useClientPrincipal();
+    const isAdmin = clientPrincipal?.userRoles.includes('authenticated');
     // const isAdmin = true;
+    if (clientPrincipal) {
+        console.log('User is logged in');
+        console.log('User roles:', clientPrincipal.userRoles);
+    } else {
+        console.log('User is not logged in');
+    }
     return(
         <nav className='navbottom-container'>
             {isAdmin && (
