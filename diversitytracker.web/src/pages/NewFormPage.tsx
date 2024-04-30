@@ -139,10 +139,12 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             <section className='newformpage-container__form-container'>
                 <Form 
                     {...formItemLayout} 
+                    style={{ maxWidth: 575 }}
                     variant="filled"  
                     onFinish={onSubmitHandler}
                     onFinishFailed={onFailSubmitHandler}
                     className='newformpage__form'
+                    layout='vertical'
                 >
 
                     <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
