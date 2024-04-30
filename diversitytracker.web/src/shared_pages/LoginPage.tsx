@@ -9,13 +9,11 @@ import { Button } from 'antd';
 export const LoginPage = () => {
     
     return(
-        <header className="App-header">
-            <section className="App-header__login">
-            <h2>DataSense</h2>
-            <Button>
-                <Logout />
-            </Button>
-            </section>
+        <header className='anonymouspagesign-container App-header'>
+            <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
+            <h2>OFFICE TRACKER</h2>
+            <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
+            <Button className='anonymouspagesign__btn'>Begin</Button>
         </header>
     )
 }

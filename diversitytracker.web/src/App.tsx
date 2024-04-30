@@ -17,7 +17,6 @@ import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
 import { AnonymousLogin } from './shared_pages/AnonymousLogin';
-import { LoginPage } from './shared_pages/LoginPage';
 
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
@@ -95,7 +94,14 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                  <LoginPage />
+                    {/* <header className="App-header">
+                      <section className="App-header__login">
+                      <h2>DataSense</h2>
+                        <Button>
+                          <Logout />
+                        </Button>
+                      </section>
+                  </header> */}
                   <NavTop />
                     <Router>
                       <NavBottom 
@@ -140,18 +146,20 @@ function App() {
                   </>
                 ) : (
                   <article className="Mainpage-login">
-                  <h2 className="Mainpage-login__title">DataSense</h2>
+                    <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
+                    <h2>OFFICE TRACKER</h2>
+                    <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
                   <section className="Mainpage-login__buttons">
                       <StaticWebAuthLogins
-                                  twitter={false}
-                                  customRenderer={({ href, className, name }) => (
-                                    <Button type="primary" className="login-button">
-                                      <a href={href} className={className}>
-                                        Login With {name}
-                                      </a>
-                                    </Button>
-                                  )}
-                                  />
+                          twitter={false}
+                          customRenderer={({ href, className, name }) => (
+                            <Button className="login-button">
+                              <a href={href} className={className}>
+                                Login With {name}
+                              </a>
+                            </Button>
+                          )}
+                        />
                   </section>
           </article>
           )}
