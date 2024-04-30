@@ -5,7 +5,7 @@ import { MOCKData, barChartMockData } from '../data/MockData'
 import { pieData, scatterFemaleData, scatterMaleData } from '../data/ProcessedData'
 import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, DistributionData, DistributionDataResponse, GenderDistribution, GenderValue, Question, scatterAiDataArr, scatterAiDataDict, scatterData, scatterDataArr, scatterDataDict } from '../types/types'
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'
-import { Switch } from 'antd'
+import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
 
 // const FilteredMockData = [
@@ -316,7 +316,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             ))
                         ) : (
                             <>
-                                <p className={className + "__reflection"}>No answers available.</p>
+                                <p className={"header-container__reflection"}>No answers available.</p>
                                 <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
                             </>
                         )}
