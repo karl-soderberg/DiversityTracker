@@ -95,7 +95,7 @@ function App() {
   });
 
     const { clientPrincipal, loaded } = useClientPrincipal();
-    const isUser = clientPrincipal !== undefined;
+    const isUser = clientPrincipal?.userRoles.includes('anonymous');
 
     if (!loaded) {
       return <p>Loading...</p>; 

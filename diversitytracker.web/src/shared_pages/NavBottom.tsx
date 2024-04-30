@@ -8,13 +8,7 @@ import { Link } from 'react-router-dom';
 export const NavBottom = () => {
     const { clientPrincipal } = useClientPrincipal();
     const isAdmin = clientPrincipal?.userRoles.includes('authenticated');
-    // const isAdmin = true;
-    if (clientPrincipal) {
-        console.log('User is logged in');
-        console.log('User roles:', clientPrincipal.userRoles);
-    } else {
-        console.log('User is not logged in');
-    }
+    
     return(
         <nav className='navbottom-container'>
             {isAdmin && (
