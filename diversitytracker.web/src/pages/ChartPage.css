@@ -177,6 +177,34 @@
 .header-container{
     margin: 5% 2%;
 }
+
+    .questionvisualizer-container{
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 1rem;
+    }
+    .questionvisualizer-container .question{
+        width: 10px;
+        height: 1px;
+        border-radius: 3rem;
+        margin-right: .5rem;
+        background-color: #ffffff9c;
+
+        transition: all 350ms ease-in-out;
+    }
+
+    .questionvisualizer-container .question.active{
+        width: 25px;
+        height: 1px;
+        border-radius: 3rem;
+        margin-right: .5rem;
+        background-color: #fff;
+
+        transition: all 350ms ease-in-out;
+    }
+
     .header-container__title{
         font-size: 1.9rem;
         font-weight: 400;
@@ -189,6 +217,7 @@
         color: #f3f3f3;
         line-height: 1.2rem;
     }
+    
 
 
     .datasummary-container{

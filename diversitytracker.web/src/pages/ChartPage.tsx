@@ -287,7 +287,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </div> 
             </ResponsiveContainer>
             </article>
+            
             <header className='header-container'>
+                <div className='questionvisualizer-container'>
+                    {questionsData && questionsData.map((question) => (
+                        <div className={'question ' + (question.id == activeQuestion && 'active')}></div>
+                    ))}
+                </div>
                 <h1 className={"header-container__title"}>Percieved Quality Of Leadership Over Time</h1>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
