@@ -16,10 +16,57 @@
 
     background-color: var(--light-module2);
 }
-.reflectionboxchartsummary-container{
-    margin: 5% 0%;
-    padding: 2% 2% 5% 2%;
 
+.adminpage-container.active{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    z-index: 2;
+
+    transform: translateX(0%);
+    
+    background-color: var(--light-base);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    
+    animation: animateRight var(--animation-timing) var(--easing);
+}
+
+
+.Mainpage-login {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin: 2rem;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.Mainpage-login__title {
+    margin: 7rem;
+    font-size: 7em;
+    
+}
+
+.Mainpage-login__buttons {
+    display: flex;
+    justify-content: space-between; 
+    width: 50%;
+    margin: 15px;
+}
+.App-header {
+    height: 4rem;
+}
+.App-header__login {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.Not-signed-in {
     display: flex;
     justify-content: center;
     align-items: center;
