@@ -95,13 +95,13 @@
 
 
 .chartpage__selectquestion{
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100vw;
     height: 43vh;
 
-    padding: 0% 4% 0% 1%;
+    padding: 0% 3% 50% 0%;
 
     display: flex;
     align-items: center;
@@ -109,6 +109,7 @@
 }
 .chartpage__selectquestion a{
     position: relative;
+    margin-top: 40vh;
     width: 50px;
     height: 100vh;
     display: flex;
@@ -117,12 +118,14 @@
     z-index: 0;
 }
 .chartpage__selectquestion a svg path{
-    fill: #ffffff15;
+    fill: #ffffff;
+    opacity: .05;
 
     transition: all 250ms ease-in-out;
 }
 .chartpage__selectquestion a:hover svg path{
     fill: #ffffff;
+    opacity: 1;
 
     transition: all 250ms ease-in-out;
 }
