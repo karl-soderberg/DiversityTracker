@@ -1,0 +1,44 @@
+.anonymouspagesign-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .anonymouspagesign-container img{
+        margin-top: 15vh;
+        width: 150px;
+    }
+    .anonymouspagesign-container h2{
+        font-weight: 400;
+        font-size: 47px;
+        color: #545454;
+        margin: 1rem 0 .2rem 0;
+    }
+    .anonymouspagesign-container p{
+        font-weight: 200;
+        font-size: 15px;
+        color: #545454;
+    }
+
+    .anonymouspagesign-container button{
+        margin-top: 1.7rem;
+        color: #fff;
+        
+        background-color: #00c4a0;
+        transition: all 350ms ease-in-out;
+    }
+
+    .anonymouspagesign-container button:hover{
+        background-color: #00c424 !important;
+        color: #fff !important;
+        border: 1px solid #00c424;
+
+        transition: all 350ms ease-in-out;
+    }

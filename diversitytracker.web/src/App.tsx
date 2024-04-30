@@ -16,6 +16,7 @@ import {
 import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
+import { AnonymousLogin } from './shared_pages/AnonymousLogin';
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
   if (!loaded) {
@@ -79,12 +80,11 @@ function App() {
       }
   });
     const { clientPrincipal, loaded } = useClientPrincipal();
-    const isUser = clientPrincipal?.userRoles.includes('anonymous');
-    const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    // const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
 
-    // const isAdmin = true;
-    // const isUser = true;
-
+    const isAdmin = true;
+    const isUser = true;
 
     if (!loaded) {
       return <p>Loading...</p>;
@@ -108,6 +108,9 @@ function App() {
                       />
                       <main className="page-container">
                           <Routes>
+                              <Route path='/anonymous' element={<AnonymousLogin />}>
+
+                              </Route>
                               <Route path="/newform" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
