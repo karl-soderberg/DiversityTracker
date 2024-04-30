@@ -1,27 +1,232 @@
 @import url('../colors.css');
 
 .chartpage-container{
-    padding: 1% 5% 15vh 5%; 
+    padding: 5% 5% 10vh 5%; 
     height: fit-content;
+    cursor: default;
 }
 
 .chart-container{
-    width: 90vw;
-    height: 60vh;
-    margin-top: 1%;
+    position: relative;
+
+    width: 85vw;
+    height: 35vh;
+    margin: 10% auto;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: var(--light-module2);
-    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.545);
+    background: 
+        linear-gradient(to bottom, rgba(28, 28, 28, 0.669) 0%, rgba(30, 30, 30, 0.733) 100%), 
+        url('https://media.macphun.com/img/uploads/customer/glossary/9/17117142256606afb1ee1a66.54460324.jpg?q=85&w=1680');
+    backdrop-filter: blur(50px);
+    background-size: cover;
+    border-radius: 1.5rem;
 }
+    .chart-container::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        backdrop-filter: blur(15px);
+        opacity: .85;
+        
+    }
+    .chartpage-container--bg{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.194) 0%, rgba(0,0,0,1) 100%), 
+        url('https://media.cntraveler.com/photos/6400e9ec3b1e3f0df75c5c44/16:9/w_2580,c_limit/Green%20Bowl%20Beach,%20Bali,%20Indonesia_2AGYRXP.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+        .chartpage-container--bg::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(150px);
+        }
+    .chart-container__scopebtn-container{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        margin: 3.6% 4%;
+
+        display: flex;
+        align-items: center;
+    }
+        .chart-container__scopebtn-container p{
+            font-size: .7rem;
+        }
+        .chart-container__scopebtn-container .switch--men{
+            background-color: #1c48ad;
+        }
+        .chart-container__scopebtn-container .switch--women{
+            background-color: #8a329e;
+        }
+        .chart-container__scopebtn-container .switch--women:hover{
+            background-color: #8a329e;
+        }
+        .chart-container__scopebtn-container p:nth-of-type(1){
+            color: #1d50c6;
+            margin-right: .5rem;
+        }
+        .chart-container__scopebtn-container p:nth-of-type(2){
+            color: #9e41b3;
+            font-size: .7rem;
+            margin-right: .3rem;
+            margin-left: .7rem;
+        }
+
+
+
+.chartpage__selectquestion{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 43vh;
+
+    padding: 0% 3% 50% 0%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chartpage__selectquestion a{
+    position: relative;
+    margin-top: 40vh;
+    width: 50px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+.chartpage__selectquestion a svg path{
+    fill: #ffffff;
+    opacity: .05;
+
+    transition: all 250ms ease-in-out;
+}
+.chartpage__selectquestion a:hover svg path{
+    fill: #ffffff;
+    opacity: 1;
+
+    transition: all 250ms ease-in-out;
+}
+
+.chartpage__selectcharttype{
+    display: flex;
+    justify-content: space-around;
+}
+    .chartpage__selectcharttype a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    .chartpage__selectcharttype p{
+        font-weight: 200;
+        font-size: .6rem;
+        color: #f3f3f3;
+    }
+    
+
+    .chartpage__selectcharttype__anchor{
+        transition: all 250ms ease-in-out;
+    }
+/* animation */
+    .chartpage__selectcharttype__anchor.active{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor svg path{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor p{
+        margin-top: .2rem;
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor.active .selectcharttype__anchor--title{
+        color: #d09bff;
+    }
+    .chartpage__selectcharttype__anchor.active svg path{
+        transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor.active svg path{
+        stroke: #b45fff;
+    }
+   
+
+
+.header-container{
+    margin: 5% 2%;
+}
+
+    .questionvisualizer-container{
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 1rem;
+    }
+    .questionvisualizer-container .question{
+        width: 10px;
+        height: 1px;
+        border-radius: 3rem;
+        margin-right: .5rem;
+        background-color: #ffffff9c;
+
+        transition: all 350ms ease-in-out;
+    }
+
+    .questionvisualizer-container .question.active{
+        width: 25px;
+        height: 1px;
+        border-radius: 3rem;
+        margin-right: .5rem;
+        background-color: #fff;
+
+        transition: all 350ms ease-in-out;
+    }
+
+    .header-container__title{
+        margin-left: -1%;
+        font-size: 1.9rem;
+        font-weight: 400;
+        color: #f3f3f3;
+    }
+
+    .header-container__reflection{
+        margin: 3% 0%;
+        font-weight: 200;
+        color: #f3f3f3;
+        line-height: 1.2rem;
+    }
+
+    
+    
 
 
     .datasummary-container{
         margin: 5% 0%;
         padding: 2% 2% 5% 2%;
+        backdrop-filter: blur(30px);
 
         border-radius: 1rem;
 
@@ -34,21 +239,47 @@
         border-radius: 1rem;
 
         background-color: var(--light-module2);
+        background-color: transparent;
     }
+        .reflectionboxsummary-container h2{
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: .5rem;
+            color: #f3f3f3;
+        }
+        .reflectionboxsummary-container p{
+            font-weight: 200;
+            color: #f3f3f3;
+            line-height: 1.2rem;
+        }
     .reflectionboxchartsummary-container{
-        margin: 5% 0%;
-        padding: 2% 2% 5% 2%;
+        width: 75vw;
+        height: 35vh;
+        margin: 10% auto;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        width: 90vw;
-        height: 65vh;
-
+        background-color: rgba(0, 0, 0, 0.545);
+        background: 
+        linear-gradient(to bottom, rgba(44, 44, 44, 0.685) 0%, rgba(22, 22, 22, 0.708) 100%), 
+        url('https://ikancorp.com/prod1/wp-content/uploads/2021/08/bphkO8F3NXuX10t03wlTHsmKPP7r5EvX1628183769.jpg');
+        backdrop-filter: blur(50px);
+        background-size: cover;
         border-radius: 1rem;
-
-        background-color: var(--light-module2);
+    }
+    .reflectionboxchartsummary-container::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        backdrop-filter: blur(15px);
+        opacity: 1;
+        
     }
     .optionalreflectionsummary-container{
         margin: 5% 0%;
@@ -57,4 +288,29 @@
         border-radius: 1rem;
 
         background-color: var(--light-module2);
+    }
+
+
+
+.chartpage-footer{
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .chartpage-footer img{
+        width: 150px;
+    }
+    .chartpage-footer h2{
+        font-weight: 400;
+        font-size: 32px;
+        color: #f3f3f3;
+
+        margin: 1rem 0 .2rem 0;
+    }
+    .chartpage-footer p{
+        font-weight: 200;
+        font-size: 10px;
+        color: #f3f3f3;
     }

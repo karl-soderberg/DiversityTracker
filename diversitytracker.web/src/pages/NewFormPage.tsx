@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   DatePicker,
@@ -38,6 +38,12 @@ type Props = {
 }
 
 export const NewFormPage = ({className, questionData, isLoading, isError, error, refetch}: Props) => {
+    const catAnimationRef = useRef<HTMLDivElement>(null);
+    const confettiAnimationRef = useRef<HTMLDivElement>(null);
+    const catAnimationInstance = useRef<any>(null);
+    const confettiAnimationInstance = useRef<any>(null);
+    const [playAnimations, setPlayAnimations] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -45,14 +51,6 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         const timeAtCompany = values.timeatcompany;
         const reflection = values.reflection;
 
-        // const questions: FormSubmitQuestionTypeDto[] = 
-        // Object.keys(values)
-        //     .filter(key => key.startsWith('QuestionType'))
-        //     .map(key => ({
-        //         questionTypeId: key,
-        //         value: values[key] / 10,
-        //         answer: values["reflection_" + question.value] || ""
-        //     }));
         const questions: FormSubmitQuestionTypeDto[] = 
             questionData.map((question) => ({
                 questionTypeId: question.id,
@@ -71,7 +69,11 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        postFormsData.mutate(formSubmissionDto);
+        if(!isSubmitted){
+            postFormsData.mutate(formSubmissionDto);
+        }
+        setPlayAnimations(true);
+        setIsSubmitted(true);
     };
 
     const onFailSubmitHandler = (errorInfo: any) => {
@@ -84,20 +86,68 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         }
     });
 
+
+    useEffect(() => {
+        if (catAnimationRef.current && !catAnimationInstance.current) {
+            catAnimationInstance.current = lottie.loadAnimation({
+                container: catAnimationRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './src/resources/animations/cat.json'
+            });
+        }
+        return () => {
+            if (catAnimationInstance.current) {
+                catAnimationInstance.current.destroy();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
+            confettiAnimationInstance.current = lottie.loadAnimation({
+                container: confettiAnimationRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './src/resources/animations/fireworks.json'
+            });
+        }
+        return () => {
+            if (confettiAnimationInstance.current) {
+                confettiAnimationInstance.current.destroy();
+            }
+        };
+    }, []);
+
+
+    useEffect(() => {
+        if (playAnimations) {
+            catAnimationInstance.current?.play();
+            confettiAnimationInstance.current?.play();
+        }
+    }, [playAnimations]);
+
     return(
         <section className={className}>
-            <h1>New Forms Page</h1>
-            <p>Submit your form</p>
+            <h1>Salt Organization Form</h1>
+            <p>The more input the better</p>
+            <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
+            <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
-            <section className='newformpage-container__form'>
+            <section className='newformpage-container__form-container'>
                 <Form 
                     {...formItemLayout} 
+                    style={{ maxWidth: 575 }}
                     variant="filled"  
                     onFinish={onSubmitHandler}
                     onFinishFailed={onFailSubmitHandler}
+                    className='newformpage__form'
+                    layout='vertical'
                 >
 
-                    <Form.Item label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
+                    <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
                         <Select
                             showSearch
                             placeholder="Select a your gender"
@@ -120,21 +170,23 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     </Form.Item>
                 
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Age"
                         name="age"
-                        rules={[{ required: true, message: 'Please input age.', min: 0}]}
+                        rules={[{ required: true, message: 'Please input age.'}]}
                         >
-                        {/* <InputNumber style={{ width: '100%' }} /> */}
-                        <input type="number" />
+                        <InputNumber style={{ width: '100%' }}/>
+                        {/* <input type="number" /> */}
                     </Form.Item>
 
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Years At Company"
                         name="timeatcompany"
-                        rules={[{ required: true, message: 'Please input time worked at company.', min: 0}]}
+                        rules={[{ required: true, message: 'Please input time worked at company.'}]}
                         >
-                        {/* <InputNumber style={{ width: '100%' }} /> */}
-                        <input type="number" />
+                        <InputNumber style={{ width: '100%' }}/>
+                        {/* <input type="number" /> */}
                     </Form.Item>
                     
                 
@@ -144,8 +196,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
                     {questionData && 
                         questionData.map((question) => (
-                            <>
+                            <div className='newformpage__form__itemgroup'>
                                 <Form.Item
+                                    className='newformpage__form__item'
                                     // label={question.value}
                                     name={question.id}
                                     rules={[{ required: true, message: 'Please input your happiness level!' }]}
@@ -161,29 +214,38 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                     />
                                 </Form.Item>
                                 <Form.Item
-                                    label={question.value + " reflections"}
+                                    className='newformpage__form__item'
+                                    label={question.value + ""}
                                     name={"reflection_" + question.value}
                                     rules={[{ required: false}]}
                                     >
                                     <Input.TextArea />
                                 </Form.Item>
-                            </>
+                            </div>
                         ))
                     }
                     <Form.Item
+                        className='newformpage__form__item'
                         label="Personal Reflections - We will weigh this heavily in our analysis"
                         name="reflection"
                         rules={[{ required: true, message: 'Please input!'}]}
                         >
                         <Input.TextArea />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
+                    <Form.Item 
+                        className='newformpage__form__item'
+                        wrapperCol={{ offset: 6, span: 16 }}>
+                        <Button className='newformpage__form__submitbtn' type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
                 </Form>
             </section>
+            <footer className='newformpage-footer'>
+                <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
+                <h2>OFFICE TRACKER</h2>
+                <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
+            </footer>
         </section>
     );
 

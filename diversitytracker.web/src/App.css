@@ -1,131 +1,20 @@
-@import url('./colors.css');
+@import url('colors.css');
 
-.page-container{
-    position: relative;
-    width: 100vw;
-    height: fit-content;
+.datasummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
+
+    border-radius: 1rem;
+
+    background-color: var(--light-path);
 }
+.reflectionboxsummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
-:root{
-    --animation-timing: 650ms;
-    --easing: cubic-bezier(0.65,0.03,0.22,0.99);
-}
+    border-radius: 1rem;
 
-.chartpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateLeftOut var(--animation-timing) var(--easing);
-}
-
-.formpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
-
-.newformpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
-
-.adminpage-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    z-index: 1;
-    animation: animateRightOut var(--animation-timing) var(--easing);
-}
-
-.chartpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-    animation: animateLeft var(--animation-timing) var(--easing);
-}
-
-.formpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-    
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    
-    animation: animateRight var(--animation-timing) var(--easing);
-}
-
-.newformpage-container.active{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    min-width: 100vw;
-    min-height: 100vh;
-
-    z-index: 2;
-
-    transform: translateX(0%);
-    
-    background-color: var(--light-base);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    
-    animation: animateRight var(--animation-timing) var(--easing);
+    background-color: var(--light-module2);
 }
 
 .adminpage-container.active{
@@ -180,60 +69,20 @@
 .Not-signed-in {
     display: flex;
     justify-content: center;
-    margin: 10px;
+    align-items: center;
 
+    width: 90vw;
+    height: 65vh;
+
+    border-radius: 1rem;
+
+    background-color: var(--light-module2);
 }
+.optionalreflectionsummary-container{
+    margin: 5% 0%;
+    padding: 2% 2% 5% 2%;
 
+    border-radius: 1rem;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @keyframes animateRight{
-    0%{
-        transform: translateX(100%);
-    }
-    100%{
-        transform: translateX(0%);
-    }
+    background-color: var(--light-module2);
 }
-
-@keyframes animateRightOut{
-    0%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(100%);
-    }
-}
-
-@keyframes animateLeft{
-    0%{
-        transform: translateX(-100%);
-    }
-    100%{
-        transform: translateX(0%);
-    }
-}
-
-@keyframes animateLeftOut{
-    0%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(-100%);
-    }
-} */

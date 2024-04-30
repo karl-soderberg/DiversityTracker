@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("dockerDb"));
 });
 
 builder.Services.AddScoped<IFormsRepository, FormsDataRepository>();

@@ -1,8 +1,8 @@
 .newformpage-container{
-    padding: 2% 5%;
+    padding: 15% 5%;
 }
 
-.newformpage-container__form{
+.newformpage-container__form-container{
     width: 90vw;
     margin: 0 auto;
     padding: 5% 0%;
@@ -10,3 +10,96 @@
     display: flex;
     flex-direction: column;
 }
+
+.newformpage__form{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.newformpage__form__item{
+    margin-top: 0rem;
+    width: 100%;
+}
+
+.newformpage__form__itemgroup{
+    width: 100%;
+    margin: 12% 0%;
+}
+
+.newformpage__form__submitbtn{
+    width: 50%;
+
+    background-color: #00c4a0;
+    transition: all 350ms ease-in-out;
+}
+
+.newformpage__form__submitbtn:hover{
+    background-color: #00c424 !important;
+
+    transition: all 350ms ease-in-out;
+}
+
+
+.animation1{
+    position: fixed;
+    top: 30%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+
+    width: 90vw;
+    height: 50vh;
+
+    visibility: collapse;
+    display: none;
+}
+.animation2{
+    position: fixed;
+    top: 0;
+    left: -30%;
+    z-index: 50;
+
+    width: 150vw;
+    height: 70vh;
+    
+    visibility: collapse;
+    display: none;
+}
+
+.animation1.active{
+    display: block;
+    visibility: visible;
+
+}
+.animation2.active{
+    display: block;
+    visibility: visible;
+}
+.newformpage-footer{
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .newformpage-footer img{
+        width: 150px;
+    }
+    .newformpage-footer h2{
+        font-weight: 400;
+        font-size: 32px;
+        color: #545454;
+
+        margin: 1rem 0 .2rem 0;
+    }
+    .newformpage-footer p{
+        font-weight: 200;
+        font-size: 10px;
+        color: #545454;
+    }
