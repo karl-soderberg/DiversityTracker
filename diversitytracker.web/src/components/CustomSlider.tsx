@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState } from 'react';
 import './CustomSlider.css'
+import Lottie from 'lottie-web';
 
 type SliderProps = {
   min: number,
@@ -28,8 +29,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
     useEffect(() => {
         if (emotionIconRef.current && !animationInstance.current) {
-            // @ts-ignore
-            animationInstance.current = lottie.loadAnimation({
+            animationInstance.current = Lottie.loadAnimation({
                 container: emotionIconRef.current,
                 renderer: 'svg',
                 loop: true,

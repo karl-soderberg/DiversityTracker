@@ -15,6 +15,7 @@ import { useMutation, useQuery } from 'react-query';
 import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } from '../types/types';
 import { CustomSlider } from '../components/CustomSlider';
 import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
+import Lottie from 'lottie-web';
 
 const { RangePicker } = DatePicker;
 
@@ -93,8 +94,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (catAnimationRef.current && !catAnimationInstance.current) {
-            // @ts-ignore
-            catAnimationInstance.current = lottie.loadAnimation({
+            catAnimationInstance.current = Lottie.loadAnimation({
                 container: catAnimationRef.current,
                 renderer: 'svg',
                 loop: true,
@@ -111,8 +111,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
-            // @ts-ignore
-            confettiAnimationInstance.current = lottie.loadAnimation({
+            confettiAnimationInstance.current = Lottie.loadAnimation({
                 container: confettiAnimationRef.current,
                 renderer: 'svg',
                 loop: true,
@@ -129,8 +128,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (writingAnimationRef.current && !writingAnimationInstance.current) {
-            // @ts-ignore
-            writingAnimationInstance.current = lottie.loadAnimation({
+            writingAnimationInstance.current = Lottie.loadAnimation({
                 container: writingAnimationRef.current,
                 renderer: 'svg',
                 loop: true,
