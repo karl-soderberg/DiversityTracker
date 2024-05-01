@@ -17,6 +17,7 @@ export const NavBottom = ({ isAdmin }: Props) => {
     const isChartPage = location.pathname === '/chart';
     const isNewFormPage = location.pathname === '/newform';
     const isAdminPage = location.pathname === '/admin';
+    const isHomePage = location.pathname === '/'
     
     
     return(
@@ -40,7 +41,7 @@ export const NavBottom = ({ isAdmin }: Props) => {
                     icon={<FormIcon className='navbottom__icon' width='25px'/>}
                     width=''
                     height='100%'
-                    active={isNewFormPage ? 'active' : ''}
+                    active={(isNewFormPage || isHomePage) ? 'active' : ''}
                 />
             </Link>
             {isAdmin && (
