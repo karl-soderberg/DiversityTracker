@@ -156,8 +156,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </>
             )} */}
             <article className='chart-container'>
+            {/* @ts-ignore */}
             <ResponsiveContainer width="90%" height="90%">
-                <>
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
                     <AreaChart data={activeDistributionFormData.data}
                         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -286,8 +286,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             scope == '' && checked && setScope('women');
                         }}
                     />
-                </div> 
-                </>
+                </div>
             </ResponsiveContainer>
             </article>
             
