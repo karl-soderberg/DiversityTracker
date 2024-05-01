@@ -1,6 +1,9 @@
 .newformpage-container{
     padding: 15% 5%;
 }
+    .newformpage-container p{
+        margin-bottom: 2rem;
+    }
 
 .newformpage-container__form-container{
     width: 90vw;
@@ -86,6 +89,7 @@
 
 .animation3-container{
     position: relative;
+    width: 400px;
 }
 .animation3{
     position: absolute;
@@ -102,7 +106,7 @@
 
 @media (max-width: 500px) {
     .animation3{
-        left: 65%;
+        left: 45%;
     }
   }
 
@@ -112,6 +116,7 @@
 .newformpage-footer{
     margin-top: 15rem;
     cursor: default;
+    width: 520px;
 
     display: flex;
     flex-direction: column;
