@@ -240,13 +240,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         margin={{
                             top: 20,
                             right: 30,
-                            left: 20,
-                            bottom: 5
+                            left: 0,
+                            bottom: 50
                         }}
                         >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
+                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
+                        <YAxis stroke="#ccc" />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
                             <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
