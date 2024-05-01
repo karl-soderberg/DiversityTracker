@@ -83,6 +83,32 @@
     display: block;
     visibility: visible;
 }
+
+.animation3-container{
+    position: relative;
+}
+.animation3{
+    position: absolute;
+    top: -300%;
+    left: 45%;
+    z-index: 20;
+
+    width: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 500px) {
+    .animation3{
+        left: 65%;
+    }
+  }
+
+
+
+
 .newformpage-footer{
     margin-top: 5rem;
     cursor: default;

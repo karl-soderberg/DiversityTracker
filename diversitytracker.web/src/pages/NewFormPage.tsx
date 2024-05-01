@@ -40,8 +40,10 @@ type Props = {
 export const NewFormPage = ({className, questionData, isLoading, isError, error, refetch}: Props) => {
     const catAnimationRef = useRef<HTMLDivElement>(null);
     const confettiAnimationRef = useRef<HTMLDivElement>(null);
+    const writingAnimationRef = useRef<HTMLDivElement>(null);
     const catAnimationInstance = useRef<any>(null);
     const confettiAnimationInstance = useRef<any>(null);
+    const writingAnimationInstance = useRef<any>(null);
     const [playAnimations, setPlayAnimations] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -121,6 +123,22 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
         };
     }, []);
 
+    useEffect(() => {
+        if (writingAnimationRef.current && !writingAnimationInstance.current) {
+            writingAnimationInstance.current = lottie.loadAnimation({
+                container: writingAnimationRef.current,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: './src/resources/animations/writing.json'
+            });
+        }
+        return () => {
+            if (writingAnimationInstance.current) {
+                writingAnimationInstance.current.destroy();
+            }
+        };
+    }, []);
 
     useEffect(() => {
         if (playAnimations) {
@@ -132,7 +150,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
     return(
         <section className={className}>
             <h1>Salt Organization Form</h1>
-            <p>The more input the better</p>
+            <p className='animation3-container'>The more input the better
+                <div ref={writingAnimationRef} className={'animation3'}></div>  
+            </p>
             <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
             <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
