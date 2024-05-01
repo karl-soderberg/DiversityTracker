@@ -82,11 +82,11 @@ function App() {
       }
   });
     const { clientPrincipal, loaded } = useClientPrincipal();
-    const isUser = clientPrincipal?.userRoles.includes('anonymous');
-    const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    // const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
 
-    // const isAdmin = true;
-    // const isUser = true;
+    const isAdmin = true;
+    const isUser = true;
 
     if (!loaded) {
       return <p>Loading...</p>;
@@ -95,14 +95,6 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                    {/* <header className="App-header">
-                      <section className="App-header__login">
-                      <h2>DataSense</h2>
-                        <Button>
-                          <Logout />
-                        </Button>
-                      </section>
-                  </header> */}
                   <NavTop />
                     <Router>
                       <NavBottom 
@@ -147,30 +139,22 @@ function App() {
                   </>
                 ) : (
                   <>
-                  {/* <header className="App-header">
-                    <section className="App-header__login">
-                    <h2>DataSense</h2>
-                      <Button>
-                        <Logout />
-                      </Button>
-                    </section>
-                </header> */}
-                  <Router>
-                    <main className="page-container">
-                        <Routes>
-                            <Route path='/' element={<LoginPage />}></Route>
-                            <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
-                            <Route path="/anonymousform" element={<NewFormPage
-                                className="newformpage-container"
-                                questionData={data}
-                                isLoading={isLoading}
-                                isError={isError}
-                                error={error}
-                                refetch={refetch}
-                              />} />
-                        </Routes>
-                    </main>
-                  </Router>
+                    <Router>
+                      <main className="page-container">
+                          <Routes>
+                              <Route path='/' element={<LoginPage />}></Route>
+                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
+                              <Route path="/anonymousform" element={<NewFormPage
+                                  className="newformpage-container"
+                                  questionData={data}
+                                  isLoading={isLoading}
+                                  isError={isError}
+                                  error={error}
+                                  refetch={refetch}
+                                />} />
+                          </Routes>
+                      </main>
+                    </Router>
                 </>
           )}
           </>
