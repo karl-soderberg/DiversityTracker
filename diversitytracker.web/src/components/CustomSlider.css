@@ -6,6 +6,12 @@
   margin: 5vh 0% 5vh 0%;
 }
 
+@media (max-width: 575px) {
+  .slider-container {
+    margin: 5vh 0% 10vh 0%;
+  }
+}
+
 .slider {
   width: 100%;
   height: 20px;

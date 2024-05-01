@@ -183,6 +183,12 @@
         color: #545454;
     }
 
+@media (max-width: 575px) {
+    .newformpage-footer{
+        margin-top: 7rem;
+        width: 100%;
+    }
+}
 
 .formsubmitted-container{
     margin: 2rem 0rem 0rem 0rem;

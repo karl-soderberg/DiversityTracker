@@ -24,6 +24,13 @@ html{
   height: 100vh;
   max-width: 575px;
   background-size: cover;
+  
+}
+
+@media (max-width: 575px) {
+  #root{
+    overflow-x: hidden;
+  }
 }
 
 .page-container{

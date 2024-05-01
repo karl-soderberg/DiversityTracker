@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {}
+    "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {
+    "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
         "projectName": "diversitytracker.api.tests",
-        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
+        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api.tests\\diversitytracker.api.tests.csproj",
         "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api.tests\\obj\\",
+        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api.tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
-                "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj"
+              "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
+                "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj"
               }
             }
           }
@@ -110,14 +110,14 @@
         }
       }
     },
-    "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
+    "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
         "projectName": "diversitytracker.api",
-        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
+        "projectPath": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\diversitytracker.api.csproj",
         "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\DiversityTracker\\diversitytracker.api\\obj\\",
+        "outputPath": "C:\\Users\\willi\\SALT\\Final_Project\\PROPER\\DiversityTracker\\diversitytracker.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
