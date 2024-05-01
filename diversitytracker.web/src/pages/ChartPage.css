@@ -138,6 +138,7 @@
 .chartpage__selectcharttype{
     display: flex;
     justify-content: space-around;
+    margin-top: 6rem;
 }
     .chartpage__selectcharttype a{
         display: flex;
@@ -212,9 +213,13 @@
 
     .header-container__title{
         margin-left: -1%;
+        max-width: 500px;
         font-size: 1.9rem;
         font-weight: 400;
         color: #f3f3f3;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
     }
 
     .header-container__reflection{
@@ -222,7 +227,12 @@
         font-weight: 200;
         color: #f3f3f3;
         line-height: 1.2rem;
+        word-wrap: break-word;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
     }
+
 
     
     

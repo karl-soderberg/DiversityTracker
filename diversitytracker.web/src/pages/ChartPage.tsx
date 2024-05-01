@@ -295,8 +295,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <h1 className={"header-container__title"}>
                          <TextTransition
                                         springConfig={presets.gentle}
-                                        style={{ margin: "0 4px" }}
-                                        inline
+                                        style={{ margin: "0 4px", maxWidth: "500px", wordWrap: "break-word" }}
+
                                     >
                             {question.value}
                         </TextTransition>
