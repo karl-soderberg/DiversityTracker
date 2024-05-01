@@ -34,7 +34,7 @@ export const NavBottom = ({ isAdmin }: Props) => {
                     />
                 </Link>
             )}
-            <Link to="/newform">
+            <Link to="/">
                 <CustomAnchor 
                     className={'navb2 navbottom__item'}
                     value='Form page'

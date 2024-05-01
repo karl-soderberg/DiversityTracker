@@ -5,7 +5,7 @@ export const NotFoundPage = () => {
     
     return(
         <article className="notfound-container">
-          <Link to="/" className='anonymouspagesign__btn'>I don't like my job and I don't think I'm gonna go</Link>
+          <Link to="/" className='anonymouspagesign__btn'>404 where's my memo</Link>
         </article>
     )
 }

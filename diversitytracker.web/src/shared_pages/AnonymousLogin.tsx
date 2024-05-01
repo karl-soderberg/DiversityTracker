@@ -14,7 +14,7 @@ export const AnonymousLogin = () => {
             <h2>OFFICE TRACKER</h2>
             <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
             {/* <Button className='anonymouspagesign__btn'>Begin</Button> */}
-            <Link to="/anonymousform" className='anonymouspagesign__btn'>Begin</Link>
+            <Link to="/" className='anonymouspagesign__btn'>Begin</Link>
         </section>
     )
 }
