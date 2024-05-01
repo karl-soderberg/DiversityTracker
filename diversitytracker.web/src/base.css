@@ -22,9 +22,12 @@ html{
 #root {
   width: 100vw;
   height: 100vh;
+  max-width: 575px;
   background-size: cover;
+  overflow: hidden;
 }
 
 .page-container{
   padding-bottom: 10vh;
 }
+

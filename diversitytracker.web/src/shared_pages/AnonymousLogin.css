@@ -1,0 +1,79 @@
+.anonymouspagesign-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .anonymouspagesign-container img{
+        margin-top: 15vh;
+        width: 150px;
+    }
+    .anonymouspagesign-container h2{
+        font-weight: 400;
+        font-size: 47px;
+        color: #545454;
+        margin: 1rem 0 .2rem 0;
+    }
+    .anonymouspagesign-container p{
+        font-weight: 200;
+        font-size: 15px;
+        color: #545454;
+    }
+
+    .anonymouspagesign-container button{
+        margin-top: 1.7rem;
+        color: #fff;
+        
+        background-color: #00c4a0;
+        transition: all 350ms ease-in-out;
+    }
+
+    .anonymouspagesign-container button:hover{
+        background-color: #00c424 !important;
+        color: #fff !important;
+        border: 1px solid #00c424;
+
+        transition: all 350ms ease-in-out;
+    }
+
+
+    .anonymouspagesign-container a{
+        margin-top: 1.7rem;
+        color: #fff;
+
+        align-items: flex-start;
+        appearance: auto;
+        background-color: #00C424;
+        border: 0.606061px solid #3A8FFB;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 0px 0px;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 27.2px 0px 0px;
+        padding: 6px 15px;
+        place-items: flex-start normal;
+        position: relative;
+        transition-duration: 0.35s;
+        transition-timing-function: ease-in-out;
+        user-select: none;
+        
+        background-color: #00c4a0;
+        transition: all 350ms ease-in-out;
+    }
+
+    .anonymouspagesign-container a:hover{
+        background-color: #00c424 !important;
+        color: #fff !important;
+        border: 1px solid #00c424;
+
+        transition: all 350ms ease-in-out;
+    }
+
+    

@@ -86,3 +86,58 @@
 
     background-color: var(--light-module2);
 }
+
+
+
+.Mainpage-login{
+
+}
+
+.Mainpage-login{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .Mainpage-login__buttons{
+        width: 58vw;
+    }
+    .Mainpage-login img{
+        margin-top: 15vh;
+        width: 175px;
+    }
+    .Mainpage-login h2{
+        font-weight: 400;
+        font-size: 47px;
+        color: #545454;
+        margin: 1rem 0 .2rem 0;
+    }
+    .Mainpage-login p{
+        font-weight: 200;
+        font-size: 15px;
+        color: #545454;
+    }
+
+    .Mainpage-login button{
+        margin-top: 1.7rem;
+        font-size: .8rem;
+        color: #fff;
+        
+        background-color: #00c4a0;
+        transition: all 350ms ease-in-out;
+    }
+
+    .Mainpage-login button:hover{
+        background-color: #00c424 !important;
+        color: #fff !important;
+        border: 1px solid #00c424;
+
+        transition: all 350ms ease-in-out;
+    }

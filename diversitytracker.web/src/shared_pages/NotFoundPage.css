@@ -1,0 +1,47 @@
+.notfound-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url("https://www.austinchronicle.com/binary/9ef6/screens_feature3-1.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.notfound-container a{
+    margin-top: 1.7rem;
+    color: #fff;
+
+    align-items: flex-start;
+    appearance: auto;
+    background-color: #00C424;
+    border: 0.606061px solid #3A8FFB;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 0px 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 27.2px 0px 0px;
+    padding: 15px 30px;
+    place-items: flex-start normal;
+    position: relative;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-in-out;
+    user-select: none;
+    
+    background-color: #c40000;
+    transition: all 350ms ease-in-out;
+}
+
+.notfound-container a:hover{
+    background-color: #00c424 !important;
+    color: #fff !important;
+    border: 1px solid #00c424;
+
+    transition: all 350ms ease-in-out;
+}

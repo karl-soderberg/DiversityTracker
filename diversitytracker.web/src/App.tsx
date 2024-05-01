@@ -16,6 +16,10 @@ import {
 import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
+import { AnonymousLogin } from './shared_pages/AnonymousLogin';
+import { LoginPage } from './shared_pages/LoginPage';
+import { NotFoundPage } from './shared_pages/NotFoundPage';
+
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
   if (!loaded) {
@@ -85,7 +89,6 @@ function App() {
     // const isAdmin = true;
     // const isUser = true;
 
-
     if (!loaded) {
       return <p>Loading...</p>;
     }
@@ -93,14 +96,6 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                    <header className="App-header">
-                      <section className="App-header__login">
-                      <h2>DataSense</h2>
-                      <Button>
-                        <Logout />
-                      </Button>
-                      </section>
-                  </header>
                   <NavTop />
                     <Router>
                       <NavBottom 
@@ -108,6 +103,7 @@ function App() {
                       />
                       <main className="page-container">
                           <Routes>
+                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
                               <Route path="/newform" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
@@ -138,26 +134,31 @@ function App() {
                                   error={error}
                                   refetch={refetch}
                                 />} />
+                              <Route path='*' element={<NotFoundPage />} />
                           </Routes>
                       </main>
                     </Router>
                   </>
                 ) : (
-                  <article className="Mainpage-login">
-                  <h2 className="Mainpage-login__title">DataSense</h2>
-                  <section className="Mainpage-login__buttons">
-                      <StaticWebAuthLogins
-                                  twitter={false}
-                                  customRenderer={({ href, className, name }) => (
-                                    <Button type="primary" className="login-button">
-                                      <a href={href} className={className}>
-                                        Login With {name}
-                                      </a>
-                                    </Button>
-                                  )}
-                                  />
-                  </section>
-          </article>
+                  <>
+                    <Router>
+                      <main className="page-container">
+                          <Routes>
+                              <Route path='/' element={<LoginPage />}></Route>
+                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
+                              <Route path="/anonymousform" element={<NewFormPage
+                                  className="newformpage-container"
+                                  questionData={data}
+                                  isLoading={isLoading}
+                                  isError={isError}
+                                  error={error}
+                                  refetch={refetch}
+                                />} />
+                                <Route path='*' element={<NotFoundPage />} />
+                          </Routes>
+                      </main>
+                    </Router>
+                </>
           )}
           </>
     )
