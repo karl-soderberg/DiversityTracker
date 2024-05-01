@@ -154,7 +154,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                 autoplay={true}
                 loop={true}
                 controls={false}
-                src="./src/resources/animations/cat.json"
+                src="/cat.json"
                 // style={{ height: '300px', width: '300px' }}
                 className={'animation1 ' + (playAnimations && 'active')}
             />
@@ -162,7 +162,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                 autoplay={true}
                 loop={true}
                 controls={false} 
-                src="./src/resources/animations/fireworks.json"
+                src="/fireworks.json"
                 // style={{ height: '300px', width: '300px' }}
                 className={'animation2 ' + (playAnimations && 'active')}
             />
@@ -175,7 +175,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                     <Player
                         autoplay={true}
                         loop={true}
-                        src="./src/resources/animations/writing.json"
+                        src="/writing.json"
                         // style={{ height: '300px', width: '300px' }}
                         className={'animation3'}
                     />
