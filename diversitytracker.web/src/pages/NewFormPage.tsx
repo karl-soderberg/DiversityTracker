@@ -204,7 +204,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="age"
                         rules={[{ required: true, message: 'Please input age.'}]}
                         >
-                        <InputNumber style={{ width: '100%' }}/>
+                        <InputNumber min={18} max={105} style={{ width: '100%' }}/>
                         {/* <input type="number" /> */}
                     </Form.Item>
 
@@ -214,7 +214,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="timeatcompany"
                         rules={[{ required: true, message: 'Please input time worked at company.'}]}
                         >
-                        <InputNumber style={{ width: '100%' }}/>
+                        <InputNumber min={0} max={75} style={{ width: '100%' }}/>
                         {/* <input type="number" /> */}
                     </Form.Item>
                     
@@ -230,7 +230,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                     className='newformpage__form__item'
                                     // label={question.value}
                                     name={question.id}
-                                    rules={[{ required: true, message: 'Please input your happiness level!' }]}
+                                    rules={[{ required: true, message: 'Please input your emotional level!' }]}
                                     >
                                     {/* <Slider min={0} max={100} defaultValue={50} /> */}
                                     <CustomSlider 
@@ -244,7 +244,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                 </Form.Item>
                                 <Form.Item
                                     className='newformpage__form__item'
-                                    label={question.value + ""}
+                                    // label={question.value + ""}
                                     name={"reflection_" + question.value}
                                     rules={[{ required: false}]}
                                     >
