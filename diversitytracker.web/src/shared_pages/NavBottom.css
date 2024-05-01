@@ -44,6 +44,9 @@
         color: #252934;
         transition: all .25s ease-in-out;
     }
+    .navb2 .navbottom__item__title{
+        margin-top: .3rem;
+    }
 
 
 
@@ -62,22 +65,33 @@
     transition: all .25s ease-in-out;
 }
 
-.navbottom__item.active .navbottom__icon--colorfill{
+.navb1.active .navbottom__icon--colorfill{
     fill: var(--menu-violet);
 }
-.navbottom__item.active .navbottom__icon--colorstroke{
+.navb1.active .navbottom__icon--colorstroke{
     stroke: var(--menu-violet);
 }
-.navbottom__item.active .navbottom__item__title{
+.navb1.active .navbottom__item__title{
     color: var(--menu-violet);
 }
 
-.navbottom__item:nth-of-type(2).active .navbottom__icon--colorfill{
+.navb2.active .navbottom__icon--colorfill{
     fill: var(--menu-green)
 }
-.navbottom__item:nth-of-type(2).active .navbottom__icon--colorstroke{
+.navb2.active .navbottom__icon--colorstroke{
     stroke: var(--menu-green);
 }
-.navbottom__item:nth-of-type(2).active .navbottom__item__title{
+.navb2.active .navbottom__item__title{
     color: var(--menu-green);
+}
+
+
+.navb3.active .navbottom__icon--colorfill{
+    fill: var(--menu-red)
+}
+.navb3.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-red);
+}
+.navb3.active .navbottom__item__title{
+    color: var(--menu-red);
 }

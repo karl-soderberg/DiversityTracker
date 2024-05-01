@@ -96,7 +96,7 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                  <NavTop />
+                  <NavTop isAdmin={isAdmin}/>
                     <Router>
                       <NavBottom 
                         isAdmin={isAdmin}

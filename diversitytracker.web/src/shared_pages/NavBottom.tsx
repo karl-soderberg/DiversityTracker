@@ -3,7 +3,7 @@ import { CustomAnchor } from '../components/CustomAnchor'
 import { ChartIcon } from '../resources/icons/ChartIcon'
 import { FormIcon } from '../resources/icons/FormIcon'
 import './NavBottom.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 type Props = {
     isAdmin: boolean
@@ -11,6 +11,12 @@ type Props = {
 
 export const NavBottom = ({ isAdmin }: Props) => {
     const { clientPrincipal } = useClientPrincipal();
+
+    const location = useLocation();
+
+    const isChartPage = location.pathname === '/chart';
+    const isNewFormPage = location.pathname === '/newform';
+    const isAdminPage = location.pathname === '/admin';
     
     
     return(
@@ -18,32 +24,34 @@ export const NavBottom = ({ isAdmin }: Props) => {
             {isAdmin && (
                 <Link to="/chart">
                     <CustomAnchor 
-                        className='navbottom__item'
+                        className={'navb1 navbottom__item'}
                         value='Charts View'
                         icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                         width=''
                         height='100%'
-                        
+                        active={isChartPage ? 'active' : ''}
                     />
                 </Link>
             )}
             <Link to="/newform">
                 <CustomAnchor 
-                    className='navbottom__item'
+                    className={'navb2 navbottom__item'}
                     value='Form page'
                     icon={<FormIcon className='navbottom__icon' width='25px'/>}
                     width=''
                     height='100%'
+                    active={isNewFormPage ? 'active' : ''}
                 />
             </Link>
             {isAdmin && (
                 <Link to="admin">
                     <CustomAnchor 
-                        className='navbottom__item'
+                        className={'navb3 navbottom__item'}
                         value='Admin Page'
                         icon={<ChartIcon className='navbottom__icon' width='30px'/>}
                         width=''
                         height='100%'
+                        active={isAdminPage ? 'active' : ''}
                     />
                 </Link>
             )}
