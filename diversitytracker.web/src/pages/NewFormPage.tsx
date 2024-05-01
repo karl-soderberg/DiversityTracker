@@ -14,6 +14,7 @@ import { GetAllQuestions, PostFormsData } from '../util/Http';
 import { useMutation, useQuery } from 'react-query';
 import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } from '../types/types';
 import { CustomSlider } from '../components/CustomSlider';
+import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
 
 const { RangePicker } = DatePicker;
 
@@ -46,6 +47,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
     const writingAnimationInstance = useRef<any>(null);
     const [playAnimations, setPlayAnimations] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [beginForm, setBeginForm] = useState(false);
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -152,7 +154,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-                
+            <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
+                <AnonymousLogin beginform={() => setBeginForm(true)}/>
+            </div>
             <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
             <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
@@ -204,7 +208,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="age"
                         rules={[{ required: true, message: 'Please input age.'}]}
                         >
-                        <InputNumber style={{ width: '100%' }}/>
+                        <InputNumber min={18} max={105} style={{ width: '100%' }}/>
                         {/* <input type="number" /> */}
                     </Form.Item>
 
@@ -214,7 +218,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         name="timeatcompany"
                         rules={[{ required: true, message: 'Please input time worked at company.'}]}
                         >
-                        <InputNumber style={{ width: '100%' }}/>
+                        <InputNumber min={0} max={75} style={{ width: '100%' }}/>
                         {/* <input type="number" /> */}
                     </Form.Item>
                     
@@ -230,7 +234,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                     className='newformpage__form__item'
                                     // label={question.value}
                                     name={question.id}
-                                    rules={[{ required: true, message: 'Please input your happiness level!' }]}
+                                    rules={[{ required: true, message: 'Please input your emotional level!' }]}
                                     >
                                     {/* <Slider min={0} max={100} defaultValue={50} /> */}
                                     <CustomSlider 
@@ -244,7 +248,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                                 </Form.Item>
                                 <Form.Item
                                     className='newformpage__form__item'
-                                    label={question.value + ""}
+                                    // label={question.value + ""}
                                     name={"reflection_" + question.value}
                                     rules={[{ required: false}]}
                                     >

@@ -103,7 +103,6 @@ function App() {
                       />
                       <main className="page-container">
                           <Routes>
-                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
                               <Route path="/" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
@@ -145,7 +144,6 @@ function App() {
                       <main className="page-container">
                           <Routes>
                               <Route path='/login' element={<LoginPage />}></Route>
-                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
                               <Route path="/" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
