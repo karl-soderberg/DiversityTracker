@@ -28,6 +28,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
 
     useEffect(() => {
         if (emotionIconRef.current && !animationInstance.current) {
+            // @ts-ignore
             animationInstance.current = lottie.loadAnimation({
                 container: emotionIconRef.current,
                 renderer: 'svg',

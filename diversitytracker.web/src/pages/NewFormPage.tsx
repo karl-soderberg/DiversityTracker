@@ -91,6 +91,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (catAnimationRef.current && !catAnimationInstance.current) {
+            // @ts-ignore
             catAnimationInstance.current = lottie.loadAnimation({
                 container: catAnimationRef.current,
                 renderer: 'svg',
@@ -108,6 +109,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
+            // @ts-ignore
             confettiAnimationInstance.current = lottie.loadAnimation({
                 container: confettiAnimationRef.current,
                 renderer: 'svg',
@@ -125,6 +127,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     useEffect(() => {
         if (writingAnimationRef.current && !writingAnimationInstance.current) {
+            // @ts-ignore
             writingAnimationInstance.current = lottie.loadAnimation({
                 container: writingAnimationRef.current,
                 renderer: 'svg',
