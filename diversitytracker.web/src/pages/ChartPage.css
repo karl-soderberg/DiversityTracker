@@ -266,17 +266,21 @@
         justify-content: center;
         align-items: center;
 
-        background-color: rgba(0, 0, 0, 0.545);
+
+        background-color: rgba(0, 0, 0, 0.387);
         background: 
-        linear-gradient(to bottom, rgba(44, 44, 44, 0.685) 0%, rgba(22, 22, 22, 0.708) 100%), 
-        url('https://ikancorp.com/prod1/wp-content/uploads/2021/08/bphkO8F3NXuX10t03wlTHsmKPP7r5EvX1628183769.jpg');
-        backdrop-filter: blur(50px);
+        linear-gradient(to bottom, rgba(22, 25, 50, 0.368) 0%, rgba(19, 23, 42, 0.644) 100%), 
+        url('https://w0.peakpx.com/wallpaper/65/1014/HD-wallpaper-blurred-blur-background-designs-colors.jpg');
+        backdrop-filter: blur(350px);
         background-size: cover;
-        border-radius: 1rem;
+        border-radius: 1.5rem;
+
+        
 
         max-width: 500px;
     }
     .reflectionboxchartsummary-container::before{
+        filter: saturate(20%);
         content: '';
         position: absolute;
         top: 0;
@@ -285,7 +289,7 @@
         height: 100%;
         border-radius: 1.5rem;
         backdrop-filter: blur(15px);
-        opacity: 1;
+        opacity: .85;
         
     }
     .optionalreflectionsummary-container{
