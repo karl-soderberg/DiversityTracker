@@ -17,6 +17,7 @@ import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
 import { AnonymousLogin } from './shared_pages/AnonymousLogin';
+import { LoginPage } from './shared_pages/LoginPage';
 
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
@@ -157,6 +158,7 @@ function App() {
                   <Router>
                     <main className="page-container">
                         <Routes>
+                            <Route path='/' element={<LoginPage />}></Route>
                             <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
                             <Route path="/anonymousform" element={<NewFormPage
                                 className="newformpage-container"
@@ -170,23 +172,6 @@ function App() {
                     </main>
                   </Router>
                 </>
-                  // <article className="Mainpage-login">
-                  //   <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                  //   <h2>OFFICE TRACKER</h2>
-                  //   <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-                  //   <section className="Mainpage-login__buttons">
-                  //       <StaticWebAuthLogins
-                  //           twitter={false}
-                  //           customRenderer={({ href, className, name }) => (
-                  //             <Button className="login-button">
-                  //               <a href={href} className={className}>
-                  //                 Login With {name}
-                  //               </a>
-                  //             </Button>
-                  //           )}
-                  //         />
-                  //   </section>
-                  // </article>
           )}
           </>
     )
