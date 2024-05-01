@@ -13,10 +13,13 @@
 
 .newformpage__form{
     width: 100%;
+    max-width: 575px;
+    cursor: default;
     /* margin: 0 auto; */
     display: flex;
 
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -43,7 +46,6 @@
 
     transition: all 350ms ease-in-out;
 }
-
 
 .animation1{
     position: fixed;
@@ -83,6 +85,7 @@
 }
 .newformpage-footer{
     margin-top: 5rem;
+    cursor: default;
 
     display: flex;
     flex-direction: column;
@@ -103,4 +106,27 @@
         font-size: 10px;
         color: #545454;
     }
-    
+
+
+
+
+/* Really quote karl "wacky" Ant Form override */
+@media (min-width: 576px) {
+    .newformpage__form__item{
+        margin-top: 0rem;
+        width: 150%;
+    }
+    .newformpage__form__itemgroup{
+        position: relative;
+        width: 100%;
+        margin-right: 50%;
+    }
+    .newformpage__form__submitbtn{
+        position: absolute;
+        bottom: 0;
+        left: -18%;
+    }
+    label{
+        width: 100%;
+    }
+  }
