@@ -19,7 +19,13 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
     const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = Number(event.target.value);
         
-        let newCompensatorValue = 4.7 - (newValue / 100) * 9.4; // Map value to range -1.5 to 1.5
+        let newCompensatorValue;
+        if(window.innerWidth <= 575){
+           newCompensatorValue = 4.7 - (newValue / 100) * 9.4; // Map value to range -1.5 to 1.5
+        }
+        else{
+           newCompensatorValue = 4 - (newValue / 100) * 8; // Map value to range -1.5 to 1.5
+        }
         setCompensatorValue(newCompensatorValue);
 
         setValue(newValue);

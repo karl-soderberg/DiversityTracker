@@ -28,9 +28,12 @@
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
+  position: relative;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: var(--thumb-green);
   cursor: pointer;
 }
 
