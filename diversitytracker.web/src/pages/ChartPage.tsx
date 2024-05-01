@@ -215,13 +215,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             margin={{
                                 top: 20,
                                 right: 20,
-                                bottom: 20,
+                                bottom: 40,
                                 left: 20,
                             }}
                             >
-                            <CartesianGrid />
-                            <XAxis type="number" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
-                            <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction', angle: -90, position: 'insideLeft' }} domain={[0, 10]}/>
+                            <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                            <XAxis type="number" stroke="#ccc" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
+                            <YAxis type="number" stroke="#ccc" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction', angle: -90, position: 'insideLeft', dy:50 }} domain={[0, 10]}/>
                             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             {scope === 'both' && (
                                 <>
@@ -232,7 +232,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             {scope === 'men' && <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />}
                             {scope === 'women' && <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />}
 
-                            <Legend align="right" />
                         </ScatterChart>
                         
                 ) : chartType == 'barchartdistribution' && genderBarData && activeGenderBarData ? (
