@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavTop } from './shared_pages/NavTop';
 import { AnonymousLogin } from './shared_pages/AnonymousLogin';
 import { LoginPage } from './shared_pages/LoginPage';
+import { NotFoundPage } from './shared_pages/NotFoundPage';
 
 const UserDisplay = () => {
   const { clientPrincipal, loaded } = useClientPrincipal();
@@ -82,11 +83,11 @@ function App() {
       }
   });
     const { clientPrincipal, loaded } = useClientPrincipal();
-    // const isUser = clientPrincipal?.userRoles.includes('anonymous');
-    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    const isAdmin = clientPrincipal?.userRoles.includes('admin');
 
-    const isAdmin = true;
-    const isUser = true;
+    // const isAdmin = true;
+    // const isUser = true;
 
     if (!loaded) {
       return <p>Loading...</p>;
@@ -133,6 +134,7 @@ function App() {
                                   error={error}
                                   refetch={refetch}
                                 />} />
+                              <Route path='*' element={<NotFoundPage />} />
                           </Routes>
                       </main>
                     </Router>
@@ -152,6 +154,7 @@ function App() {
                                   error={error}
                                   refetch={refetch}
                                 />} />
+                                <Route path='*' element={<NotFoundPage />} />
                           </Routes>
                       </main>
                     </Router>

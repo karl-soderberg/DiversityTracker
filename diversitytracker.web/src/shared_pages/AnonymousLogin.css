@@ -75,24 +75,3 @@
 
         transition: all 350ms ease-in-out;
     }
-
-
-
-
-    button.ant-btn.css-dev-only-do-not-override-1qfezbu.ant-btn-default.anonymouspagesign__btn {
-        align-items: flex-start;
-        appearance: auto;
-        background-color: #00C424;
-        border: 0.606061px solid #3A8FFB;
-        border-radius: 6px;
-        box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 0px 0px;
-        box-sizing: border-box;
-        cursor: pointer;
-        margin: 27.2px 0px 0px;
-        padding: 4px 15px;
-        place-items: flex-start normal;
-        position: relative;
-        transition-duration: 0.35s;
-        transition-timing-function: ease-in-out;
-        user-select: none;
-    }
