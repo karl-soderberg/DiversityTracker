@@ -180,10 +180,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         {(scope === "both" || scope === "men") && 
                             <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
                         }
-                        <Legend />
                     </AreaChart>
                 ) : chartType === 'distributionacrosstime' ? (
-                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
                         {(scope === "both" || scope === "women") && 
                             <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" />
                         }
@@ -193,7 +192,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                         <XAxis dataKey="date" />
                         <YAxis />
-                        <Legend />
                     </LineChart>
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
@@ -211,7 +209,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 ))}
                             </Pie>
                             <Tooltip />
-                            <Legend />
                         </PieChart>
                 ) : chartType === 'scatterdistribution' && activeTimeAtCompanyScatterData && timeAtCompanyScatterData ? (
                         <ScatterChart
@@ -252,7 +249,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Legend />
                         {(scope === "both" || scope === "women") && 
                             <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
                         }
