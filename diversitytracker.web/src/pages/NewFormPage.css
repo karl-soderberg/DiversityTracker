@@ -134,6 +134,30 @@
     }
 
 
+.formsubmitted-container{
+    margin: 2rem 0rem 0rem 0rem;
+    cursor: default;
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formsubmitted-container h2{
+    font-weight: 400;
+    font-size: 28px;
+    color: #545454;
+
+    margin: 1rem 0 .2rem 0;
+}
+.formsubmitted-container p{
+    font-weight: 200;
+    font-size: 20px;
+    color: #545454;
+}
+
+
 
 
 /* Really quote karl "wacky" Ant Form override */
@@ -156,3 +180,6 @@
         width: 100%;
     }
   }
+
+
+

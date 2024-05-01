@@ -152,22 +152,28 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-            <h1>Salt Organization Form</h1>
-            <p className='animation3-container'>The more input the better
-                <div ref={writingAnimationRef} className={'animation3'}></div>  
-            </p>
+                
             <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
             <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
             <section className='newformpage-container__form-container'>
-                <Form 
-                    {...formItemLayout} 
+                {!isSubmitted ? 
+                    <>
+                    <h1>Salt Organization Form</h1>
+                    <p className='animation3-container'>The more input the better
+                        <div ref={writingAnimationRef} className={'animation3'}></div>  
+                    </p>
+                    <Form 
+                    {...formItemLayout}
                     style={{ maxWidth: 575 }}
                     variant="filled"  
                     onFinish={onSubmitHandler}
                     onFinishFailed={onFailSubmitHandler}
                     className='newformpage__form'
                     layout='vertical'
+
+                    labelWrap
+                    labelCol={{flex: '50px'}}
                 >
 
                     <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
@@ -263,12 +269,23 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         </Button>
                     </Form.Item>
                 </Form>
+                <footer className='newformpage-footer'>
+                    <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
+                    <h2>OFFICE TRACKER</h2>
+                    <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
+                </footer>
+                </>
+                :
+                <>
+                    <section className='formsubmitted-container'>
+                        <h2>Thank you for submitting your form!</h2>
+                        <p>There are no other forms to be filled</p>
+                    </section>
+                </>
+                }
+               
             </section>
-            <footer className='newformpage-footer'>
-                <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                <h2>OFFICE TRACKER</h2>
-                <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-            </footer>
+            
         </section>
     );
 
