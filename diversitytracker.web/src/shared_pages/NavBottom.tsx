@@ -20,7 +20,7 @@ export const NavBottom = ({ isAdmin }: Props) => {
     
     
     return(
-        <nav className='navbottom-container'>
+        <nav className={'navbottom-container ' + (isChartPage && 'chartactive')}>
             {isAdmin && (
                 <Link to="/chart">
                     <CustomAnchor 

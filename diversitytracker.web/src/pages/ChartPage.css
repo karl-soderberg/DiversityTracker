@@ -272,6 +272,8 @@
         backdrop-filter: blur(50px);
         background-size: cover;
         border-radius: 1rem;
+
+        max-width: 500px;
     }
     .reflectionboxchartsummary-container::before{
         content: '';
@@ -295,9 +297,8 @@
     }
 
 
-
 .chartpage-footer{
-    margin-top: 5rem;
+    margin-top: 10rem;
 
     display: flex;
     flex-direction: column;
