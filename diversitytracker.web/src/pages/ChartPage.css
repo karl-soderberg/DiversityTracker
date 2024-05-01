@@ -22,12 +22,13 @@
     background-color: rgba(0, 0, 0, 0.387);
     background: 
         linear-gradient(to bottom, rgba(22, 25, 50, 0.368) 0%, rgba(19, 23, 42, 0.644) 100%), 
-        url('https://media.macphun.com/img/uploads/customer/glossary/9/17117142256606afb1ee1a66.54460324.jpg?q=85&w=1680');
+        url('https://w0.peakpx.com/wallpaper/65/1014/HD-wallpaper-blurred-blur-background-designs-colors.jpg');
     backdrop-filter: blur(350px);
     background-size: cover;
     border-radius: 1.5rem;
 }
-    .chart-container::before{
+.chart-container::before{
+        filter: saturate(20%);
         content: '';
         position: absolute;
         top: 0;
