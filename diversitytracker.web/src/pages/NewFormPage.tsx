@@ -69,9 +69,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        // if(!isSubmitted){
-        //     postFormsData.mutate(formSubmissionDto);
-        // }
+        if(!isSubmitted){
+            postFormsData.mutate(formSubmissionDto);
+        }
         setPlayAnimations(true);
         setIsSubmitted(true);
     };
@@ -85,65 +85,6 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             refetch();
         }
     });
-
-
-    // useEffect(() => {
-    //     if (catAnimationRef.current && !catAnimationInstance.current) {
-    //         catAnimationInstance.current = Lottie.loadAnimation({
-    //             container: catAnimationRef.current,
-    //             renderer: 'svg',
-    //             loop: true,
-    //             autoplay: false,
-    //             path: './src/resources/animations/cat.json'
-    //         });
-    //     }
-    //     return () => {
-    //         if (catAnimationInstance.current) {
-    //             catAnimationInstance.current.destroy();
-    //         }
-    //     };
-    // }, []);
-
-    // useEffect(() => {
-    //     if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
-    //         confettiAnimationInstance.current = Lottie.loadAnimation({
-    //             container: confettiAnimationRef.current,
-    //             renderer: 'svg',
-    //             loop: true,
-    //             autoplay: false,
-    //             path: './src/resources/animations/fireworks.json'
-    //         });
-    //     }
-    //     return () => {
-    //         if (confettiAnimationInstance.current) {
-    //             confettiAnimationInstance.current.destroy();
-    //         }
-    //     };
-    // }, []);
-
-    // useEffect(() => {
-    //     if (writingAnimationRef.current && !writingAnimationInstance.current) {
-    //         writingAnimationInstance.current = Lottie.loadAnimation({
-    //             container: writingAnimationRef.current,
-    //             renderer: 'svg',
-    //             loop: true,
-    //             autoplay: true,
-    //             path: './src/resources/animations/writing.json'
-    //         });
-    //     }
-    //     return () => {
-    //         if (writingAnimationInstance.current) {
-    //             writingAnimationInstance.current.destroy();
-    //         }
-    //     };
-    // }, []);
-
-    // useEffect(() => {
-    //     if (playAnimations) {
-    //         catAnimationInstance.current?.play();
-    //         confettiAnimationInstance.current?.play();
-    //     }
-    // }, [playAnimations]);
 
     return(
         <section className={className}>
@@ -307,39 +248,3 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
     );
 
 }
-
-
-
-// const { max, min } = props;
-// const [value, setValue] = useState(0);
-
-// const mid = Number(((max - min) / 2).toFixed(5));
-// const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
-// const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
-
-
-
-{/* <Form.Item
-    label="TextArea"
-    name="TextArea"
-    rules={[{ required: true, message: 'Please input!' }]}
-    >
-    <Input.TextArea />
-    </Form.Item> */}
-
-
-    {/* <Form.Item
-    label="DatePicker"
-    name="DatePicker"
-    rules={[{ required: true, message: 'Please input!' }]}
-    >
-    <DatePicker />
-    </Form.Item>
-
-    <Form.Item
-    label="RangePicker"
-    name="RangePicker"
-    rules={[{ required: true, message: 'Please input!' }]}
-    >
-    <RangePicker />
-    </Form.Item> */}
