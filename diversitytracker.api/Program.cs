@@ -37,16 +37,16 @@ builder.Services.AddHttpClient<IAiInterpretationService, AiInterpretationService
 
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = null;
-        options.Audience = null;
-    });
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.Authority = null;
+//         options.Audience = null;
+//     });
 
-builder.Services.AddAuthorizationBuilder()
-  .AddPolicy("isAdmin", policy =>
-    policy.RequireClaim("role", "admin"));
+// builder.Services.AddAuthorizationBuilder()
+//   .AddPolicy("isAdmin", policy =>
+//     policy.RequireClaim("role", "admin"));
 
 var app = builder.Build();
 
