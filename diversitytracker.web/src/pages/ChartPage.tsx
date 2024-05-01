@@ -296,8 +296,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <h1 className={"header-container__title"}>
                          <TextTransition
                                         springConfig={presets.gentle}
-                                        style={{ margin: "0 4px" }}
-                                        inline
+                                        style={{ margin: "0 4px", maxWidth: "500px", wordWrap: "break-word" }}
+
                                     >
                             {question.value}
                         </TextTransition>
@@ -425,10 +425,10 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
                             ))
                         ) : (
-                            <>
+                            <section className='reflectionboxsummary-container__content'>
                                 <p>No data available.</p>
                                 <button onClick={() => InterperetAllQuestionValues()}>Interperet data</button>
-                            </>
+                            </section>
                         )}
                     </>
                 )}
@@ -456,10 +456,17 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </ResponsiveContainer>
                     : 
-                    <>
-                        <p>No data available</p>
-                        <button onClick={() => CreateDataFromQuestionAnswersInterpretation()}>Interperet data</button>
-                    </>
+                    <section className='reflectionboxchartsummary-container__content'>
+                        <div>
+                            <h2>AI Data Interpretation</h2>
+                        </div>
+                        <div>
+                            <p>No data available</p>
+                        </div>
+                        <div>
+                            <Button onClick={() => CreateDataFromQuestionAnswersInterpretation()}>Interperet data</Button>
+                        </div>
+                    </section>
             }
                
             </article>
