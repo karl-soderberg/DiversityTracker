@@ -16,6 +16,7 @@ import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } fr
 import { CustomSlider } from '../components/CustomSlider';
 import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
 import Lottie from 'lottie-web';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const { RangePicker } = DatePicker;
 
@@ -40,12 +41,6 @@ type Props = {
 }
 
 export const NewFormPage = ({className, questionData, isLoading, isError, error, refetch}: Props) => {
-    const catAnimationRef = useRef<HTMLDivElement>(null);
-    const confettiAnimationRef = useRef<HTMLDivElement>(null);
-    const writingAnimationRef = useRef<HTMLDivElement>(null);
-    const catAnimationInstance = useRef<any>(null);
-    const confettiAnimationInstance = useRef<any>(null);
-    const writingAnimationInstance = useRef<any>(null);
     const [playAnimations, setPlayAnimations] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [beginForm, setBeginForm] = useState(false);
@@ -74,9 +69,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        if(!isSubmitted){
-            postFormsData.mutate(formSubmissionDto);
-        }
+        // if(!isSubmitted){
+        //     postFormsData.mutate(formSubmissionDto);
+        // }
         setPlayAnimations(true);
         setIsSubmitted(true);
     };
@@ -92,78 +87,98 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
     });
 
 
-    useEffect(() => {
-        if (catAnimationRef.current && !catAnimationInstance.current) {
-            catAnimationInstance.current = Lottie.loadAnimation({
-                container: catAnimationRef.current,
-                renderer: 'svg',
-                loop: true,
-                autoplay: false,
-                path: './src/resources/animations/cat.json'
-            });
-        }
-        return () => {
-            if (catAnimationInstance.current) {
-                catAnimationInstance.current.destroy();
-            }
-        };
-    }, []);
+    // useEffect(() => {
+    //     if (catAnimationRef.current && !catAnimationInstance.current) {
+    //         catAnimationInstance.current = Lottie.loadAnimation({
+    //             container: catAnimationRef.current,
+    //             renderer: 'svg',
+    //             loop: true,
+    //             autoplay: false,
+    //             path: './src/resources/animations/cat.json'
+    //         });
+    //     }
+    //     return () => {
+    //         if (catAnimationInstance.current) {
+    //             catAnimationInstance.current.destroy();
+    //         }
+    //     };
+    // }, []);
 
-    useEffect(() => {
-        if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
-            confettiAnimationInstance.current = Lottie.loadAnimation({
-                container: confettiAnimationRef.current,
-                renderer: 'svg',
-                loop: true,
-                autoplay: false,
-                path: './src/resources/animations/fireworks.json'
-            });
-        }
-        return () => {
-            if (confettiAnimationInstance.current) {
-                confettiAnimationInstance.current.destroy();
-            }
-        };
-    }, []);
+    // useEffect(() => {
+    //     if (confettiAnimationRef.current && !confettiAnimationInstance.current) {
+    //         confettiAnimationInstance.current = Lottie.loadAnimation({
+    //             container: confettiAnimationRef.current,
+    //             renderer: 'svg',
+    //             loop: true,
+    //             autoplay: false,
+    //             path: './src/resources/animations/fireworks.json'
+    //         });
+    //     }
+    //     return () => {
+    //         if (confettiAnimationInstance.current) {
+    //             confettiAnimationInstance.current.destroy();
+    //         }
+    //     };
+    // }, []);
 
-    useEffect(() => {
-        if (writingAnimationRef.current && !writingAnimationInstance.current) {
-            writingAnimationInstance.current = Lottie.loadAnimation({
-                container: writingAnimationRef.current,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: './src/resources/animations/writing.json'
-            });
-        }
-        return () => {
-            if (writingAnimationInstance.current) {
-                writingAnimationInstance.current.destroy();
-            }
-        };
-    }, []);
+    // useEffect(() => {
+    //     if (writingAnimationRef.current && !writingAnimationInstance.current) {
+    //         writingAnimationInstance.current = Lottie.loadAnimation({
+    //             container: writingAnimationRef.current,
+    //             renderer: 'svg',
+    //             loop: true,
+    //             autoplay: true,
+    //             path: './src/resources/animations/writing.json'
+    //         });
+    //     }
+    //     return () => {
+    //         if (writingAnimationInstance.current) {
+    //             writingAnimationInstance.current.destroy();
+    //         }
+    //     };
+    // }, []);
 
-    useEffect(() => {
-        if (playAnimations) {
-            catAnimationInstance.current?.play();
-            confettiAnimationInstance.current?.play();
-        }
-    }, [playAnimations]);
+    // useEffect(() => {
+    //     if (playAnimations) {
+    //         catAnimationInstance.current?.play();
+    //         confettiAnimationInstance.current?.play();
+    //     }
+    // }, [playAnimations]);
 
     return(
         <section className={className}>
             <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
                 <AnonymousLogin beginform={() => setBeginForm(true)}/>
             </div>
-            <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
-            <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
+            <Player
+                autoplay={true}
+                loop={true}
+                controls={false}
+                src="./src/resources/animations/cat.json"
+                // style={{ height: '300px', width: '300px' }}
+                className={'animation1 ' + (playAnimations && 'active')}
+            />
+            <Player
+                autoplay={true}
+                loop={true}
+                controls={false} 
+                src="./src/resources/animations/fireworks.json"
+                // style={{ height: '300px', width: '300px' }}
+                className={'animation2 ' + (playAnimations && 'active')}
+            />
 
             <section className='newformpage-container__form-container'>
                 {!isSubmitted ? 
                     <>
                     <h1>Salt Organization Form</h1>
                     <p className='animation3-container'>The more input the better
-                        <div ref={writingAnimationRef} className={'animation3'}></div>  
+                    <Player
+                        autoplay={true}
+                        loop={true}
+                        src="./src/resources/animations/writing.json"
+                        // style={{ height: '300px', width: '300px' }}
+                        className={'animation3'}
+                    />
                     </p>
                     <Form 
                     {...formItemLayout}
