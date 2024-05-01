@@ -213,6 +213,12 @@
     color: #545454;
 }
 
+@media (max-width: 575px) {
+    .formsubmitted-container{
+        width: 100%;
+        text-align: center;
+    }
+}
 
 
 
