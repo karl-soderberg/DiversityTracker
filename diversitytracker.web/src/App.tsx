@@ -83,11 +83,11 @@ function App() {
       }
   });
     const { clientPrincipal, loaded } = useClientPrincipal();
-    // const isUser = clientPrincipal?.userRoles.includes('anonymous');
-    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    const isUser = clientPrincipal?.userRoles.includes('anonymous');
+    const isAdmin = clientPrincipal?.userRoles.includes('admin');
 
-    const isAdmin = true;
-    const isUser = true;
+    // const isAdmin = true;
+    // const isUser = true;
 
     if (!loaded) {
       return <p>Loading...</p>;
@@ -96,7 +96,7 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                  <NavTop />
+                  <NavTop isAdmin={isAdmin}/>
                     <Router>
                       <NavBottom 
                         isAdmin={isAdmin}
