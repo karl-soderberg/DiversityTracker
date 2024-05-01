@@ -160,7 +160,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             <ResponsiveContainer width="90%" height="90%">
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
                     <AreaChart data={activeDistributionFormData.data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                        margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
                         <defs>
                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
@@ -171,9 +171,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
                             </linearGradient>
                         </defs> 
-                        <XAxis dataKey="value" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="value" stroke="#ccc" />
+                        <YAxis stroke="#ccc"/>
+                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {(scope === "both" || scope === "women") && 
                             <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
                         }
@@ -215,13 +215,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             margin={{
                                 top: 20,
                                 right: 20,
-                                bottom: 20,
+                                bottom: 40,
                                 left: 20,
                             }}
                             >
-                            <CartesianGrid />
-                            <XAxis type="number" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
-                            <YAxis type="number" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction', angle: -90, position: 'insideLeft' }} domain={[0, 10]}/>
+                            <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                            <XAxis type="number" stroke="#ccc" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
+                            <YAxis type="number" stroke="#ccc" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction', angle: -90, position: 'insideLeft', dy:50 }} domain={[0, 10]}/>
                             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             {scope === 'both' && (
                                 <>
@@ -232,7 +232,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             {scope === 'men' && <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />}
                             {scope === 'women' && <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />}
 
-                            <Legend align="right" />
                         </ScatterChart>
                         
                 ) : chartType == 'barchartdistribution' && genderBarData && activeGenderBarData ? (
@@ -241,13 +240,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         margin={{
                             top: 20,
                             right: 30,
-                            left: 20,
-                            bottom: 5
+                            left: 0,
+                            bottom: 50
                         }}
                         >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
+                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
+                        <YAxis stroke="#ccc" />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
                             <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
