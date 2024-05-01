@@ -290,6 +290,7 @@
         border-radius: 1.5rem;
         backdrop-filter: blur(15px);
         opacity: .85;
+        z-index: -1;
         
     }
     .optionalreflectionsummary-container{
@@ -299,6 +300,25 @@
         border-radius: 1rem;
 
         background-color: var(--light-module2);
+    }
+
+    .reflectionboxsummary-container__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+    .reflectionboxchartsummary-container__content div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        color: #f3f3f3;
+    }
+
+    .reflectionboxsummary-container__content{
+
     }
 
 
