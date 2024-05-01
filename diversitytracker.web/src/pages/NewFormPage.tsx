@@ -14,6 +14,7 @@ import { GetAllQuestions, PostFormsData } from '../util/Http';
 import { useMutation, useQuery } from 'react-query';
 import { FormSubmitQuestionTypeDto, Gender, PostFormSubmissionDto, Question } from '../types/types';
 import { CustomSlider } from '../components/CustomSlider';
+import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
 
 const { RangePicker } = DatePicker;
 
@@ -152,7 +153,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-                
+            <div className='anonymouslogin-container'>
+                <AnonymousLogin />
+            </div>
             <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
             <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
 
