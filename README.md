@@ -1,4 +1,4 @@
-# Diversity Tracker - Final Project at &lt;/salt&gt;
+# Diversity Tracker - Final Project at &lt;/salt&gt; 
 
 ## Timeline
 
