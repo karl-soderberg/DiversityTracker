@@ -1,4 +1,4 @@
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from 'recharts'
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Label, Legend, Line, LineChart, Pie, PieChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from 'recharts'
 import './ChartPage.css'
 import { useEffect, useState } from 'react'
 import { MOCKData, barChartMockData } from '../data/MockData'
@@ -182,16 +182,16 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </AreaChart>
                 ) : chartType === 'distributionacrosstime' ? (
-                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
+                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
                         {(scope === "both" || scope === "women") && 
-                            <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" />
+                            <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" strokeWidth={2}/>
                         }
                         {(scope === "both" || scope === "men") && 
-                            <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" />
+                            <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" strokeWidth={2}/>
                         }
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
+                        <CartesianGrid />
+                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Date', position: 'insideBottom', offset: -10 }} />
+                        <YAxis stroke="#ccc" label={{ value: 'Satisfaction level', angle: -90, position: 'insideLeft', offset: 15, dy:50 }} />
                     </LineChart>
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
