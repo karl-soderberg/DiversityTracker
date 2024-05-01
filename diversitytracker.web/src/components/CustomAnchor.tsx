@@ -7,13 +7,14 @@ type Props = {
     icon: ReactElement,
     width: string,
     height: string,
+    active: string,
 }
 
-export const CustomAnchor = ( {className, value, icon, width, height} : Props) => {
+export const CustomAnchor = ( {className, value, icon, width, height, active} : Props) => {
 
     return(
         <a 
-            className= {className}
+            className= {className + " " + active}
             style={{width: width, height: height}}
 
         >

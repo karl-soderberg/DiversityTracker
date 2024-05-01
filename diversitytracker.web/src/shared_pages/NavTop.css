@@ -8,7 +8,7 @@
     height: 6vh;
     z-index: 1500;
 
-    padding: 0% 4% 0% 2%; 
+    padding: 0% 6% 0% 2%; 
 
     display: flex;
     justify-content: space-between;
@@ -26,8 +26,8 @@
         justify-content: center;
     }
     .navtop__icon{
-        width: 1.8rem;
-        opacity: .9;
+        width: 1.2rem;
+        opacity: .15;
         
         transition: all .25s ease-in-out;
     }
@@ -36,16 +36,32 @@
             transition: all .25s ease-in-out;
         }
         .navtop__icon--colorstroke{
-            stroke: #b1b1b1;;
+            stroke: #b1b1b16d;;
             transition: all .25s ease-in-out;
         }
+    .navtop__icon:hover{
+        width: 1.1rem;
+        opacity: 1;
+        
+        transition: all .25s ease-in-out;
+    }
+
     .admin_icon{
-        width: 42px;
-        height: 42px;
+        width: 37px;
+        height: 37px;
         border-radius: 100%;
         background-image: url("https://talent.salt.dev/_next/image?url=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F117780994%3Fv%3D4&w=640&q=75");
         background-size: cover;
         opacity: .9;
+
+        transition: all 350ms ease-in-out;
+    }
+    .admin_icon:hover{
+        cursor: pointer;
+        filter: saturate(125%);
+        transform: scale(1.1);
+
+        transition: all 350ms ease-in-out;
     }
     .navtop__item__title{
         margin-top: .1rem;
@@ -55,6 +71,66 @@
         transition: all .25s ease-in-out;
     }
 
+.sidebar{
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 65vw;
+    height: 100vh;
+    padding: 10% 2% 10% 0%;
+
+    display: flex;
+    flex-direction: column;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: #f3f6f8;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+    transform: translateX(125%);
+    transition: all 650ms cubic-bezier(0.65,0.03,0.22,0.99);
+}
+.sidebar.active{
+    transform: translateX(0%);
+    transition: all 650ms cubic-bezier(0.65,0.03,0.22,0.99);
+}
+    .sidebar .btn-logout{
+        height: 50px;
+    }
+    .sidebar .btn{
+        margin-top: 1.7rem;
+        color: #fff;
+
+        align-items: flex-start;
+        appearance: auto;
+        background-color: #00C424;
+        border: 0.606061px solid #dedede;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 0px 0px;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 27.2px 0px 0px;
+        padding: 15px 20px;
+        place-items: flex-start normal;
+        position: relative;
+        transition-duration: 0.35s;
+        transition-timing-function: ease-in-out;
+        user-select: none;
+        
+        background-color: #ffffff;
+        color: #000;
+        transition: all 350ms ease-in-out;
+        margin: 5%;
+    }
+
+    .sidebar .btn:hover{
+        background-color: #3d3d3d !important;
+        color: #fff !important;
+        border: 1px solid #6d6d6d;
+
+        transition: all 350ms ease-in-out;
+    }
 
 
     
