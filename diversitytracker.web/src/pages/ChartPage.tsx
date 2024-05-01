@@ -245,6 +245,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }}
                         >
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                        {/* @ts-ignore */}
                         <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
                         <YAxis stroke="#ccc" />
                         <Tooltip />
