@@ -13,7 +13,8 @@ export const AnonymousLogin = () => {
             <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
             <h2>OFFICE TRACKER</h2>
             <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-            <Button className='anonymouspagesign__btn'>Begin</Button>
+            {/* <Button className='anonymouspagesign__btn'>Begin</Button> */}
+            <Link to="/anonymousform" className='anonymouspagesign__btn'>Begin</Link>
         </section>
     )
 }

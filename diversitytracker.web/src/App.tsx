@@ -109,7 +109,7 @@ function App() {
                       />
                       <main className="page-container">
                           <Routes>
-                              <Route path='/anonymous' element={<AnonymousLogin />}></Route>
+                              <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
                               <Route path="/newform" element={<NewFormPage
                                   className="newformpage-container"
                                   questionData={data}
@@ -145,23 +145,48 @@ function App() {
                     </Router>
                   </>
                 ) : (
-                  <article className="Mainpage-login">
-                    <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                    <h2>OFFICE TRACKER</h2>
-                    <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-                  <section className="Mainpage-login__buttons">
-                      <StaticWebAuthLogins
-                          twitter={false}
-                          customRenderer={({ href, className, name }) => (
-                            <Button className="login-button">
-                              <a href={href} className={className}>
-                                Login With {name}
-                              </a>
-                            </Button>
-                          )}
-                        />
-                  </section>
-          </article>
+                  <>
+                  {/* <header className="App-header">
+                    <section className="App-header__login">
+                    <h2>DataSense</h2>
+                      <Button>
+                        <Logout />
+                      </Button>
+                    </section>
+                </header> */}
+                  <Router>
+                    <main className="page-container">
+                        <Routes>
+                            <Route path='/anonymouslogin' element={<AnonymousLogin />}></Route>
+                            <Route path="/anonymousform" element={<NewFormPage
+                                className="newformpage-container"
+                                questionData={data}
+                                isLoading={isLoading}
+                                isError={isError}
+                                error={error}
+                                refetch={refetch}
+                              />} />
+                        </Routes>
+                    </main>
+                  </Router>
+                </>
+                  // <article className="Mainpage-login">
+                  //   <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
+                  //   <h2>OFFICE TRACKER</h2>
+                  //   <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
+                  //   <section className="Mainpage-login__buttons">
+                  //       <StaticWebAuthLogins
+                  //           twitter={false}
+                  //           customRenderer={({ href, className, name }) => (
+                  //             <Button className="login-button">
+                  //               <a href={href} className={className}>
+                  //                 Login With {name}
+                  //               </a>
+                  //             </Button>
+                  //           )}
+                  //         />
+                  //   </section>
+                  // </article>
           )}
           </>
     )
