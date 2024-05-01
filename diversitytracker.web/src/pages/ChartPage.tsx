@@ -189,7 +189,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         {(scope === "both" || scope === "men") && 
                             <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" strokeWidth={2}/>
                         }
-                        <CartesianGrid />
+                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
                         <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Date', position: 'insideBottom', offset: -10 }} />
                         <YAxis stroke="#ccc" label={{ value: 'Satisfaction level', angle: -90, position: 'insideLeft', offset: 15, dy:50 }} />
                     </LineChart>
