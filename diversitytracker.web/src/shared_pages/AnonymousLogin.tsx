@@ -6,7 +6,11 @@ import './AnonymousLogin.css'
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
-export const AnonymousLogin = () => {
+type Props = {
+    beginform: () => void
+}
+
+export const AnonymousLogin = ( { beginform }: Props) => {
     
     return(
         <section className='anonymouspagesign-container'>
@@ -14,7 +18,7 @@ export const AnonymousLogin = () => {
             <h2>OFFICE TRACKER</h2>
             <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
             {/* <Button className='anonymouspagesign__btn'>Begin</Button> */}
-            <Link to="/" className='anonymouspagesign__btn'>Begin</Link>
+            <a onClick={() => beginform()} className='anonymouspagesign__btn'>Begin</a>
         </section>
     )
 }

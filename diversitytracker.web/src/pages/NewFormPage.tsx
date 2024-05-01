@@ -47,6 +47,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
     const writingAnimationInstance = useRef<any>(null);
     const [playAnimations, setPlayAnimations] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [beginForm, setBeginForm] = useState(false);
 
     const onSubmitHandler = (values: any) => {
         const gender = parseInt(values.Select) as Gender;
@@ -153,8 +154,8 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-            <div className='anonymouslogin-container'>
-                <AnonymousLogin />
+            <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
+                <AnonymousLogin beginform={() => setBeginForm(true)}/>
             </div>
             <div ref={catAnimationRef} className={'animation1 ' + (playAnimations && 'active')}></div>
             <div ref={confettiAnimationRef} className={'animation2 ' + (playAnimations && 'active')}></div>
