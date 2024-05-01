@@ -34,7 +34,7 @@ export const CustomSlider = ({min, max, step, text, onChange }: SliderProps) => 
                 renderer: 'svg',
                 loop: true,
                 autoplay: false,
-                path: './src/resources/animations/moodScaleAnimation2.json'
+                path: '/moodScaleAnimation2.json'
             });
         }
 
