@@ -160,7 +160,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             <ResponsiveContainer width="90%" height="90%">
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
                     <AreaChart data={activeDistributionFormData.data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                        margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
                         <defs>
                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
@@ -171,9 +171,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
                             </linearGradient>
                         </defs> 
-                        <XAxis dataKey="value" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="value" stroke="#ccc" />
+                        <YAxis stroke="#ccc"/>
+                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {(scope === "both" || scope === "women") && 
                             <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
                         }
