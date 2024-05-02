@@ -99,7 +99,7 @@
 
 
 
-.chartpage__selectquestion{
+/* .chartpage__selectquestion{
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -113,16 +113,37 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+} */
+.chartpage__selectquestion{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 43vh;
+    top: 10vh;
+    width: 15vw;
+    z-index: 500;
+}
+.chartpage__selectquestion.left{
+    position: fixed;
+    left: 0%;
+
+    padding: 0% 0% 50% 0%;
+}
+.chartpage__selectquestion.right{
+    position: fixed;
+    right: -5%;
+
+    padding: 0% 0% 50% 0%;
 }
 .chartpage__selectquestion a{
     position: relative;
     margin-top: 40vh;
-    width: 50px;
+    width: 40px;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    z-index: 500;
 }
 .chartpage__selectquestion a svg path{
     fill: #ffffff;
