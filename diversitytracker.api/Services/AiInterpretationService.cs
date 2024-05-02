@@ -216,6 +216,9 @@ namespace diversitytracker.api.Services
                 int idx = 0;
                 foreach(var question in form.Questions)
                 {
+                    if (string.IsNullOrWhiteSpace(question.Answer))
+                    continue;
+
                     if (questionAnswersData.ContainsKey(questionTypes[idx].Value))
                     {
                         List<string> tempList = questionAnswersData[questionTypes[idx].Value].ToList();
@@ -479,14 +482,14 @@ namespace diversitytracker.api.Services
         {
 
             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions. Give a 20-50 word answer for each question/answers section. The sections are seperated by ->- .It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question contra answer inside a section is seperated by ||. The sections of one question/answer are seperated by ->- \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions. Give a 85-120 word answer for each question/answers section. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
                 string key = kvp.Key;
                 string[] answers = kvp.Value;
 
-                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                promptBuilder.AppendLine($"Question: [{key}] ||\n");
                 
                 foreach (var answer in answers)
                 {
