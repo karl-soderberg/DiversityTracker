@@ -246,7 +246,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         >
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {/* @ts-ignore */}
-                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:40, dx:-15 }}/> 
                         <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
