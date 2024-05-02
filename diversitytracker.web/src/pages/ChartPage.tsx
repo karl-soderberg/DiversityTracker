@@ -286,8 +286,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
                                 <p className={"header-container__reflection"} key={filteredInter.id}>
-                                    {filteredInter.answerInterpretation}   
-                                    absolutely
+                                    {filteredInter.answerInterpretation}
                                 </p>
                             ))
                         ) : (

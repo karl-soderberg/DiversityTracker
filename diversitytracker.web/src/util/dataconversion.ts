@@ -245,10 +245,12 @@ export const MapAPIFormsAIResponseToScatterChart = (inData: APIFormsResponse, qu
             if(interpretation.questionTypeId == question.id)
             {
                 for (let idx = 0; idx < interpretation.aiAnswerData.value.length; idx++) {
-                    dataResponseDict[question.id].scatterData.push({
-                        wordlength: interpretation.aiAnswerData.wordLength[idx],
-                        value: interpretation.aiAnswerData.value[idx]
-                    })
+                    if(interpretation.aiAnswerData.wordLength[idx] != 0 || interpretation.aiAnswerData.value[idx] != 0){
+                        dataResponseDict[question.id].scatterData.push({
+                            wordlength: interpretation.aiAnswerData.wordLength[idx],
+                            value: interpretation.aiAnswerData.value[idx]
+                        })
+                    }
                 }
             }
         })
