@@ -278,22 +278,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         </TextTransition>
                     </h1>
                 ))}
-                {/* {(formsData && formsData.aiInterpretation) && (
-                    <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p className={"header-container__reflection"} key={filteredInter.id}>
-                                    {filteredInter.answerInterpretation}
-                                </p>
-                            ))
-                        ) : (
-                            <>
-                                <p className={"header-container__reflection"}>No answers available.</p>
-                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
-                            </>
-                        )}
-                    </>
-                )} */}
             </header>
             <section className={'chartpage__selectcharttype '}>
                 <a 
@@ -347,33 +331,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <p className='selectcharttype__anchor--title'>Gender Distribution</p>
                 </a>
             </section>
-            {/* <p>This tracks the percieved leadership among all departments across all genders</p> */}
-            {/* <select className={className + '__selectchhart'} name="" id="" onChange={(e) => setChartType(e.target.value)}>
-                <option value="distributionscale">Distribution scale</option>
-                <option value="distributionacrosstime">Distribution across time</option>
-                <option value="scatterdistribution">Scatter Distribution</option>
-                <option value="barchartdistribution">Barchart Distribution</option>
-                <option value="genderdistribution">Gender Distribution</option>
-            </select> */}
-            {/* <select name="" id="" onChange={(e) => setScope(e.target.value)}>
-                <option value="both">both</option>
-                <option value="men">men</option>
-                <option value="women">women</option>
-            </select> */}
-            {/* {questionsData && 
-                <select name="" id="" onChange={(e) => {
-                        setActiveQuestion(e.target.value);
-                        distributionformdata &&setActiveDistributionFormData(distributionformdata[activeQuestion])
-                        genderBarData && setActiveGenderBarData(genderBarData[activeQuestion]);
-                        timeAtCompanyScatterData && setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
-                        aiInterpretation && setActiveAiInterpretation(aiInterpretation[activeQuestion]);
-                    }}>
-                    {questionsData.map((question) => (
-                        <option value={question.id}>{question.value}</option>
-                    ))}
-                </select>
-            } */}
-            {/* <p>{activeQuestion}</p> */}
             <article className='reflectionboxsummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
