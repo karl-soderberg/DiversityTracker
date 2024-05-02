@@ -268,11 +268,11 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             </article>
             
             <header className='header-container'>
-                <div className='questionvisualizer-container'>
+                {/* <div className='questionvisualizer-container'>
                     {questionsData && questionsData.map((question) => (
                         <div className={'question ' + (question.id == activeQuestion && 'active')}></div>
                     ))}
-                </div>
+                </div> */}
                 {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
                     <h1 className={"header-container__title"}>
                          <TextTransition
@@ -283,7 +283,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         </TextTransition>
                     </h1>
                 ))}
-                {(formsData && formsData.aiInterpretation) && (
+                {/* {(formsData && formsData.aiInterpretation) && (
                     <>
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
@@ -298,7 +298,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             </>
                         )}
                     </>
-                )}
+                )} */}
             </header>
             <section className={'chartpage__selectcharttype '}>
                 <a 
@@ -379,7 +379,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </select>
             } */}
             {/* <p>{activeQuestion}</p> */}
-            {/* <article className='datasummary-container'>
+            <article className='reflectionboxsummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
@@ -395,7 +395,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
-            </article> */}
+            </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
