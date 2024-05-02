@@ -171,8 +171,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
                             </linearGradient>
                         </defs> 
-                        <XAxis dataKey="value" stroke="#ccc" />
-                        <YAxis stroke="#ccc"/>
+                        <XAxis dataKey="value" stroke="#ccc" label={{ value: 'Satisfaction Level', position: 'insideBottom', offset: -10 }}  />
+                        <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }}/>
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {(scope === "both" || scope === "women") && 
                             <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
@@ -190,8 +190,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" strokeWidth={2}/>
                         }
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
-                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Date', position: 'insideBottom', offset: -10 }} />
-                        <YAxis stroke="#ccc" label={{ value: 'Satisfaction level', angle: -90, position: 'insideLeft', offset: 15, dy:50 }} />
+                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Month', position: 'insideBottom', offset: -10 }} />
+                        <YAxis stroke="#ccc" label={{ value: 'Mean Happiness', angle: -90, position: 'insideLeft', offset: 15, dy:60 }} />
                     </LineChart>
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
@@ -202,12 +202,16 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 cx="50%"
                                 cy="50%"
                                 outerRadius={80}
-                                label={({ name, value }) => `${name} (${value.toFixed(2)}%)`}
+                                label={({ value }) => `${value.toFixed(2)}%`}
                             >
                                 {pieData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
+                            <text x={400} y={20} textAnchor="end" dominantBaseline="middle" fill="#FFF">
+                                Gender Distribution
+                            </text>
+
                             <Tooltip />
                         </PieChart>
                 ) : chartType === 'scatterdistribution' && activeTimeAtCompanyScatterData && timeAtCompanyScatterData ? (
@@ -221,7 +225,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             >
                             <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                             <XAxis type="number" stroke="#ccc" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
-                            <YAxis type="number" stroke="#ccc" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction', angle: -90, position: 'insideLeft', dy:50 }} domain={[0, 10]}/>
+                            <YAxis type="number" stroke="#ccc" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:50 }} domain={[0, 10]}/>
                             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             {scope === 'both' && (
                                 <>
@@ -246,8 +250,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         >
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {/* @ts-ignore */}
-                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
-                        <YAxis stroke="#ccc" />
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:40, dx:-15 }}/> 
+                        <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
                             <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     

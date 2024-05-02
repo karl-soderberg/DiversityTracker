@@ -209,7 +209,7 @@ export const MapAPIFormsResponseToScatterChart = (inData: APIFormsResponse, ques
                     if (Math.round(question.value) == value) {
                         let scatterDataObject: scatterData = {
                             satisfactionlevel: question.value,
-                            age: calculateAge(parseInt(formsubmission.person.timeAtCompany))
+                            age: parseInt(formsubmission.person.timeAtCompany)
                         }
                         dataResponseDict[question.questionTypeId].scatterMaleData.push(scatterDataObject);
                     }
@@ -220,7 +220,7 @@ export const MapAPIFormsResponseToScatterChart = (inData: APIFormsResponse, ques
                     if (Math.round(question.value) == value) {
                         let scatterDataObject: scatterData = {
                             satisfactionlevel: question.value,
-                            age: calculateAge(parseInt(formsubmission.person.timeAtCompany))
+                            age: parseInt(formsubmission.person.timeAtCompany)
                         }
                         dataResponseDict[question.questionTypeId].scatterFemaleData.push(scatterDataObject);
                     }
