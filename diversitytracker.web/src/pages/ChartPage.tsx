@@ -158,7 +158,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </AreaChart>
                 ) : chartType === 'distributionacrosstime' ? (
-                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
+                    <LineChart data={MOCKData} margin={{ top: 10, right: 20, left: -5, bottom: 35 }}>
                         {(scope === "both" || scope === "women") && 
                             <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" strokeWidth={2}/>
                         }
@@ -178,14 +178,14 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 data={activeGenderDistributionData}
                                 cx="50%"
                                 cy="50%"
-                                outerRadius={80}
-                                label={({ value }) => `${value.toFixed(2)}%`}
+                                outerRadius={65}
+                                label={({ value }) => `${value.toFixed(1)}%`}
                             >
                                 {pieData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
-                            <text x={400} y={20} textAnchor="end" dominantBaseline="middle" fill="#FFF">
+                            <text x={132} y={20} textAnchor="end" dominantBaseline="middle" fill="#ccc">
                                 Gender Distribution
                             </text>
 
@@ -197,7 +197,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 top: 20,
                                 right: 20,
                                 bottom: 40,
-                                left: 20,
+                                left: 5,
                             }}
                             >
                             <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
@@ -227,7 +227,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         >
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {/* @ts-ignore */}
-                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:40, dx:-15 }}/> 
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 9, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:30, dx:-15 }}/> 
                         <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
