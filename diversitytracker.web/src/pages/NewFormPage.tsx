@@ -69,9 +69,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
             },
             questions: questions
         };
-        // if(!isSubmitted){
-        //     postFormsData.mutate(formSubmissionDto);
-        // }
+        if(!isSubmitted){
+            postFormsData.mutate(formSubmissionDto);
+        }
         setPlayAnimations(true);
         setIsSubmitted(true);
     };
