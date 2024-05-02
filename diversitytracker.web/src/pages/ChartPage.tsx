@@ -8,11 +8,6 @@ import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, Map
 import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
 
-// const FilteredMockData = [
-//     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
-//     MOCKmay.filter(entry => entry.gender === 'female').map(entry => entry.rating),
-// ];
-
 type Props = {
     className: string,
     questionData: any, 
@@ -268,11 +263,11 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             </article>
             
             <header className='header-container'>
-                {/* <div className='questionvisualizer-container'>
+                <div className='questionvisualizer-container'>
                     {questionsData && questionsData.map((question) => (
                         <div className={'question ' + (question.id == activeQuestion && 'active')}></div>
                     ))}
-                </div> */}
+                </div>
                 {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
                     <h1 className={"header-container__title"}>
                          <TextTransition

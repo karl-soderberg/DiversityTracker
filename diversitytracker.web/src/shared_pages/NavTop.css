@@ -85,7 +85,7 @@
 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background-color: #f3f6f8;
+    background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     transform: translateX(125%);
