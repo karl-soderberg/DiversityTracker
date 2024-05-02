@@ -220,10 +220,11 @@
         white-space: normal;
         overflow-wrap: break-word;
         word-break: normal;
+        margin-bottom: 9%;
     }
 
     .header-container__reflection{
-        margin: 3% 0%;
+        margin: 3% 0% 3% 0%;
         font-weight: 200;
         color: #f3f3f3;
         line-height: 1.2rem;

@@ -129,32 +129,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </svg>
                 </a>
             </div>
-            {/* {formsData && (
-                <>
-                    <h3>Overall Data Interpretation:</h3>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
-                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
-                    ) : (
-                        <>
-                            <p>No data interpretation available.</p>
-                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
-                        </>
-                    )}
-                </>
-            )}
-            {formsData && (
-                <>
-                    <h3>Reflections Interpretation:</h3>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
-                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
-                    ) : (
-                        <>
-                            <p>No reflections available.</p>
-                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
-                        </>
-                    )}
-                </>
-            )} */}
             <article className='chart-container'>
             {/* @ts-ignore */}
             <ResponsiveContainer width="90%" height="90%">
@@ -302,7 +276,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                          <TextTransition
                                         springConfig={presets.gentle}
                                         style={{ margin: "0 4px", maxWidth: "500px", wordWrap: "break-word" }}
-
                                     >
                             {question.value}
                         </TextTransition>
@@ -313,7 +286,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
                             formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
                                 <p className={"header-container__reflection"} key={filteredInter.id}>
-                                    {filteredInter.answerInterpretation}     
+                                    {filteredInter.answerInterpretation}   
+                                    absolutely
                                 </p>
                             ))
                         ) : (
@@ -404,7 +378,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </select>
             } */}
             {/* <p>{activeQuestion}</p> */}
-            <article className='datasummary-container'>
+            {/* <article className='datasummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
@@ -420,7 +394,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
-            </article>
+            </article> */}
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
@@ -485,6 +459,32 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <p>No data available</p>
                 }
             </article>
+            {formsData && (
+                <article className='reflectionboxsummary-container'>
+                    <h2>Overall Study Reflections Interpretation</h2>
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
+                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                    ) : (
+                        <>
+                            <p>No reflections available.</p>
+                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
+                        </>
+                    )}
+                </article>
+            )}
+            {formsData && (
+                <article className='reflectionboxsummary-container'>
+                    <h2>Overall Study Data Interpretation</h2>
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
+                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                    ) : (
+                        <>
+                            <p>No data interpretation available.</p>
+                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
+                        </>
+                    )}
+                </article>
+            )}
             <footer className='chartpage-footer'>
                 <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
                 <h2>OFFICE TRACKER</h2>
