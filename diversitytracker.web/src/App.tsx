@@ -130,7 +130,7 @@ function App() {
                                   isLoading={isLoading}
                                   isError={isError}
                                   error={error}
-                                  refetch={refetch}
+                                  refetch={questionRefetch}
                                 />} />
                               <Route path='*' element={<NotFoundPage />} />
                           </Routes>
