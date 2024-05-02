@@ -85,7 +85,7 @@
 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background-color: #f3f6f8;
+    background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     transform: translateX(125%);
@@ -130,6 +130,18 @@
         border: 1px solid #6d6d6d;
 
         transition: all 350ms ease-in-out;
+    }
+
+    .sidebar.darkmode{
+        background-color: #202020;
+    }
+    .sidebar.darkmode .btn{
+        background-color: #202020;
+        color: #fff;
+        border: solid 1px #cccccc75;
+    }
+    .sidebar.darkmode .btn:hover{
+        
     }
 
 

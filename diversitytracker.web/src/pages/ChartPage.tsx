@@ -7,11 +7,7 @@ import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, Distr
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'
 import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
-
-// const FilteredMockData = [
-//     MOCKmay.filter(entry => entry.gender === 'male').map(entry => entry.rating),
-//     MOCKmay.filter(entry => entry.gender === 'female').map(entry => entry.rating),
-// ];
+import { motion } from 'framer-motion';
 
 type Props = {
     className: string,
@@ -131,32 +127,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </svg>
                 </a>
             </div>
-            {/* {formsData && (
-                <>
-                    <h3>Overall Data Interpretation:</h3>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
-                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
-                    ) : (
-                        <>
-                            <p>No data interpretation available.</p>
-                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
-                        </>
-                    )}
-                </>
-            )}
-            {formsData && (
-                <>
-                    <h3>Reflections Interpretation:</h3>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
-                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
-                    ) : (
-                        <>
-                            <p>No reflections available.</p>
-                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
-                        </>
-                    )}
-                </>
-            )} */}
             <article className='chart-container'>
             {/* @ts-ignore */}
             <ResponsiveContainer width="90%" height="90%">
@@ -184,7 +154,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </AreaChart>
                 ) : chartType === 'distributionacrosstime' ? (
-                    <LineChart data={MOCKData} margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
+                    <LineChart data={MOCKData} margin={{ top: 10, right: 20, left: -5, bottom: 35 }}>
                         {(scope === "both" || scope === "women") && 
                             <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" strokeWidth={2}/>
                         }
@@ -204,14 +174,14 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 data={activeGenderDistributionData}
                                 cx="50%"
                                 cy="50%"
-                                outerRadius={80}
-                                label={({ value }) => `${value.toFixed(2)}%`}
+                                outerRadius={65}
+                                label={({ value }) => `${value.toFixed(1)}%`}
                             >
                                 {pieData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='#5484EB'/>
                                 ))}
                             </Pie>
-                            <text x={400} y={20} textAnchor="end" dominantBaseline="middle" fill="#FFF">
+                            <text x={132} y={20} textAnchor="end" dominantBaseline="middle" fill="#ccc">
                                 Gender Distribution
                             </text>
 
@@ -223,7 +193,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 top: 20,
                                 right: 20,
                                 bottom: 40,
-                                left: 20,
+                                left: 5,
                             }}
                             >
                             <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
@@ -253,7 +223,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         >
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {/* @ts-ignore */}
-                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:40, dx:-15 }}/> 
+                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 9, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:30, dx:-15 }}/> 
                         <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
@@ -302,30 +272,13 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
                     <h1 className={"header-container__title"}>
                          <TextTransition
+                            className="custom-text-transition"
                                         springConfig={presets.gentle}
-                                        style={{ margin: "0 4px", maxWidth: "500px", wordWrap: "break-word" }}
-
                                     >
                             {question.value}
                         </TextTransition>
                     </h1>
                 ))}
-                {(formsData && formsData.aiInterpretation) && (
-                    <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p className={"header-container__reflection"} key={filteredInter.id}>
-                                    {filteredInter.answerInterpretation}     
-                                </p>
-                            ))
-                        ) : (
-                            <>
-                                <p className={"header-container__reflection"}>No answers available.</p>
-                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
-                            </>
-                        )}
-                    </>
-                )}
             </header>
             <section className={'chartpage__selectcharttype '}>
                 <a 
@@ -379,68 +332,58 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <p className='selectcharttype__anchor--title'>Gender Distribution</p>
                 </a>
             </section>
-            {/* <p>This tracks the percieved leadership among all departments across all genders</p> */}
-            {/* <select className={className + '__selectchhart'} name="" id="" onChange={(e) => setChartType(e.target.value)}>
-                <option value="distributionscale">Distribution scale</option>
-                <option value="distributionacrosstime">Distribution across time</option>
-                <option value="scatterdistribution">Scatter Distribution</option>
-                <option value="barchartdistribution">Barchart Distribution</option>
-                <option value="genderdistribution">Gender Distribution</option>
-            </select> */}
-            {/* <select name="" id="" onChange={(e) => setScope(e.target.value)}>
-                <option value="both">both</option>
-                <option value="men">men</option>
-                <option value="women">women</option>
-            </select> */}
-            {/* {questionsData && 
-                <select name="" id="" onChange={(e) => {
-                        setActiveQuestion(e.target.value);
-                        distributionformdata &&setActiveDistributionFormData(distributionformdata[activeQuestion])
-                        genderBarData && setActiveGenderBarData(genderBarData[activeQuestion]);
-                        timeAtCompanyScatterData && setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
-                        aiInterpretation && setActiveAiInterpretation(aiInterpretation[activeQuestion]);
-                    }}>
-                    {questionsData.map((question) => (
-                        <option value={question.id}>{question.value}</option>
-                    ))}
-                </select>
-            } */}
-            {/* <p>{activeQuestion}</p> */}
-            <article className='reflectionboxsummary-container'>
+           <motion.article
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                className='reflectionboxsummary-container'
+                >
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
-                            ))
-                        ) : (
-                            <>
-                                <p>No answers available.</p>
-                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
-                            </>
-                        )}
+                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
+                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                            {filteredInter.answerInterpretation}
+                        </motion.p>
+                        ))
+                    ) : (
+                        <>
+                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>No answers available.</motion.p>
+                        <motion.button whileHover={{ scale: 1.1 }} onClick={() => InterperetAllQuestionAnswers()}>
+                            Interpret data
+                        </motion.button>
+                        </>
+                    )}
                     </>
                 )}
-            </article>
-            <article className='reflectionboxsummary-container'>
+            </motion.article>
+            <motion.article
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                className='reflectionboxsummary-container'
+                >
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
-                            ))
-                        ) : (
-                            <section className='reflectionboxsummary-container__content'>
-                                <p>No data available.</p>
-                                <button onClick={() => InterperetAllQuestionValues()}>Interperet data</button>
-                            </section>
-                        )}
+                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion). map(filteredInter => (
+                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                            {filteredInter.valueInterpretation}
+                        </motion.p>
+                        ))
+                    ) : (
+                        <motion.section className='reflectionboxsummary-container__content' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                        <p>No data available.</p>
+                        <button onClick={() => InterperetAllQuestionValues()}>Interpret data</button>
+                        </motion.section>
+                    )}
                     </>
                 )}
-
-            </article>
+            </motion.article>
             <article className='reflectionboxchartsummary-container'>
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <ResponsiveContainer width="100%" height="100%">
@@ -449,16 +392,15 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 margin={{
                                 top: 20,
                                 right: 20,
-                                bottom: 10,
-                                left: 10,
+                                bottom: 35,
+                                left: -10,
                                 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="wordlength" type="number" name="wordlength" unit="" />
-                                <YAxis dataKey="value" type="number" name="value" unit="" />
+                                <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
+                                <XAxis label={{ value: 'Time at Company', position: 'insideBottom', offset: -2 }} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="wordlength" type="number" name="wordlength" unit="" />
+                                <YAxis label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:60, dx:20 }} domain={[0, 10]} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="value" type="number" name="value" unit="" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                <Legend />
-                                <Scatter name="Ratings based on question answer field" data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
+                                <Scatter data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
                             </ScatterChart>
                         }
                     </ResponsiveContainer>
@@ -487,6 +429,32 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <p>No data available</p>
                 }
             </article>
+            {formsData && (
+                <article className='reflectionboxsummary-container overallstudy-container'>
+                    <h2>Overall Study Reflections Interpretation</h2>
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
+                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                    ) : (
+                        <>
+                            <p>No reflections available.</p>
+                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
+                        </>
+                    )}
+                </article>
+            )}
+            {formsData && (
+                <article className='reflectionboxsummary-container overalldata-container'>
+                    <h2>Overall Study Data Interpretation</h2>
+                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
+                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                    ) : (
+                        <>
+                            <p>No data interpretation available.</p>
+                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
+                        </>
+                    )}
+                </article>
+            )}
             <footer className='chartpage-footer'>
                 <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
                 <h2>OFFICE TRACKER</h2>

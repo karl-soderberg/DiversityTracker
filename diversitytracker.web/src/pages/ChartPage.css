@@ -2,7 +2,7 @@
 
 .chartpage-container{
     max-width: 575px;
-    padding: 12vh 7% 25vh 7%; 
+    padding: 7vh 7% 25vh 7%; 
     height: fit-content;
     cursor: default;
 }
@@ -161,7 +161,7 @@
 .chartpage__selectcharttype{
     display: flex;
     justify-content: space-around;
-    margin-top: 2rem;
+    margin-top: .5rem;
     margin-bottom: 2rem;
 }
     .chartpage__selectcharttype a{
@@ -170,10 +170,11 @@
         align-items: center;
         justify-content: center;
         z-index: 10;
+        width: 13%;
     }
     .chartpage__selectcharttype p{
         font-weight: 200;
-        font-size: .6rem;
+        font-size: .5rem;
         color: #f3f3f3;
     }
     
@@ -184,6 +185,14 @@
 /* animation */
     .chartpage__selectcharttype__anchor.active{
         transition: all 250ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor svg{
+
+        transition: all 450ms ease-in-out;
+    }
+    .chartpage__selectcharttype__anchor.active svg{
+        transform: scale(1.04);
+        transition: all 450ms ease-in-out;
     }
     .chartpage__selectcharttype__anchor svg path{
         transition: all 250ms ease-in-out;
@@ -237,6 +246,7 @@
     margin: 5% 2% 0% 2%;
     display: flex;
     flex-direction: column;
+    height: fit-content;
 }
     .header-container__title{
         margin-left: -1%;
@@ -245,12 +255,21 @@
         font-weight: 400;
         color: #f3f3f3;
         margin-bottom: 2.5rem;
-        /* white-space: normal;
+        white-space: normal;
         overflow-wrap: break-word;
-        word-break: normal; */
+        word-break: normal;
+        margin-bottom: 4%;
+    }
+    .header-container__title div{
+        height: fit-content;
+    }
+    .custom-text-transition {
+        position: relative;
+        top: -0px;
+        transition: top 0.5s ease-out;
     }
     .header-container__reflection{
-        margin: 3% 0%;
+        margin: 3% 0% 3% 0%;
         font-weight: 200;
         color: #f3f3f3;
         line-height: 1.2rem;
@@ -264,6 +283,8 @@
             font-size: 1.2rem;
         }
     }
+
+    
     
 
 
@@ -360,8 +381,14 @@
         color: #f3f3f3;
     }
 
-    .reflectionboxsummary-container__content{
-
+    .overallstudy-container{
+        margin-top: 5rem;
+    }
+    .overallstudy-container h2{
+        font-size: 1.8rem;
+    }
+    .overalldata-container h2{
+        font-size: 1.8rem;
     }
 
 
