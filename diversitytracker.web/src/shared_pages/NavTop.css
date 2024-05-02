@@ -132,6 +132,18 @@
         transition: all 350ms ease-in-out;
     }
 
+    .sidebar.darkmode{
+        background-color: #202020;
+    }
+    .sidebar.darkmode .btn{
+        background-color: #202020;
+        color: #fff;
+        border: solid 1px #cccccc75;
+    }
+    .sidebar.darkmode .btn:hover{
+        
+    }
+
 
     
 

@@ -96,8 +96,8 @@ function App() {
           <>
                 {isUser ? (
                   <>
-                  <NavTop />
                     <Router>
+                      <NavTop />
                       <NavBottom 
                       />
                       <main className="page-container">

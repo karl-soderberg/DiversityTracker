@@ -3,7 +3,7 @@ import { CustomAnchor } from '../components/CustomAnchor'
 import { ChartIcon } from '../resources/icons/ChartIcon'
 import { FormIcon } from '../resources/icons/FormIcon'
 import './NavTop.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from 'antd';
 import { Logout, useClientPrincipal } from '@aaronpowell/react-static-web-apps-auth';
 
@@ -16,6 +16,10 @@ export const NavTop = () => {
     //const isAdmin = clientPrincipal?.userRoles.includes('admin');
     const isAdmin = true;
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false); 
+
+    const location = useLocation();
+    const isChartPage = location.pathname === '/chart';
+
     return(
         <nav className={'navtop-container'}>
             <a>
@@ -27,10 +31,10 @@ export const NavTop = () => {
             </a>
             {isAdmin && 
                 <>
-                    <section className={'sidebar ' + (sidebarVisible && 'active')}>
-                        <a className='btn'>My Account</a>
-                        <a className='btn'>Admin Tab</a>
-                        <a className='btn'>Form Preview</a>
+                    <section className={'sidebar ' + (sidebarVisible && 'active ') + (isChartPage && 'darkmode')}>
+                        <Link onClick={() => setSidebarVisible(false)} to="admin" className='btn'>My Account</Link>
+                        <Link onClick={() => setSidebarVisible(false)} to="admin" className='btn'>Admin Tab</Link>
+                        <Link onClick={() => setSidebarVisible(false)} to="/" className='btn'>Form Preview</Link>
                         <Button className='btn btn-logout'>
                             <Logout />      
                         </Button>
