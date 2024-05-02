@@ -192,6 +192,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
                         <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Month', position: 'insideBottom', offset: -10 }} />
                         <YAxis stroke="#ccc" label={{ value: 'Mean Happiness', angle: -90, position: 'insideLeft', offset: 15, dy:60 }} />
+                        <Tooltip />
                     </LineChart>
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
@@ -403,7 +404,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </select>
             } */}
             {/* <p>{activeQuestion}</p> */}
-            {/* <article className='datasummary-container'>
+            <article className='datasummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
@@ -419,7 +420,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         )}
                     </>
                 )}
-            </article> */}
+            </article>
             <article className='reflectionboxsummary-container'>
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (

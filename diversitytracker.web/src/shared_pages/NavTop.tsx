@@ -5,13 +5,16 @@ import { FormIcon } from '../resources/icons/FormIcon'
 import './NavTop.css'
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { Logout } from '@aaronpowell/react-static-web-apps-auth';
+import { Logout, useClientPrincipal } from '@aaronpowell/react-static-web-apps-auth';
 
 type Props = {
     isAdmin: boolean
 }
 
-export const NavTop = ({isAdmin}: Props) => {
+export const NavTop = () => {
+    const { clientPrincipal } = useClientPrincipal();
+    //const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    const isAdmin = true;
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false); 
     return(
         <nav className={'navtop-container'}>
