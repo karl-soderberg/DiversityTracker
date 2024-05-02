@@ -328,8 +328,14 @@
         color: #f3f3f3;
     }
 
-    .reflectionboxsummary-container__content{
-
+    .overallstudy-container{
+        margin-top: 5rem;
+    }
+    .overallstudy-container h2{
+        font-size: 1.9rem;
+    }
+    .overalldata-container h2{
+        font-size: 1.9rem;
     }
 
 

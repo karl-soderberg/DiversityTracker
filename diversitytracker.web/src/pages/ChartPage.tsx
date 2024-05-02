@@ -459,7 +459,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 }
             </article>
             {formsData && (
-                <article className='reflectionboxsummary-container'>
+                <article className='reflectionboxsummary-container overallstudy-container'>
                     <h2>Overall Study Reflections Interpretation</h2>
                     {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
                         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
@@ -472,7 +472,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </article>
             )}
             {formsData && (
-                <article className='reflectionboxsummary-container'>
+                <article className='reflectionboxsummary-container overalldata-container'>
                     <h2>Overall Study Data Interpretation</h2>
                     {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
                         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
