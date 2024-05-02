@@ -190,8 +190,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                             <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" strokeWidth={2}/>
                         }
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
-                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Date', position: 'insideBottom', offset: -10 }} />
-                        <YAxis stroke="#ccc" label={{ value: 'Satisfaction level', angle: -90, position: 'insideLeft', offset: 15, dy:50 }} />
+                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Month', position: 'insideBottom', offset: -10 }} />
+                        <YAxis stroke="#ccc" label={{ value: 'Mean Happiness', angle: -90, position: 'insideLeft', offset: 15, dy:60 }} />
                     </LineChart>
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
@@ -247,7 +247,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
                         {/* @ts-ignore */}
                         <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10, angle: -25, textAnchor: 'end' }}/>
-                        <YAxis stroke="#ccc" />
+                        <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
                         <Tooltip />
                         {(scope === "both" || scope === "women") && 
                             <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
