@@ -263,6 +263,11 @@
     .header-container__title div{
         height: fit-content;
     }
+    .custom-text-transition {
+        position: relative;
+        top: -0px;
+        transition: top 0.5s ease-out;
+    }
     .header-container__reflection{
         margin: 3% 0% 3% 0%;
         font-weight: 200;
@@ -278,6 +283,8 @@
             font-size: 1.2rem;
         }
     }
+
+    
     
 
 

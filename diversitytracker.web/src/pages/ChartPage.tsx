@@ -7,6 +7,7 @@ import { APIFormsResponse, ChartDistributionDict, ChartGenderDistribution, Distr
 import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, MapAPIFormsResponseToDistributionDataType, MapAPIFormsResponseToGenderDistribution, MapAPIFormsResponseToScatterChart } from '../util/dataconversion'
 import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
+import { motion } from 'framer-motion';
 
 type Props = {
     className: string,
@@ -271,8 +272,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 {questionsData && questionsData.filter(question => question.id == activeQuestion).map(question => (
                     <h1 className={"header-container__title"}>
                          <TextTransition
+                            className="custom-text-transition"
                                         springConfig={presets.gentle}
-                                        style={{ margin: "0 4px", maxWidth: "500px", wordWrap: "break-word" }}
                                     >
                             {question.value}
                         </TextTransition>
@@ -331,41 +332,58 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     <p className='selectcharttype__anchor--title'>Gender Distribution</p>
                 </a>
             </section>
-            <article className='reflectionboxsummary-container'>
+           <motion.article
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                className='reflectionboxsummary-container'
+                >
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p key={filteredInter.id}>{filteredInter.answerInterpretation}</p>
-                            ))
-                        ) : (
-                            <>
-                                <p>No answers available.</p>
-                                <button onClick={() => InterperetAllQuestionAnswers()}>Interperet data</button>
-                            </>
-                        )}
+                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
+                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                            {filteredInter.answerInterpretation}
+                        </motion.p>
+                        ))
+                    ) : (
+                        <>
+                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>No answers available.</motion.p>
+                        <motion.button whileHover={{ scale: 1.1 }} onClick={() => InterperetAllQuestionAnswers()}>
+                            Interpret data
+                        </motion.button>
+                        </>
+                    )}
                     </>
                 )}
-            </article>
-            <article className='reflectionboxsummary-container'>
+            </motion.article>
+            <motion.article
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                className='reflectionboxsummary-container'
+                >
                 <h2>Data Reflection</h2>
                 {(formsData && formsData.aiInterpretation != null) && (
                     <>
-                        {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                            formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                                <p key={filteredInter.id}>{filteredInter.valueInterpretation}</p>
-                            ))
-                        ) : (
-                            <section className='reflectionboxsummary-container__content'>
-                                <p>No data available.</p>
-                                <button onClick={() => InterperetAllQuestionValues()}>Interperet data</button>
-                            </section>
-                        )}
+                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
+                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion). map(filteredInter => (
+                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                            {filteredInter.valueInterpretation}
+                        </motion.p>
+                        ))
+                    ) : (
+                        <motion.section className='reflectionboxsummary-container__content' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                        <p>No data available.</p>
+                        <button onClick={() => InterperetAllQuestionValues()}>Interpret data</button>
+                        </motion.section>
+                    )}
                     </>
                 )}
-
-            </article>
+            </motion.article>
             <article className='reflectionboxchartsummary-container'>
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <ResponsiveContainer width="100%" height="100%">
