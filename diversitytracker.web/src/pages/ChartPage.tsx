@@ -178,7 +178,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 label={({ value }) => `${value.toFixed(1)}%`}
                             >
                                 {pieData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='#5484EB'/>
                                 ))}
                             </Pie>
                             <text x={132} y={20} textAnchor="end" dominantBaseline="middle" fill="#ccc">
@@ -392,16 +392,15 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 margin={{
                                 top: 20,
                                 right: 20,
-                                bottom: 10,
-                                left: 10,
+                                bottom: 35,
+                                left: -10,
                                 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="wordlength" type="number" name="wordlength" unit="" />
-                                <YAxis dataKey="value" type="number" name="value" unit="" />
+                                <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
+                                <XAxis label={{ value: 'Time at Company', position: 'insideBottom', offset: -2 }} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="wordlength" type="number" name="wordlength" unit="" />
+                                <YAxis label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:60, dx:20 }} domain={[0, 10]} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="value" type="number" name="value" unit="" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                <Legend />
-                                <Scatter name="Ratings based on question answer field" data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
+                                <Scatter data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
                             </ScatterChart>
                         }
                     </ResponsiveContainer>
