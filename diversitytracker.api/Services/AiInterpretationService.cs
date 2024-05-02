@@ -455,7 +455,7 @@ namespace diversitytracker.api.Services
         private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
         {
              StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where many individuals ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional and interpersonal insights based on the data. Every section is seperated by ->- . I want you to give one answer per section and seperate the answers by two new lines. Don't give an answer on the data values themselves. Answer in under 20-50 words for each question/answers. Only give me a text no bullet points or similar. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+                    $"Here is a collection of questions and answers where many individuals ranked 0-10. The Question and answers section is seperated by || \n I want you to reflect on what people have answered and draw meaningful insights about the data more highlighting the emotional and interpersonal conclusions based on the data. Draw on the negative and positive points. Every section is seperated by ->- . I want you to give one answer per section and seperate the answers by two new lines. Don't give an answer on the data values themselves. Answer in between 100-120 words for each question/answers. Only give me a text no bullet points or similar. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
             
             foreach (var kvp in realData)
             {
