@@ -404,7 +404,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 </select>
             } */}
             {/* <p>{activeQuestion}</p> */}
-            <article className='datasummary-container'>
+            <article className='reflectionboxsummary-container'>
                 <h2>Reflection Box Summary</h2>
                 {(formsData && formsData.aiInterpretation) && (
                     <>

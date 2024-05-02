@@ -88,9 +88,9 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-            <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
+            {/* <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
                 <AnonymousLogin beginform={() => setBeginForm(true)}/>
-            </div>
+            </div> */}
             <Player
                 autoplay={true}
                 loop={true}
