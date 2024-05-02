@@ -1,7 +1,6 @@
 import { PostFormSubmissionDto, PostQuestionTypeDto, Question } from "../types/types";
 
 const API_URL =  "https://williaml.se/api"
-//const API_URL = "https://officetrackerapi2.azurewebsites.net/api";
 
 export const GetAllQuestions = async (): Promise<Array<Question>> => {
     const response = await fetch(`${API_URL}/Questions`);
