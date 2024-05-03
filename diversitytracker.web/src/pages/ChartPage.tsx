@@ -397,7 +397,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                                 }}
                             >
                                 <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
-                                <XAxis label={{ value: 'Time at Company', position: 'insideBottom', offset: -2 }} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="wordlength" type="number" name="wordlength" unit="" />
+                                <XAxis label={{ value: 'Length Of Answer', position: 'insideBottom', offset: -8 }} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="wordlength" type="number" name="wordlength" unit="" />
                                 <YAxis label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:60, dx:20 }} domain={[0, 10]} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="value" type="number" name="value" unit="" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                 <Scatter data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
