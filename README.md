@@ -1,4 +1,4 @@
-# Diversity Tracker - Final Project at &lt;/salt&gt; 
+# Office Tracker - Final Project at &lt;/salt&gt; 
 
 ## Timeline
 
@@ -11,12 +11,11 @@
 * Data analysis tools are completely aware of context. Meaning the interpretation is fully dynamic
 
 ## Challenges
-
 This project aims to enhance organizational inclusivity and maximize productivity by addressing the critical issues of 
-underrepresentation of minorities and overlooked interpersonal office dynamics at organizations. 
+overlooked interpersonal office dynamics at organizations.
 
-Utilizing anonymous gender-based forms and comprehensive data visualizations, we will shed light on representation, 
-perception, inclusivity, equality, and interpersonal dynamics within the workplace, 
+Utilizing AI Data intepretation, anonymous forms and comprehensive data visualizations, we will shed light on representation, 
+perception, inclusivity, equality, and interpersonal dynamics within the workplace.
 
 ## Planning & Prototyping
 <img src="https://github.com/karl-soderberg/DiversityTracker/assets/117780994/62a2cf68-8797-4112-b790-52685378fbbc" width="40%">
