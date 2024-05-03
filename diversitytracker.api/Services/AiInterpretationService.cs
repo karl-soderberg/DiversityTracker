@@ -379,6 +379,10 @@ namespace diversitytracker.api.Services
                 int idx = 0;
                 foreach(var question in form.Questions)
                 {
+                    if (idx >= questionsDataAiMatches.Count || idx >= questionsWordLengthAiMatches.Count)
+                    {
+                        continue;
+                    }
                     var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
                     
                     if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
@@ -506,18 +510,21 @@ namespace diversitytracker.api.Services
         {
 
             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n . I want you to write an array of values 0-10 for each persons answer and bundle them into one array per question. 0 being poor, 10 being really good opinion. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! Do not include the question itself JUST the arrays! The Question and answers section is seperated by || \n . I want you to write an array of values 0-10 for each persons answer and bundle them into one array per question. 0 being poor, 10 being really good opinion. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
                 string key = kvp.Key;
                 string[] answers = kvp.Value;
 
-                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                promptBuilder.AppendLine($"Question: [{key}] ||\n");
                 
                 foreach (var answer in answers)
                 {
-                    promptBuilder.AppendLine($"- {answer} \n");
+                    if (!string.IsNullOrEmpty(answer))
+                    {
+                        promptBuilder.AppendLine($"- {answer} \n");
+                    }
                 }
 
                 promptBuilder.AppendLine("->- \n");
@@ -530,18 +537,21 @@ namespace diversitytracker.api.Services
         {
 
             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n . I want you to write an array of number of words contained in each persons answer and bundle them into one array per question. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
+                    $"I want you to write an array of number of words contained in each persons answer and bundle them into one array per question. Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n .  The sections are seperated by ->- . It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
 
             foreach (var kvp in questionAnswerData)
             {
                 string key = kvp.Key;
                 string[] answers = kvp.Value;
 
-                promptBuilder.AppendLine($"Question: {kvp} ||\n");
+                promptBuilder.AppendLine($"Question: [{key}] ||\n");
                 
                 foreach (var answer in answers)
                 {
-                    promptBuilder.AppendLine($"- {answer} \n");
+                    if (!string.IsNullOrEmpty(answer))
+                    {
+                        promptBuilder.AppendLine($"- {answer} \n");
+                    }
                 }
 
                 promptBuilder.AppendLine("->- \n");
