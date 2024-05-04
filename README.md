@@ -1,4 +1,4 @@
-# Office Tracker - Final Project at &lt;/salt&gt; 
+# Office Tracker - Interpersonal Office Dynamics Tracker With AI Interpereted Data Analysis - Final Project at &lt;/salt&gt; 
 
 ## Timeline
 
