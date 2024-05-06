@@ -1,5 +1,14 @@
 # Office Tracker - Interpersonal Office Dynamics Tracker With AI Interpereted Data Analysis - Final Project at &lt;/salt&gt; 
 
+## Demo
+[Higher Resolution](https://www.youtube.com/watch?v=KRAUU94sA_U)
+
+https://github.com/karl-soderberg/DiversityTracker/assets/117780994/8b905ace-cd32-4a9b-b488-c61f0ddc40cc
+
+[Karl](https://www.linkedin.com/in/karl-soderberg/)
+
+[William](https://www.linkedin.com/in/william-f-lindberg/)
+
 ---
 
 The Data Insights App is a powerful tool designed to streamline the data collection, processing, visualization, and interpretation process. With its customizable form, AI-powered data processing, and advanced visualization capabilities, it provides users with valuable insights into their data, enabling informed decision-making.
