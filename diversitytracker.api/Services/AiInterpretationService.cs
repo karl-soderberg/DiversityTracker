@@ -105,25 +105,21 @@ namespace diversitytracker.api.Services
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
 
-            if(aiInterpretation == null)
+            if (aiInterpretation == null)
             {
-                var newAiInterpretation = new AiInterpretation()
+                aiInterpretation = new AiInterpretation()
                 {
                     RealDataInterpretation = realDataInterpretation,
                 };
-                await _aiInterpretationRepository.AddAiInterpretationAsync(newAiInterpretation);
-                
-                return newAiInterpretation;
+                await _aiInterpretationRepository.AddAiInterpretationAsync(aiInterpretation);
             }
             else
             {
                 aiInterpretation.RealDataInterpretation = realDataInterpretation;
                 await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
-                
-                return aiInterpretation;
             }
 
-
+            return aiInterpretation;
         }
 
         public async Task<AiInterpretation> InterperetRealDataSeperatedAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
