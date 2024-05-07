@@ -199,7 +199,7 @@ namespace diversitytracker.api.Services
             return aiInterpretation;
         }
 
-        public async Task<AiInterpretation> InterperetAllQuestionsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        public async Task<AiInterpretation> InterperetQuestionAnswersSeperated(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
             var questionAnswersData = new Dictionary<string, string[]>();
 
@@ -209,7 +209,9 @@ namespace diversitytracker.api.Services
                 foreach(var question in form.Questions)
                 {
                     if (string.IsNullOrWhiteSpace(question.Answer))
-                    continue;
+                    {
+                        continue;
+                    }
 
                     if (questionAnswersData.ContainsKey(questionTypes[idx].Value))
                     {
