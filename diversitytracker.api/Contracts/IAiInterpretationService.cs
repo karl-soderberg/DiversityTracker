@@ -7,7 +7,7 @@ namespace diversitytracker.api.Contracts
     {
         Task<AiInterpretation> InterperetAllPersonalReflections(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
         Task<AiInterpretation> InterperetAllData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
-        Task<AiInterpretation> InterperetAllQuestionsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
+        Task<AiInterpretation> InterperetQuestionDataSeperated(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
         Task<AiInterpretation> InterperetRealDataSeperatedAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
         Task<AiInterpretation> CreateDataFromQuestionAnswers(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes);
     }
