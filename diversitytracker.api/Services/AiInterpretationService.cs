@@ -422,10 +422,5 @@ namespace diversitytracker.api.Services
 
             return aiInterpretation;
         }
-
-        public Task<AiInterpretation> InterperetQuestionAsync(QuestionType questionType)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
