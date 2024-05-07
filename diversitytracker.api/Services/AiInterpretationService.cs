@@ -53,7 +53,7 @@ namespace diversitytracker.api.Services
             return openAIAnswer;
         }
 
-        public async Task<AiInterpretation> InterperetAllReflectionsFormsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        public async Task<AiInterpretation> InterperetAllPersonalReflections(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
             List<string> reflectionAnswersData = formSubmissions.Select(form => form.Person.PersonalReflection).ToList();
 
