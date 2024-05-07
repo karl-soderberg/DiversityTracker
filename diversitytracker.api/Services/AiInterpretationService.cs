@@ -79,7 +79,7 @@ namespace diversitytracker.api.Services
             return aiInterpretation;     
         }
 
-        public async Task<AiInterpretation> InterperetAllRealDataAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
+        public async Task<AiInterpretation> InterperetAllData(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
             var realData = new Dictionary<string, double[]>();
 

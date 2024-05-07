@@ -55,7 +55,7 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-                var interperetation = await _aiInterpretationService.InterperetAllRealDataAsync(forms, questionTypes);
+                var interperetation = await _aiInterpretationService.InterperetAllData(forms, questionTypes);
                 return Ok(interperetation);
             }
             catch (Exception ex)
