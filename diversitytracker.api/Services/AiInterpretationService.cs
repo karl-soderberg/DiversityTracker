@@ -10,13 +10,18 @@ namespace diversitytracker.api.Services
 {
     public class AiInterpretationService : IAiInterpretationService
     {
-        private readonly HttpClient _httpClient;
         private readonly string _apiKey;
         private readonly IQuestionsRepository _questionsRepository;
         private readonly IAiInterpretationRepository _aiInterpretationRepository;
         private readonly IPromptService _promptService;
+        private readonly HttpClient _httpClient;
 
-        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository, IAiInterpretationRepository aiInterpretationRepository, IPromptService promptService)
+        public AiInterpretationService(
+            HttpClient httpClient, 
+            IConfiguration configuration, 
+            IQuestionsRepository questionsRepository,
+            IAiInterpretationRepository aiInterpretationRepository,
+            IPromptService promptService)
         {
             _apiKey = configuration["OpenAi:apiKey"];
             _httpClient = httpClient;
@@ -313,59 +318,26 @@ namespace diversitytracker.api.Services
             var questionDataAiInterpretation = await OpenAIInterperet(questionDataPrompt);
             var questionWordLengthAiInterpretation = await OpenAIInterperet(questionWordLengthPrompt);
 
-            var linesAnswers = questionDataAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Trim())
-                .ToArray();
+            var questionsDataAiMatches = questionDataAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim().Trim('[', ']').Split(',')
+                    .Select(n => double.Parse(n.Trim()))
+                    .ToArray())
+                .ToList();
 
-            var linesWordLength = questionWordLengthAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Trim())
-                .ToArray();
-
-            List<double[]> questionsDataAiMatches = new List<double[]>();
-            List<double[]> questionsWordLengthAiMatches = new List<double[]>();
-
-            foreach (var line in linesAnswers)
-            {
-                var trimmedLine = line.Trim('[', ']');
-                double[] numbers = trimmedLine.Split(',')
-                                            .Select(n => double.Parse(n.Trim()))
-                                            .ToArray();
-                questionsDataAiMatches.Add(numbers);
-            }
-
-            foreach (var line in linesWordLength)
-            {
-                var trimmedLine = line.Trim('[', ']');
-                double[] numbers = trimmedLine.Split(',')
-                                            .Select(n => double.Parse(n.Trim()))
-                                            .ToArray();
-                questionsWordLengthAiMatches.Add(numbers);
-            }
-
+            var questionsWordLengthAiMatches = questionWordLengthAiInterpretation.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim().Trim('[', ']').Split(',')
+                    .Select(n => double.Parse(n.Trim()))
+                    .ToArray())
+                .ToList();
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
-
-            var wasnull = false;
-            if(aiInterpretation == null)
-            {
-                aiInterpretation = new AiInterpretation
-                {
-                    QuestionInterpretations = new List<AiQuestionInterpretation>(),
-                };
-                wasnull = true;
-            }
-            else if(aiInterpretation.QuestionInterpretations == null)
-            {
-                aiInterpretation.QuestionInterpretations = new List<AiQuestionInterpretation>(){};
-            };
-            
+            bool wasnull = aiInterpretation == null;
+            aiInterpretation ??= new AiInterpretation { QuestionInterpretations = new List<AiQuestionInterpretation>() };
+            aiInterpretation.QuestionInterpretations ??= new List<AiQuestionInterpretation>();
 
             foreach (var questionInterpretation in aiInterpretation.QuestionInterpretations)
             {
-                if (questionInterpretation.aiAnswerData == null)
-                {
-                    questionInterpretation.aiAnswerData = new AiAnswerData();
-                }
+                questionInterpretation.aiAnswerData ??= new AiAnswerData();
             }
 
             foreach(var form in formSubmissions)
@@ -379,7 +351,10 @@ namespace diversitytracker.api.Services
                     }
                     var fetchQuestionType = await _questionsRepository.GetQuestionTypeByIdAsync(question.QuestionTypeId);
                     
-                    if(!aiInterpretation.QuestionInterpretations.Any(i => i.QuestionTypeId == question.QuestionTypeId))
+                    var questionInterpretationExists = aiInterpretation.QuestionInterpretations
+                        .FirstOrDefault(i => i.QuestionTypeId == question.QuestionTypeId);
+
+                    if(questionInterpretationExists == null)
                     {
                         var newAiAnswerData = new AiAnswerData(){
                             Value = questionsDataAiMatches[idx],
