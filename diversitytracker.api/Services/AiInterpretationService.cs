@@ -55,34 +55,28 @@ namespace diversitytracker.api.Services
 
         public async Task<AiInterpretation> InterperetAllReflectionsFormsAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
         {
-            List<string> reflectionAnswersData = new List<string>();
-
-            foreach(var form in formSubmissions)
-            {
-                reflectionAnswersData.Add(form.Person.PersonalReflection);
-            }
+            List<string> reflectionAnswersData = formSubmissions.Select(form => form.Person.PersonalReflection).ToList();
 
             var reflectionPrompt = _promptService.CreateReflectionAnswersDataPrompt(reflectionAnswersData);
             var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
+            reflectionInterpretation = reflectionInterpretation.Replace("||", "");
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
-            if(aiInterpretation == null)
+            if (aiInterpretation == null)
             {
-                var newAiInterpretation = new AiInterpretation()
+                aiInterpretation = new AiInterpretation()
                 {
                     ReflectionsInterpretation = reflectionInterpretation,
                 };
-                await _aiInterpretationRepository.AddAiInterpretationAsync(newAiInterpretation);
-                
-                return newAiInterpretation;
+                await _aiInterpretationRepository.AddAiInterpretationAsync(aiInterpretation);
             }
             else
             {
                 aiInterpretation.ReflectionsInterpretation = reflectionInterpretation;
                 await _aiInterpretationRepository.UpdateAiInterpretationAsync(aiInterpretation);
-                
-                return aiInterpretation;
             }
+
+            return aiInterpretation;     
         }
 
         public async Task<AiInterpretation> InterperetAllRealDataAsync(List<FormSubmission> formSubmissions, List<QuestionType> questionTypes)
