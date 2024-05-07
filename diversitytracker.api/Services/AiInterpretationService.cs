@@ -14,14 +14,16 @@ namespace diversitytracker.api.Services
         private readonly string _apiKey;
         private readonly IQuestionsRepository _questionsRepository;
         private readonly IAiInterpretationRepository _aiInterpretationRepository;
+        private readonly IPromptService _promptService;
 
-        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository, IAiInterpretationRepository aiInterpretationRepository)
+        public AiInterpretationService(HttpClient httpClient, IConfiguration configuration, IQuestionsRepository questionsRepository, IAiInterpretationRepository aiInterpretationRepository, IPromptService promptService)
         {
             _apiKey = configuration["OpenAi:apiKey"];
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
             _questionsRepository = questionsRepository;
             _aiInterpretationRepository = aiInterpretationRepository;
+            _promptService = promptService;
         }
         private async Task<string> OpenAIInterperet(string prompt)
         {
@@ -60,7 +62,7 @@ namespace diversitytracker.api.Services
                 reflectionAnswersData.Add(form.Person.PersonalReflection);
             }
 
-            var reflectionPrompt = CreateReflectionAnswersDataPrompt(reflectionAnswersData);
+            var reflectionPrompt = _promptService.CreateReflectionAnswersDataPrompt(reflectionAnswersData);
             var reflectionInterpretation = await OpenAIInterperet(reflectionPrompt);
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
@@ -104,7 +106,7 @@ namespace diversitytracker.api.Services
                 }
             }
 
-            var realDataPrompt = CreateRealdataPrompt(realData);
+            var realDataPrompt = _promptService.CreateRealdataPrompt(realData);
             var realDataInterpretation = await OpenAIInterperet(realDataPrompt);
 
             var aiInterpretation = await _aiInterpretationRepository.GetAiInterpretationAsync();
@@ -151,7 +153,7 @@ namespace diversitytracker.api.Services
                 }
             }
 
-            var realDataSeperatedPrompt = CreateRealdataMultiblePrompt(realData);
+            var realDataSeperatedPrompt = _promptService.CreateRealdataMultiplePrompt(realData);
             var realDataSeperatedInterpretation = await OpenAIInterperet(realDataSeperatedPrompt);
             var realDataSeperatedInterpretations = realDataSeperatedInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -233,7 +235,7 @@ namespace diversitytracker.api.Services
                 }
             }
 
-            var questionAnswerPrompt = CreateQuestionAnswersDataPrompt(questionAnswersData);
+            var questionAnswerPrompt = _promptService.CreateQuestionAnswersDataPrompt(questionAnswersData);
             var questionAnswerInterpretation = await OpenAIInterperet(questionAnswerPrompt);
             var questionAnswerInterpretations = questionAnswerInterpretation.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -313,8 +315,8 @@ namespace diversitytracker.api.Services
                 }
             }
 
-            var questionDataPrompt = CreateDataFromQuestionAnswersPrompt(questionAnswersData);
-            var questionWordLengthPrompt = CountQuestionWordLengthPrompt(questionAnswersData);
+            var questionDataPrompt = _promptService.CreateDataFromQuestionAnswersPrompt(questionAnswersData);
+            var questionWordLengthPrompt = _promptService.CountQuestionWordLengthPrompt(questionAnswersData);
 
             var questionDataAiInterpretation = await OpenAIInterperet(questionDataPrompt);
             var questionWordLengthAiInterpretation = await OpenAIInterperet(questionWordLengthPrompt);
@@ -424,140 +426,6 @@ namespace diversitytracker.api.Services
         public Task<AiInterpretation> InterperetQuestionAsync(QuestionType questionType)
         {
             throw new NotImplementedException();
-        }
-
-        private string CreateReflectionAnswersDataPrompt(List<string> reflectionAnswerData)
-        {
-            StringBuilder promptBuilder = new StringBuilder("Here is a collection of anonymous reflections from multiple individuals about an organization. Interpret the collection of reflections as a whole with a short and concise professional analysis and summary. Make it under 75 words: It's Important that you seperate YOUR ANSWERS with the sign ||\n\n");
-            foreach (var input in reflectionAnswerData)
-            {
-                promptBuilder.AppendLine($"- {input}");
-            }
-            return promptBuilder.ToString();
-        }
-
-        private string CreateRealdataPrompt(Dictionary<string, double[]> realData)
-        {
-             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where people ranked 0-10. The Question and answers section is seperated by || \n I want you to draw real world conclusions about the data more highlighting the emotional/personal points based on the data. Do not give answer on the data values themselves. Answer in under 50 words.\n\n");
-            
-            foreach (var kvp in realData)
-            {
-                string key = kvp.Key;
-                double[] values = kvp.Value;
-                
-                promptBuilder.AppendLine($"{kvp} || \n");
-                foreach (var value in values)
-                {
-                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
-                }
-
-                promptBuilder.AppendLine("->-");
-            }
-            var prompt = promptBuilder.ToString();
-
-            return prompt;
-        }
-
-        private string CreateRealdataMultiblePrompt(Dictionary<string, double[]> realData)
-        {
-             StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions and answers where many individuals ranked 0-10. The Question and answers section is seperated by || \n I want you to reflect on what people have answered and draw meaningful insights about the data more highlighting the emotional and interpersonal conclusions based on the data. Draw on the negative and positive points. Every section is seperated by ->- . I want you to give one answer per section and seperate the answers by two new lines. Don't give an answer on the data values themselves. Answer in between 100-120 words for each question/answers. Only give me a text no bullet points or similar. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
-            
-            foreach (var kvp in realData)
-            {
-                string key = kvp.Key;
-                double[] values = kvp.Value;
-                
-                promptBuilder.AppendLine($"{key} || \n");
-                foreach (var value in values)
-                {
-                    promptBuilder.AppendLine($"- {Math.Round(value)}\n");
-                }
-
-                promptBuilder.AppendLine("->-");
-            }
-            var prompt = promptBuilder.ToString();
-
-            return prompt;
-        }
-
-        private string CreateQuestionAnswersDataPrompt(Dictionary<string, string[]> questionAnswerData)
-        {
-
-            StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question contra answer inside a section is seperated by ||. The sections of one question/answer are seperated by ->- \n I want you to draw real world conclusions about the answers related to the given question more highlighting the problem areas in the organization but also some objective conclusions. Give a 85-120 word answer for each question/answers section. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
-
-            foreach (var kvp in questionAnswerData)
-            {
-                string key = kvp.Key;
-                string[] answers = kvp.Value;
-
-                promptBuilder.AppendLine($"Question: [{key}] ||\n");
-                
-                foreach (var answer in answers)
-                {
-                    promptBuilder.AppendLine($"- {answer} \n");
-                }
-
-                promptBuilder.AppendLine("->- \n");
-            }
-
-            return promptBuilder.ToString();
-        }
-
-        private string CreateDataFromQuestionAnswersPrompt(Dictionary<string, string[]> questionAnswerData)
-        {
-
-            StringBuilder promptBuilder = new StringBuilder(
-                    $"Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! Do not include the question itself JUST the arrays! The Question and answers section is seperated by || \n . I want you to write an array of values 0-10 for each persons answer and bundle them into one array per question. 0 being poor, 10 being really good opinion. The sections are seperated by ->-. It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
-
-            foreach (var kvp in questionAnswerData)
-            {
-                string key = kvp.Key;
-                string[] answers = kvp.Value;
-
-                promptBuilder.AppendLine($"Question: [{key}] ||\n");
-                
-                foreach (var answer in answers)
-                {
-                    if (!string.IsNullOrEmpty(answer))
-                    {
-                        promptBuilder.AppendLine($"- {answer} \n");
-                    }
-                }
-
-                promptBuilder.AppendLine("->- \n");
-            }
-
-            return promptBuilder.ToString();
-        }
-
-        private string CountQuestionWordLengthPrompt(Dictionary<string, string[]> questionAnswerData)
-        {
-
-            StringBuilder promptBuilder = new StringBuilder(
-                    $"I want you to write an array of number of words contained in each persons answer and bundle them into one array per question. Here is a collection of questions with answers from people working at an organization. It's Important that you seperate YOUR ANSWERS with two new lines! The Question and answers section is seperated by || \n .  The sections are seperated by ->- . It's Important that you seperate YOUR ANSWERS with two new lines.!\n\n");
-
-            foreach (var kvp in questionAnswerData)
-            {
-                string key = kvp.Key;
-                string[] answers = kvp.Value;
-
-                promptBuilder.AppendLine($"Question: [{key}] ||\n");
-                
-                foreach (var answer in answers)
-                {
-                    if (!string.IsNullOrEmpty(answer))
-                    {
-                        promptBuilder.AppendLine($"- {answer} \n");
-                    }
-                }
-
-                promptBuilder.AppendLine("->- \n");
-            }
-
-            return promptBuilder.ToString();
         }
     }
 }
