@@ -8,6 +8,7 @@ import { MapAPIFormsAIResponseToScatterChart, MapAPIFormsResponseToBarChart, Map
 import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
 import { motion } from 'framer-motion';
+import { Footer } from '../shared_pages/Footer'
 
 type Props = {
     className: string,
@@ -23,6 +24,16 @@ type Props = {
     InterperetAllQuestionValues: () => void,
     CreateDataFromQuestionAnswersInterpretation: () => void
 }
+
+type ActiveInterpretation = {
+    activeDistributionFormData: DistributionData,
+    activeGenderDistributionData: Array<GenderValue>,
+    activeGenderBarData: ChartGenderDistribution[],
+    activeTimeAtCompanyScatterData: scatterDataArr,
+    activeAiInterpretation: scatterAiDataArr,
+}
+
+const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
 
 export const ChartPage = ( {className, questionData, formsData, InterperetAllReflectionsForms, InterperetAllRealData, InterperetAllQuestionAnswers, InterperetAllQuestionValues, CreateDataFromQuestionAnswersInterpretation} : Props) => {
@@ -43,11 +54,9 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
     const [activeTimeAtCompanyScatterData, setActiveTimeAtCompanyScatterData] = useState<scatterDataArr>();
     const [activeAiInterpretation, setActiveAiInterpretation] = useState<scatterAiDataArr>();
 
-    const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
-
     useEffect(() => {
         if(distributionformdata){
-            setActiveDistributionFormData(distributionformdata[activeQuestion])
+            setActiveDistributionFormData(distributionformdata[activeQuestion]) 
         }
         if(genderDistributionData){
             setActiveGenderDistributionData(genderDistributionData[activeQuestion]);
@@ -455,11 +464,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     )}
                 </article>
             )}
-            <footer className='chartpage-footer'>
-                <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                <h2>OFFICE TRACKER</h2>
-                <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-            </footer>
+            <Footer className='chartpage-footer'/>
         </section>
     )
 }

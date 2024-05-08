@@ -17,6 +17,7 @@ import { CustomSlider } from '../components/CustomSlider';
 import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
 import Lottie from 'lottie-web';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { Footer } from '../shared_pages/Footer';
 
 const { RangePicker } = DatePicker;
 
@@ -227,11 +228,7 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                         </Button>
                     </Form.Item>
                 </Form>
-                <footer className='newformpage-footer'>
-                    <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                    <h2>OFFICE TRACKER</h2>
-                    <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-                </footer>
+                <Footer className='newformpage-footer'/>
                 </>
                 :
                 <>
