@@ -9,6 +9,7 @@ import { Button, Switch } from 'antd'
 import TextTransition, { presets } from 'react-text-transition'
 import { motion } from 'framer-motion';
 import { Footer } from '../shared_pages/Footer'
+import { Article } from '../components/modules/Article'
 
 type Props = {
     className: string,
@@ -439,30 +440,48 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 }
             </article>
             {formsData && (
-                <article className='reflectionboxsummary-container overallstudy-container'>
-                    <h2>Overall Study Reflections Interpretation</h2>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
-                        <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
-                    ) : (
-                        <>
-                            <p>No reflections available.</p>
-                            <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
-                        </>
-                    )}
-                </article>
+                // <article className='reflectionboxsummary-container overallstudy-container'>
+                //     <h2>Overall Study Reflections Interpretation</h2>
+                //     {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
+                //         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
+                //     ) : (
+                //         <>
+                //             <p>No reflections available.</p>
+                //             <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
+                //         </>
+                //     )}
+                // </article>
+                <Article 
+                    data={formsData.aiInterpretation.reflectionsInterpretation}
+                    datanullcheck={formsData.aiInterpretation}
+                    className='reflectionboxsummary-container overallstudy-container'
+                    title='Overall Study Reflections Interpretation'
+                    noDataTitle='No reflections available.'
+                    noDataBtnTrigger={InterperetAllRealData}
+                    noDatabtnTitle='Interperet data'
+                />
             )}
             {formsData && (
-                <article className='reflectionboxsummary-container overalldata-container'>
-                    <h2>Overall Study Data Interpretation</h2>
-                    {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
-                        <p>{formsData.aiInterpretation.realDataInterpretation}</p>
-                    ) : (
-                        <>
-                            <p>No data interpretation available.</p>
-                            <button onClick={() => InterperetAllRealData()}>Interperet data</button>
-                        </>
-                    )}
-                </article>
+                // <article className='reflectionboxsummary-container overalldata-container'>
+                //     <h2>Overall Study Data Interpretation</h2>
+                //     {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
+                //         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
+                //     ) : (
+                //         <>
+                //             <p>No data interpretation available.</p>
+                //             <button onClick={() => InterperetAllRealData()}>Interperet data</button>
+                //         </>
+                //     )}
+                // </article>
+                <Article 
+                    data={formsData.aiInterpretation.realDataInterpretation}
+                    datanullcheck={formsData.aiInterpretation}
+                    className='reflectionboxsummary-container overalldata-container'
+                    title='Overall Study Data Interpretation'
+                    noDataTitle='No data interpretation available.'
+                    noDataBtnTrigger={InterperetAllRealData}
+                    noDatabtnTitle='Interperet data'
+                />
             )}
             <Footer className='chartpage-footer'/>
         </section>
