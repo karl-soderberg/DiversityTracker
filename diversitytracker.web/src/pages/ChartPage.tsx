@@ -10,7 +10,8 @@ import TextTransition, { presets } from 'react-text-transition'
 import { motion } from 'framer-motion';
 import { Footer } from '../shared_pages/Footer'
 import { Article } from '../components/modules/Article'
-import { AreaChartComponent, DistributionChartComponent } from '../components/charts/DistributionChartComponent'
+import { DistributionChartModule } from '../components/charts/DistributionChartModule'
+import { AreaChartModule } from '../components/charts/AreaChartModule'
 
 type Props = {
     className: string,
@@ -117,30 +118,40 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {/* @ts-ignore */}
             <ResponsiveContainer width="90%" height="90%">
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
-                    <AreaChart data={activeDistributionFormData.data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
-                        <defs>
-                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
-                                <stop offset="95%" stopColor="var(--chart-female)" stopOpacity={.2}/>
-                            </linearGradient>
-                            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="var( --chart-male)" stopOpacity={0.8}/>
-                                <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
-                            </linearGradient>
-                        </defs> 
-                        <XAxis dataKey="value" stroke="#ccc" label={{ value: 'Satisfaction Level', position: 'insideBottom', offset: -10 }}  />
-                        <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }}/>
-                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
-                        {(scope === "both" || scope === "women") && 
-                            <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
-                        }
-                        {(scope === "both" || scope === "men") && 
-                            <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
-                        }
-                    </AreaChart>
+                    // <AreaChart data={activeDistributionFormData.data}
+                    //     margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
+                    //     <defs>
+                    //         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    //             <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
+                    //             <stop offset="95%" stopColor="var(--chart-female)" stopOpacity={.2}/>
+                    //         </linearGradient>
+                    //         <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                    //             <stop offset="5%" stopColor="var( --chart-male)" stopOpacity={0.8}/>
+                    //             <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
+                    //         </linearGradient>
+                    //     </defs> 
+                    //     <XAxis dataKey="value" stroke="#ccc" label={{ value: 'Satisfaction Level', position: 'insideBottom', offset: -10 }}  />
+                    //     <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }}/>
+                    //     <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
+                    //     {(scope === "both" || scope === "women") && 
+                    //         <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
+                    //     }
+                    //     {(scope === "both" || scope === "men") && 
+                    //         <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
+                    //     }
+                    // </AreaChart>
+                    <AreaChartModule 
+                        data={activeDistributionFormData.data}
+                        dataKeyA='numberofwomen'
+                        dataKeyB='numberofmen'
+                        scope={scope}
+                        yLabel='Respondents'
+                        xLabel='Satisfaction Level'
+                        colorA='var(--chart-female)'
+                        colorB='var( --chart-male)'
+                    />
                 ) : chartType === 'distributionacrosstime' ? (
-                    <DistributionChartComponent 
+                    <DistributionChartModule 
                         data={MOCKData}
                         dataKeyA='numberofwomen'
                         dataKeyB='numberofmen'

@@ -1,5 +1,4 @@
 import { Tooltip } from "antd"
-import { ScriptableLineSegmentContext } from "chart.js"
 import { useEffect } from "react"
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
@@ -14,7 +13,7 @@ type Props = {
     colorB: string
 }
 
-export const DistributionChartComponent = ({data, dataKeyA, dataKeyB, scope, yLabel, xLabel, colorA, colorB}: Props) => {
+export const DistributionChartModule = ({data, dataKeyA, dataKeyB, scope, yLabel, xLabel, colorA, colorB}: Props) => {
 
     useEffect(() => {
         console.log(data);
