@@ -12,6 +12,7 @@ import { Footer } from '../shared_pages/Footer'
 import { Article } from '../components/modules/Article'
 import { DistributionChartModule } from '../components/charts/DistributionChartModule'
 import { AreaChartModule } from '../components/charts/AreaChartModule'
+import { PieChartModule } from '../components/charts/PieChartModule'
 
 type Props = {
     className: string,
@@ -28,7 +29,6 @@ type Props = {
     CreateDataFromQuestionAnswersInterpretation: () => void
 }
 
-const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
 
 export const ChartPage = ( {className, questionData, formsData, InterperetAllReflectionsForms, InterperetAllRealData, InterperetAllQuestionAnswers, InterperetAllQuestionValues, CreateDataFromQuestionAnswersInterpretation} : Props) => {
@@ -89,6 +89,8 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
         }
     }
 
+    const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
+
     return(
         <section className={className}>
             <div className='chartpage-container--bg'></div>
@@ -140,26 +142,10 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         xLabel='Month'
                     />
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
-                    <PieChart width={400} height={400}>
-                            <Pie
-                                dataKey="value"
-                                isAnimationActive={false}
-                                data={activeGenderDistributionData}
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={65}
-                                label={({ value }) => `${value.toFixed(1)}%`}
-                            >
-                                {pieData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='#5484EB'/>
-                                ))}
-                            </Pie>
-                            <text x={132} y={20} textAnchor="end" dominantBaseline="middle" fill="#ccc">
-                                Gender Distribution
-                            </text>
-
-                            <Tooltip />
-                        </PieChart>
+                    <PieChartModule 
+                        data={activeGenderDistributionData}
+                        labelA='Gender Distribution'
+                    />
                 ) : chartType === 'scatterdistribution' && activeTimeAtCompanyScatterData && timeAtCompanyScatterData ? (
                         <ScatterChart
                             margin={{
