@@ -1,6 +1,6 @@
 import { Tooltip } from "antd"
 import { useEffect } from "react"
-import { Bar, BarChart, CartesianGrid, Line, LineChart, Rectangle, ResponsiveContainer, Scatter, ScatterChart, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 type Props = {
     data: any,

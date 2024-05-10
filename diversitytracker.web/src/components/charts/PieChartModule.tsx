@@ -1,6 +1,6 @@
 import { Tooltip } from "antd"
 import { useEffect } from "react"
-import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { Cell, Pie, PieChart, ResponsiveContainer} from "recharts"
 import { pieData } from "../../data/ProcessedData"
 
 type Props = {

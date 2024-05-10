@@ -1,6 +1,5 @@
-import { Tooltip } from "antd"
 import { useEffect } from "react"
-import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 type Props = {
     data: any,
