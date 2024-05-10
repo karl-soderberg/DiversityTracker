@@ -219,7 +219,10 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     </h1>
                 ))}
             </header>
-            <ChartSelector />
+            <ChartSelector 
+                chartType={chartType}
+                setChartType={setChartType}
+            />
             <motion.article
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

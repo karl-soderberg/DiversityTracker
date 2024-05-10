@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type ChartType = 'distributionscale' | 'distributionacrosstime' | 'scatterdistribution' | 'barchartdistribution' | 'genderdistribution';
 
-type Props = {
+type ChartBtnProps = {
     type: ChartType;
     title: string;
     svgContent: JSX.Element;
@@ -10,7 +10,7 @@ type Props = {
     onSelect: (type: ChartType) => void;
 }
 
-const ChartButton = ({ type, title, svgContent, isActive, onSelect }: Props) => {
+const ChartButton = ({ type, title, svgContent, isActive, onSelect }: ChartBtnProps) => {
     return (
         <a onClick={() => onSelect(type)} 
            className={`chartpage__selectcharttype__anchor ${isActive ? 'active' : ''}`}>
@@ -20,9 +20,12 @@ const ChartButton = ({ type, title, svgContent, isActive, onSelect }: Props) => 
     );
 };
 
+type ChartSelectorProps = {
+    chartType: string,
+    setChartType: (type: string) => void
+}
 
-const ChartSelector: React.FC = () => {
-    const [chartType, setChartType] = useState<ChartType>('distributionscale');
+const ChartSelector = ({ chartType, setChartType }: ChartSelectorProps) => {
 
     const handleSelectChartType = (type: ChartType) => {
         setChartType(type);
