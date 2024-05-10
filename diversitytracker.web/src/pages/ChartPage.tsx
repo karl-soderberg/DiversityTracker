@@ -118,28 +118,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             {/* @ts-ignore */}
             <ResponsiveContainer width="90%" height="90%">
                 {chartType === 'distributionscale' && activeDistributionFormData && distributionformdata ? (
-                    // <AreaChart data={activeDistributionFormData.data}
-                    //     margin={{ top: 10, right: 30, left: 0, bottom: 35 }}>
-                    //     <defs>
-                    //         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    //             <stop offset="5%" stopColor="var(--chart-female)" stopOpacity={0.8}/>
-                    //             <stop offset="95%" stopColor="var(--chart-female)" stopOpacity={.2}/>
-                    //         </linearGradient>
-                    //         <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                    //             <stop offset="5%" stopColor="var( --chart-male)" stopOpacity={0.8}/>
-                    //             <stop offset="95%" stopColor="var( --chart-male)" stopOpacity={.2}/>
-                    //         </linearGradient>
-                    //     </defs> 
-                    //     <XAxis dataKey="value" stroke="#ccc" label={{ value: 'Satisfaction Level', position: 'insideBottom', offset: -10 }}  />
-                    //     <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }}/>
-                    //     <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
-                    //     {(scope === "both" || scope === "women") && 
-                    //         <Area type="monotone" dataKey="numberofwomen" name='women' stroke="var(--chart-female)" fillOpacity={1} fill="url(#colorUv)" /> 
-                    //     }
-                    //     {(scope === "both" || scope === "men") && 
-                    //         <Area type="monotone" dataKey="numberofmen" name='men' stroke="var( --chart-male)" fillOpacity={1} fill="url(#colorPv)" />
-                    //     }
-                    // </AreaChart>
                     <AreaChartModule 
                         data={activeDistributionFormData.data}
                         dataKeyA='numberofwomen'
@@ -425,17 +403,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 }
             </article>
             {formsData && (
-                // <article className='reflectionboxsummary-container overallstudy-container'>
-                //     <h2>Overall Study Reflections Interpretation</h2>
-                //     {formsData.aiInterpretation != null && formsData.aiInterpretation.reflectionsInterpretation ? (
-                //         <p>{formsData.aiInterpretation.reflectionsInterpretation.replace(/\|\|/g, ' ')}</p>
-                //     ) : (
-                //         <>
-                //             <p>No reflections available.</p>
-                //             <button onClick={() => InterperetAllReflectionsForms()}>Interperet data</button>
-                //         </>
-                //     )}
-                // </article>
                 <Article 
                     data={formsData.aiInterpretation.reflectionsInterpretation}
                     datanullcheck={formsData.aiInterpretation}
@@ -447,17 +414,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 />
             )}
             {formsData && (
-                // <article className='reflectionboxsummary-container overalldata-container'>
-                //     <h2>Overall Study Data Interpretation</h2>
-                //     {formsData.aiInterpretation != null && formsData.aiInterpretation.realDataInterpretation ? (
-                //         <p>{formsData.aiInterpretation.realDataInterpretation}</p>
-                //     ) : (
-                //         <>
-                //             <p>No data interpretation available.</p>
-                //             <button onClick={() => InterperetAllRealData()}>Interperet data</button>
-                //         </>
-                //     )}
-                // </article>
                 <Article 
                     data={formsData.aiInterpretation.realDataInterpretation}
                     datanullcheck={formsData.aiInterpretation}
