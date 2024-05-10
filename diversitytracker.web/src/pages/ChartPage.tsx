@@ -13,6 +13,7 @@ import { Article } from '../components/modules/Article'
 import { DistributionChartModule } from '../components/charts/DistributionChartModule'
 import { AreaChartModule } from '../components/charts/AreaChartModule'
 import { PieChartModule } from '../components/charts/PieChartModule'
+import { ScatterChartModule } from '../components/charts/ScatterChartModule'
 
 type Props = {
     className: string,
@@ -89,8 +90,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
         }
     }
 
-    const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
-
     return(
         <section className={className}>
             <div className='chartpage-container--bg'></div>
@@ -147,28 +146,17 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         labelA='Gender Distribution'
                     />
                 ) : chartType === 'scatterdistribution' && activeTimeAtCompanyScatterData && timeAtCompanyScatterData ? (
-                        <ScatterChart
-                            margin={{
-                                top: 20,
-                                right: 20,
-                                bottom: 40,
-                                left: 5,
-                            }}
-                            >
-                            <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
-                            <XAxis type="number" stroke="#ccc" dataKey="age" name="age" label={{ value: 'Time at Company', position: 'insideBottom', offset: -15 }} />
-                            <YAxis type="number" stroke="#ccc" dataKey="satisfactionlevel" name="satisfactionlevel" label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:50 }} domain={[0, 10]}/>
-                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                            {scope === 'both' && (
-                                <>
-                                    <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />
-                                    <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />
-                                </>
-                            )}
-                            {scope === 'men' && <Scatter name="Male" data={activeTimeAtCompanyScatterData.scatterMaleData} fill="var(--chart-male)" />}
-                            {scope === 'women' && <Scatter name="Female" data={activeTimeAtCompanyScatterData.scatterFemaleData} fill="var(--chart-female)" />}
-
-                        </ScatterChart>
+                        <ScatterChartModule 
+                            dataA={activeTimeAtCompanyScatterData.scatterMaleData}
+                            dataB={activeTimeAtCompanyScatterData.scatterFemaleData}
+                            dataKeyA='age'
+                            dataKeyB='satisfactionlevel'
+                            scope={scope}
+                            yLabel='satisfactionlevel'
+                            xLabel='Time at Company'
+                            colorA='var(--chart-male)'
+                            colorB='var(--chart-female)'
+                        />
                         
                 ) : chartType == 'barchartdistribution' && genderBarData && activeGenderBarData ? (
                     <BarChart
