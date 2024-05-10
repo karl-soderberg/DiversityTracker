@@ -26,14 +26,6 @@ type Props = {
     CreateDataFromQuestionAnswersInterpretation: () => void
 }
 
-type ActiveInterpretation = {
-    activeDistributionFormData: DistributionData,
-    activeGenderDistributionData: Array<GenderValue>,
-    activeGenderBarData: ChartGenderDistribution[],
-    activeTimeAtCompanyScatterData: scatterDataArr,
-    activeAiInterpretation: scatterAiDataArr,
-}
-
 const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
 
@@ -56,45 +48,28 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
     const [activeAiInterpretation, setActiveAiInterpretation] = useState<scatterAiDataArr>();
 
     useEffect(() => {
-        if(distributionformdata){
-            setActiveDistributionFormData(distributionformdata[activeQuestion]) 
+        if (formsData && questionData && !activeQuestion) {
+          setQuestionsData(questionData);
+          setActiveQuestion(questionData[0].id);
         }
-        if(genderDistributionData){
-            setActiveGenderDistributionData(genderDistributionData[activeQuestion]);
+    
+        if (formsData && questionData && !distributionformdata) {
+          setDistributionFormData(MapAPIFormsResponseToDistributionDataType(formsData, questionData));
+          setGenderDistributionData(MapAPIFormsResponseToGenderDistribution(formsData, questionData));
+          setGenderBarData(MapAPIFormsResponseToBarChart(formsData, questionData));
+          setTimeAtCompanyScatterData(MapAPIFormsResponseToScatterChart(formsData, questionData));
+          formsData.aiInterpretation && setAiInterpretation(MapAPIFormsAIResponseToScatterChart(formsData, questionData));
         }
-        if(genderBarData){
-            setActiveGenderBarData(genderBarData[activeQuestion]);
+    
+        if (activeQuestion) {
+          distributionformdata && setActiveDistributionFormData(distributionformdata[activeQuestion]);
+          genderDistributionData &&  setActiveGenderDistributionData(genderDistributionData[activeQuestion]);
+          genderBarData &&  setActiveGenderBarData(genderBarData[activeQuestion]);
+          timeAtCompanyScatterData &&  setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
+          aiInterpretation &&  setActiveAiInterpretation(aiInterpretation[activeQuestion]);
         }
-        if(timeAtCompanyScatterData){
-            setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion])
-        }
-        if(aiInterpretation){
-            setActiveAiInterpretation(aiInterpretation[activeQuestion])
-        }
-    }, [distributionformdata, aiInterpretation])
 
-    useEffect(() => {
-        if(activeQuestion && formsData && questionData && distributionformdata == undefined){
-            setDistributionFormData(MapAPIFormsResponseToDistributionDataType(formsData, questionData));
-            setGenderDistributionData(MapAPIFormsResponseToGenderDistribution(formsData, questionData));
-            setGenderBarData(MapAPIFormsResponseToBarChart(formsData, questionData));
-            setTimeAtCompanyScatterData(MapAPIFormsResponseToScatterChart(formsData, questionData));
-            if(formsData.aiInterpretation != undefined){
-                setAiInterpretation(MapAPIFormsAIResponseToScatterChart(formsData, questionData));
-            }
-        }
-        distributionformdata && setActiveDistributionFormData(distributionformdata[activeQuestion])
-        genderBarData && setActiveGenderBarData(genderBarData[activeQuestion]);
-        timeAtCompanyScatterData && setActiveTimeAtCompanyScatterData(timeAtCompanyScatterData[activeQuestion]);
-        aiInterpretation && setActiveAiInterpretation(aiInterpretation[activeQuestion]);
-    }, [activeQuestion]);
-
-    useEffect(() => {
-        if(questionData){
-            setQuestionsData(questionData);
-            setActiveQuestion(questionData[0].id)
-        }
-    }, [questionData]);
+      }, [formsData, questionData, activeQuestion, distributionformdata, genderDistributionData, genderBarData, timeAtCompanyScatterData, aiInterpretation]);
 
     const goToNextChart = () => {
         const currentIndex = questionData.findIndex(question => question.id === activeQuestion);
