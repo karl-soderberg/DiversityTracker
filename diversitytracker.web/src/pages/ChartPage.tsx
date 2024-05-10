@@ -395,7 +395,7 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                     className='reflectionboxsummary-container overallstudy-container'
                     title='Overall Study Reflections Interpretation'
                     noDataTitle='No reflections available.'
-                    noDataBtnTrigger={InterperetAllRealData}
+                    noDataBtnTrigger={InterperetAllReflectionsForms}
                     noDatabtnTitle='Interperet data'
                 />
             )}
