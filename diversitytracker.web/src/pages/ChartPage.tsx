@@ -14,6 +14,7 @@ import { DistributionChartModule } from '../components/charts/DistributionChartM
 import { AreaChartModule } from '../components/charts/AreaChartModule'
 import { PieChartModule } from '../components/charts/PieChartModule'
 import { ScatterChartModule } from '../components/charts/ScatterChartModule'
+import { BarChartModule } from '../components/charts/BarChartModule'
 
 type Props = {
     className: string,
@@ -159,27 +160,17 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         />
                         
                 ) : chartType == 'barchartdistribution' && genderBarData && activeGenderBarData ? (
-                    <BarChart
+                    <BarChartModule 
                         data={activeGenderBarData}
-                        margin={{
-                            top: 20,
-                            right: 30,
-                            left: 0,
-                            bottom: 50
-                        }}
-                        >
-                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5} />
-                        {/* @ts-ignore */}
-                        <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 9, angle: -25, textAnchor: 'end' }} label={{ value: 'Agreement Spectrum', position: 'insideBottom', dy:30, dx:-15 }}/> 
-                        <YAxis stroke="#ccc" label={{ value: 'Respondents', angle: -90, position: 'insideLeft', offset: 10, dy:40 }} />
-                        <Tooltip />
-                        {(scope === "both" || scope === "women") && 
-                            <Bar dataKey="female" fill="var(--chart-female)" activeBar={<Rectangle stroke="var(--chart-male)" />} />     
-                        }
-                        {(scope === "both" || scope === "men") && 
-                            <Bar dataKey="male" fill="var(--chart-male)" activeBar={<Rectangle stroke="var(--chart-female)" />} />
-                        }     
-                    </BarChart>
+                        dataKeyA='female'
+                        dataKeyB='male'
+                        dataKeyC='name'
+                        scope={scope}
+                        yLabel='Respondents'
+                        xLabel='Agreement Spectrum'
+                        colorA='var(--chart-female)'
+                        colorB='var(--chart-male)'
+                    />
                 ) : null}
                 <div className='chart-container__scopebtn-container'>
                     <p>Men</p>

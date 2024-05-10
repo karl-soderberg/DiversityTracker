@@ -14,10 +14,6 @@ type Props = {
 }
 
 export const DistributionChartModule = ({data, dataKeyA, dataKeyB, scope, yLabel, xLabel, colorA, colorB}: Props) => {
-
-    useEffect(() => {
-        console.log(data);
-    }, [])
     return (
         <ResponsiveContainer>
             <LineChart data={data} margin={{ top: 10, right: 20, left: -5, bottom: 35 }}>

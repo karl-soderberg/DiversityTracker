@@ -8,7 +8,6 @@ type Props = {
     labelA: string,
 }
 
-
 const COLORS = ['#0043e1', '#d986ec', '#FFBB28', '#00C49F', '#FF8042'];
 
 export const PieChartModule = ({data, labelA}: Props) => {
