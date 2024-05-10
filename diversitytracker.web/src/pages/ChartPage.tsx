@@ -10,6 +10,7 @@ import TextTransition, { presets } from 'react-text-transition'
 import { motion } from 'framer-motion';
 import { Footer } from '../shared_pages/Footer'
 import { Article } from '../components/modules/Article'
+import { AreaChartComponent, DistributionChartComponent } from '../components/charts/DistributionChartComponent'
 
 type Props = {
     className: string,
@@ -139,18 +140,16 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </AreaChart>
                 ) : chartType === 'distributionacrosstime' ? (
-                    <LineChart data={MOCKData} margin={{ top: 10, right: 20, left: -5, bottom: 35 }}>
-                        {(scope === "both" || scope === "women") && 
-                            <Line type="monotone" dataKey="numberofwomen" stroke="var(--chart-female)" strokeWidth={2}/>
-                        }
-                        {(scope === "both" || scope === "men") && 
-                            <Line type="monotone" dataKey="numberofmen" stroke="var( --chart-male)" strokeWidth={2}/>
-                        }
-                        <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
-                        <XAxis dataKey="date" stroke="#ccc" label={{ value: 'Month', position: 'insideBottom', offset: -10 }} />
-                        <YAxis stroke="#ccc" label={{ value: 'Mean Happiness', angle: -90, position: 'insideLeft', offset: 15, dy:60 }} />
-                        <Tooltip />
-                    </LineChart>
+                    <DistributionChartComponent 
+                        data={MOCKData}
+                        dataKeyA='numberofwomen'
+                        dataKeyB='numberofmen'
+                        scope={scope}
+                        colorA='var(--chart-female)'
+                        colorB='var( --chart-male)'
+                        yLabel='Satisfaction'
+                        xLabel='Month'
+                    />
                 ) : chartType === 'genderdistribution' && genderDistributionData && activeGenderDistributionData ? (
                     <PieChart width={400} height={400}>
                             <Pie
