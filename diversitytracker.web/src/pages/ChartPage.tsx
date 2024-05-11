@@ -310,16 +310,15 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
             }
                
             </article>
-            <article className='reflectionboxsummary-container'>
-                {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
-                    <>
-                        <h2>AI Data rating based on each individuals answer</h2>
-                        <p>This chart presents the interpreted ratings, which are based on actual responses. The model evaluates each response, assigning a rank on a scale from 0 to 10. Additionally, the length of each response is analyzed, and both metrics are subsequently weighted and displayed on the graph.</p>
-                    </>
-                :
-                    <p>No data available</p>
-                }
-            </article>
+            <Article 
+                className='reflectionboxsummary-container'
+                data={'This chart presents the interpreted ratings, which are based on actual responses. The model evaluates each response, assigning a rank on a scale from 0 to 10. Additionally, the length of each response is analyzed, and both metrics are subsequently weighted and displayed on the graph.'}
+                datanullcheck={'d'}
+                title='AI Data rating based on each individuals answer'
+                noDataTitle='No data available'
+                noDatabtnTitle='Interperet data'
+                noDataBtnTrigger={CreateDataFromQuestionAnswersInterpretation}
+            />
             {formsData && (
                 <Article 
                     data={formsData.aiInterpretation.reflectionsInterpretation}
