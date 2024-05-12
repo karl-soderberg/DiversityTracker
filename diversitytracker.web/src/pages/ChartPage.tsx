@@ -16,6 +16,7 @@ import { PieChartModule } from '../components/charts/PieChartModule'
 import { ScatterChartModule } from '../components/charts/ScatterChartModule'
 import { BarChartModule } from '../components/charts/BarChartModule'
 import ChartSelector from '../components/menus/ChartButton'
+import { ArticleAnimated } from '../components/modules/ArticleAnimated'
 
 type Props = {
     className: string,
@@ -223,58 +224,30 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 chartType={chartType}
                 setChartType={setChartType}
             />
-            <motion.article
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5 }}
-                className='reflectionboxsummary-container'
-                >
-                <h2>Reflection Box Summary</h2>
-                {(formsData && formsData.aiInterpretation) && (
-                    <>
-                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).map(filteredInter => (
-                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-                            {filteredInter.answerInterpretation}
-                        </motion.p>
-                        ))
-                    ) : (
-                        <>
-                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>No answers available.</motion.p>
-                        <motion.button whileHover={{ scale: 1.1 }} onClick={() => InterperetAllQuestionAnswers()}>
-                            Interpret data
-                        </motion.button>
-                        </>
-                    )}
-                    </>
-                )}
-            </motion.article>
-            <motion.article
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5 }}
-                className='reflectionboxsummary-container'
-                >
-                <h2>Data Reflection</h2>
-                {(formsData && formsData.aiInterpretation != null) && (
-                    <>
-                    {formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion).length > 0 ? (
-                        formsData.aiInterpretation.questionInterpretations.filter(inter => inter.questionTypeId === activeQuestion). map(filteredInter => (
-                        <motion.p key={filteredInter.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-                            {filteredInter.valueInterpretation}
-                        </motion.p>
-                        ))
-                    ) : (
-                        <motion.section className='reflectionboxsummary-container__content' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-                        <p>No data available.</p>
-                        <button onClick={() => InterperetAllQuestionValues()}>Interpret data</button>
-                        </motion.section>
-                    )}
-                    </>
-                )}
-            </motion.article>
+            {(formsData && formsData.aiInterpretation) && (
+            <>
+                <ArticleAnimated 
+                    data={formsData}
+                    dynamicAttribute='answerInterpretation'
+                    activeQuestion={activeQuestion}
+                    className='reflectionboxsummary-container'
+                    title='Reflection Box Summary'
+                    noDataTitle='No answers available.'
+                    noDatabtnTitle='Interpret data'
+                    noDataBtnTrigger={InterperetAllQuestionAnswers}
+                />
+                <ArticleAnimated 
+                    data={formsData}
+                    dynamicAttribute='valueInterpretation'
+                    activeQuestion={activeQuestion}
+                    className='reflectionboxsummary-container'
+                    title='Data Reflection'
+                    noDataTitle='No answers available.'
+                    noDatabtnTitle='Interpret data'
+                    noDataBtnTrigger={InterperetAllQuestionAnswers}
+                />
+            </>
+            )}
             <article className='reflectionboxchartsummary-container'>
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <ResponsiveContainer width="100%" height="100%">
