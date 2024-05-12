@@ -17,6 +17,7 @@ import { ScatterChartModule } from '../components/charts/ScatterChartModule'
 import { BarChartModule } from '../components/charts/BarChartModule'
 import ChartSelector from '../components/menus/ChartButton'
 import { ArticleAnimated } from '../components/modules/ArticleAnimated'
+import { ScatterChartSingleDataModule } from '../components/charts/ScatterChartSingleDataModule'
 
 type Props = {
     className: string,
@@ -252,20 +253,14 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                 {aiInterpretation && formsData.aiInterpretation != null && aiInterpretation[activeQuestion].scatterData.length > 0 ? 
                     <ResponsiveContainer width="100%" height="100%">
                         {(formsData && activeAiInterpretation) &&
-                            <ScatterChart
-                                margin={{
-                                top: 20,
-                                right: 20,
-                                bottom: 35,
-                                left: -10,
-                                }}
-                            >
-                                <CartesianGrid stroke="grey" strokeDasharray="3 3" strokeWidth={0.5}/>
-                                <XAxis label={{ value: 'Length Of Answer', position: 'insideBottom', offset: -8 }} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="wordlength" type="number" name="wordlength" unit="" />
-                                <YAxis label={{ value: 'Satisfaction Level', angle: -90, position: 'insideLeft', dy:60, dx:20 }} domain={[0, 10]} tick={{ fontSize: 12 }} stroke="#ccc" dataKey="value" type="number" name="value" unit="" />
-                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                <Scatter data={activeAiInterpretation.scatterData} fill="var(--chart-male)" />
-                            </ScatterChart>
+                            <ScatterChartSingleDataModule 
+                                data={activeAiInterpretation.scatterData}
+                                dataKeyA='wordlength'
+                                dataKeyB='value'
+                                colorA='var(--chart-male)'
+                                xLabel='Length Of Answer'
+                                yLabel='Satisfaction Level'
+                            />
                         }
                     </ResponsiveContainer>
                     : 
@@ -281,7 +276,6 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         </div>
                     </section>
             }
-               
             </article>
             <Article 
                 className='reflectionboxsummary-container'
