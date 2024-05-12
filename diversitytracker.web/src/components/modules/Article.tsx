@@ -1,3 +1,5 @@
+import { Button } from "antd"
+
 type Props = {
     data: any
     datanullcheck: any
@@ -17,7 +19,7 @@ export const Article = ({data, datanullcheck, className, title, noDataTitle, noD
             ) : (
                 <>
                     <p>{noDataTitle}</p>
-                    <button onClick={() => noDataBtnTrigger()}>{noDatabtnTitle}</button>
+                    <Button onClick={() => noDataBtnTrigger()}>{noDatabtnTitle}</Button>
                 </>
             )}
         </article>

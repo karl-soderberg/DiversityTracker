@@ -264,28 +264,26 @@ export const ChartPage = ( {className, questionData, formsData, InterperetAllRef
                         }
                     </ResponsiveContainer>
                     : 
-                    <section className='reflectionboxchartsummary-container__content'>
-                        <div>
-                            <h2>AI Data Interpretation</h2>
-                        </div>
-                        <div>
-                            <p>No data available</p>
-                        </div>
-                        <div>
-                            <Button onClick={() => CreateDataFromQuestionAnswersInterpretation()}>Interperet data</Button>
-                        </div>
-                    </section>
+                    <Article 
+                        className='reflectionboxchartsummary-container__content'
+                        data={null}
+                        datanullcheck={null}
+                        title='AI Data Interpretation'
+                        noDataTitle='No data available'
+                        noDatabtnTitle='Interperet data'
+                        noDataBtnTrigger={CreateDataFromQuestionAnswersInterpretation}
+                    />
             }
             </article>
-            <Article 
-                className='reflectionboxsummary-container'
-                data={'This chart presents the interpreted ratings, which are based on actual responses. The model evaluates each response, assigning a rank on a scale from 0 to 10. Additionally, the length of each response is analyzed, and both metrics are subsequently weighted and displayed on the graph.'}
-                datanullcheck={'d'}
-                title='AI Data rating based on each individuals answer'
-                noDataTitle='No data available'
-                noDatabtnTitle='Interperet data'
-                noDataBtnTrigger={CreateDataFromQuestionAnswersInterpretation}
-            />
+                <Article 
+                    className='reflectionboxsummary-container'
+                    data={'This chart presents the interpreted ratings, which are based on actual responses. The model evaluates each response, assigning a rank on a scale from 0 to 10. Additionally, the length of each response is analyzed, and both metrics are subsequently weighted and displayed on the graph.'}
+                    datanullcheck={'d'}
+                    title='AI Data rating based on each individuals answer'
+                    noDataTitle='No data available'
+                    noDatabtnTitle='Interperet data'
+                    noDataBtnTrigger={CreateDataFromQuestionAnswersInterpretation}
+                />
             {formsData && (
                 <Article 
                     data={formsData.aiInterpretation.reflectionsInterpretation}

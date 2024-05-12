@@ -373,9 +373,11 @@
         align-items: center;
         z-index: 1;
     }
-    .reflectionboxchartsummary-container__content div {
+    .reflectionboxchartsummary-container__content {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        gap: .5rem;
         align-items: center;
         margin-bottom: 1rem;
         color: #f3f3f3;
