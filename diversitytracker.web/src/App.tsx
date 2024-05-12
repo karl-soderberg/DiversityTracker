@@ -44,45 +44,29 @@ const UserDisplay = () => {
   return <p>User not signed in</p>;
 };
 function App() {
-  const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
-    queryKey: ['getQuestions'],
-    queryFn: () => GetAllQuestions()
-  });
-  const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
-    queryKey: ['getFormData'],
-    queryFn: () => GetFormsData()
-  });
+    const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
+      queryKey: ['getQuestions'],
+      queryFn: () => GetAllQuestions()
+    });
+    
+    const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
+      queryKey: ['getFormData'],
+      queryFn: () => GetFormsData()
+    });
   
-  const InterperetAllReflectionsForms = useMutation(() => aiInterperetAllReflectionsForms(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const InterperetAllRealData = useMutation(() => aiInterperetAllRealData(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const InterperetAllQuestionAnswers = useMutation(() => aiInterperetAllQuestionAnswers(), {
-    onSuccess: () => {
+    const onSuccessHandler = () => {
         refetch();
         questionRefetch();
-    }
-  });
-  const InterperetAllQuestionValues = useMutation(() => aiInterperetAllQuestionValues(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const CreateDataFromQuestionAnswersInterpretation = useMutation(() => aiCreateDataFromQuestionAnswersInterpretation(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
+    };
+
+    const useMutationWithHandler = (mutationFunction) => useMutation(mutationFunction, { onSuccess: onSuccessHandler });
+
+    const InterperetAllReflectionsForms = useMutationWithHandler(() => aiInterperetAllReflectionsForms());
+    const InterperetAllRealData = useMutationWithHandler(() => aiInterperetAllRealData());
+    const InterperetAllQuestionAnswers = useMutationWithHandler(() => aiInterperetAllQuestionAnswers());
+    const InterperetAllQuestionValues = useMutationWithHandler(() => aiInterperetAllQuestionValues());
+    const CreateDataFromQuestionAnswersInterpretation = useMutationWithHandler(() => aiCreateDataFromQuestionAnswersInterpretation());
+
     const { clientPrincipal, loaded } = useClientPrincipal();
     // const isUser = clientPrincipal?.userRoles.includes('anonymous');
     // const isAdmin = clientPrincipal?.userRoles.includes('admin');
