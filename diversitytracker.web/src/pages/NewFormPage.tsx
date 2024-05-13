@@ -17,7 +17,7 @@ import { CustomSlider } from '../components/CustomSlider';
 import { AnonymousLogin } from '../shared_pages/AnonymousLogin';
 import Lottie from 'lottie-web';
 import { Player } from '@lottiefiles/react-lottie-player';
-
+import { Footer } from '../shared_pages/Footer';
 const { RangePicker } = DatePicker;
 
 const formItemLayout = {
@@ -88,15 +88,11 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
 
     return(
         <section className={className}>
-            {/* <div className={'anonymouslogin-container ' + (beginForm && 'inactive')} >
-                <AnonymousLogin beginform={() => setBeginForm(true)}/>
-            </div> */}
             <Player
                 autoplay={true}
                 loop={true}
                 controls={false}
                 src="/cat.json"
-                // style={{ height: '300px', width: '300px' }}
                 className={'animation1 ' + (playAnimations && 'active')}
             />
             <Player
@@ -104,146 +100,129 @@ export const NewFormPage = ({className, questionData, isLoading, isError, error,
                 loop={true}
                 controls={false} 
                 src="/fireworks.json"
-                // style={{ height: '300px', width: '300px' }}
                 className={'animation2 ' + (playAnimations && 'active')}
             />
-
             <section className='newformpage-container__form-container'>
                 {!isSubmitted ? 
                     <>
-                    <h1>Salt Organization Form</h1>
-                    <p className='animation3-container'>The more input the better
-                    <Player
-                        autoplay={true}
-                        loop={true}
-                        src="/writing.json"
-                        // style={{ height: '300px', width: '300px' }}
-                        className={'animation3'}
-                    />
-                    </p>
-                    <Form 
-                    {...formItemLayout}
-                    style={{ maxWidth: 575 }}
-                    variant="filled"  
-                    onFinish={onSubmitHandler}
-                    onFinishFailed={onFailSubmitHandler}
-                    className='newformpage__form'
-                    layout='vertical'
+                        <h1>Salt Organization Form</h1>
+                        <p className='animation3-container'>The more input the better
+                            <Player
+                                autoplay={true}
+                                loop={true}
+                                src="/writing.json"
+                                className={'animation3'}
+                            />
+                        </p>
+                        <Form 
+                            {...formItemLayout}
+                            style={{ maxWidth: 575 }}
+                            variant="filled"  
+                            onFinish={onSubmitHandler}
+                            onFinishFailed={onFailSubmitHandler}
+                            className='newformpage__form'
+                            layout='vertical'
 
-                    labelWrap
-                    labelCol={{flex: '50px'}}
-                >
-
-                    <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
-                        <Select
-                            showSearch
-                            placeholder="Select a your gender"
-                            optionFilterProp="children"
-                            options={[
-                            {
-                                value: '1',
-                                label: 'Female',
-                            },
-                            {
-                                value: '0',
-                                label: 'Male',
-                            },
-                            {
-                                value: '2',
-                                label: 'Other',
-                            },
-                            ]}
-                        />
-                    </Form.Item>
-                
-                    <Form.Item
-                        className='newformpage__form__item'
-                        label="Age"
-                        name="age"
-                        rules={[{ required: true, message: 'Please input age.'}]}
+                            labelWrap
+                            labelCol={{flex: '50px'}}
                         >
-                        <InputNumber min={18} max={105} style={{ width: '100%' }}/>
-                        {/* <input type="number" /> */}
-                    </Form.Item>
 
-                    <Form.Item
-                        className='newformpage__form__item'
-                        label="Years At Company"
-                        name="timeatcompany"
-                        rules={[{ required: true, message: 'Please input time worked at company.'}]}
-                        >
-                        <InputNumber min={0} max={75} style={{ width: '100%' }}/>
-                        {/* <input type="number" /> */}
-                    </Form.Item>
+                        <Form.Item className='newformpage__form__item' label="Gender" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
+                            <Select
+                                showSearch
+                                placeholder="Select a your gender"
+                                optionFilterProp="children"
+                                options={[
+                                {
+                                    value: '1',
+                                    label: 'Female',
+                                },
+                                {
+                                    value: '0',
+                                    label: 'Male',
+                                },
+                                {
+                                    value: '2',
+                                    label: 'Other',
+                                },
+                                ]}
+                            />
+                        </Form.Item>
                     
-                
-                    {isLoading && 'Loading...'}
+                        <Form.Item
+                            className='newformpage__form__item'
+                            label="Age"
+                            name="age"
+                            rules={[{ required: true, message: 'Please input age.'}]}
+                            >
+                            <InputNumber min={18} max={105} style={{ width: '100%' }}/>
+                        </Form.Item>
 
-                    {isError && 'Unknown Error occured...'}
+                        <Form.Item
+                            className='newformpage__form__item'
+                            label="Years At Company"
+                            name="timeatcompany"
+                            rules={[{ required: true, message: 'Please input time worked at company.'}]}
+                            >
+                            <InputNumber min={0} max={75} style={{ width: '100%' }}/>
+                        </Form.Item>
+                    
+                        {isLoading && 'Loading...'}
 
-                    {questionData && 
-                        questionData.map((question) => (
-                            <div className='newformpage__form__itemgroup'>
-                                <Form.Item
-                                    className='newformpage__form__item'
-                                    // label={question.value}
-                                    name={question.id}
-                                    rules={[{ required: true, message: 'Please input your emotional level!' }]}
+                        {isError && 'Unknown Error occured...'}
+
+                        {questionData && 
+                            questionData.map((question) => (
+                                <div className='newformpage__form__itemgroup'>
+                                    <Form.Item
+                                        className='newformpage__form__item'
+                                        name={question.id}
+                                        rules={[{ required: true, message: 'Please input your emotional level!' }]}
+                                        >
+                                        <CustomSlider 
+                                            min={0}
+                                            max={100}
+                                            step={.1}
+                                            onChange={(value) => {}}
+                                            text={question.value}
+                                            key={question.id}
+                                        />
+                                    </Form.Item>
+                                    <Form.Item
+                                        className='newformpage__form__item'
+                                        name={"reflection_" + question.value}
+                                        rules={[{ required: false}]}
                                     >
-                                    {/* <Slider min={0} max={100} defaultValue={50} /> */}
-                                    <CustomSlider 
-                                        min={0}
-                                        max={100}
-                                        step={.1}
-                                        onChange={(value) => {}}
-                                        text={question.value}
-                                        key={question.id}
-                                    />
-                                </Form.Item>
-                                <Form.Item
-                                    className='newformpage__form__item'
-                                    // label={question.value + ""}
-                                    name={"reflection_" + question.value}
-                                    rules={[{ required: false}]}
-                                    >
-                                    <Input.TextArea />
-                                </Form.Item>
-                            </div>
-                        ))
-                    }
-                    <Form.Item
-                        className='newformpage__form__item'
-                        label="Personal Reflections - We will weigh this heavily in our analysis"
-                        name="reflection"
-                        rules={[{ required: true, message: 'Please input!'}]}
-                        >
-                        <Input.TextArea />
-                    </Form.Item>
-                    <Form.Item 
-                        className='newformpage__form__item'
-                        wrapperCol={{ offset: 6, span: 16 }}>
-                        <Button className='newformpage__form__submitbtn' type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
-                <footer className='newformpage-footer'>
-                    <img src="https://res.cloudinary.com/dlw9fdrql/image/upload/v1714415047/office_tracker_logo_konca1.png" alt="" />
-                    <h2>OFFICE TRACKER</h2>
-                    <p>HARMONIZING THE INTEPERSONAL WORKSPACE</p>
-                </footer>
+                                        <Input.TextArea />
+                                    </Form.Item>
+                                </div>
+                            ))
+                        }
+                        <Form.Item
+                            className='newformpage__form__item'
+                            label="Personal Reflections - We will weigh this heavily in our analysis"
+                            name="reflection"
+                            rules={[{ required: true, message: 'Please input!'}]}
+                            >
+                            <Input.TextArea />
+                        </Form.Item>
+                        <Form.Item 
+                            className='newformpage__form__item'
+                            wrapperCol={{ offset: 6, span: 16 }}>
+                            <Button className='newformpage__form__submitbtn' type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    <Footer className='newformpage-footer'/>
                 </>
                 :
-                <>
-                    <section className='formsubmitted-container'>
-                        <h2>Thank you for submitting your form!</h2>
-                        <p>There are no other forms to be filled</p>
-                    </section>
-                </>
+                <section className='formsubmitted-container'>
+                    <h2>Thank you for submitting your form!</h2>
+                    <p>There are no other forms to be filled</p>
+                </section>
                 }
-               
             </section>
-            
         </section>
     );
 

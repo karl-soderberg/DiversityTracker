@@ -1,7 +1,10 @@
 @import url('../colors.css');
 
 .adminpage-container{
+    max-width: 575px;
     padding: 15% 5%;
+    min-height: 100vh;
+    background-color: #fff;
 }
 .adminpage-container__title{
     font-size: 1.3rem;
@@ -12,7 +15,7 @@
 }
 
 .formdata__questions-container{
-    width: 50vw;
+    max-width: 520px;
 }
 @media all and (max-width: 1200px) {
     .formdata__questions-container{
@@ -222,7 +225,7 @@
 
 
 .deleteconfirmation-container{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

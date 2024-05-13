@@ -20,68 +20,30 @@ import { AnonymousLogin } from './shared_pages/AnonymousLogin';
 import { LoginPage } from './shared_pages/LoginPage';
 import { NotFoundPage } from './shared_pages/NotFoundPage';
 
-const UserDisplay = () => {
-  const { clientPrincipal, loaded } = useClientPrincipal();
-  if (!loaded) {
-    return <p>Checking user info...</p>;
-  }
-  if (clientPrincipal) {
-    return (
-      <div>
-        <p>
-          {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
-          {clientPrincipal.userId} {clientPrincipal.userRoles}
-        </p>
-        <p>
-          <Logout />
-        </p>
-        <p>
-          <UserPurge provider={clientPrincipal.identityProvider} />
-        </p>
-      </div>
-    );
-  }
-  return <p>User not signed in</p>;
-};
 function App() {
-  const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
-    queryKey: ['getQuestions'],
-    queryFn: () => GetAllQuestions()
-  });
-  const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
-    queryKey: ['getFormData'],
-    queryFn: () => GetFormsData()
-  });
-  const InterperetAllReflectionsForms = useMutation(() => aiInterperetAllReflectionsForms(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const InterperetAllRealData = useMutation(() => aiInterperetAllRealData(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const InterperetAllQuestionAnswers = useMutation(() => aiInterperetAllQuestionAnswers(), {
-    onSuccess: () => {
+    const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
+      queryKey: ['getQuestions'],
+      queryFn: () => GetAllQuestions()
+    });
+    
+    const {data: formsData, isLoading: aiIsLoadingForms, isError: aiIsErrorForms, error: aiErrorForms, refetch } = useQuery<APIFormsResponse>({
+      queryKey: ['getFormData'],
+      queryFn: () => GetFormsData()
+    });
+  
+    const onSuccessHandler = () => {
         refetch();
         questionRefetch();
-    }
-  });
-  const InterperetAllQuestionValues = useMutation(() => aiInterperetAllQuestionValues(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
-  const CreateDataFromQuestionAnswersInterpretation = useMutation(() => aiCreateDataFromQuestionAnswersInterpretation(), {
-      onSuccess: () => {
-          refetch();
-          questionRefetch();
-      }
-  });
+    };
+
+    const useMutationWithHandler = (mutationFunction) => useMutation(mutationFunction, { onSuccess: onSuccessHandler });
+
+    const InterperetAllReflectionsForms = useMutationWithHandler(() => aiInterperetAllReflectionsForms());
+    const InterperetAllRealData = useMutationWithHandler(() => aiInterperetAllRealData());
+    const InterperetAllQuestionAnswers = useMutationWithHandler(() => aiInterperetAllQuestionAnswers());
+    const InterperetAllQuestionValues = useMutationWithHandler(() => aiInterperetAllQuestionValues());
+    const CreateDataFromQuestionAnswersInterpretation = useMutationWithHandler(() => aiCreateDataFromQuestionAnswersInterpretation());
+
     const { clientPrincipal, loaded } = useClientPrincipal();
     const isUser = clientPrincipal?.userRoles.includes('anonymous');
     const isAdmin = clientPrincipal?.userRoles.includes('admin');

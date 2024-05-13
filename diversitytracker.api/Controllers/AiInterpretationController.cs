@@ -38,7 +38,7 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-                var interperetation = await _aiInterpretationService.InterperetAllReflectionsFormsAsync(forms, questionTypes);
+                var interperetation = await _aiInterpretationService.InterperetAllPersonalReflections(forms, questionTypes);
                 return Ok(interperetation);
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-                var interperetation = await _aiInterpretationService.InterperetAllRealDataAsync(forms, questionTypes);
+                var interperetation = await _aiInterpretationService.InterperetAllData(forms, questionTypes);
                 return Ok(interperetation);
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-                var interperetation = await _aiInterpretationService.InterperetAllQuestionsAsync(forms, questionTypes);
+                var interperetation = await _aiInterpretationService.InterperetQuestionDataSeperated(forms, questionTypes);
                 return Ok(interperetation);
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace diversitytracker.api.Controllers
             {
                 var forms = await _formsRepository.GetFormsAsync(null, null);
                 var questionTypes = await _questionsRepository.GetQuestionTypesAsync();
-                var interperetation = await _aiInterpretationService.InterperetRealDataSeperatedAsync(forms, questionTypes);
+                var interperetation = await _aiInterpretationService.InterperetQuestionAnswersSeperated(forms, questionTypes);
                 return Ok(interperetation); 
             }
             catch (Exception ex)
