@@ -13,6 +13,7 @@
 
     width: 85vw;
     height: 35vh;
+    min-height: 225px;
     margin: 10% auto;
 
     display: flex;
@@ -43,11 +44,13 @@
     }
     .chartpage-container--bg{
         position: fixed;
-        left: 0;
+        left: 50%;
+        transform: translateX(-50%);
         top: 0;
         width: 100vw;
         height: 100vh;
         z-index: -1;
+        max-width: 575px;
         background: 
         linear-gradient(to bottom, rgba(0, 0, 0, 0.194) 0%, rgba(0,0,0,1) 100%), 
         url('https://media.cntraveler.com/photos/6400e9ec3b1e3f0df75c5c44/16:9/w_2580,c_limit/Green%20Bowl%20Beach,%20Bali,%20Indonesia_2AGYRXP.jpg');
@@ -97,23 +100,6 @@
             margin-left: .7rem;
         }
 
-
-
-/* .chartpage__selectquestion{
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10vh;
-    width: 100vw;
-    height: 43vh;
-    max-width: 575px;
-
-    padding: 0% 0.2% 50% 0%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-} */
 .chartpage__selectquestion{
     display: flex;
     align-items: center;
@@ -124,14 +110,16 @@
     z-index: 500;
 }
 .chartpage__selectquestion.left{
-    position: fixed;
-    left: 0%;
+    position: absolute;
+    left: 2%;
 
     padding: 0% 0% 50% 0%;
 }
 .chartpage__selectquestion.right{
-    position: fixed;
-    right: -3.5%;
+    position: absolute;
+    right: 2%;
+    display: flex;
+    justify-content: flex-end;
 
     padding: 0% 0% 50% 0%;
 }

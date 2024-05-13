@@ -1,12 +1,15 @@
 @import url('../colors.css');
 
 .navtop-container{
-    position: fixed;
+    position: absolute;
     top: 0;
-    left: 0;
-    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
     height: 6vh;
+    min-height: 50px;
     z-index: 1500;
+    max-width: 575px;
 
     padding: 0% 6% 0% 2%; 
 
@@ -76,7 +79,8 @@
     top: 0;
     right: 0;
 
-    width: 65vw;
+    width: 100%;
+    max-width: 300px;
     height: 100vh;
     padding: 10% 2% 10% 0%;
 
