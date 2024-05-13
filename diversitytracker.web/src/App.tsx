@@ -20,29 +20,6 @@ import { AnonymousLogin } from './shared_pages/AnonymousLogin';
 import { LoginPage } from './shared_pages/LoginPage';
 import { NotFoundPage } from './shared_pages/NotFoundPage';
 
-const UserDisplay = () => {
-  const { clientPrincipal, loaded } = useClientPrincipal();
-  if (!loaded) {
-    return <p>Checking user info...</p>;
-  }
-  if (clientPrincipal) {
-    return (
-      <div>
-        <p>
-          {clientPrincipal.identityProvider} {clientPrincipal.userDetails}{" "}
-          {clientPrincipal.userId} {clientPrincipal.userRoles}
-        </p>
-        <p>
-          <Logout />
-        </p>
-        <p>
-          <UserPurge provider={clientPrincipal.identityProvider} />
-        </p>
-      </div>
-    );
-  }
-  return <p>User not signed in</p>;
-};
 function App() {
     const { data, isLoading, isError, error, refetch: questionRefetch } = useQuery<Array<Question>, Error>({
       queryKey: ['getQuestions'],

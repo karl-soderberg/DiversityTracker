@@ -25,7 +25,6 @@ export const AdminPage = ( {className, questionData, isLoading, isError, error, 
 
     const addQuestionHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        // const questionValue = e.target.question.value;
         const questionValue = addQuestionValue;
         if(questionValue != ''){
             postQuestion.mutate(questionValue);
