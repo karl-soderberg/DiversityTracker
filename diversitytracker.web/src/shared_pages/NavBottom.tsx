@@ -11,8 +11,8 @@ type Props = {
 
 export const NavBottom = () => {
     const { clientPrincipal } = useClientPrincipal();
-    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
-    const isAdmin = true;
+    const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    // const isAdmin = true;
 
     const location = useLocation();
 

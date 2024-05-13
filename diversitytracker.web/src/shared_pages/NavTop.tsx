@@ -13,8 +13,8 @@ type Props = {
 
 export const NavTop = () => {
     const { clientPrincipal } = useClientPrincipal();
-    // const isAdmin = clientPrincipal?.userRoles.includes('admin');
-    const isAdmin = true;
+    const isAdmin = clientPrincipal?.userRoles.includes('admin');
+    // const isAdmin = true;
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false); 
 
     const location = useLocation();
